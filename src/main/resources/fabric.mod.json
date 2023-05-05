@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "template",
+  "version": "${version}",
+
+  "name": "Template Mod",
+  "description": "Template Description",
+  "authors": [
+    "Team Abode"
+  ],
+  "contact": {
+    "homepage": "https://twitter.com/TeamAbodeMC",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "All Rights Reserved",
+  "icon": "assets/template/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.teamabode.template.TemplateMod"
+    ]
+  },
+  "mixins": [
+    "template.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.17",
+    "fabric-api": "*",
+    "minecraft": "~1.19.4",
+    "java": ">=17"
+  },
+  "suggests": {}
+}
