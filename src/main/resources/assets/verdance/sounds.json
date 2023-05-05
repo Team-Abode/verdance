@@ -1,0 +1,19 @@
+{
+  "block.cantaloupe.grow": {
+    "sounds": [
+      "verdance:block/cantaloupe/grow1",
+      "verdance:block/cantaloupe/grow2",
+      "verdance:block/cantaloupe/grow3",
+      "verdance:block/cantaloupe/grow4"
+    ],
+    "subtitle": "subtitles.verdance.block.cantaloupe.grow"
+  },
+  "music_disc.range": {
+    "sounds": [
+      {
+        "name": "verdance:record/range",
+        "stream": true
+      }
+    ]
+  }
+}

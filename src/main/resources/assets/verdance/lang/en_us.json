@@ -1,0 +1,25 @@
+{
+  "biome.verdance.shrublands": "Shrublands",
+
+  "block.verdance.attached_cantaloupe_stem": "Attached Cantaloupe Stem",
+  "block.verdance.cantaloupe": "Cantaloupe",
+  "block.verdance.cantaloupe_stem": "Cantaloupe Stem",
+  "block.verdance.mulberry_button": "Mulberry Button",
+  "block.verdance.mulberry_door": "Mulberry Door",
+  "block.verdance.mulberry_fence": "Mulberry Fence",
+  "block.verdance.mulberry_fence_gate": "Mulberry Fence Gate",
+  "block.verdance.mulberry_planks": "Mulberry Planks",
+  "block.verdance.mulberry_pressure_plate": "Mulberry Pressure Plate",
+  "block.verdance.mulberry_slab": "Mulberry Slab",
+  "block.verdance.mulberry_stairs": "Mulberry Stairs",
+  "block.verdance.mulberry_trapdoor": "Mulberry Trapdoor",
+  "block.verdance.shrub": "Shrub",
+  "block.verdance.white_stucco": "White Stucco",
+
+  "item.verdance.cantaloupe_seeds": "Cantaloupe Seeds",
+  "item.verdance.cantaloupe_slice": "Cantaloupe Slice",
+  "item.verdance.music_disc_range": "Music Disc",
+  "item.verdance.music_disc_range.desc": "Firch - Range",
+
+  "subtitles.verdance.block.cantaloupe.grow": "Fruit grows"
+}

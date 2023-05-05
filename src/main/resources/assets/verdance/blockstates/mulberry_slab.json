@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "verdance:block/mulberry_slab"
+    },
+    "type=double": {
+      "model": "verdance:block/mulberry_planks"
+    },
+    "type=top": {
+      "model": "verdance:block/mulberry_slab_top"
+    }
+  }
+}

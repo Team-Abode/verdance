@@ -1,0 +1,22 @@
+{
+	"ambientocclusion": false,
+	"textures": {
+		"texture": "verdance:block/attached_cantaloupe_stem",
+		"particle": "verdance:block/cantaloupe_stem"
+	},
+	"elements": [
+		{
+			"from": [8, 2, 0],
+			"to": [8, 10, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 5], "texture": "#texture"},
+				"east": {"uv": [9, 0, 0, 8], "texture": "#texture"},
+				"south": {"uv": [0, 0, 0, 5], "texture": "#texture"},
+				"west": {"uv": [0, 0, 9, 8], "texture": "#texture"},
+				"up": {"uv": [0, 0, 0, 7], "texture": "#texture"},
+				"down": {"uv": [0, 0, 0, 7], "texture": "#texture"}
+			}
+		}
+	]
+}

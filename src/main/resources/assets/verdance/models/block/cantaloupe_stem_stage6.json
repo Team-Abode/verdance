@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/stem_growth6",
+  "textures": {
+    "stem": "verdance:block/cantaloupe_stem"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "verdance:block/cantaloupe",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "verdance:block/cantaloupe",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "verdance:block/cantaloupe",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "verdance:block/cantaloupe",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "verdance:block/cantaloupe"
+    },
+    "facing=west": {
+      "model": "verdance:block/cantaloupe",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

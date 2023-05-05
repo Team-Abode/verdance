@@ -1,9 +1,12 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.teamabode.template.mixin",
+  "package": "com.teamabode.verdance.core.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [],
+  "mixins": [
+    "general.LightningBoltMixin",
+    "general.SugarCaneBlockMixin"
+  ],
   "client": [],
   "injectors": {
     "defaultRequire": 1

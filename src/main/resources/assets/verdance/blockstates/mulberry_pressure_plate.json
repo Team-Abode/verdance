@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "verdance:block/mulberry_pressure_plate"
+    },
+    "powered=true": {
+      "model": "verdance:block/mulberry_pressure_plate_down"
+    }
+  }
+}

@@ -1,27 +1,31 @@
 {
   "schemaVersion": 1,
-  "id": "template",
+  "id": "verdance",
   "version": "${version}",
 
-  "name": "Template Mod",
-  "description": "Template Description",
+  "name": "Verdance",
+  "description": "",
   "authors": [
-    "Team Abode"
+    "Team Abode",
+    "Guest Starring: Chikorita Lover"
   ],
   "contact": {
     "homepage": "https://twitter.com/TeamAbodeMC",
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
   "license": "All Rights Reserved",
-  "icon": "assets/template/icon.png",
+  "icon": "assets/verdance/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.teamabode.template.TemplateMod"
+      "com.teamabode.verdance.Verdance"
+    ],
+    "client": [
+      "com.teamabode.verdance.client.VerdanceClient"
     ]
   },
   "mixins": [
-    "template.mixins.json"
+    "verdance.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.14.17",
