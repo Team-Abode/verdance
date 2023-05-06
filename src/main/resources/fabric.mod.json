@@ -22,6 +22,9 @@
     ],
     "client": [
       "com.teamabode.verdance.client.VerdanceClient"
+    ],
+    "fabric-datagen": [
+      "com.teamabode.verdance.core.data.VerdanceData"
     ]
   },
   "mixins": [

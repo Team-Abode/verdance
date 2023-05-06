@@ -28,6 +28,20 @@ base {
 	archivesName = project.archives_base_name
 }
 
+loom {
+	runs {
+		datagenClient {
+			inherit client
+			name "Data Generation"
+			vmArg "-Dfabric-api.datagen"
+			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+			vmArg "-Dfabric-api.datagen.modid=${project.mod_id}"
+
+			runDir "build/datagen"
+		}
+	}
+}
+
 processResources {
 	inputs.property "version", project.version
 
@@ -50,6 +64,16 @@ java {
 jar {
 	from("LICENSE") {
 		rename { "${it}_${base.archivesName.get()}"}
+	}
+}
+
+sourceSets {
+	main {
+		resources {
+			srcDirs += [
+					'src/main/generated'
+			]
+		}
 	}
 }
 

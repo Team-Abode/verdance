@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "verdance:white_stucco",
+    "verdance:white_stucco_stairs",
+    "verdance:white_stucco_slab",
+    "verdance:white_stucco_wall"
+  ]
+}

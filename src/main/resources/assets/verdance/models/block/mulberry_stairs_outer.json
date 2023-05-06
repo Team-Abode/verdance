@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "verdance:block/mulberry_planks",
-    "side": "verdance:block/mulberry_planks",
-    "top": "verdance:block/mulberry_planks"
-  }
-}

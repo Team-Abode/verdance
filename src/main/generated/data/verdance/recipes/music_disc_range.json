@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "verdance:disc_fragment_range"
+    },
+    {
+      "item": "verdance:disc_fragment_range"
+    },
+    {
+      "item": "verdance:disc_fragment_range"
+    },
+    {
+      "item": "verdance:disc_fragment_range"
+    }
+  ],
+  "result": {
+    "item": "verdance:music_disc_range"
+  }
+}
