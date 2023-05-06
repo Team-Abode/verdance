@@ -1,0 +1,9 @@
+// 1.19.4	2023-05-06T12:06:15.2447898	Verdance/Block Loot Tables
+ac2d8669fd526c057304c3feaf401072e2fd34e8 data\verdance\loot_tables\blocks\white_stucco_stairs.json
+d8ee472847fa1b5bb59539657e25abc357edd642 data\verdance\loot_tables\blocks\white_stucco_slab.json
+32dc0bc4166430d24e7f67fd93ff9ebcc552b796 data\verdance\loot_tables\blocks\white_stucco.json
+ef3b4d4d94bd13b7fbc7cb76bc2f0984c0fb9832 data\verdance\loot_tables\blocks\attached_cantaloupe_stem.json
+8f7cac99f8f6e58bf45799d582ef4535c0aa970e data\verdance\loot_tables\blocks\shrub.json
+26c9feb0a3b48594056522831d841122bef812c8 data\verdance\loot_tables\blocks\cantaloupe.json
+fd9434b5893ff0673904847cc851df865f363eae data\verdance\loot_tables\blocks\cantaloupe_stem.json
+045eb8329ed3d43f9387d69e6eeb806e6b814bce data\verdance\loot_tables\blocks\white_stucco_wall.json
