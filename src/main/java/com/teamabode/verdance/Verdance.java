@@ -18,7 +18,6 @@ public class Verdance implements ModInitializer {
         VerdanceItems.register();
         VerdanceFeatures.register();
         VerdanceSounds.register();
-
         VerdanceGroupEvents.register();
     }
 }
