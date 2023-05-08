@@ -1,5 +1,6 @@
 package com.teamabode.verdance.core.mixin;
 
+import com.teamabode.verdance.Verdance;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -12,7 +13,7 @@ public class VerdanceMixinPlugin implements IMixinConfigPlugin {
 
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.contains("SugarCaneBlock")) {
-            return true;
+            return Verdance.CONFIG.getBooleanProperty("bonemealable_sugar_cane");
         }
         return true;
     }

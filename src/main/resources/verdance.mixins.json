@@ -7,6 +7,7 @@
     "general.LightningBoltMixin",
     "general.SugarCaneBlockMixin"
   ],
+  "plugin": "com.teamabode.verdance.core.mixin.VerdanceMixinPlugin",
   "client": [],
   "injectors": {
     "defaultRequire": 1
