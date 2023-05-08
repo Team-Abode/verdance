@@ -24,6 +24,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     }
 
     public void generate() {
+        mulberry();
         shrub();
         stucco();
         cantaloupe();
@@ -37,21 +38,28 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         });
     }
 
+    private void mulberry() {
+        dropSelf(VerdanceBlocks.MULBERRY_PLANKS);
+        dropSelf(VerdanceBlocks.MULBERRY_STAIRS);
+        add(VerdanceBlocks.MULBERRY_SLAB, this::createSlabItemTable);
+        dropSelf(VerdanceBlocks.MULBERRY_FENCE);
+        dropSelf(VerdanceBlocks.MULBERRY_FENCE_GATE);
+        add(VerdanceBlocks.MULBERRY_DOOR, this::createDoorTable);
+        dropSelf(VerdanceBlocks.MULBERRY_TRAPDOOR);
+        dropSelf(VerdanceBlocks.MULBERRY_PRESSURE_PLATE);
+        dropSelf(VerdanceBlocks.MULBERRY_BUTTON);
+    }
+
     private void stucco() {
         dropSelf(VerdanceBlocks.WHITE_STUCCO);
         dropSelf(VerdanceBlocks.WHITE_STUCCO_STAIRS);
-        dropSelf(VerdanceBlocks.WHITE_STUCCO_SLAB);
+        add(VerdanceBlocks.WHITE_STUCCO_SLAB, this::createSlabItemTable);
         dropSelf(VerdanceBlocks.WHITE_STUCCO_WALL);
     }
 
     private void cantaloupe() {
         add(VerdanceBlocks.CANTALOUPE, block -> {
-            var lootItem = LootItem.lootTableItem(VerdanceItems.CANTALOUPE_SLICE)
-                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 4.0f)))
-                    .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
-                    .apply(LimitCount.limitCount(IntRange.upperBound(4)));
-
-
+            var lootItem = LootItem.lootTableItem(VerdanceItems.CANTALOUPE_SLICE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 4.0f))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)).apply(LimitCount.limitCount(IntRange.upperBound(4)));
             return createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, lootItem));
         });
         add(VerdanceBlocks.CANTALOUPE_STEM, block -> this.createStemDrops(block, VerdanceItems.CANTALOUPE_SEEDS));

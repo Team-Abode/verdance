@@ -2,12 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
+    "#": {
       "item": "verdance:white_stucco"
     }
   },
   "pattern": [
-    "SSS"
+    "###"
   ],
   "result": {
     "count": 6,

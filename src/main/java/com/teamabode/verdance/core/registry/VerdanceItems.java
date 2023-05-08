@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 
 public class VerdanceItems {
-
     public static final Item CANTALOUPE_SLICE = register("cantaloupe_slice", new Item((new Item.Properties()).food(VerdanceFoods.CANTALOUPE_SLICE)));
     public static final Item CANTALOUPE_SEEDS = register("cantaloupe_seeds", new ItemNameBlockItem(VerdanceBlocks.CANTALOUPE_STEM, new Item.Properties()));
 

@@ -11,6 +11,18 @@ import net.minecraft.world.level.ItemLike;
 public class VerdanceGroupEvents {
 
     public static void register() {
+        appendItemsBefore(CreativeModeTabs.BUILDING_BLOCKS, Items.CRIMSON_STEM,
+                VerdanceBlocks.MULBERRY_PLANKS,
+                VerdanceBlocks.MULBERRY_STAIRS,
+                VerdanceBlocks.MULBERRY_SLAB,
+                VerdanceBlocks.MULBERRY_FENCE,
+                VerdanceBlocks.MULBERRY_FENCE_GATE,
+                VerdanceBlocks.MULBERRY_DOOR,
+                VerdanceBlocks.MULBERRY_TRAPDOOR,
+                VerdanceBlocks.MULBERRY_PRESSURE_PLATE,
+                VerdanceBlocks.MULBERRY_BUTTON
+        );
+
         appendItemsAfter(CreativeModeTabs.FOOD_AND_DRINKS, Items.MELON_SLICE, VerdanceItems.CANTALOUPE_SLICE);
         appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Items.MELON, VerdanceBlocks.CANTALOUPE);
         appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Items.MELON_SEEDS, VerdanceItems.CANTALOUPE_SEEDS);

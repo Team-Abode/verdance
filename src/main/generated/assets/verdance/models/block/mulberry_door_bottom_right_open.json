@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right_open",
+  "textures": {
+    "bottom": "verdance:block/mulberry_door_bottom",
+    "top": "verdance:block/mulberry_door_top"
+  }
+}
