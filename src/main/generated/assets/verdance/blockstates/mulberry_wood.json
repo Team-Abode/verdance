@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "verdance:block/mulberry_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "verdance:block/mulberry_wood"
+    },
+    "axis=z": {
+      "model": "verdance:block/mulberry_wood",
+      "x": 90
+    }
+  }
+}

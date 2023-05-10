@@ -7,6 +7,9 @@ import com.teamabode.verdance.common.block.CantaloupeStemBlock;
 import com.teamabode.verdance.common.block.ShrubBlock;
 import com.teamabode.verdance.core.registry.misc.VerdanceBlockSetType;
 import com.teamabode.verdance.core.registry.misc.VerdanceWoodType;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -18,6 +21,10 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
 public class VerdanceBlocks {
+    public static final Block MULBERRY_LOG = register("mulberry_log", new RotatedPillarBlock(Properties.of(Material.WOOD, blockState -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MaterialColor.TERRACOTTA_YELLOW : MaterialColor.TERRACOTTA_GRAY).strength(2.0F).sound(SoundType.WOOD)));
+    public static final Block MULBERRY_WOOD = register("mulberry_wood", new RotatedPillarBlock(Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_GRAY).strength(2.0F).sound(SoundType.WOOD)));
+    public static final Block STRIPPED_MULBERRY_LOG = register("stripped_mulberry_log", new RotatedPillarBlock(Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_YELLOW).strength(2.0F).sound(SoundType.WOOD)));
+    public static final Block STRIPPED_MULBERRY_WOOD = register("stripped_mulberry_wood", new RotatedPillarBlock(Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_YELLOW).strength(2.0F).sound(SoundType.WOOD)));
     public static final Block MULBERRY_PLANKS = register("mulberry_planks", new Block(Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_YELLOW).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
     public static final Block MULBERRY_STAIRS = register("mulberry_stairs", new StairBlock(MULBERRY_PLANKS.defaultBlockState(), Properties.copy(MULBERRY_PLANKS)));
     public static final Block MULBERRY_SLAB = register("mulberry_slab", new SlabBlock(Properties.copy(MULBERRY_PLANKS)));
@@ -51,6 +58,16 @@ public class VerdanceBlocks {
     }
 
     public static void register() {
-
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(STRIPPED_MULBERRY_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(STRIPPED_MULBERRY_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_PLANKS, 20, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_STAIRS, 20, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_SLAB, 20, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_FENCE, 20, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_FENCE_GATE, 20, 5);
+        StrippableBlockRegistry.register(MULBERRY_LOG, STRIPPED_MULBERRY_LOG);
+        StrippableBlockRegistry.register(MULBERRY_WOOD, STRIPPED_MULBERRY_WOOD);
     }
 }

@@ -27,6 +27,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         trapdoors();
         pressurePlates();
         buttons();
+        logs();
 
         mineablePickaxe();
         mineableAxe();
@@ -116,6 +117,21 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     private void buttons() {
         this.getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS)
                 .add(VerdanceBlocks.MULBERRY_BUTTON)
+                .setReplace(false);
+    }
+
+    private void logs() {
+        this.getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
+                .forceAddTag(VerdanceBlockTags.MULBERRY_LOGS)
+                .setReplace(false);
+        this.getOrCreateTagBuilder(BlockTags.OVERWORLD_NATURAL_LOGS)
+                .add(VerdanceBlocks.MULBERRY_LOG)
+                .setReplace(false);
+        this.getOrCreateTagBuilder(VerdanceBlockTags.MULBERRY_LOGS)
+                .add(VerdanceBlocks.MULBERRY_LOG)
+                .add(VerdanceBlocks.MULBERRY_WOOD)
+                .add(VerdanceBlocks.STRIPPED_MULBERRY_LOG)
+                .add(VerdanceBlocks.STRIPPED_MULBERRY_WOOD)
                 .setReplace(false);
     }
 }

@@ -7,7 +7,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
 public class VerdanceBlockTags {
-
+    public static final TagKey<Block> MULBERRY_LOGS = create("mulberry_logs");
     public static final TagKey<Block> SHRUB_MAY_PLACE_ON = create("shrub_may_place_on");
 
     private static TagKey<Block> create(String name) {

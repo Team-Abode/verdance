@@ -2,6 +2,7 @@ package com.teamabode.verdance.core.data.server.tag;
 
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
+import com.teamabode.verdance.core.registry.misc.VerdanceItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
@@ -26,6 +27,7 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
         trapdoors();
         pressurePlates();
         buttons();
+        logs();
 
         this.getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(VerdanceItems.MUSIC_DISC_RANGE).setReplace(false);
     }
@@ -93,6 +95,18 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
     private void buttons() {
         this.getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS)
                 .add(VerdanceBlocks.MULBERRY_BUTTON.asItem())
+                .setReplace(false);
+    }
+
+    private void logs() {
+        this.getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN)
+                .forceAddTag(VerdanceItemTags.MULBERRY_LOGS)
+                .setReplace(false);
+        this.getOrCreateTagBuilder(VerdanceItemTags.MULBERRY_LOGS)
+                .add(VerdanceBlocks.MULBERRY_LOG.asItem())
+                .add(VerdanceBlocks.MULBERRY_WOOD.asItem())
+                .add(VerdanceBlocks.STRIPPED_MULBERRY_LOG.asItem())
+                .add(VerdanceBlocks.STRIPPED_MULBERRY_WOOD.asItem())
                 .setReplace(false);
     }
 }

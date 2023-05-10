@@ -1,4 +1,4 @@
-// 1.19.4	2023-05-07T20:36:34.4321653	Verdance/Tags for minecraft:block
+// 1.19.4	2023-05-09T21:30:46.299923	Verdance/Tags for minecraft:block
 fa011c5db162709b03ef42585ea0b671a80a1114 data\minecraft\tags\blocks\planks.json
 33c28c9f89481e90b89719a965fdbff11e61a317 data\minecraft\tags\blocks\fence_gates.json
 20b1636e9df05fdadbf251b4c564351f98631340 data\minecraft\tags\blocks\mineable\axe.json
@@ -7,10 +7,13 @@ d7a6de6ff3e1110fe49fe2aa0a650410b7207ec4 data\minecraft\tags\blocks\mineable\pic
 d7412025d84c3d6cc81ab615f3c5f057afec6001 data\minecraft\tags\blocks\wooden_stairs.json
 3562f5cfd047e95000b4f19571780d8a7eb9eabd data\minecraft\tags\blocks\wooden_fences.json
 9aea83ebb2efb53eec4c54149e6bfb543e800106 data\minecraft\tags\blocks\wooden_buttons.json
+9722b128b26624e071c0c81c5af7be61e88b5ea6 data\minecraft\tags\blocks\logs_that_burn.json
 b66991f48a5e2b8f58576c280c4f5dc1c901ead7 data\minecraft\tags\blocks\wooden_slabs.json
 31e6cf2746bf5e0508cdc04d5eb73594ba6059fb data\minecraft\tags\blocks\wooden_pressure_plates.json
+ea63104cb1291612594cff2d1eaeab52b2f602d7 data\minecraft\tags\blocks\overworld_natural_logs.json
 3e3a1245ce4e93400cd4e5e1636212c6d18e08d1 data\minecraft\tags\blocks\walls.json
 eb8c3573c32e839af8e198abad8f736241c2099b data\minecraft\tags\blocks\wooden_doors.json
 29f0d52461dc40472da8629088810ef360326f77 data\minecraft\tags\blocks\stairs.json
+278f9d0ff0c137c51e45049a49dc3d5f1b1822cb data\verdance\tags\blocks\mulberry_logs.json
 142f4b6eec280ab84050602fe5f8d8e7d61af5a5 data\minecraft\tags\blocks\wooden_trapdoors.json
 af78635538db2f108d580d0f389bc5b452712c9d data\verdance\tags\blocks\shrub_may_place_on.json

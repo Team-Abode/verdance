@@ -12,6 +12,10 @@ public class VerdanceGroupEvents {
 
     public static void register() {
         appendItemsBefore(CreativeModeTabs.BUILDING_BLOCKS, Items.CRIMSON_STEM,
+                VerdanceBlocks.MULBERRY_LOG,
+                VerdanceBlocks.MULBERRY_WOOD,
+                VerdanceBlocks.STRIPPED_MULBERRY_LOG,
+                VerdanceBlocks.STRIPPED_MULBERRY_WOOD,
                 VerdanceBlocks.MULBERRY_PLANKS,
                 VerdanceBlocks.MULBERRY_STAIRS,
                 VerdanceBlocks.MULBERRY_SLAB,

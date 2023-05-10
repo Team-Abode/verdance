@@ -39,6 +39,10 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     }
 
     private void mulberry() {
+        dropSelf(VerdanceBlocks.MULBERRY_LOG);
+        dropSelf(VerdanceBlocks.MULBERRY_WOOD);
+        dropSelf(VerdanceBlocks.STRIPPED_MULBERRY_LOG);
+        dropSelf(VerdanceBlocks.STRIPPED_MULBERRY_WOOD);
         dropSelf(VerdanceBlocks.MULBERRY_PLANKS);
         dropSelf(VerdanceBlocks.MULBERRY_STAIRS);
         add(VerdanceBlocks.MULBERRY_SLAB, this::createSlabItemTable);

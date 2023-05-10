@@ -1,6 +1,8 @@
-// 1.19.4	2023-05-07T20:36:34.4379413	Verdance/Tags for minecraft:item
+// 1.19.4	2023-05-09T21:30:46.3065989	Verdance/Tags for minecraft:item
 29f0d52461dc40472da8629088810ef360326f77 data\minecraft\tags\items\stairs.json
 c3690c6f3034a1e42926f539845b7aa2824e879e data\minecraft\tags\items\music_discs.json
+278f9d0ff0c137c51e45049a49dc3d5f1b1822cb data\verdance\tags\items\mulberry_logs.json
+9722b128b26624e071c0c81c5af7be61e88b5ea6 data\minecraft\tags\items\logs_that_burn.json
 3e3a1245ce4e93400cd4e5e1636212c6d18e08d1 data\minecraft\tags\items\walls.json
 33c28c9f89481e90b89719a965fdbff11e61a317 data\minecraft\tags\items\fence_gates.json
 31e6cf2746bf5e0508cdc04d5eb73594ba6059fb data\minecraft\tags\items\wooden_pressure_plates.json

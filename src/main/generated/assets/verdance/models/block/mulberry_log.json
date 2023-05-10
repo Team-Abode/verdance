@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "verdance:block/mulberry_log_top",
+    "side": "verdance:block/mulberry_log"
+  }
+}
