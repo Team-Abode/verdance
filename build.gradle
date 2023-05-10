@@ -11,6 +11,13 @@ repositories {
 		name = 'ParchmentMC'
 		url = 'https://maven.parchmentmc.org'
 	}
+	maven {
+		url = uri("https://maven.pkg.github.com/team-abode/scribe-wip")
+		credentials {
+			username = "ExDrill"
+			password = "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"
+		}
+	}
 }
 
 dependencies {
@@ -22,6 +29,7 @@ dependencies {
 
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modApi "com.teamabode:scribe:${rootProject.scribe_version}"
 }
 
 base {

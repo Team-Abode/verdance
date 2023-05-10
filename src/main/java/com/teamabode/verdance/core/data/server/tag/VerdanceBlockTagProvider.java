@@ -27,6 +27,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         trapdoors();
         pressurePlates();
         buttons();
+        signs();
         logs();
 
         mineablePickaxe();
@@ -117,6 +118,21 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     private void buttons() {
         this.getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS)
                 .add(VerdanceBlocks.MULBERRY_BUTTON)
+                .setReplace(false);
+    }
+
+    private void signs() {
+        this.getOrCreateTagBuilder(BlockTags.STANDING_SIGNS)
+                .add(VerdanceBlocks.MULBERRY_SIGN)
+                .setReplace(false);
+        this.getOrCreateTagBuilder(BlockTags.WALL_SIGNS)
+                .add(VerdanceBlocks.MULBERRY_WALL_SIGN)
+                .setReplace(false);
+        this.getOrCreateTagBuilder(BlockTags.CEILING_HANGING_SIGNS)
+                .add(VerdanceBlocks.MULBERRY_HANGING_SIGN)
+                .setReplace(false);
+        this.getOrCreateTagBuilder(BlockTags.WALL_HANGING_SIGNS)
+                .add(VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN)
                 .setReplace(false);
     }
 

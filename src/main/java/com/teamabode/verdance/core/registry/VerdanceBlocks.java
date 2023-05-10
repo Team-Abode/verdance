@@ -13,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -34,6 +35,12 @@ public class VerdanceBlocks {
     public static final Block MULBERRY_TRAPDOOR = register("mulberry_trapdoor", new TrapDoorBlock(Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_YELLOW).strength(3.0F).noOcclusion().isValidSpawn((blockState, blockGetter, blockPos, object) -> false), VerdanceBlockSetType.MULBERRY));
     public static final Block MULBERRY_PRESSURE_PLATE = register("mulberry_pressure_plate", new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Properties.of(Material.WOOD, MULBERRY_PLANKS.defaultMaterialColor()).noCollission().strength(0.5F), VerdanceBlockSetType.MULBERRY));
     public static final Block MULBERRY_BUTTON = register("mulberry_button", new ButtonBlock(Properties.of(Material.DECORATION).noCollission().strength(0.5F), VerdanceBlockSetType.MULBERRY, 30, true));
+
+    public static final Block MULBERRY_SIGN = registerNoItem("mulberry_sign", new StandingSignBlock(Properties.copy(Blocks.OAK_SIGN).color(MaterialColor.TERRACOTTA_YELLOW), VerdanceWoodType.MULBERRY));
+    public static final Block MULBERRY_WALL_SIGN = registerNoItem("mulberry_wall_sign", new WallSignBlock(Properties.copy(Blocks.OAK_WALL_SIGN).color(MaterialColor.TERRACOTTA_YELLOW), VerdanceWoodType.MULBERRY));
+
+    public static final Block MULBERRY_HANGING_SIGN = registerNoItem("mulberry_hanging_sign", new CeilingHangingSignBlock(Properties.copy(Blocks.OAK_HANGING_SIGN).color(MaterialColor.TERRACOTTA_YELLOW), VerdanceWoodType.MULBERRY));
+    public static final Block MULBERRY_WALL_HANGING_SIGN = registerNoItem("mulberry_wall_hanging_sign", new WallHangingSignBlock(Properties.copy(Blocks.OAK_WALL_HANGING_SIGN).color(MaterialColor.TERRACOTTA_YELLOW).requiredFeatures(FeatureFlags.UPDATE_1_20), VerdanceWoodType.MULBERRY));
 
     public static final Block CANTALOUPE = register("cantaloupe", new CantaloupeBlock(Properties.of(Material.VEGETABLE, MaterialColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD)));
     public static final Block ATTACHED_CANTALOUPE_STEM = registerNoItem("attached_cantaloupe_stem", new AttachedCantaloupeStemBlock(Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP)));

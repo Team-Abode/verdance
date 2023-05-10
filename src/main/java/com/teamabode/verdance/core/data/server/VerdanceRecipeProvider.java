@@ -36,7 +36,6 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, family.get(Variant.WALL), family.getBaseBlock());
     }
 
-    @Override
     public void buildRecipes(Consumer<FinishedRecipe> exporter) {
         VerdanceFamilies.getAllFamilies().filter(family -> family.shouldGenerateRecipe(FeatureFlags.DEFAULT_FLAGS)).forEach(family -> RecipeProvider.generateRecipes(exporter, family));
         woodFromLogs(exporter, VerdanceBlocks.MULBERRY_WOOD, VerdanceBlocks.MULBERRY_LOG);
