@@ -11,7 +11,7 @@ import net.minecraft.world.level.ItemLike;
 public class VerdanceGroupEvents {
 
     public static void register() {
-        appendItemsBefore(CreativeModeTabs.BUILDING_BLOCKS, Items.CRIMSON_STEM,
+        appendItemsAfter(CreativeModeTabs.BUILDING_BLOCKS, Items.MANGROVE_BUTTON,
                 VerdanceBlocks.MULBERRY_PLANKS,
                 VerdanceBlocks.MULBERRY_STAIRS,
                 VerdanceBlocks.MULBERRY_SLAB,
@@ -21,6 +21,10 @@ public class VerdanceGroupEvents {
                 VerdanceBlocks.MULBERRY_TRAPDOOR,
                 VerdanceBlocks.MULBERRY_PRESSURE_PLATE,
                 VerdanceBlocks.MULBERRY_BUTTON
+        );
+        appendItemsAfter(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.MANGROVE_HANGING_SIGN,
+                VerdanceItems.MULBERRY_SIGN,
+                VerdanceItems.MULBERRY_HANGING_SIGN
         );
 
         appendItemsAfter(CreativeModeTabs.FOOD_AND_DRINKS, Items.MELON_SLICE, VerdanceItems.CANTALOUPE_SLICE);

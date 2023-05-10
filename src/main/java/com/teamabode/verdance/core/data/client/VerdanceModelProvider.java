@@ -22,6 +22,8 @@ public class VerdanceModelProvider extends FabricModelProvider {
         generator.generateFlatItem(VerdanceItems.CANTALOUPE_SLICE, ModelTemplates.FLAT_ITEM);
         generator.generateFlatItem(VerdanceItems.CANTALOUPE_SEEDS, ModelTemplates.FLAT_ITEM);
 
+        generator.generateFlatItem(VerdanceItems.MULBERRY_HANGING_SIGN, ModelTemplates.FLAT_ITEM);
+
         generator.generateFlatItem(VerdanceItems.MUSIC_DISC_RANGE, ModelTemplates.FLAT_ITEM);
         generator.generateFlatItem(VerdanceItems.DISC_FRAGMENT_RANGE, ModelTemplates.FLAT_ITEM);
     }

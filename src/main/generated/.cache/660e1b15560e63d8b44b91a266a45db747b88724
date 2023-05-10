@@ -1,16 +1,18 @@
-// 1.19.4	2023-05-07T20:36:34.4321653	Verdance/Tags for minecraft:block
-fa011c5db162709b03ef42585ea0b671a80a1114 data\minecraft\tags\blocks\planks.json
-33c28c9f89481e90b89719a965fdbff11e61a317 data\minecraft\tags\blocks\fence_gates.json
-20b1636e9df05fdadbf251b4c564351f98631340 data\minecraft\tags\blocks\mineable\axe.json
-65075f65efd77a0c22dfd11cf74a1ea899d0e98d data\minecraft\tags\blocks\slabs.json
-d7a6de6ff3e1110fe49fe2aa0a650410b7207ec4 data\minecraft\tags\blocks\mineable\pickaxe.json
-d7412025d84c3d6cc81ab615f3c5f057afec6001 data\minecraft\tags\blocks\wooden_stairs.json
-3562f5cfd047e95000b4f19571780d8a7eb9eabd data\minecraft\tags\blocks\wooden_fences.json
-9aea83ebb2efb53eec4c54149e6bfb543e800106 data\minecraft\tags\blocks\wooden_buttons.json
-b66991f48a5e2b8f58576c280c4f5dc1c901ead7 data\minecraft\tags\blocks\wooden_slabs.json
-31e6cf2746bf5e0508cdc04d5eb73594ba6059fb data\minecraft\tags\blocks\wooden_pressure_plates.json
-3e3a1245ce4e93400cd4e5e1636212c6d18e08d1 data\minecraft\tags\blocks\walls.json
-eb8c3573c32e839af8e198abad8f736241c2099b data\minecraft\tags\blocks\wooden_doors.json
+// 1.19.4	2023-05-09T20:10:26.5802229	Verdance/Tags for minecraft:block
 29f0d52461dc40472da8629088810ef360326f77 data\minecraft\tags\blocks\stairs.json
-142f4b6eec280ab84050602fe5f8d8e7d61af5a5 data\minecraft\tags\blocks\wooden_trapdoors.json
+9aea83ebb2efb53eec4c54149e6bfb543e800106 data\minecraft\tags\blocks\wooden_buttons.json
 af78635538db2f108d580d0f389bc5b452712c9d data\verdance\tags\blocks\shrub_may_place_on.json
+fa011c5db162709b03ef42585ea0b671a80a1114 data\minecraft\tags\blocks\planks.json
+142f4b6eec280ab84050602fe5f8d8e7d61af5a5 data\minecraft\tags\blocks\wooden_trapdoors.json
+3e3a1245ce4e93400cd4e5e1636212c6d18e08d1 data\minecraft\tags\blocks\walls.json
+042e306e18c8947a40e62ccf7fdc1b53e715aed5 data\minecraft\tags\blocks\wall_signs.json
+d7412025d84c3d6cc81ab615f3c5f057afec6001 data\minecraft\tags\blocks\wooden_stairs.json
+20b1636e9df05fdadbf251b4c564351f98631340 data\minecraft\tags\blocks\mineable\axe.json
+3562f5cfd047e95000b4f19571780d8a7eb9eabd data\minecraft\tags\blocks\wooden_fences.json
+d7a6de6ff3e1110fe49fe2aa0a650410b7207ec4 data\minecraft\tags\blocks\mineable\pickaxe.json
+65075f65efd77a0c22dfd11cf74a1ea899d0e98d data\minecraft\tags\blocks\slabs.json
+b66991f48a5e2b8f58576c280c4f5dc1c901ead7 data\minecraft\tags\blocks\wooden_slabs.json
+eb8c3573c32e839af8e198abad8f736241c2099b data\minecraft\tags\blocks\wooden_doors.json
+31e6cf2746bf5e0508cdc04d5eb73594ba6059fb data\minecraft\tags\blocks\wooden_pressure_plates.json
+33c28c9f89481e90b89719a965fdbff11e61a317 data\minecraft\tags\blocks\fence_gates.json
+a6ab8ba916601f7420ae94a9986c44d91e52ca7d data\minecraft\tags\blocks\standing_signs.json

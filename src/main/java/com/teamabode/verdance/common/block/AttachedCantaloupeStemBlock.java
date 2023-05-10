@@ -31,7 +31,7 @@ public class AttachedCantaloupeStemBlock extends BushBlock {
     public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
     public static final BooleanProperty WEST = BlockStateProperties.WEST;
     public static final Map<Direction, BooleanProperty> PROPERTY_BY_DIRECTION = PipeBlock.PROPERTY_BY_DIRECTION.entrySet().stream().filter(entry -> entry.getKey().getAxis().isHorizontal()).collect(Util.toMap());
-    private static final VoxelShape SHAPE = Block.box(0.0d, 0.0d, 0.0d, 8.0d, 8.0d, 8.0d);
+    private static final VoxelShape SHAPE = Block.box(4.0d, 0.0d, 4.0d, 12.0d, 10.0d, 12.0d);
 
     public AttachedCantaloupeStemBlock(Properties properties) {
         super(properties);
@@ -58,7 +58,7 @@ public class AttachedCantaloupeStemBlock extends BushBlock {
     }
 
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return Block.box(4.0d, 0.0d, 4.0d, 12.0d, 10.0d, 12.0d);
+        return SHAPE;
     }
 
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
