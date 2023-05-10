@@ -27,6 +27,7 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
         trapdoors();
         pressurePlates();
         buttons();
+        signs();
         logs();
 
         this.getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(VerdanceItems.MUSIC_DISC_RANGE).setReplace(false);
@@ -95,6 +96,15 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
     private void buttons() {
         this.getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS)
                 .add(VerdanceBlocks.MULBERRY_BUTTON.asItem())
+                .setReplace(false);
+    }
+
+    private void signs() {
+        this.getOrCreateTagBuilder(ItemTags.SIGNS)
+                .add(VerdanceItems.MULBERRY_SIGN)
+                .setReplace(false);
+        this.getOrCreateTagBuilder(ItemTags.HANGING_SIGNS)
+                .add(VerdanceItems.MULBERRY_HANGING_SIGN)
                 .setReplace(false);
     }
 
