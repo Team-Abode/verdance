@@ -1,4 +1,4 @@
-// 1.19.4	2023-05-09T22:03:57.6826282	Verdance/Recipes
+// 1.19.4	2023-05-09T22:23:39.1942155	Verdance/Recipes
 f6f4a23d678151158abfac306b14f960c185a6a2 data\verdance\advancements\recipes\building_blocks\white_stucco.json
 1ecc5cc2ed3b827d0f37509aa9f5c2a4aff12216 data\verdance\recipes\mulberry_stairs.json
 551bfb3f8b4a6067c254dcf7d70e49cbbb5233a9 data\verdance\advancements\recipes\building_blocks\white_stucco_slab_from_white_stucco_stonecutting.json
@@ -12,10 +12,10 @@ adc3df8fe4941f4d9fa9a42ce6779e38c6440d83 data\verdance\recipes\mulberry_button.j
 156f221519aabbba720d260af9b9fdcb5ed625d8 data\verdance\recipes\white_stucco_wall.json
 a6b887b595b587da26460357118139d5333cacde data\verdance\advancements\recipes\redstone\mulberry_button.json
 863d34480d1a1ff1f6c707247f42a594f5cd40eb data\verdance\advancements\recipes\redstone\mulberry_door.json
-10d1f7c182674a1f39d691bece579b6710ecbdd4 data\verdance\advancements\recipes\decorations\mulberry_fence.json
 20cb7501b54012c2829b6dd84851214c1676648e data\verdance\advancements\recipes\building_blocks\white_stucco_slab.json
-73fb15d2d6943d76da8ee782696d7d7526b1134d data\verdance\recipes\white_stucco_slab.json
+10d1f7c182674a1f39d691bece579b6710ecbdd4 data\verdance\advancements\recipes\decorations\mulberry_fence.json
 07e3dcc9f19b5d414271721138c185b41645a8c5 data\verdance\recipes\white_stucco_stairs.json
+73fb15d2d6943d76da8ee782696d7d7526b1134d data\verdance\recipes\white_stucco_slab.json
 492e659d3fb4100d3eb25e4a59b7aa26ce11d63b data\verdance\recipes\white_stucco_stairs_from_white_stucco_stonecutting.json
 1205964b69c946496dee96849d8fccb0915f048b data\verdance\advancements\recipes\redstone\mulberry_fence_gate.json
 8631955a7997ac46dd6931dea34d46028a8ee01f data\verdance\recipes\mulberry_fence_gate.json

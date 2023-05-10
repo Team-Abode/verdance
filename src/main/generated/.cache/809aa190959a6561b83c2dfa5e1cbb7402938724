@@ -1,4 +1,4 @@
-// 1.19.4	2023-05-09T22:03:57.6838076	Verdance/Model Definitions
+// 1.19.4	2023-05-09T22:23:39.1955879	Verdance/Model Definitions
 31c99c33f1b8a4b72774673e1773ea1c130764e0 assets\verdance\models\item\stripped_mulberry_wood.json
 1288387946f43c8f5763073babb9a0e25e12461a assets\verdance\models\block\stripped_mulberry_log_horizontal.json
 ec565b21a90dbbc0bafc959af91f417e8ecdf78f assets\verdance\models\block\mulberry_stairs.json
@@ -41,8 +41,8 @@ cd387ca14cc143e02ba9316c487812e67c3b03b8 assets\verdance\models\item\mulberry_tr
 4b0eb84407f9336d18e9eb5c65bca9df0f129cf0 assets\verdance\models\block\mulberry_fence_inventory.json
 07d4d635ef2d310f7ccf37212b4894551cb44591 assets\verdance\models\block\mulberry_trapdoor_open.json
 ab4ccce4828a483196319158e4c97bfcf5da8769 assets\verdance\models\block\mulberry_button_inventory.json
-0f1db81a5b10a2681cd5a2a0c10a5f54ffbc8e1f assets\verdance\blockstates\mulberry_fence.json
 1804b85646a3ea98c22cc02103872fef872e1572 assets\verdance\blockstates\white_stucco_wall.json
+0f1db81a5b10a2681cd5a2a0c10a5f54ffbc8e1f assets\verdance\blockstates\mulberry_fence.json
 0fea973c83de1b809c3dbc19cc136abb3d8522dc assets\verdance\blockstates\mulberry_trapdoor.json
 5fcb7e2001ad025f2a7a403702d02a987aa34fee assets\verdance\blockstates\stripped_mulberry_wood.json
 e30ea25c155df81ebf69e84dea341de7d606c745 assets\verdance\blockstates\white_stucco_slab.json
@@ -69,6 +69,7 @@ e4ba0a2ccd52cad7770be1dc351a7c165a18fbc5 assets\verdance\models\block\mulberry_b
 a05496c6ea9c8f6d4b6667f38c50d622253dea32 assets\verdance\models\block\mulberry_slab.json
 056432dbbc3745d5ee7c61e86ddf830f94e7b96c assets\verdance\models\block\white_stucco_stairs.json
 6a6ee7f6ac3f7c2370944ade331c3d8197f00036 assets\verdance\models\block\white_stucco_stairs_outer.json
+67153fc2c59cda84236368eb30defae4fb31e4ce assets\verdance\models\item\mulberry.json
 a26aeb12aa66fb76c4cbfd39631a3a2df257f72a assets\verdance\models\block\mulberry_fence_gate_wall.json
 138e378e4ecc7e242ad874a1c3ebb8cc33cb6348 assets\verdance\models\block\mulberry_pressure_plate.json
 2641965891e41fc4c6dcdbe609dcb2d5e980b0a1 assets\verdance\models\item\cantaloupe_seeds.json

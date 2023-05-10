@@ -5,6 +5,7 @@ import com.teamabode.verdance.core.registry.VerdanceItems;
 import com.teamabode.verdance.core.registry.misc.VerdanceItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.ItemTags;
 
@@ -117,6 +118,13 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(VerdanceBlocks.MULBERRY_WOOD.asItem())
                 .add(VerdanceBlocks.STRIPPED_MULBERRY_LOG.asItem())
                 .add(VerdanceBlocks.STRIPPED_MULBERRY_WOOD.asItem())
+                .setReplace(false);
+    }
+
+    private void foods() {
+        this.getOrCreateTagBuilder(ConventionalItemTags.FOODS)
+                .add(VerdanceItems.CANTALOUPE_SLICE)
+                .add(VerdanceItems.MULBERRY)
                 .setReplace(false);
     }
 }
