@@ -1,0 +1,28 @@
+{
+  "name": "verdance:ghost_town/center",
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "verdance:ghost_town/pathways/pathway_1",
+        "projection": "terrain_matching",
+        "processors": {
+          "processors": []
+        }
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "verdance:ghost_town/pathways/pathway_2",
+        "projection": "terrain_matching",
+        "processors": {
+          "processors": []
+        }
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

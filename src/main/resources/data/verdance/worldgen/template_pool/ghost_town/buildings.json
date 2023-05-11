@@ -1,0 +1,28 @@
+{
+  "name": "verdance:ghost_town/pathway",
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "verdance:ghost_town/buildings/home",
+        "projection": "rigid",
+        "processors": {
+          "processors": []
+        }
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "verdance:ghost_town/buildings/garden",
+        "projection": "rigid",
+        "processors": {
+          "processors": []
+        }
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}
