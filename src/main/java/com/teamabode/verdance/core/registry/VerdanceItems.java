@@ -1,5 +1,6 @@
 package com.teamabode.verdance.core.registry;
 
+import com.teamabode.scribe.common.item.ScribeBoatItem;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.core.registry.misc.VerdanceFoods;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
@@ -20,6 +21,9 @@ public class VerdanceItems {
 
     public static final Item MULBERRY_SIGN = register("mulberry_sign", new SignItem(new Item.Properties().stacksTo(16), VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN));
     public static final Item MULBERRY_HANGING_SIGN = register("mulberry_hanging_sign", new HangingSignItem(VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN, new Item.Properties().stacksTo(16).requiredFeatures(FeatureFlags.UPDATE_1_20)));
+
+    public static final Item MULBERRY_BOAT = register("mulberry_boat", new ScribeBoatItem(new Item.Properties().stacksTo(1), VerdanceBoatType.MULBERRY, false));
+    public static final Item MULBERRY_CHEST_BOAT = register("mulberry_chest_boat", new ScribeBoatItem(new Item.Properties().stacksTo(1), VerdanceBoatType.MULBERRY, true));
 
     private static <T extends Item> T register(String name, T item) {
         return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Verdance.MOD_ID, name), item);
