@@ -29,6 +29,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         buttons();
         signs();
         logs();
+        saplings();
 
         mineablePickaxe();
         mineableAxe();
@@ -148,6 +149,12 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
                 .add(VerdanceBlocks.MULBERRY_WOOD)
                 .add(VerdanceBlocks.STRIPPED_MULBERRY_LOG)
                 .add(VerdanceBlocks.STRIPPED_MULBERRY_WOOD)
+                .setReplace(false);
+    }
+
+    private void saplings() {
+        this.getOrCreateTagBuilder(BlockTags.SAPLINGS)
+                .add(VerdanceBlocks.MULBERRY_SAPLING)
                 .setReplace(false);
     }
 }

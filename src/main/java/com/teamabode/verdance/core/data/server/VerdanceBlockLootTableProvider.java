@@ -52,6 +52,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         dropSelf(VerdanceBlocks.MULBERRY_TRAPDOOR);
         dropSelf(VerdanceBlocks.MULBERRY_PRESSURE_PLATE);
         dropSelf(VerdanceBlocks.MULBERRY_BUTTON);
+        dropSelf(VerdanceBlocks.MULBERRY_SAPLING);
         dropSelf(VerdanceBlocks.MULBERRY_SIGN);
         dropSelf(VerdanceBlocks.MULBERRY_HANGING_SIGN);
     }

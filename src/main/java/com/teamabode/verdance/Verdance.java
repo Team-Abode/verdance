@@ -28,5 +28,6 @@ public class Verdance implements ModInitializer {
         VerdanceBlockSetType.register();
         VerdanceWoodType.register();
         VerdanceTrunkPlacerType.register();
+        VerdanceTreeFeatures.register();
     }
 }

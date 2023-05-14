@@ -30,6 +30,8 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
         buttons();
         signs();
         logs();
+        foods();
+        saplings();
 
         this.getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(VerdanceItems.MUSIC_DISC_RANGE).setReplace(false);
     }
@@ -124,6 +126,12 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
     private void foods() {
         this.getOrCreateTagBuilder(ConventionalItemTags.FOODS)
                 .add(VerdanceItems.CANTALOUPE_SLICE)
+                .add(VerdanceItems.MULBERRY)
+                .setReplace(false);
+    }
+
+    private void saplings() {
+        this.getOrCreateTagBuilder(ItemTags.SAPLINGS)
                 .add(VerdanceItems.MULBERRY)
                 .setReplace(false);
     }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "verdance:block/mulberry_sapling"
+  }
+}

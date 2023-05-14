@@ -19,6 +19,7 @@ public class VerdanceClient implements ClientModInitializer {
     }
 
     private static void setRenderTypes() {
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_SAPLING, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.SHRUB, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.ATTACHED_CANTALOUPE_STEM, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.CANTALOUPE_STEM, RenderType.cutout());
