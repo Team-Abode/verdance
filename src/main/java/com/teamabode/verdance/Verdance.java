@@ -6,9 +6,7 @@ import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceFeatures;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import com.teamabode.verdance.core.registry.VerdanceSounds;
-import com.teamabode.verdance.core.registry.misc.VerdanceBlockSetType;
-import com.teamabode.verdance.core.registry.misc.VerdanceGroupEvents;
-import com.teamabode.verdance.core.registry.misc.VerdanceWoodType;
+import com.teamabode.verdance.core.registry.misc.*;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,5 +27,6 @@ public class Verdance implements ModInitializer {
         VerdanceGroupEvents.register();
         VerdanceBlockSetType.register();
         VerdanceWoodType.register();
+        VerdanceTrunkPlacerType.register();
     }
 }

@@ -6,7 +6,8 @@
   "mixins": [
     "general.BlockEntityTypeMixin",
     "general.LightningBoltMixin",
-    "general.SugarCaneBlockMixin"
+    "general.SugarCaneBlockMixin",
+    "general.TrunkPlacerTypeMixin"
   ],
   "plugin": "com.teamabode.verdance.core.mixin.VerdanceMixinPlugin",
   "client": [],
