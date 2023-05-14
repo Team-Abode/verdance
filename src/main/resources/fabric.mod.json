@@ -25,6 +25,9 @@
     ],
     "fabric-datagen": [
       "com.teamabode.verdance.core.data.VerdanceData"
+    ],
+    "terrablender": [
+      "com.teamabode.verdance.core.integration.terrablender.VerdanceTerraBlender"
     ]
   },
   "mixins": [
