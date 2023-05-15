@@ -31,7 +31,6 @@ public class VerdanceClient implements ClientModInitializer {
 
     private static void addColorProviders() {
         ColorProviderRegistry.BLOCK.register((state, tintGetter, pos, i) -> tintGetter != null && pos != null ? BiomeColors.getAverageFoliageColor(tintGetter, pos) : FoliageColor.getDefaultColor(), VerdanceBlocks.MULBERRY_LEAVES, VerdanceBlocks.SHRUB);
-
         ColorProviderRegistry.ITEM.register((stack, i) -> {
             BlockState state = ((BlockItem) stack.getItem()).getBlock().defaultBlockState();
 

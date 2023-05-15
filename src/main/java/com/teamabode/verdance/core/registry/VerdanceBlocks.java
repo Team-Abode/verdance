@@ -44,7 +44,7 @@ public class VerdanceBlocks {
     public static final Block MULBERRY_SIGN = registerNoItem("mulberry_sign", new StandingSignBlock(Properties.copy(Blocks.OAK_SIGN).color(MaterialColor.TERRACOTTA_YELLOW), VerdanceWoodType.MULBERRY));
     public static final Block MULBERRY_WALL_SIGN = registerNoItem("mulberry_wall_sign", new WallSignBlock(Properties.copy(Blocks.OAK_WALL_SIGN).color(MaterialColor.TERRACOTTA_YELLOW).dropsLike(MULBERRY_SIGN), VerdanceWoodType.MULBERRY));
 
-    public static final Block MULBERRY_HANGING_SIGN = registerNoItem("mulberry_hanging_sign", new CeilingHangingSignBlock(Properties.copy(Blocks.OAK_HANGING_SIGN).color(MaterialColor.TERRACOTTA_YELLOW), VerdanceWoodType.MULBERRY));
+    public static final Block MULBERRY_HANGING_SIGN = registerNoItem("mulberry_hanging_sign", new CeilingHangingSignBlock(Properties.copy(Blocks.OAK_HANGING_SIGN).color(MaterialColor.TERRACOTTA_YELLOW).requiredFeatures(FeatureFlags.UPDATE_1_20), VerdanceWoodType.MULBERRY));
     public static final Block MULBERRY_WALL_HANGING_SIGN = registerNoItem("mulberry_wall_hanging_sign", new WallHangingSignBlock(Properties.copy(Blocks.OAK_WALL_HANGING_SIGN).color(MaterialColor.TERRACOTTA_YELLOW).requiredFeatures(FeatureFlags.UPDATE_1_20).dropsLike(MULBERRY_HANGING_SIGN), VerdanceWoodType.MULBERRY));
 
     public static final Block CANTALOUPE = register("cantaloupe", new CantaloupeBlock(Properties.of(Material.VEGETABLE, MaterialColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD)));
@@ -57,6 +57,21 @@ public class VerdanceBlocks {
     public static final Block WHITE_STUCCO_STAIRS = register("white_stucco_stairs", new StairBlock(WHITE_STUCCO.defaultBlockState(), Properties.copy(WHITE_STUCCO)));
     public static final Block WHITE_STUCCO_SLAB = register("white_stucco_slab", new SlabBlock(Properties.copy(WHITE_STUCCO)));
     public static final Block WHITE_STUCCO_WALL = register("white_stucco_wall", new WallBlock(Properties.copy(WHITE_STUCCO)));
+
+    public static final Block LIGHT_GRAY_STUCCO = register("light_gray_stucco", new Block(Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_GRAY).requiresCorrectToolForDrops().strength(2.0F, 7.0F)));
+    public static final Block LIGHT_GRAY_STUCCO_STAIRS = register("light_gray_stucco_stairs", new StairBlock(LIGHT_GRAY_STUCCO.defaultBlockState(), Properties.copy(LIGHT_GRAY_STUCCO)));
+    public static final Block LIGHT_GRAY_STUCCO_SLAB = register("light_gray_stucco_slab", new SlabBlock(Properties.copy(LIGHT_GRAY_STUCCO)));
+    public static final Block LIGHT_GRAY_STUCCO_WALL = register("light_gray_stucco_wall", new WallBlock(Properties.copy(LIGHT_GRAY_STUCCO)));
+
+    public static final Block GRAY_STUCCO = register("gray_stucco", new Block(Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).requiresCorrectToolForDrops().strength(2.0F, 7.0F)));
+    public static final Block GRAY_STUCCO_STAIRS = register("gray_stucco_stairs", new StairBlock(GRAY_STUCCO.defaultBlockState(), Properties.copy(GRAY_STUCCO)));
+    public static final Block GRAY_STUCCO_SLAB = register("gray_stucco_slab", new SlabBlock(Properties.copy(GRAY_STUCCO)));
+    public static final Block GRAY_STUCCO_WALL = register("gray_stucco_wall", new WallBlock(Properties.copy(GRAY_STUCCO)));
+
+    public static final Block BLACK_STUCCO = register("black_stucco", new Block(Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).requiresCorrectToolForDrops().strength(2.0F, 7.0F)));
+    public static final Block BLACK_STUCCO_STAIRS = register("black_stucco_stairs", new StairBlock(BLACK_STUCCO.defaultBlockState(), Properties.copy(BLACK_STUCCO)));
+    public static final Block BLACK_STUCCO_SLAB = register("black_stucco_slab", new SlabBlock(Properties.copy(BLACK_STUCCO)));
+    public static final Block BLACK_STUCCO_WALL = register("black_stucco_wall", new WallBlock(Properties.copy(BLACK_STUCCO)));
 
     private static <T extends Block> T register(String name, T block) {
         var registry = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Verdance.MOD_ID, name), block);

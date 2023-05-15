@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "verdance:block/black_stucco",
+    "side": "verdance:block/black_stucco",
+    "top": "verdance:block/black_stucco"
+  }
+}

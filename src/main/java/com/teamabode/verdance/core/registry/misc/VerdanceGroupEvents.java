@@ -3,6 +3,7 @@ package com.teamabode.verdance.core.registry.misc;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
@@ -32,10 +33,7 @@ public class VerdanceGroupEvents {
                 VerdanceItems.MULBERRY_CHEST_BOAT
         );
 
-        appendItemsAfter(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.MANGROVE_HANGING_SIGN,
-                VerdanceItems.MULBERRY_SIGN,
-                VerdanceItems.MULBERRY_HANGING_SIGN
-        );
+        appendSigns();
 
 
         appendItemsAfter(CreativeModeTabs.FOOD_AND_DRINKS, Items.GLOW_BERRIES, VerdanceItems.MULBERRY);
@@ -62,6 +60,19 @@ public class VerdanceGroupEvents {
     private static void appendItemsAfter(CreativeModeTab tab, ItemLike target, ItemLike... appendedItems) {
         ItemGroupEvents.modifyEntriesEvent(tab).register(entries -> {
             entries.addAfter(target, appendedItems);
+        });
+    }
+
+    private static void appendSigns() {
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(modifier -> {
+            var context = modifier.getContext();
+
+            if (context.enabledFeatures().contains(FeatureFlags.UPDATE_1_20)) {
+                modifier.addAfter(Items.MANGROVE_HANGING_SIGN, VerdanceItems.MULBERRY_SIGN, VerdanceItems.MULBERRY_HANGING_SIGN);
+            }
+            else {
+                modifier.addAfter(Items.MANGROVE_SIGN, VerdanceItems.MULBERRY_SIGN);
+            }
         });
     }
 

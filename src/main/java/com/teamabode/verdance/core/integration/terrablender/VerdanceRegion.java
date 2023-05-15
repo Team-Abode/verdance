@@ -22,6 +22,7 @@ public class VerdanceRegion extends Region {
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
         this.addModifiedVanillaOverworldBiomes(mapper, builder -> {
             builder.replaceBiome(Biomes.DESERT, VerdanceBiomes.SHRUBLANDS);
+            builder.replaceBiome(Biomes.MEADOW, VerdanceBiomes.MULBERRY_FOREST);
         });
     }
 }
