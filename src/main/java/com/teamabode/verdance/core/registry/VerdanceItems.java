@@ -34,6 +34,7 @@ public class VerdanceItems {
         CompostingChanceRegistry.INSTANCE.add(CANTALOUPE_SEEDS, 0.30F);
         CompostingChanceRegistry.INSTANCE.add(CANTALOUPE_SLICE, 0.50F);
         CompostingChanceRegistry.INSTANCE.add(MULBERRY, 0.30F);
+        CompostingChanceRegistry.INSTANCE.add(VerdanceBlocks.MULBERRY_LEAVES, 0.30F);
         CompostingChanceRegistry.INSTANCE.add(VerdanceBlocks.SHRUB, 0.65F);
     }
 }

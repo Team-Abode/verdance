@@ -30,8 +30,10 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         signs();
         logs();
         saplings();
+        leaves();
 
         mineablePickaxe();
+        mineableHoe();
         mineableAxe();
     }
 
@@ -47,6 +49,12 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
                 .add(VerdanceBlocks.WHITE_STUCCO_STAIRS)
                 .add(VerdanceBlocks.WHITE_STUCCO_SLAB)
                 .add(VerdanceBlocks.WHITE_STUCCO_WALL)
+                .setReplace(false);
+    }
+
+    private void mineableHoe() {
+        this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_HOE)
+                .add(VerdanceBlocks.MULBERRY_LEAVES)
                 .setReplace(false);
     }
 
@@ -155,6 +163,12 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     private void saplings() {
         this.getOrCreateTagBuilder(BlockTags.SAPLINGS)
                 .add(VerdanceBlocks.MULBERRY_SAPLING)
+                .setReplace(false);
+    }
+
+    private void leaves() {
+        this.getOrCreateTagBuilder(BlockTags.LEAVES)
+                .add(VerdanceBlocks.MULBERRY_LEAVES)
                 .setReplace(false);
     }
 }

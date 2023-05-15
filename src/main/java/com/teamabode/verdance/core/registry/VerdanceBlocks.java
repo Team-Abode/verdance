@@ -14,12 +14,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.grower.JungleTreeGrower;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -39,6 +38,7 @@ public class VerdanceBlocks {
     public static final Block MULBERRY_PRESSURE_PLATE = register("mulberry_pressure_plate", new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Properties.of(Material.WOOD, MULBERRY_PLANKS.defaultMaterialColor()).noCollission().strength(0.5F), VerdanceBlockSetType.MULBERRY));
     public static final Block MULBERRY_BUTTON = register("mulberry_button", new ButtonBlock(Properties.of(Material.DECORATION).noCollission().strength(0.5F), VerdanceBlockSetType.MULBERRY, 30, true));
 
+    public static final Block MULBERRY_LEAVES = register("mulberry_leaves", new LeavesBlock(Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn((blockState, blockGetter, blockPos, object) -> object == EntityType.OCELOT || object == EntityType.PARROT).isSuffocating((blockState, blockGetter, blockPos) -> false).isViewBlocking((blockState, blockGetter, blockPos) -> false)));
     public static final Block MULBERRY_SAPLING = registerNoItem("mulberry_sapling", new SaplingBlock(new MulberryTreeGrower(), Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)));
 
     public static final Block MULBERRY_SIGN = registerNoItem("mulberry_sign", new StandingSignBlock(Properties.copy(Blocks.OAK_SIGN).color(MaterialColor.TERRACOTTA_YELLOW), VerdanceWoodType.MULBERRY));
@@ -74,11 +74,12 @@ public class VerdanceBlocks {
         FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_WOOD, 5, 5);
         FlammableBlockRegistry.getDefaultInstance().add(STRIPPED_MULBERRY_LOG, 5, 5);
         FlammableBlockRegistry.getDefaultInstance().add(STRIPPED_MULBERRY_WOOD, 5, 5);
-        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_PLANKS, 20, 5);
-        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_STAIRS, 20, 5);
-        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_SLAB, 20, 5);
-        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_FENCE, 20, 5);
-        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_FENCE_GATE, 20, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_STAIRS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_SLAB, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_FENCE, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_FENCE_GATE, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_LEAVES, 30, 60);
         StrippableBlockRegistry.register(MULBERRY_LOG, STRIPPED_MULBERRY_LOG);
         StrippableBlockRegistry.register(MULBERRY_WOOD, STRIPPED_MULBERRY_WOOD);
     }

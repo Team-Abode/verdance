@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "verdance:block/mulberry_leaves"
+  }
+}

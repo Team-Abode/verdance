@@ -34,6 +34,7 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
         boats();
         foods();
         saplings();
+        leaves();
 
         this.getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(VerdanceItems.MUSIC_DISC_RANGE).setReplace(false);
     }
@@ -144,6 +145,12 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
     private void saplings() {
         this.getOrCreateTagBuilder(ItemTags.SAPLINGS)
                 .add(VerdanceItems.MULBERRY)
+                .setReplace(false);
+    }
+
+    private void leaves() {
+        this.getOrCreateTagBuilder(ItemTags.LEAVES)
+                .add(VerdanceBlocks.MULBERRY_LEAVES.asItem())
                 .setReplace(false);
     }
 }

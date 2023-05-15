@@ -7,6 +7,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 
 public class VerdanceGroupEvents {
 
@@ -45,6 +46,8 @@ public class VerdanceGroupEvents {
         appendItemsAfter(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.MUSIC_DISC_OTHERSIDE, VerdanceItems.MUSIC_DISC_RANGE);
         appendItemsBefore(CreativeModeTabs.INGREDIENTS, Items.DISC_FRAGMENT_5, VerdanceItems.DISC_FRAGMENT_RANGE);
 
+        appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Blocks.MANGROVE_LEAVES, VerdanceBlocks.MULBERRY_LEAVES);
+        appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Blocks.MANGROVE_PROPAGULE, VerdanceItems.MULBERRY);
         appendItemsBefore(CreativeModeTabs.NATURAL_BLOCKS, Items.AZALEA, VerdanceBlocks.SHRUB);
 
         appendItemsAfter(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA,

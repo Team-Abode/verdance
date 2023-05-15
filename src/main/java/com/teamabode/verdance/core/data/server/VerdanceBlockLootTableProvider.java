@@ -7,6 +7,8 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.IntRange;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -52,6 +54,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         dropSelf(VerdanceBlocks.MULBERRY_TRAPDOOR);
         dropSelf(VerdanceBlocks.MULBERRY_PRESSURE_PLATE);
         dropSelf(VerdanceBlocks.MULBERRY_BUTTON);
+        add(VerdanceBlocks.MULBERRY_LEAVES, (Block block) -> this.createLeavesDrops(block, VerdanceBlocks.MULBERRY_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
         dropSelf(VerdanceBlocks.MULBERRY_SAPLING);
         dropSelf(VerdanceBlocks.MULBERRY_SIGN);
         dropSelf(VerdanceBlocks.MULBERRY_HANGING_SIGN);
