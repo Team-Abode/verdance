@@ -21,11 +21,11 @@ public class Verdance implements ModInitializer {
 
     public void onInitialize() {
         VerdanceBlocks.register();
-        VerdanceBoatType.register();
         VerdanceItems.register();
         VerdanceFeatures.register();
         VerdanceSounds.register();
         VerdanceGroupEvents.register();
+        VerdanceBoatType.register();
         VerdanceBlockSetType.register();
         VerdanceWoodType.register();
         VerdanceTrunkPlacerType.register();

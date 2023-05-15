@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ItemTags;
 
 import java.util.concurrent.CompletableFuture;
@@ -30,6 +31,7 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
         buttons();
         signs();
         logs();
+        boats();
         foods();
         saplings();
 
@@ -120,6 +122,15 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(VerdanceBlocks.MULBERRY_WOOD.asItem())
                 .add(VerdanceBlocks.STRIPPED_MULBERRY_LOG.asItem())
                 .add(VerdanceBlocks.STRIPPED_MULBERRY_WOOD.asItem())
+                .setReplace(false);
+    }
+
+    private void boats() {
+        this.getOrCreateTagBuilder(ItemTags.BOATS)
+                .add(VerdanceItems.MULBERRY_BOAT)
+                .setReplace(false);
+        this.getOrCreateTagBuilder(ItemTags.CHEST_BOATS)
+                .add(VerdanceItems.MULBERRY_CHEST_BOAT)
                 .setReplace(false);
     }
 

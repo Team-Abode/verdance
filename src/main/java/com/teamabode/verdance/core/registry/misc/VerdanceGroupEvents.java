@@ -26,10 +26,17 @@ public class VerdanceGroupEvents {
                 VerdanceBlocks.MULBERRY_PRESSURE_PLATE,
                 VerdanceBlocks.MULBERRY_BUTTON
         );
+        appendItemsAfter(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.MANGROVE_CHEST_BOAT,
+                VerdanceItems.MULBERRY_BOAT,
+                VerdanceItems.MULBERRY_CHEST_BOAT
+        );
+
         appendItemsAfter(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.MANGROVE_HANGING_SIGN,
                 VerdanceItems.MULBERRY_SIGN,
                 VerdanceItems.MULBERRY_HANGING_SIGN
         );
+
+
         appendItemsAfter(CreativeModeTabs.FOOD_AND_DRINKS, Items.GLOW_BERRIES, VerdanceItems.MULBERRY);
         appendItemsAfter(CreativeModeTabs.FOOD_AND_DRINKS, Items.MELON_SLICE, VerdanceItems.CANTALOUPE_SLICE);
         appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Items.MELON, VerdanceBlocks.CANTALOUPE);
