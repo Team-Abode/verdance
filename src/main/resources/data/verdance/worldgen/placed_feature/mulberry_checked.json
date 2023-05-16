@@ -2,20 +2,10 @@
   "feature": "verdance:mulberry",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": {
-        "type": "minecraft:weighted_list",
-        "distribution": [
-          {
-            "weight": 6,
-            "data": 3
-          },
-          {
-            "weight": 1,
-            "data": 2
-          }
-        ]
-      }
+      "type": "minecraft:noise_based_count",
+      "noise_to_count_ratio": 50,
+      "noise_factor": 10,
+      "noise_offset": 0.5
     },
     {
       "type": "minecraft:in_square"

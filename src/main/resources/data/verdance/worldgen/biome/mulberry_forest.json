@@ -1,5 +1,5 @@
 {
-  "temperature": 0.8,
+  "temperature": 0.6,
   "downfall": 0.8,
   "has_precipitation": true,
   "temperature_modifier": "none",
@@ -8,6 +8,8 @@
     "fog_color": 12638463,
     "water_color": 937679,
     "water_fog_color": 329011,
+    "grass_color": 10141259,
+    "foliage_color": 8893999,
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000,
@@ -33,21 +35,15 @@
     "axolotls": [],
     "creature": [
       {
-        "type": "minecraft:donkey",
-        "weight": 1,
-        "minCount": 1,
-        "maxCount": 2
-      },
-      {
         "type": "minecraft:rabbit",
         "weight": 2,
         "minCount": 2,
         "maxCount": 6
       },
       {
-        "type": "minecraft:sheep",
-        "weight": 2,
-        "minCount": 2,
+        "type": "minecraft:wolf",
+        "weight": 4,
+        "minCount": 4,
         "maxCount": 4
       }
     ],
@@ -178,7 +174,7 @@
       "minecraft:glow_lichen",
       "minecraft:patch_tall_grass_2",
       "minecraft:patch_grass_plain",
-      "verdance:trees_mulberry_forest"
+      "verdance:mulberry_checked"
     ],
     [
       "minecraft:freeze_top_layer"
