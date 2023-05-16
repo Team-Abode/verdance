@@ -49,6 +49,18 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
                 .add(VerdanceBlocks.WHITE_STUCCO_STAIRS)
                 .add(VerdanceBlocks.WHITE_STUCCO_SLAB)
                 .add(VerdanceBlocks.WHITE_STUCCO_WALL)
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO)
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS)
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB)
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL)
+                .add(VerdanceBlocks.GRAY_STUCCO)
+                .add(VerdanceBlocks.GRAY_STUCCO_STAIRS)
+                .add(VerdanceBlocks.GRAY_STUCCO_SLAB)
+                .add(VerdanceBlocks.GRAY_STUCCO_WALL)
+                .add(VerdanceBlocks.BLACK_STUCCO)
+                .add(VerdanceBlocks.BLACK_STUCCO_STAIRS)
+                .add(VerdanceBlocks.BLACK_STUCCO_SLAB)
+                .add(VerdanceBlocks.BLACK_STUCCO_WALL)
                 .setReplace(false);
     }
 
@@ -67,6 +79,9 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     private void walls() {
         this.getOrCreateTagBuilder(BlockTags.WALLS)
                 .add(VerdanceBlocks.WHITE_STUCCO_WALL)
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL)
+                .add(VerdanceBlocks.GRAY_STUCCO_WALL)
+                .add(VerdanceBlocks.BLACK_STUCCO_WALL)
                 .setReplace(false);
     }
 
@@ -79,6 +94,9 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     private void stairs() {
         this.getOrCreateTagBuilder(BlockTags.STAIRS)
                 .add(VerdanceBlocks.WHITE_STUCCO_STAIRS)
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS)
+                .add(VerdanceBlocks.GRAY_STUCCO_STAIRS)
+                .add(VerdanceBlocks.BLACK_STUCCO_STAIRS)
                 .setReplace(false);
         this.getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS)
                 .add(VerdanceBlocks.MULBERRY_STAIRS)
@@ -88,6 +106,9 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     private void slabs() {
         this.getOrCreateTagBuilder(BlockTags.SLABS)
                 .add(VerdanceBlocks.WHITE_STUCCO_SLAB)
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB)
+                .add(VerdanceBlocks.GRAY_STUCCO_SLAB)
+                .add(VerdanceBlocks.BLACK_STUCCO_SLAB)
                 .setReplace(false);
         this.getOrCreateTagBuilder(BlockTags.WOODEN_SLABS)
                 .add(VerdanceBlocks.MULBERRY_SLAB)

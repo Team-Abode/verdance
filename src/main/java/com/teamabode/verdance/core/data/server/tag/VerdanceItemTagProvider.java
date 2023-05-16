@@ -48,6 +48,9 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
     private void stairs() {
         this.getOrCreateTagBuilder(ItemTags.STAIRS)
                 .add(VerdanceBlocks.WHITE_STUCCO_STAIRS.asItem())
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS.asItem())
+                .add(VerdanceBlocks.GRAY_STUCCO_STAIRS.asItem())
+                .add(VerdanceBlocks.BLACK_STUCCO_STAIRS.asItem())
                 .setReplace(false);
         this.getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS)
                 .add(VerdanceBlocks.MULBERRY_STAIRS.asItem())
@@ -57,6 +60,9 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
     private void slabs() {
         this.getOrCreateTagBuilder(ItemTags.SLABS)
                 .add(VerdanceBlocks.WHITE_STUCCO_SLAB.asItem())
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB.asItem())
+                .add(VerdanceBlocks.GRAY_STUCCO_SLAB.asItem())
+                .add(VerdanceBlocks.BLACK_STUCCO_SLAB.asItem())
                 .setReplace(false);
         this.getOrCreateTagBuilder(ItemTags.WOODEN_SLABS)
                 .add(VerdanceBlocks.MULBERRY_SLAB.asItem())
@@ -66,6 +72,9 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
     private void walls() {
         this.getOrCreateTagBuilder(ItemTags.WALLS)
                 .add(VerdanceBlocks.WHITE_STUCCO_WALL.asItem())
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL.asItem())
+                .add(VerdanceBlocks.GRAY_STUCCO_WALL.asItem())
+                .add(VerdanceBlocks.BLACK_STUCCO_WALL.asItem())
                 .setReplace(false);
     }
 

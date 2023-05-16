@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.IntRange;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -65,6 +64,18 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         dropSelf(VerdanceBlocks.WHITE_STUCCO_STAIRS);
         add(VerdanceBlocks.WHITE_STUCCO_SLAB, this::createSlabItemTable);
         dropSelf(VerdanceBlocks.WHITE_STUCCO_WALL);
+        dropSelf(VerdanceBlocks.LIGHT_GRAY_STUCCO);
+        dropSelf(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS);
+        add(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB, this::createSlabItemTable);
+        dropSelf(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL);
+        dropSelf(VerdanceBlocks.GRAY_STUCCO);
+        dropSelf(VerdanceBlocks.GRAY_STUCCO_STAIRS);
+        add(VerdanceBlocks.GRAY_STUCCO_SLAB, this::createSlabItemTable);
+        dropSelf(VerdanceBlocks.GRAY_STUCCO_WALL);
+        dropSelf(VerdanceBlocks.BLACK_STUCCO);
+        dropSelf(VerdanceBlocks.BLACK_STUCCO_STAIRS);
+        add(VerdanceBlocks.BLACK_STUCCO_SLAB, this::createSlabItemTable);
+        dropSelf(VerdanceBlocks.BLACK_STUCCO_WALL);
     }
 
     private void cantaloupe() {

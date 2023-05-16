@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "verdance:white_stucco_wall"
+    "verdance:white_stucco_wall",
+    "verdance:light_gray_stucco_wall",
+    "verdance:gray_stucco_wall",
+    "verdance:black_stucco_wall"
   ]
 }
