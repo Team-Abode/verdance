@@ -1,7 +1,7 @@
 package com.teamabode.verdance.core.integration.terrablender;
 
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.core.registry.misc.VerdanceSurfaceRules;
+import com.teamabode.verdance.core.misc.worldgen.VerdanceSurfaceRules;
 import net.minecraft.resources.ResourceLocation;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;

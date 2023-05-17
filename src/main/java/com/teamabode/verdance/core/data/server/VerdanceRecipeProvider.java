@@ -2,8 +2,8 @@ package com.teamabode.verdance.core.data.server;
 
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
-import com.teamabode.verdance.core.registry.misc.VerdanceFamilies;
-import com.teamabode.verdance.core.registry.misc.VerdanceItemTags;
+import com.teamabode.verdance.core.misc.datagen.VerdanceFamilies;
+import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.BlockFamily;

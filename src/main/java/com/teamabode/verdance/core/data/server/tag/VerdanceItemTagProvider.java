@@ -2,12 +2,11 @@ package com.teamabode.verdance.core.data.server.tag;
 
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
-import com.teamabode.verdance.core.registry.misc.VerdanceItemTags;
+import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ItemTags;
 
 import java.util.concurrent.CompletableFuture;

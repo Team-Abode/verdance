@@ -1,7 +1,7 @@
 package com.teamabode.verdance.common.block;
 
-import com.teamabode.verdance.core.registry.VerdanceConfiguredFeatures;
-import com.teamabode.verdance.core.registry.misc.VerdanceBlockTags;
+import com.teamabode.verdance.core.misc.worldgen.VerdanceConfiguredFeatures;
+import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;

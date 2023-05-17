@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.registry.misc;
+package com.teamabode.verdance.core.misc.worldgen;
 
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;

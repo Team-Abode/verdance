@@ -1,6 +1,6 @@
 package com.teamabode.verdance.core.registry;
 
-import com.teamabode.scribe.common.entity.ScribeBoatType;
+import com.teamabode.scribe.common.entity.boat.ScribeBoatType;
 import com.teamabode.scribe.core.registry.ScribeBuiltInRegistries;
 import com.teamabode.verdance.Verdance;
 import net.minecraft.core.Registry;

@@ -3,8 +3,6 @@ package com.teamabode.verdance.core.registry;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.feature.BoulderConfiguration;
 import com.teamabode.verdance.common.feature.BoulderFeature;
-import com.teamabode.verdance.common.feature.SequenceFeature;
-import com.teamabode.verdance.common.feature.SequenceFeatureConfiguration;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;

@@ -2,7 +2,7 @@ package com.teamabode.verdance.core.registry;
 
 import com.teamabode.scribe.common.item.ScribeBoatItem;
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.core.registry.misc.VerdanceFoods;
+import com.teamabode.verdance.core.misc.VerdanceFoods;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

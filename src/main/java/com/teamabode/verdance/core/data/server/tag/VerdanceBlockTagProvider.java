@@ -1,7 +1,7 @@
 package com.teamabode.verdance.core.data.server.tag;
 
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
-import com.teamabode.verdance.core.registry.misc.VerdanceBlockTags;
+import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;

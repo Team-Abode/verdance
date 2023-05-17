@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.registry.misc;
+package com.teamabode.verdance.core.misc.worldgen;
 
 import com.mojang.serialization.Codec;
 import com.teamabode.verdance.Verdance;

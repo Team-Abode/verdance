@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.registry.misc;
+package com.teamabode.verdance.core.misc;
 
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;

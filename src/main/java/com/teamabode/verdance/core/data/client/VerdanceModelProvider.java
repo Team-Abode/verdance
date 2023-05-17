@@ -2,7 +2,7 @@ package com.teamabode.verdance.core.data.client;
 
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
-import com.teamabode.verdance.core.registry.misc.VerdanceFamilies;
+import com.teamabode.verdance.core.misc.datagen.VerdanceFamilies;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.models.BlockModelGenerators;

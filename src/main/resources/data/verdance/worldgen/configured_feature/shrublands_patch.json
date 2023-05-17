@@ -6,7 +6,7 @@
         "chance": 0.1,
         "feature": {
           "feature": {
-            "type": "verdance:sequence",
+            "type": "scribe:sequence",
             "config": {
               "features": [
                   {

@@ -1,10 +1,8 @@
-package com.teamabode.verdance.core.registry.misc;
+package com.teamabode.verdance.core.misc.datagen;
 
 import com.teamabode.verdance.Verdance;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeRegistry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
 public class VerdanceWoodType {

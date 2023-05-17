@@ -2,7 +2,7 @@ package com.teamabode.verdance.common.feature;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.teamabode.verdance.core.registry.misc.VerdanceTrunkPlacerType;
+import com.teamabode.verdance.core.misc.worldgen.VerdanceTrunkPlacerType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;

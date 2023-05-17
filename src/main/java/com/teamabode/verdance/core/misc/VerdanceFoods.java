@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.registry.misc;
+package com.teamabode.verdance.core.misc;
 
 import net.minecraft.world.food.FoodConstants;
 import net.minecraft.world.food.FoodProperties;

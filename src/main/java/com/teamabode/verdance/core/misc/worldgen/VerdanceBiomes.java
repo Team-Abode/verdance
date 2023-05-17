@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.registry.misc;
+package com.teamabode.verdance.core.misc.worldgen;
 
 import com.teamabode.verdance.Verdance;
 import net.minecraft.core.registries.Registries;
