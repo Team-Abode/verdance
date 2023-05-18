@@ -54,22 +54,22 @@ public class VerdanceBlocks {
 
     public static final Block SHRUB = register("shrub", new ShrubBlock(Properties.copy(Blocks.AZALEA)));
 
-    public static final Block WHITE_STUCCO = register("white_stucco", new Block(Properties.of(Material.STONE, MaterialColor.WOOL).requiresCorrectToolForDrops().strength(2.0F, 7.0F)));
+    public static final Block WHITE_STUCCO = register("white_stucco", new Block(Properties.of(Material.STONE, MaterialColor.WOOL).requiresCorrectToolForDrops().strength(1.5F, 5.5F)));
     public static final Block WHITE_STUCCO_STAIRS = register("white_stucco_stairs", new StairBlock(WHITE_STUCCO.defaultBlockState(), Properties.copy(WHITE_STUCCO)));
     public static final Block WHITE_STUCCO_SLAB = register("white_stucco_slab", new SlabBlock(Properties.copy(WHITE_STUCCO)));
     public static final Block WHITE_STUCCO_WALL = register("white_stucco_wall", new WallBlock(Properties.copy(WHITE_STUCCO)));
 
-    public static final Block LIGHT_GRAY_STUCCO = register("light_gray_stucco", new Block(Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_GRAY).requiresCorrectToolForDrops().strength(2.0F, 7.0F)));
+    public static final Block LIGHT_GRAY_STUCCO = register("light_gray_stucco", new Block(Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_GRAY).requiresCorrectToolForDrops().strength(1.5F, 5.5F)));
     public static final Block LIGHT_GRAY_STUCCO_STAIRS = register("light_gray_stucco_stairs", new StairBlock(LIGHT_GRAY_STUCCO.defaultBlockState(), Properties.copy(LIGHT_GRAY_STUCCO)));
     public static final Block LIGHT_GRAY_STUCCO_SLAB = register("light_gray_stucco_slab", new SlabBlock(Properties.copy(LIGHT_GRAY_STUCCO)));
     public static final Block LIGHT_GRAY_STUCCO_WALL = register("light_gray_stucco_wall", new WallBlock(Properties.copy(LIGHT_GRAY_STUCCO)));
 
-    public static final Block GRAY_STUCCO = register("gray_stucco", new Block(Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).requiresCorrectToolForDrops().strength(2.0F, 7.0F)));
+    public static final Block GRAY_STUCCO = register("gray_stucco", new Block(Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).requiresCorrectToolForDrops().strength(1.5F, 5.5F)));
     public static final Block GRAY_STUCCO_STAIRS = register("gray_stucco_stairs", new StairBlock(GRAY_STUCCO.defaultBlockState(), Properties.copy(GRAY_STUCCO)));
     public static final Block GRAY_STUCCO_SLAB = register("gray_stucco_slab", new SlabBlock(Properties.copy(GRAY_STUCCO)));
     public static final Block GRAY_STUCCO_WALL = register("gray_stucco_wall", new WallBlock(Properties.copy(GRAY_STUCCO)));
 
-    public static final Block BLACK_STUCCO = register("black_stucco", new Block(Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).requiresCorrectToolForDrops().strength(2.0F, 7.0F)));
+    public static final Block BLACK_STUCCO = register("black_stucco", new Block(Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).requiresCorrectToolForDrops().strength(1.5F, 5.5F)));
     public static final Block BLACK_STUCCO_STAIRS = register("black_stucco_stairs", new StairBlock(BLACK_STUCCO.defaultBlockState(), Properties.copy(BLACK_STUCCO)));
     public static final Block BLACK_STUCCO_SLAB = register("black_stucco_slab", new SlabBlock(Properties.copy(BLACK_STUCCO)));
     public static final Block BLACK_STUCCO_WALL = register("black_stucco_wall", new WallBlock(Properties.copy(BLACK_STUCCO)));
