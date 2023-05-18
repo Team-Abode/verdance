@@ -61,6 +61,18 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
                 .add(VerdanceBlocks.BLACK_STUCCO_STAIRS)
                 .add(VerdanceBlocks.BLACK_STUCCO_SLAB)
                 .add(VerdanceBlocks.BLACK_STUCCO_WALL)
+                .add(VerdanceBlocks.BROWN_STUCCO)
+                .add(VerdanceBlocks.BROWN_STUCCO_STAIRS)
+                .add(VerdanceBlocks.BROWN_STUCCO_SLAB)
+                .add(VerdanceBlocks.BROWN_STUCCO_WALL)
+                .add(VerdanceBlocks.RED_STUCCO)
+                .add(VerdanceBlocks.RED_STUCCO_STAIRS)
+                .add(VerdanceBlocks.RED_STUCCO_SLAB)
+                .add(VerdanceBlocks.RED_STUCCO_WALL)
+                .add(VerdanceBlocks.ORANGE_STUCCO)
+                .add(VerdanceBlocks.ORANGE_STUCCO_STAIRS)
+                .add(VerdanceBlocks.ORANGE_STUCCO_SLAB)
+                .add(VerdanceBlocks.ORANGE_STUCCO_WALL)
                 .setReplace(false);
     }
 
@@ -82,6 +94,9 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
                 .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL)
                 .add(VerdanceBlocks.GRAY_STUCCO_WALL)
                 .add(VerdanceBlocks.BLACK_STUCCO_WALL)
+                .add(VerdanceBlocks.BROWN_STUCCO_WALL)
+                .add(VerdanceBlocks.RED_STUCCO_WALL)
+                .add(VerdanceBlocks.ORANGE_STUCCO_WALL)
                 .setReplace(false);
     }
 
@@ -97,6 +112,9 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
                 .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS)
                 .add(VerdanceBlocks.GRAY_STUCCO_STAIRS)
                 .add(VerdanceBlocks.BLACK_STUCCO_STAIRS)
+                .add(VerdanceBlocks.BROWN_STUCCO_STAIRS)
+                .add(VerdanceBlocks.RED_STUCCO_STAIRS)
+                .add(VerdanceBlocks.ORANGE_STUCCO_STAIRS)
                 .setReplace(false);
         this.getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS)
                 .add(VerdanceBlocks.MULBERRY_STAIRS)
@@ -109,6 +127,9 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
                 .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB)
                 .add(VerdanceBlocks.GRAY_STUCCO_SLAB)
                 .add(VerdanceBlocks.BLACK_STUCCO_SLAB)
+                .add(VerdanceBlocks.BROWN_STUCCO_SLAB)
+                .add(VerdanceBlocks.RED_STUCCO_SLAB)
+                .add(VerdanceBlocks.ORANGE_STUCCO_SLAB)
                 .setReplace(false);
         this.getOrCreateTagBuilder(BlockTags.WOODEN_SLABS)
                 .add(VerdanceBlocks.MULBERRY_SLAB)

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "verdance:block/orange_stucco",
+    "side": "verdance:block/orange_stucco",
+    "top": "verdance:block/orange_stucco"
+  }
+}

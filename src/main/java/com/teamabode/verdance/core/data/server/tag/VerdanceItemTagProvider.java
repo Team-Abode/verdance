@@ -50,6 +50,9 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS.asItem())
                 .add(VerdanceBlocks.GRAY_STUCCO_STAIRS.asItem())
                 .add(VerdanceBlocks.BLACK_STUCCO_STAIRS.asItem())
+                .add(VerdanceBlocks.BROWN_STUCCO_STAIRS.asItem())
+                .add(VerdanceBlocks.RED_STUCCO_STAIRS.asItem())
+                .add(VerdanceBlocks.ORANGE_STUCCO_STAIRS.asItem())
                 .setReplace(false);
         this.getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS)
                 .add(VerdanceBlocks.MULBERRY_STAIRS.asItem())
@@ -62,6 +65,9 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB.asItem())
                 .add(VerdanceBlocks.GRAY_STUCCO_SLAB.asItem())
                 .add(VerdanceBlocks.BLACK_STUCCO_SLAB.asItem())
+                .add(VerdanceBlocks.BROWN_STUCCO_SLAB.asItem())
+                .add(VerdanceBlocks.RED_STUCCO_SLAB.asItem())
+                .add(VerdanceBlocks.ORANGE_STUCCO_SLAB.asItem())
                 .setReplace(false);
         this.getOrCreateTagBuilder(ItemTags.WOODEN_SLABS)
                 .add(VerdanceBlocks.MULBERRY_SLAB.asItem())
@@ -74,6 +80,9 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL.asItem())
                 .add(VerdanceBlocks.GRAY_STUCCO_WALL.asItem())
                 .add(VerdanceBlocks.BLACK_STUCCO_WALL.asItem())
+                .add(VerdanceBlocks.BROWN_STUCCO_WALL.asItem())
+                .add(VerdanceBlocks.RED_STUCCO_WALL.asItem())
+                .add(VerdanceBlocks.ORANGE_STUCCO_WALL.asItem())
                 .setReplace(false);
     }
 

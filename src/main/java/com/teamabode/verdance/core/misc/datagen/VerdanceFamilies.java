@@ -16,6 +16,9 @@ public class VerdanceFamilies {
     public static final BlockFamily LIGHT_GRAY_STUCCO = create(VerdanceBlocks.LIGHT_GRAY_STUCCO).stairs(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS).slab(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB).wall(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL).getFamily();
     public static final BlockFamily GRAY_STUCCO = create(VerdanceBlocks.GRAY_STUCCO).stairs(VerdanceBlocks.GRAY_STUCCO_STAIRS).slab(VerdanceBlocks.GRAY_STUCCO_SLAB).wall(VerdanceBlocks.GRAY_STUCCO_WALL).getFamily();
     public static final BlockFamily BLACK_STUCCO = create(VerdanceBlocks.BLACK_STUCCO).stairs(VerdanceBlocks.BLACK_STUCCO_STAIRS).slab(VerdanceBlocks.BLACK_STUCCO_SLAB).wall(VerdanceBlocks.BLACK_STUCCO_WALL).getFamily();
+    public static final BlockFamily BROWN_STUCCO = create(VerdanceBlocks.BROWN_STUCCO).stairs(VerdanceBlocks.BROWN_STUCCO_STAIRS).slab(VerdanceBlocks.BROWN_STUCCO_SLAB).wall(VerdanceBlocks.BROWN_STUCCO_WALL).getFamily();
+    public static final BlockFamily RED_STUCCO = create(VerdanceBlocks.RED_STUCCO).stairs(VerdanceBlocks.RED_STUCCO_STAIRS).slab(VerdanceBlocks.RED_STUCCO_SLAB).wall(VerdanceBlocks.RED_STUCCO_WALL).getFamily();
+    public static final BlockFamily ORANGE_STUCCO = create(VerdanceBlocks.ORANGE_STUCCO).stairs(VerdanceBlocks.ORANGE_STUCCO_STAIRS).slab(VerdanceBlocks.ORANGE_STUCCO_SLAB).wall(VerdanceBlocks.ORANGE_STUCCO_WALL).getFamily();
 
     private static BlockFamily.Builder create(Block baseBlock) {
         BlockFamily.Builder builder = new BlockFamily.Builder(baseBlock);
