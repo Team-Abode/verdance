@@ -47,5 +47,8 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         stucco(exporter, VerdanceFamilies.LIGHT_GRAY_STUCCO, Items.LIGHT_GRAY_DYE);
         stucco(exporter, VerdanceFamilies.GRAY_STUCCO, Items.GRAY_DYE);
         stucco(exporter, VerdanceFamilies.BLACK_STUCCO, Items.BLACK_DYE);
+        stucco(exporter, VerdanceFamilies.BROWN_STUCCO, Items.BROWN_DYE);
+        stucco(exporter, VerdanceFamilies.RED_STUCCO, Items.RED_DYE);
+        stucco(exporter, VerdanceFamilies.ORANGE_STUCCO, Items.ORANGE_DYE);
     }
 }

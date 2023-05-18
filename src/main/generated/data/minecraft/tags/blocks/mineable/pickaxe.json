@@ -16,6 +16,18 @@
     "verdance:black_stucco",
     "verdance:black_stucco_stairs",
     "verdance:black_stucco_slab",
-    "verdance:black_stucco_wall"
+    "verdance:black_stucco_wall",
+    "verdance:brown_stucco",
+    "verdance:brown_stucco_stairs",
+    "verdance:brown_stucco_slab",
+    "verdance:brown_stucco_wall",
+    "verdance:red_stucco",
+    "verdance:red_stucco_stairs",
+    "verdance:red_stucco_slab",
+    "verdance:red_stucco_wall",
+    "verdance:orange_stucco",
+    "verdance:orange_stucco_stairs",
+    "verdance:orange_stucco_slab",
+    "verdance:orange_stucco_wall"
   ]
 }

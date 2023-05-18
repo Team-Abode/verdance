@@ -76,6 +76,18 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         dropSelf(VerdanceBlocks.BLACK_STUCCO_STAIRS);
         add(VerdanceBlocks.BLACK_STUCCO_SLAB, this::createSlabItemTable);
         dropSelf(VerdanceBlocks.BLACK_STUCCO_WALL);
+        dropSelf(VerdanceBlocks.BROWN_STUCCO);
+        dropSelf(VerdanceBlocks.BROWN_STUCCO_STAIRS);
+        add(VerdanceBlocks.BROWN_STUCCO_SLAB, this::createSlabItemTable);
+        dropSelf(VerdanceBlocks.BROWN_STUCCO_WALL);
+        dropSelf(VerdanceBlocks.RED_STUCCO);
+        dropSelf(VerdanceBlocks.RED_STUCCO_STAIRS);
+        add(VerdanceBlocks.RED_STUCCO_SLAB, this::createSlabItemTable);
+        dropSelf(VerdanceBlocks.RED_STUCCO_WALL);
+        dropSelf(VerdanceBlocks.ORANGE_STUCCO);
+        dropSelf(VerdanceBlocks.ORANGE_STUCCO_STAIRS);
+        add(VerdanceBlocks.ORANGE_STUCCO_SLAB, this::createSlabItemTable);
+        dropSelf(VerdanceBlocks.ORANGE_STUCCO_WALL);
     }
 
     private void cantaloupe() {

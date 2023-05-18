@@ -1,21 +1,21 @@
-// 1.19.4	2023-05-15T21:02:53.7997172	Verdance/Tags for minecraft:block
+// 1.19.4	2023-05-17T23:27:25.931261	Verdance/Tags for minecraft:block
 33c28c9f89481e90b89719a965fdbff11e61a317 data\minecraft\tags\blocks\fence_gates.json
 fea93397f32bd4c1305d505b76e1c25b7002b16a data\minecraft\tags\blocks\wall_hanging_signs.json
 3562f5cfd047e95000b4f19571780d8a7eb9eabd data\minecraft\tags\blocks\wooden_fences.json
 9aea83ebb2efb53eec4c54149e6bfb543e800106 data\minecraft\tags\blocks\wooden_buttons.json
 9722b128b26624e071c0c81c5af7be61e88b5ea6 data\minecraft\tags\blocks\logs_that_burn.json
 b66991f48a5e2b8f58576c280c4f5dc1c901ead7 data\minecraft\tags\blocks\wooden_slabs.json
+ca30db3415d936706a86fdc128660409036227d4 data\minecraft\tags\blocks\walls.json
 eb8c3573c32e839af8e198abad8f736241c2099b data\minecraft\tags\blocks\wooden_doors.json
-e9a36c49704983def4df8b40fb811ba6ee52c280 data\minecraft\tags\blocks\walls.json
 a6ab8ba916601f7420ae94a9986c44d91e52ca7d data\minecraft\tags\blocks\standing_signs.json
-73c71e088a5d1b7baba82cd95c75da47cbbec17c data\minecraft\tags\blocks\stairs.json
+6eb82bb5cbee11edc622aa289512f8b2e95494c7 data\minecraft\tags\blocks\stairs.json
 278f9d0ff0c137c51e45049a49dc3d5f1b1822cb data\verdance\tags\blocks\mulberry_logs.json
 fa011c5db162709b03ef42585ea0b671a80a1114 data\minecraft\tags\blocks\planks.json
 20b1636e9df05fdadbf251b4c564351f98631340 data\minecraft\tags\blocks\mineable\axe.json
-22c5eebf0c532300751913a238f3c8381fcb30b1 data\minecraft\tags\blocks\mineable\hoe.json
 8a4b445fbcd7e3c1f9af9c1f7edf08a80f2562c4 data\minecraft\tags\blocks\saplings.json
-471dfad33cf276f9d8a89666e1f08a8e41a464df data\minecraft\tags\blocks\slabs.json
-3f392a33968c23b6ea3ca0425d4145daf31f6f24 data\minecraft\tags\blocks\mineable\pickaxe.json
+22c5eebf0c532300751913a238f3c8381fcb30b1 data\minecraft\tags\blocks\mineable\hoe.json
+b2b9e848b7fd0fff4c51734cc940431ac5995442 data\minecraft\tags\blocks\slabs.json
+6bb9f0ae3a75e82bec7e0f88c998e3444768f183 data\minecraft\tags\blocks\mineable\pickaxe.json
 d7412025d84c3d6cc81ab615f3c5f057afec6001 data\minecraft\tags\blocks\wooden_stairs.json
 042e306e18c8947a40e62ccf7fdc1b53e715aed5 data\minecraft\tags\blocks\wall_signs.json
 31e6cf2746bf5e0508cdc04d5eb73594ba6059fb data\minecraft\tags\blocks\wooden_pressure_plates.json

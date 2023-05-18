@@ -64,7 +64,19 @@ public class VerdanceGroupEvents {
                 VerdanceBlocks.BLACK_STUCCO,
                 VerdanceBlocks.BLACK_STUCCO_STAIRS,
                 VerdanceBlocks.BLACK_STUCCO_SLAB,
-                VerdanceBlocks.BLACK_STUCCO_WALL
+                VerdanceBlocks.BLACK_STUCCO_WALL,
+                VerdanceBlocks.BROWN_STUCCO,
+                VerdanceBlocks.BROWN_STUCCO_STAIRS,
+                VerdanceBlocks.BROWN_STUCCO_SLAB,
+                VerdanceBlocks.BROWN_STUCCO_WALL,
+                VerdanceBlocks.RED_STUCCO,
+                VerdanceBlocks.RED_STUCCO_STAIRS,
+                VerdanceBlocks.RED_STUCCO_SLAB,
+                VerdanceBlocks.RED_STUCCO_WALL,
+                VerdanceBlocks.ORANGE_STUCCO,
+                VerdanceBlocks.ORANGE_STUCCO_STAIRS,
+                VerdanceBlocks.ORANGE_STUCCO_SLAB,
+                VerdanceBlocks.ORANGE_STUCCO_WALL
         );
     }
 
