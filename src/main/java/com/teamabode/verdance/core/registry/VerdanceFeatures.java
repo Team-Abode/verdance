@@ -12,7 +12,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 public class VerdanceFeatures {
 
     public static final Feature<BoulderConfiguration> BOULDER = register("boulder", new BoulderFeature());
-    public static final Feature<SequenceFeatureConfiguration> SEQUENCE = register("sequence", new SequenceFeature());
 
     private static <T extends Feature<? extends FeatureConfiguration>> T register(String name, T feature) {
         return Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation(Verdance.MOD_ID, name), feature);
