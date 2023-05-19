@@ -31,6 +31,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         logs();
         saplings();
         leaves();
+        flowerPots();
 
         mineablePickaxe();
         mineableHoe();
@@ -211,6 +212,12 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     private void leaves() {
         this.getOrCreateTagBuilder(BlockTags.LEAVES)
                 .add(VerdanceBlocks.MULBERRY_LEAVES)
+                .setReplace(false);
+    }
+
+    private void flowerPots() {
+        this.getOrCreateTagBuilder(BlockTags.FLOWER_POTS)
+                .add(VerdanceBlocks.POTTED_MULBERRY_SAPLING)
                 .setReplace(false);
     }
 }

@@ -42,6 +42,7 @@ public class VerdanceBlocks {
     public static final Block MULBERRY_LEAVES = register("mulberry_leaves", new LeavesBlock(Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.CHERRY_LEAVES).noOcclusion().isValidSpawn((state, level, pos, entityType) -> entityType == EntityType.OCELOT || entityType == EntityType.PARROT).isSuffocating((blockState, blockGetter, blockPos) -> false).isViewBlocking((blockState, blockGetter, blockPos) -> false)));
 
     public static final Block MULBERRY_SAPLING = registerNoItem("mulberry_sapling", new SaplingBlock(new MulberryTreeGrower(), Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)));
+    public static final Block POTTED_MULBERRY_SAPLING = registerNoItem("potted_mulberry_sapling", new FlowerPotBlock(MULBERRY_SAPLING, Properties.of(Material.DECORATION).instabreak().noOcclusion()));
 
     public static final Block MULBERRY_SIGN = registerNoItem("mulberry_sign", new StandingSignBlock(Properties.copy(Blocks.OAK_SIGN).color(MaterialColor.TERRACOTTA_YELLOW), VerdanceWoodType.MULBERRY));
     public static final Block MULBERRY_WALL_SIGN = registerNoItem("mulberry_wall_sign", new WallSignBlock(Properties.copy(Blocks.OAK_WALL_SIGN).color(MaterialColor.TERRACOTTA_YELLOW).dropsLike(MULBERRY_SIGN), VerdanceWoodType.MULBERRY));

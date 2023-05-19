@@ -1,4 +1,4 @@
-// 1.19.4	2023-05-17T23:27:25.9344703	Verdance/Block Loot Tables
+// 1.19.4	2023-05-18T17:57:12.2689134	Verdance/Block Loot Tables
 68268b1ec042a37da0aeb7d1058edbcdc16eb6d5 data\verdance\loot_tables\blocks\gray_stucco_stairs.json
 5755749d31c8ce070531413a38afb35b00a62c14 data\verdance\loot_tables\blocks\mulberry_log.json
 ff8519dc5d92f47423f779ebe72ff514492cdabe data\verdance\loot_tables\blocks\brown_stucco_slab.json
@@ -42,6 +42,7 @@ ef3b4d4d94bd13b7fbc7cb76bc2f0984c0fb9832 data\verdance\loot_tables\blocks\attach
 9dbe388111195f93d6ee55c0f53ebf92a560cc56 data\verdance\loot_tables\blocks\light_gray_stucco_slab.json
 32dc0bc4166430d24e7f67fd93ff9ebcc552b796 data\verdance\loot_tables\blocks\white_stucco.json
 341d07d9a95b2b6f8f76426d1f0633d8b1e4e3ca data\verdance\loot_tables\blocks\mulberry_button.json
+be5b5d83a6fdc29a2fa525628ddce39b5f21a4db data\verdance\loot_tables\blocks\potted_mulberry_sapling.json
 12ab651f10202117f12ff97718d8b0fd94d438e3 data\verdance\loot_tables\blocks\black_stucco_wall.json
 bcf2fbbe4e64e82a20ebf117d2be8d082d97a061 data\verdance\loot_tables\blocks\mulberry_wood.json
 8f7cac99f8f6e58bf45799d582ef4535c0aa970e data\verdance\loot_tables\blocks\shrub.json

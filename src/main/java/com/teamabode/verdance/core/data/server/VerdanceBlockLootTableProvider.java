@@ -55,6 +55,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         dropSelf(VerdanceBlocks.MULBERRY_BUTTON);
         add(VerdanceBlocks.MULBERRY_LEAVES, (Block block) -> this.createLeavesDrops(block, VerdanceBlocks.MULBERRY_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
         dropSelf(VerdanceBlocks.MULBERRY_SAPLING);
+        dropPottedContents(VerdanceBlocks.POTTED_MULBERRY_SAPLING);
         dropSelf(VerdanceBlocks.MULBERRY_SIGN);
         dropSelf(VerdanceBlocks.MULBERRY_HANGING_SIGN);
     }
