@@ -22,7 +22,7 @@
       "type": "minecraft:weighted_state_provider",
       "entries": [
         {
-          "weight": 3,
+          "weight": 5,
           "data": {
             "Name": "verdance:mulberry_leaves",
             "Properties": {
