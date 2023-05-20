@@ -174,7 +174,8 @@
       "minecraft:glow_lichen",
       "minecraft:patch_tall_grass_2",
       "minecraft:patch_grass_plain",
-      "verdance:mulberry_checked"
+      "verdance:mulberry_checked",
+      "verdance:flower_mulberry_forest"
     ],
     [
       "minecraft:freeze_top_layer"
