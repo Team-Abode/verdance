@@ -168,6 +168,7 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
     private void leaves() {
         this.getOrCreateTagBuilder(ItemTags.LEAVES)
                 .add(VerdanceBlocks.MULBERRY_LEAVES.asItem())
+                .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES.asItem())
                 .setReplace(false);
     }
 }
