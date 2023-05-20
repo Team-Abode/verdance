@@ -80,6 +80,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     private void mineableHoe() {
         this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_HOE)
                 .add(VerdanceBlocks.MULBERRY_LEAVES)
+                .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES)
                 .setReplace(false);
     }
 

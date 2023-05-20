@@ -4,6 +4,7 @@ import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -17,12 +18,16 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.LimitCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.function.BiConsumer;
 
 public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider {
+    private static final float[] NORMAL_LEAVES_STICK_CHANCES = {0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
+    private static final LootItemCondition.Builder HAS_SHEARS_OR_SILK_TOUCH = HAS_SHEARS.or(HAS_SILK_TOUCH);
+    private static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = HAS_SHEARS_OR_SILK_TOUCH.invert();
 
     public VerdanceBlockLootTableProvider(FabricDataOutput dataOutput) {
         super(dataOutput);
@@ -57,11 +62,25 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         dropSelf(VerdanceBlocks.MULBERRY_TRAPDOOR);
         dropSelf(VerdanceBlocks.MULBERRY_PRESSURE_PLATE);
         dropSelf(VerdanceBlocks.MULBERRY_BUTTON);
-        add(VerdanceBlocks.MULBERRY_LEAVES, (Block block) -> this.createLeavesDrops(block, VerdanceBlocks.MULBERRY_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
+        add(VerdanceBlocks.MULBERRY_LEAVES, this::createMulberryLeaves);
+        add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES, this::createFloweringMulberryLeaves);
         dropSelf(VerdanceBlocks.MULBERRY_SAPLING);
         dropPottedContents(VerdanceBlocks.POTTED_MULBERRY_SAPLING);
         dropSelf(VerdanceBlocks.MULBERRY_SIGN);
         dropSelf(VerdanceBlocks.MULBERRY_HANGING_SIGN);
+    }
+
+    private LootTable.Builder createMulberryLeaves(Block leafBlock) {
+        var lootItem = LootItem.lootTableItem(Items.STICK);
+
+        return createSilkTouchOrShearsDispatchTable(
+                leafBlock,
+                this.applyExplosionCondition(leafBlock, lootItem).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, NORMAL_LEAVES_STICK_CHANCES))
+        );
+    }
+
+    private LootTable.Builder createFloweringMulberryLeaves(Block leafBlock) {
+        return createMulberryLeaves(leafBlock).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f)).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(this.applyExplosionCondition(leafBlock, LootItem.lootTableItem(VerdanceItems.MULBERRY).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 2.0f))))));
     }
 
     private void stucco() {

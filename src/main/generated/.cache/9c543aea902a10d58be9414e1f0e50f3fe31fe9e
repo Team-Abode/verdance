@@ -1,4 +1,4 @@
-// 1.19.4	2023-05-20T00:10:15.4311994	Verdance/Block Loot Tables
+// 1.19.4	2023-05-20T14:51:07.9167746	Verdance/Block Loot Tables
 9dbe388111195f93d6ee55c0f53ebf92a560cc56 data\verdance\loot_tables\blocks\light_gray_stucco_slab.json
 32dc0bc4166430d24e7f67fd93ff9ebcc552b796 data\verdance\loot_tables\blocks\white_stucco.json
 a9f075179dc01bac11bb5c1d7d705ddd5c87cf6f data\verdance\loot_tables\blocks\mulberry_planks.json
@@ -7,7 +7,7 @@ d9fcfb265cf8db591499483d06f6aa8c3c7e1ed3 data\verdance\loot_tables\blocks\black_
 f85426fa62c637b84eb2be4f90e9d066e5ae7658 data\verdance\loot_tables\blocks\red_stucco_wall.json
 e5aa952b8a09baf8609fd061637c71669b6e9ba5 data\verdance\loot_tables\blocks\mulberry_sign.json
 ff8519dc5d92f47423f779ebe72ff514492cdabe data\verdance\loot_tables\blocks\brown_stucco_slab.json
-c7811489ae584c7f1e6921217df01d7cdd929929 data\verdance\loot_tables\blocks\mulberry_leaves.json
+b360329aade1bfa32995497252f3b1a831eba7e3 data\verdance\loot_tables\blocks\mulberry_leaves.json
 074099bcef71a5240a23788152ca387b2a46d580 data\verdance\loot_tables\blocks\stripped_mulberry_log.json
 26c9feb0a3b48594056522831d841122bef812c8 data\verdance\loot_tables\blocks\cantaloupe.json
 fd9434b5893ff0673904847cc851df865f363eae data\verdance\loot_tables\blocks\cantaloupe_stem.json
@@ -29,6 +29,7 @@ be5b5d83a6fdc29a2fa525628ddce39b5f21a4db data\verdance\loot_tables\blocks\potted
 045eb8329ed3d43f9387d69e6eeb806e6b814bce data\verdance\loot_tables\blocks\white_stucco_wall.json
 eb94bc343de6c1d679f8d6d8819a13c2f83c4d1e data\verdance\loot_tables\blocks\mulberry_trapdoor.json
 ac2d8669fd526c057304c3feaf401072e2fd34e8 data\verdance\loot_tables\blocks\white_stucco_stairs.json
+ba039ab96aaa43a5862fe852187727d01fbb357d data\verdance\loot_tables\blocks\flowering_mulberry_leaves.json
 341d07d9a95b2b6f8f76426d1f0633d8b1e4e3ca data\verdance\loot_tables\blocks\mulberry_button.json
 55a1b4735f410d81f6abcf86a5da94f6f22a38ab data\verdance\loot_tables\blocks\light_gray_stucco_stairs.json
 27230bb65c38e27f7128a7149372104293a6431b data\verdance\loot_tables\blocks\mulberry_stairs.json

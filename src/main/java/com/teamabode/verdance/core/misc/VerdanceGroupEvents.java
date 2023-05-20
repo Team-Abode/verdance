@@ -44,7 +44,7 @@ public class VerdanceGroupEvents {
         appendItemsAfter(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.MUSIC_DISC_OTHERSIDE, VerdanceItems.MUSIC_DISC_RANGE);
         appendItemsBefore(CreativeModeTabs.INGREDIENTS, Items.DISC_FRAGMENT_5, VerdanceItems.DISC_FRAGMENT_RANGE);
 
-        appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Blocks.MANGROVE_LEAVES, VerdanceBlocks.MULBERRY_LEAVES);
+        appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Blocks.MANGROVE_LEAVES, VerdanceBlocks.MULBERRY_LEAVES, VerdanceBlocks.FLOWERING_MULBERRY_LEAVES);
         appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Blocks.MANGROVE_PROPAGULE, VerdanceItems.MULBERRY);
         appendItemsBefore(CreativeModeTabs.NATURAL_BLOCKS, Items.AZALEA, VerdanceBlocks.SHRUB);
 
