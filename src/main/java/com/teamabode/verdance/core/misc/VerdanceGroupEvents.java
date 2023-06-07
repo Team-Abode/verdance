@@ -3,6 +3,7 @@ package com.teamabode.verdance.core.misc;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 public class VerdanceGroupEvents {
 
     public static void register() {
-        appendItemsAfter(CreativeModeTabs.BUILDING_BLOCKS, Items.MANGROVE_BUTTON,
+        appendItemsAfter(CreativeModeTabs.BUILDING_BLOCKS, Items.CHERRY_BUTTON,
                 VerdanceBlocks.MULBERRY_LOG,
                 VerdanceBlocks.MULBERRY_WOOD,
                 VerdanceBlocks.STRIPPED_MULBERRY_LOG,
@@ -28,12 +29,15 @@ public class VerdanceGroupEvents {
                 VerdanceBlocks.MULBERRY_PRESSURE_PLATE,
                 VerdanceBlocks.MULBERRY_BUTTON
         );
-        appendItemsAfter(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.MANGROVE_CHEST_BOAT,
+        appendItemsAfter(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.CHERRY_CHEST_BOAT,
                 VerdanceItems.MULBERRY_BOAT,
                 VerdanceItems.MULBERRY_CHEST_BOAT
         );
 
-        appendSigns();
+        appendItemsAfter(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.CHERRY_HANGING_SIGN,
+                VerdanceItems.MULBERRY_SIGN,
+                VerdanceItems.MULBERRY_HANGING_SIGN
+        );
 
 
         appendItemsAfter(CreativeModeTabs.FOOD_AND_DRINKS, Items.GLOW_BERRIES, VerdanceItems.MULBERRY);
@@ -44,7 +48,7 @@ public class VerdanceGroupEvents {
         appendItemsAfter(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.MUSIC_DISC_OTHERSIDE, VerdanceItems.MUSIC_DISC_RANGE);
         appendItemsBefore(CreativeModeTabs.INGREDIENTS, Items.DISC_FRAGMENT_5, VerdanceItems.DISC_FRAGMENT_RANGE);
 
-        appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Blocks.MANGROVE_LEAVES, VerdanceBlocks.MULBERRY_LEAVES, VerdanceBlocks.FLOWERING_MULBERRY_LEAVES);
+        appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Blocks.CHERRY_LEAVES, VerdanceBlocks.MULBERRY_LEAVES, VerdanceBlocks.FLOWERING_MULBERRY_LEAVES);
         appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Blocks.MANGROVE_PROPAGULE, VerdanceItems.MULBERRY);
         appendItemsBefore(CreativeModeTabs.NATURAL_BLOCKS, Items.AZALEA, VerdanceBlocks.SHRUB);
 
@@ -81,26 +85,13 @@ public class VerdanceGroupEvents {
     }
 
 
-    private static void appendItemsAfter(CreativeModeTab tab, ItemLike target, ItemLike... appendedItems) {
+    private static void appendItemsAfter(ResourceKey<CreativeModeTab> tab, ItemLike target, ItemLike... appendedItems) {
         ItemGroupEvents.modifyEntriesEvent(tab).register(entries -> {
             entries.addAfter(target, appendedItems);
         });
     }
 
-    private static void appendSigns() {
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(modifier -> {
-            var context = modifier.getContext();
-
-            if (context.enabledFeatures().contains(FeatureFlags.UPDATE_1_20)) {
-                modifier.addAfter(Items.MANGROVE_HANGING_SIGN, VerdanceItems.MULBERRY_SIGN, VerdanceItems.MULBERRY_HANGING_SIGN);
-            }
-            else {
-                modifier.addAfter(Items.MANGROVE_SIGN, VerdanceItems.MULBERRY_SIGN);
-            }
-        });
-    }
-
-    private static void appendItemsBefore(CreativeModeTab tab, ItemLike target, ItemLike... appendedItems) {
+    private static void appendItemsBefore(ResourceKey<CreativeModeTab> tab, ItemLike target, ItemLike... appendedItems) {
         ItemGroupEvents.modifyEntriesEvent(tab).register(entries -> {
             entries.addBefore(target, appendedItems);
         });

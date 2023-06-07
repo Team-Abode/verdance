@@ -1,12 +1,18 @@
 package com.teamabode.verdance.client;
 
+import com.teamabode.verdance.client.model.SilkMothModel;
+import com.teamabode.verdance.client.renderer.SilkMothRenderer;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
+import com.teamabode.verdance.core.registry.VerdanceEntities;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Blocks;
@@ -17,6 +23,12 @@ public class VerdanceClient implements ClientModInitializer {
     public void onInitializeClient() {
         setRenderTypes();
         addColorProviders();
+        registerSilkMothClient();
+    }
+
+    private static void registerSilkMothClient() {
+        EntityModelLayerRegistry.registerModelLayer(SilkMothModel.LAYER_LOCATION, SilkMothModel::createBodyLayer);
+        EntityRendererRegistry.register(VerdanceEntities.SILK_MOTH, SilkMothRenderer::new);
     }
 
     private static void setRenderTypes() {

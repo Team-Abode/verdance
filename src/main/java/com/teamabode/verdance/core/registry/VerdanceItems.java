@@ -20,7 +20,7 @@ public class VerdanceItems {
     public static final Item DISC_FRAGMENT_RANGE = register("disc_fragment_range", new DiscFragmentItem(new Item.Properties()));
 
     public static final Item MULBERRY_SIGN = register("mulberry_sign", new SignItem(new Item.Properties().stacksTo(16), VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN));
-    public static final Item MULBERRY_HANGING_SIGN = register("mulberry_hanging_sign", new HangingSignItem(VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN, new Item.Properties().stacksTo(16).requiredFeatures(FeatureFlags.UPDATE_1_20)));
+    public static final Item MULBERRY_HANGING_SIGN = register("mulberry_hanging_sign", new HangingSignItem(VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN, new Item.Properties().stacksTo(16)));
 
     public static final Item MULBERRY_BOAT = register("mulberry_boat", new ScribeBoatItem(new Item.Properties().stacksTo(1), VerdanceBoatType.MULBERRY, false));
     public static final Item MULBERRY_CHEST_BOAT = register("mulberry_chest_boat", new ScribeBoatItem(new Item.Properties().stacksTo(1), VerdanceBoatType.MULBERRY, true));

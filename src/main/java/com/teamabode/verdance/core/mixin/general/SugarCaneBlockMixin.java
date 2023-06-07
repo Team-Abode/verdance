@@ -25,7 +25,7 @@ public class SugarCaneBlockMixin implements BonemealableBlock {
 
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos blockPos, BlockState blockState) {
         for (int i = 1; i < 3; i++) {
-            if (level.getBlockState(blockPos.above(i)).getMaterial().isReplaceable()) {
+            if (level.getBlockState(blockPos.above(i)).canBeReplaced()) {
                 level.setBlock(blockPos.above(i), sugarCaneBlock.defaultBlockState(), 2);
                 continue;
             }

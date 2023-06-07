@@ -3,7 +3,7 @@ plugins {
 	id 'maven-publish'
 }
 
-version = "${project.minecraft_version}-${project.mod_version}"
+version = project.minecraft_version + "-" + project.mod_version
 group = project.maven_group
 
 repositories {
@@ -31,10 +31,15 @@ dependencies {
 		parchment("org.parchmentmc.data:parchment-${project.parchment_version}@zip")
 	}
 
+	// Fabric
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	// Scribe
 	modApi "com.teamabode:scribe:${rootProject.scribe_version}"
-	modApi "com.github.glitchfiend:TerraBlender-fabric:${rootProject.minecraft_version}-${rootProject.terrablender_version}"
+	include "com.teamabode:scribe:${rootProject.scribe_version}"
+
+	modCompileOnly "com.github.glitchfiend:TerraBlender-fabric:1.19.4-${rootProject.terrablender_version}"
 }
 
 base {

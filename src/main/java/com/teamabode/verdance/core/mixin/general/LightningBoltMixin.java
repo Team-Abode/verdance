@@ -20,7 +20,7 @@ public abstract class LightningBoltMixin {
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LightningBolt;powerLightningRod()V", shift = At.Shift.BEFORE))
     private void killShrubs(CallbackInfo ci) {
         BlockPos strikePos = this.getStrikePosition();
-        Level level = lightningBolt.level;
+        Level level = lightningBolt.level();
 
         for (BlockPos pos : BlockPos.betweenClosed(strikePos.offset(-3, -3, -3), strikePos.offset(3, 3, 3))) {
             if (!level.canSeeSky(pos)) continue;
