@@ -28,5 +28,6 @@
     "recipes": [
       "verdance:mulberry_planks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

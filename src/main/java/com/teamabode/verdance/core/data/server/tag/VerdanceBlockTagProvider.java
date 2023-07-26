@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -36,6 +37,8 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         mineablePickaxe();
         mineableHoe();
         mineableAxe();
+
+        ghostTownReplaceable();
     }
 
     private void shrubPlaceables() {
@@ -221,5 +224,10 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         this.getOrCreateTagBuilder(BlockTags.FLOWER_POTS)
                 .add(VerdanceBlocks.POTTED_MULBERRY_SAPLING)
                 .setReplace(false);
+    }
+
+    private void ghostTownReplaceable() {
+        this.getOrCreateTagBuilder(VerdanceBlockTags.GHOST_TOWN_REPLACEABLE).setReplace(false)
+                .add(Blocks.SAND);
     }
 }

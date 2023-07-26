@@ -30,5 +30,6 @@
     "recipes": [
       "verdance:music_disc_range"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

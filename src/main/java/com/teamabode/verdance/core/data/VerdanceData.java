@@ -1,6 +1,7 @@
 package com.teamabode.verdance.core.data;
 
 import com.teamabode.verdance.core.data.client.VerdanceModelProvider;
+import com.teamabode.verdance.core.data.server.VerdanceArchaeologyLootTableProvider;
 import com.teamabode.verdance.core.data.server.VerdanceBlockLootTableProvider;
 import com.teamabode.verdance.core.data.server.tag.VerdanceBlockTagProvider;
 import com.teamabode.verdance.core.data.server.tag.VerdanceItemTagProvider;
@@ -18,6 +19,7 @@ public class VerdanceData implements DataGeneratorEntrypoint {
         pack.addProvider(VerdanceBlockTagProvider::new);
         pack.addProvider(VerdanceItemTagProvider::new);
         pack.addProvider(VerdanceBlockLootTableProvider::new);
+        pack.addProvider(VerdanceArchaeologyLootTableProvider::new);
 
         // Client Data
         pack.addProvider(VerdanceModelProvider::new);

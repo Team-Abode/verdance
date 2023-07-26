@@ -56,5 +56,6 @@
     "recipes": [
       "verdance:orange_stucco"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

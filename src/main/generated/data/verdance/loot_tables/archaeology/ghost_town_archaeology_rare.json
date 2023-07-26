@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:archaeology",
+  "pools": [
+    {
+      "bonus_rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "verdance:disc_fragment_range"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:burn_pottery_sherd"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:danger_pottery_sherd"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sheaf_pottery_sherd"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:dune_armor_trim_smithing_template"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:raw_gold"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "verdance:archaeology/ghost_town_archaeology_rare"
+}

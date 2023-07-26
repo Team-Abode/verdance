@@ -56,5 +56,6 @@
     "recipes": [
       "verdance:light_gray_stucco"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

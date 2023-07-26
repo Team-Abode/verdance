@@ -1,4 +1,4 @@
-// 1.19.4	2023-05-20T14:51:07.913783	Verdance/Tags for minecraft:block
+// 1.20	2023-06-09T18:48:49.9543999	Verdance/Tags for minecraft:block
 6eb82bb5cbee11edc622aa289512f8b2e95494c7 data\minecraft\tags\blocks\stairs.json
 9aea83ebb2efb53eec4c54149e6bfb543e800106 data\minecraft\tags\blocks\wooden_buttons.json
 242badb5ca6814f4654e8eda89b45f006153f9e0 data\minecraft\tags\blocks\leaves.json
@@ -17,9 +17,10 @@ b2b9e848b7fd0fff4c51734cc940431ac5995442 data\minecraft\tags\blocks\slabs.json
 b66991f48a5e2b8f58576c280c4f5dc1c901ead7 data\minecraft\tags\blocks\wooden_slabs.json
 31e6cf2746bf5e0508cdc04d5eb73594ba6059fb data\minecraft\tags\blocks\wooden_pressure_plates.json
 af78635538db2f108d580d0f389bc5b452712c9d data\verdance\tags\blocks\shrub_may_place_on.json
-20b1636e9df05fdadbf251b4c564351f98631340 data\minecraft\tags\blocks\mineable\axe.json
 242badb5ca6814f4654e8eda89b45f006153f9e0 data\minecraft\tags\blocks\mineable\hoe.json
+20b1636e9df05fdadbf251b4c564351f98631340 data\minecraft\tags\blocks\mineable\axe.json
 8a4b445fbcd7e3c1f9af9c1f7edf08a80f2562c4 data\minecraft\tags\blocks\saplings.json
+f793f5c44cbbe22304c2c4faa2a50791bae27f9d data\verdance\tags\blocks\ghost_town_replaceable.json
 6bb9f0ae3a75e82bec7e0f88c998e3444768f183 data\minecraft\tags\blocks\mineable\pickaxe.json
 eb8c3573c32e839af8e198abad8f736241c2099b data\minecraft\tags\blocks\wooden_doors.json
 33c28c9f89481e90b89719a965fdbff11e61a317 data\minecraft\tags\blocks\fence_gates.json

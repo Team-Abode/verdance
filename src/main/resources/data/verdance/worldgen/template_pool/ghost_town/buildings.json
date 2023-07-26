@@ -1,28 +1,23 @@
 {
-  "name": "verdance:ghost_town/pathway",
+  "fallback": "verdance:ghost_town/terminator",
   "elements": [
     {
+      "weight": 2,
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
-        "location": "verdance:ghost_town/buildings/home",
+        "element_type": "minecraft:single_pool_element",
+        "location": "verdance:ghost_town/buildings/house_01",
         "projection": "rigid",
-        "processors": {
-          "processors": []
-        }
-      },
-      "weight": 1
+        "processors": "verdance:ghost_town_archaeology"
+      }
     },
     {
+      "weight": 1,
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
-        "location": "verdance:ghost_town/buildings/garden",
+        "element_type": "minecraft:single_pool_element",
+        "location": "verdance:ghost_town/buildings/farm",
         "projection": "rigid",
-        "processors": {
-          "processors": []
-        }
-      },
-      "weight": 1
+        "processors": "verdance:ghost_town_farm_archaeology"
+      }
     }
-  ],
-  "fallback": "minecraft:empty"
+  ]
 }

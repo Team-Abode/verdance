@@ -41,6 +41,14 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         woodFromLogs(exporter, VerdanceBlocks.MULBERRY_WOOD, VerdanceBlocks.MULBERRY_LOG);
         woodFromLogs(exporter, VerdanceBlocks.STRIPPED_MULBERRY_WOOD, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
         planksFromLog(exporter, VerdanceBlocks.MULBERRY_PLANKS, VerdanceItemTags.MULBERRY_LOGS, 4);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, VerdanceItems.CANTALOUPE_SEEDS, 4)
+        .requires(VerdanceItems.CANTALOUPE_SLICE)
+        .unlockedBy(getHasName(VerdanceItems.CANTALOUPE_SLICE), has(VerdanceItems.CANTALOUPE_SLICE))
+        .save(exporter);
+
+        twoByTwoPacker(exporter, RecipeCategory.MISC, VerdanceBlocks.CANTALOUPE, VerdanceItems.CANTALOUPE_SLICE);
+
         hangingSign(exporter, VerdanceItems.MULBERRY_HANGING_SIGN, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
         rangeDisc(exporter);
         stucco(exporter, VerdanceFamilies.WHITE_STUCCO, Items.WHITE_DYE);

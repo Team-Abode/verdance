@@ -1,8 +1,7 @@
 package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,7 +17,7 @@ public class VerdanceEntities {
             FabricEntityTypeBuilder.createMob()
                     .spawnGroup(MobCategory.CREATURE)
                     .entityFactory(SilkMoth::new)
-                    .dimensions(EntityDimensions.scalable(0.7f, 0.7f))
+                    .dimensions(EntityDimensions.scalable(1.1f, 0.9f))
                     .defaultAttributes(SilkMoth::createSilkMothAttributes)
                     .spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules)
                     .build()

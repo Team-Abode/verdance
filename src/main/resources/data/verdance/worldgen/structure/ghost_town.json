@@ -16,7 +16,7 @@
     }
   },
   "terrain_adaptation": "beard_thin",
-  "start_pool": "verdance:ghost_town/start",
+  "start_pool": "verdance:ghost_town/centers",
   "size": 6,
   "start_height": {
     "absolute": 0

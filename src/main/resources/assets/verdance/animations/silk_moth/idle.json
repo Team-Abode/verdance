@@ -1,0 +1,70 @@
+{
+	"length": 0.9,
+	"looping": false,
+	"bones": {
+		"right_antenna": {
+			"rotation": {
+				"0.0": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 0]
+				},
+				"0.15": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, -22.5]
+				},
+				"0.3": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 0]
+				},
+				"0.45": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 22.5]
+				},
+				"0.6": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 0]
+				},
+				"0.75": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, -22.5]
+				},
+				"0.9": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 0]
+				}
+			}
+		},
+		"left_antenna": {
+			"rotation": {
+				"0.0": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 0]
+				},
+				"0.15": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 22.5]
+				},
+				"0.3": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 0]
+				},
+				"0.45": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, -22.5]
+				},
+				"0.6": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 0]
+				},
+				"0.75": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 22.5]
+				},
+				"0.9": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 0]
+				}
+			}
+		}
+	}
+}

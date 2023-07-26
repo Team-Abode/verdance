@@ -30,5 +30,6 @@
     "recipes": [
       "verdance:light_gray_stucco_stairs"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

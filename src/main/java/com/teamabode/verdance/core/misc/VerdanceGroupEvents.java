@@ -82,6 +82,7 @@ public class VerdanceGroupEvents {
                 VerdanceBlocks.ORANGE_STUCCO_SLAB,
                 VerdanceBlocks.ORANGE_STUCCO_WALL
         );
+        appendItemsBefore(CreativeModeTabs.SPAWN_EGGS, Items.SILVERFISH_SPAWN_EGG, VerdanceItems.SILK_MOTH_SPAWN_EGG);
     }
 
 

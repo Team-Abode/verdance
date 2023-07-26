@@ -1,0 +1,32 @@
+{
+  "fallback": "verdance:ghost_town/terminator",
+  "elements": [
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "verdance:ghost_town/streets/straight",
+        "projection": "terrain_matching",
+        "processors": "verdance:street_degradation"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "verdance:ghost_town/streets/corner",
+        "projection": "terrain_matching",
+        "processors": "verdance:street_degradation"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "verdance:ghost_town/streets/crossroad",
+        "projection": "terrain_matching",
+        "processors": "verdance:street_degradation"
+      }
+    }
+  ]
+}

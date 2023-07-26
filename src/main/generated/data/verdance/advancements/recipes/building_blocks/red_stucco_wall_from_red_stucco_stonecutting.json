@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:red_stucco_wall_from_red_stucco_stonecutting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

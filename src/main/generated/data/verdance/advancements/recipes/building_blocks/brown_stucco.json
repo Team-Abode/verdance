@@ -56,5 +56,6 @@
     "recipes": [
       "verdance:brown_stucco"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }
