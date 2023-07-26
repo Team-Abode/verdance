@@ -36,8 +36,7 @@ public class SilkMothAi {
             MemoryModuleType.IS_TEMPTED,
             MemoryModuleType.TEMPTING_PLAYER,
             MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
-            VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS,
-            VerdanceMemoryModuleType.GROUND_COOLDOWN_TICKS
+            VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS
     );
     public static final ImmutableList<SensorType<? extends Sensor<? super SilkMoth>>> SENSOR_TYPES = ImmutableList.of(
             SensorType.NEAREST_LIVING_ENTITIES,
@@ -65,8 +64,7 @@ public class SilkMothAi {
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
-                new CountDownCooldownTicks(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS),
-                new CountDownCooldownTicks(VerdanceMemoryModuleType.GROUND_COOLDOWN_TICKS)
+                new CountDownCooldownTicks(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS)
         ));
     }
 

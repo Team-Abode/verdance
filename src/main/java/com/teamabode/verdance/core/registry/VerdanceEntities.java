@@ -19,7 +19,7 @@ public class VerdanceEntities {
                     .entityFactory(SilkMoth::new)
                     .dimensions(EntityDimensions.scalable(1.1f, 0.9f))
                     .defaultAttributes(SilkMoth::createSilkMothAttributes)
-                    .spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules)
+                    .spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SilkMoth::checkSilkMothSpawnRules)
                     .build()
     );
 

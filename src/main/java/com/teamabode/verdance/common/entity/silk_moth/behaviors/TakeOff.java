@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleType;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
@@ -23,7 +22,6 @@ public class TakeOff extends Behavior<SilkMoth> {
     }
 
     protected void start(ServerLevel level, SilkMoth entity, long gameTime) {
-        entity.setPose(Pose.FALL_FLYING);
         entity.takeOff();
     }
 }

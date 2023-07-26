@@ -1,18 +1,18 @@
 package com.teamabode.verdance.common.entity.silk_moth;
 
 import com.mojang.serialization.Dynamic;
-import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.entity.silk_moth.pathing.SilkMothFlyingMoveControl;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.TimeUtil;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -22,7 +22,10 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import org.jetbrains.annotations.Nullable;
@@ -30,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("unchecked")
 public class SilkMoth extends Animal {
     public static final EntityDataAccessor<Boolean> FLYING = SynchedEntityData.defineId(SilkMoth.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> LAND_COOLDOWN = SynchedEntityData.defineId(SilkMoth.class, EntityDataSerializers.INT);
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState flyAnimationState = new AnimationState();
@@ -38,26 +42,17 @@ public class SilkMoth extends Animal {
 
     public SilkMoth(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
+        this.setMaxUpStep(1.25f);
         this.setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, 10.0f);
         this.setPathfindingMalus(BlockPathTypes.WATER, 5.0f);
         this.setPathfindingMalus(BlockPathTypes.DANGER_POWDER_SNOW, 10.0f);
     }
 
-    protected Brain.Provider<SilkMoth> brainProvider() {
-        return SilkMothAi.brainProvider();
-    }
-
-    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return SilkMothAi.makeBrain(this.brainProvider().makeBrain(dynamic));
-    }
-
-    public Brain<SilkMoth> getBrain() {
-        return (Brain<SilkMoth>) super.getBrain();
-    }
-
-    protected void sendDebugPackets() {
-        super.sendDebugPackets();
-        DebugPackets.sendEntityBrain(this);
+    public void tick() {
+        super.tick();
+        if (this.level().isClientSide()) {
+            this.setupAnimations();
+        }
     }
 
     private void setupAnimations() {
@@ -68,35 +63,25 @@ public class SilkMoth extends Animal {
         if (this.idleCooldown > 0) {
             this.idleCooldown--;
         }
-        this.flyAnimationState.animateWhen(this.isFlying() && !this.onGround(), this.tickCount);
-    }
-
-    public void tick() {
-        super.tick();
-        if (this.level().isClientSide()) {
-            this.setupAnimations();
-        }
-        if (this.tickCount % 20 == 0) {
-            Verdance.LOGGER.info(
-                    "Client Side: " + this.level().isClientSide() +
-                    "\nFlying: " + this.entityData.get(FLYING) +
-                    "\nCooldown Ticks: " + this.getBrain().getMemory(VerdanceMemoryModuleType.GROUND_COOLDOWN_TICKS) +
-                    "\nPose: " + this.getPose().name()
-            );
-        }
+        this.flyAnimationState.animateWhen(!this.onGround() && this.isFlying(), this.tickCount);
     }
 
     public void aiStep() {
         super.aiStep();
 
-        if (this.isFlying() && this.onGround() && this.getBrain().getMemory(VerdanceMemoryModuleType.GROUND_COOLDOWN_TICKS).isEmpty()) {
+        int landCooldown = this.getLandCooldown();
+        if (landCooldown > 0) {
+            this.setLandCooldown(landCooldown - 1);
+        }
+
+        if (this.isFlying() && this.onGround() && this.getLandCooldown() <= 0) {
             this.stopFlying();
         }
     }
 
     public void takeOff() {
         this.setFlying(true);
-        this.getBrain().setMemory(VerdanceMemoryModuleType.GROUND_COOLDOWN_TICKS, 100);
+        this.setLandCooldown(100);
     }
 
     public void stopFlying() {
@@ -114,6 +99,18 @@ public class SilkMoth extends Animal {
         SilkMothAi.updateActivity(this);
         this.level().getProfiler().pop();
         super.customServerAiStep();
+    }
+
+    protected Brain.Provider<SilkMoth> brainProvider() {
+        return SilkMothAi.brainProvider();
+    }
+
+    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
+        return SilkMothAi.makeBrain(this.brainProvider().makeBrain(dynamic));
+    }
+
+    public Brain<SilkMoth> getBrain() {
+        return (Brain<SilkMoth>) super.getBrain();
     }
 
     protected int calculateFallDamage(float fallDistance, float damageMultiplier) {
@@ -140,9 +137,11 @@ public class SilkMoth extends Animal {
         return navigation;
     }
 
+    // Data
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(FLYING, false);
+        this.entityData.define(LAND_COOLDOWN, 0);
     }
 
     public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
@@ -151,22 +150,25 @@ public class SilkMoth extends Animal {
             if (this.isFlying()) {
                 this.moveControl = new SilkMothFlyingMoveControl(this);
                 this.navigation = this.createFlightNavigation(this.level());
-                return;
             }
-            this.moveControl = new MoveControl(this);
-            this.navigation = this.createNavigation(this.level());
-            this.setNoGravity(false);
+            else {
+                this.moveControl = new MoveControl(this);
+                this.navigation = this.createNavigation(this.level());
+                this.setNoGravity(false);
+            }
         }
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("Flying", this.isFlying());
+        compound.putInt("LandCooldown", this.getLandCooldown());
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.setFlying(compound.getBoolean("Flying"));
+        this.setLandCooldown(compound.getInt("LandCooldown"));
     }
 
     public void setFlying(boolean flying) {
@@ -177,6 +179,27 @@ public class SilkMoth extends Animal {
         return this.entityData.get(FLYING);
     }
 
+    public void setLandCooldown(int cooldown) {
+        this.entityData.set(LAND_COOLDOWN, cooldown);
+    }
+
+    public int getLandCooldown() {
+        return this.entityData.get(LAND_COOLDOWN);
+    }
+
+    // Spawning Mechanics
+    public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+        return -level.getPathfindingCostFromLightLevels(pos);
+    }
+
+    public static boolean checkSilkMothSpawnRules(EntityType<? extends Animal> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+        return Monster.isDarkEnoughToSpawn(level, pos, random) && checkMobSpawnRules(type, level, spawnType, pos, random);
+    }
+
+    public MobType getMobType() {
+        return MobType.ARTHROPOD;
+    }
+
     @Nullable
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
         return null;
@@ -184,9 +207,5 @@ public class SilkMoth extends Animal {
 
     public static AttributeSupplier.Builder createSilkMothAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 15.0f).add(Attributes.FLYING_SPEED, 0.6d).add(Attributes.MOVEMENT_SPEED, 0.2d).add(Attributes.FOLLOW_RANGE, 48.0);
-    }
-
-    public MobType getMobType() {
-        return MobType.ARTHROPOD;
     }
 }
