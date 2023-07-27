@@ -1,6 +1,7 @@
 package com.teamabode.verdance.common.entity.silk_moth;
 
 import com.mojang.serialization.Dynamic;
+import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.entity.silk_moth.pathing.SilkMothFlyingMoveControl;
 import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleType;
@@ -75,12 +76,12 @@ public class SilkMoth extends Animal {
         super.aiStep();
 
         int landCooldown = this.getLandCooldown();
+        if (this.isFlying() && this.onGround() && landCooldown <= 0) {
+            this.setLandCooldown(0);
+            this.stopFlying();
+        }
         if (landCooldown > 0) {
             this.setLandCooldown(landCooldown - 1);
-        }
-
-        if (this.isFlying() && this.onGround() && this.getLandCooldown() <= 0) {
-            this.stopFlying();
         }
     }
 
@@ -90,14 +91,14 @@ public class SilkMoth extends Animal {
     }
 
     public void stopFlying() {
-        int randomTime = TimeUtil.rangeOfSeconds(10, 15).sample(this.getRandom());
+        int randomTime = TimeUtil.rangeOfSeconds(10, 12).sample(this.getRandom());
 
         this.setFlying(false);
         this.getBrain().setMemory(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS, randomTime);
     }
 
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        this.getBrain().setMemory(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS, 200);
+        this.getBrain().setMemory(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS, 100);
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 

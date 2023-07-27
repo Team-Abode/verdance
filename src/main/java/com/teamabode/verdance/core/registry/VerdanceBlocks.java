@@ -1,10 +1,7 @@
 package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.common.block.AttachedCantaloupeStemBlock;
-import com.teamabode.verdance.common.block.CantaloupeBlock;
-import com.teamabode.verdance.common.block.CantaloupeStemBlock;
-import com.teamabode.verdance.common.block.ShrubBlock;
+import com.teamabode.verdance.common.block.*;
 import com.teamabode.verdance.common.feature.MulberryTreeGrower;
 import com.teamabode.verdance.core.misc.datagen.VerdanceBlockSetType;
 import com.teamabode.verdance.core.misc.datagen.VerdanceWoodType;
@@ -22,6 +19,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 
 public class VerdanceBlocks {
     public static final Block MULBERRY_LOG = register("mulberry_log", new RotatedPillarBlock(Properties.of().mapColor(VerdanceBlocks::getMulberryLogMapColor).strength(2.0F).sound(SoundType.WOOD)));
@@ -90,6 +88,8 @@ public class VerdanceBlocks {
     public static final Block ORANGE_STUCCO_STAIRS = register("orange_stucco_stairs", new StairBlock(ORANGE_STUCCO.defaultBlockState(), Properties.copy(ORANGE_STUCCO)));
     public static final Block ORANGE_STUCCO_SLAB = register("orange_stucco_slab", new SlabBlock(Properties.copy(ORANGE_STUCCO)));
     public static final Block ORANGE_STUCCO_WALL = register("orange_stucco_wall", new WallBlock(Properties.copy(ORANGE_STUCCO)));
+
+    public static final Block SILK_WORM_EGGS = register("silk_worm_eggs", new SilkWormEggsBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.FROGSPAWN).instabreak().noOcclusion().noCollission().pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops()));
 
     private static Block registerStucco(DyeColor dyeColor) {
         return new Block(Properties.of().mapColor(dyeColor).requiresCorrectToolForDrops().strength(1.5F, 5.5F));

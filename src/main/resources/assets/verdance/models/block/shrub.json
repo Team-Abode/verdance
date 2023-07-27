@@ -2,70 +2,37 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"stem": "verdance:block/shrub_stem",
 		"particle": "verdance:block/shrub",
-		"shrub": "verdance:block/shrub"
+		"shrub": "verdance:block/shrub",
+		"stem": "verdance:block/shrub_stem"
 	},
 	"elements": [
 		{
-			"from": [7, 0, 7],
-			"to": [9, 10, 9],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"from": [0.8, 0, 8],
+			"to": [15.2, 16, 8],
+			"shade": false,
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
-				"north": {"uv": [7, 6, 9, 16], "texture": "#stem"},
-				"east": {"uv": [7, 6, 9, 16], "texture": "#stem"},
-				"south": {"uv": [7, 6, 9, 16], "texture": "#stem"},
-				"west": {"uv": [7, 6, 9, 16], "texture": "#stem"},
-				"up": {"uv": [7, 7, 9, 9], "rotation": 270, "texture": "#stem"},
-				"down": {"uv": [7, 14, 9, 16], "rotation": 270, "texture": "#stem"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#stem"},
+				"east": {"uv": [0, 0, 0, 0], "texture": "#stem"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#stem"},
+				"west": {"uv": [0, 0, 0, 0], "texture": "#stem"},
+				"up": {"uv": [0, 0, 0, 0], "rotation": 270, "texture": "#stem"},
+				"down": {"uv": [0, 0, 0, 0], "rotation": 90, "texture": "#stem"}
 			}
 		},
 		{
-			"from": [9, 4, 8],
-			"to": [13, 8, 8],
+			"from": [8, 0, 0.8],
+			"to": [8, 16, 15.2],
+			"shade": false,
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8], "rescale": true},
 			"faces": {
-				"north": {"uv": [3, 8, 7, 12], "texture": "#stem"},
-				"east": {"uv": [0, 0, 0, 4], "texture": "#stem"},
-				"south": {"uv": [7, 8, 3, 12], "texture": "#stem"},
-				"west": {"uv": [0, 0, 0, 4], "texture": "#stem"},
-				"up": {"uv": [0, 0, 4, 0], "texture": "#stem"},
-				"down": {"uv": [0, 0, 4, 0], "texture": "#stem"}
-			}
-		},
-		{
-			"from": [8, 4, 3],
-			"to": [8, 10, 7],
-			"faces": {
-				"north": {"uv": [0, 0, 0, 6], "texture": "#stem"},
-				"east": {"uv": [9, 7, 13, 13], "texture": "#stem"},
-				"south": {"uv": [0, 0, 0, 6], "texture": "#stem"},
-				"west": {"uv": [13, 7, 9, 13], "texture": "#stem"},
-				"up": {"uv": [0, 0, 0, 4], "texture": "#stem"},
-				"down": {"uv": [0, 0, 0, 4], "texture": "#stem"}
-			}
-		},
-		{
-			"from": [8, 4, 9],
-			"to": [8, 10, 13],
-			"faces": {
-				"north": {"uv": [0, 0, 0, 6], "texture": "#stem"},
-				"east": {"uv": [3, 7, 7, 13], "texture": "#stem"},
-				"south": {"uv": [0, 0, 0, 6], "texture": "#stem"},
-				"west": {"uv": [7, 7, 3, 13], "texture": "#stem"},
-				"up": {"uv": [0, 0, 0, 4], "texture": "#stem"},
-				"down": {"uv": [0, 0, 0, 4], "texture": "#stem"}
-			}
-		},
-		{
-			"from": [3, 3, 8],
-			"to": [7, 9, 8],
-			"faces": {
-				"north": {"uv": [9, 7, 13, 13], "texture": "#stem"},
-				"east": {"uv": [0, 0, 0, 4], "texture": "#stem"},
-				"south": {"uv": [13, 7, 9, 13], "texture": "#stem"},
-				"west": {"uv": [0, 0, 0, 4], "texture": "#stem"},
-				"up": {"uv": [0, 0, 4, 0], "texture": "#stem"},
-				"down": {"uv": [0, 0, 4, 0], "texture": "#stem"}
+				"north": {"uv": [0, 0, 0, 0], "texture": "#stem"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#stem"},
+				"south": {"uv": [0, 0, 0, 0], "texture": "#stem"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#stem"},
+				"up": {"uv": [0, 0, 0, 0], "rotation": 270, "texture": "#stem"},
+				"down": {"uv": [0, 0, 0, 0], "rotation": 90, "texture": "#stem"}
 			}
 		},
 		{
@@ -243,49 +210,49 @@
 			"name": "stem",
 			"origin": [0, 0, 0],
 			"color": 0,
-			"children": [0, 1, 2, 3, 4]
+			"children": [0, 1]
 		},
 		{
 			"name": "base",
 			"origin": [8, 0, 8],
 			"color": 0,
-			"children": [5]
+			"children": [2]
 		},
 		{
 			"name": "leaf_n",
 			"origin": [8, 9, 3],
 			"color": 0,
-			"children": [6, 7]
+			"children": [3, 4]
 		},
 		{
 			"name": "leaf_e",
 			"origin": [8, 8, 8],
 			"color": 0,
-			"children": [8, 9]
+			"children": [5, 6]
 		},
 		{
 			"name": "leaf_s",
 			"origin": [8, 9, 13],
 			"color": 0,
-			"children": [10, 11]
+			"children": [7, 8]
 		},
 		{
 			"name": "leaf_w",
 			"origin": [8, 8, 8],
 			"color": 0,
-			"children": [12, 13]
+			"children": [9, 10]
 		},
 		{
 			"name": "leaf_u",
 			"origin": [8, 8, 8],
 			"color": 0,
-			"children": [14, 15]
+			"children": [11, 12]
 		},
 		{
 			"name": "leaf_d",
 			"origin": [8, 8, 8],
 			"color": 0,
-			"children": [16, 17]
+			"children": [13, 14]
 		}
 	]
 }

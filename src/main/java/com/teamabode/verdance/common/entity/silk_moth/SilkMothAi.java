@@ -1,13 +1,11 @@
 package com.teamabode.verdance.common.entity.silk_moth;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
-import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.entity.silk_moth.behaviors.TakeOff;
-import com.teamabode.verdance.common.entity.silk_moth.behaviors.TryFindLeaves;
-import com.teamabode.verdance.common.entity.silk_moth.behaviors.TryLayEggsOnLeaves;
+import com.teamabode.verdance.common.entity.silk_moth.behaviors.SearchForLeaves;
+import com.teamabode.verdance.common.entity.silk_moth.behaviors.TryLayEggs;
 import com.teamabode.verdance.core.registry.VerdanceActivities;
 import com.teamabode.verdance.core.registry.VerdanceEntities;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleType;
@@ -94,12 +92,12 @@ public class SilkMothAi {
         brain.addActivityWithConditions(VerdanceActivities.LAY_EGGS, ImmutableList.of(
                 Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(10, 20))),
                 Pair.of(1, RandomStroll.stroll(1.0f)),
-                Pair.of(2, TryFindLeaves.create()),
-                Pair.of(3, TryLayEggsOnLeaves.create())
+                Pair.of(2, SearchForLeaves.create()),
+                Pair.of(3, TryLayEggs.create())
         ), ImmutableSet.of(Pair.of(MemoryModuleType.IS_PREGNANT, MemoryStatus.VALUE_PRESENT)));
     }
 
-    private static void initPollinateActivity(Brain<SilkMoth> brain) {
+    private static void initSleepActivity(Brain<SilkMoth> brain) {
 
     }
 

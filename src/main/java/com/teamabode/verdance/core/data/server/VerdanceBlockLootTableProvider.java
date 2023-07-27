@@ -38,6 +38,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         shrub();
         stucco();
         cantaloupe();
+        silkWormEggs();
     }
 
     private void shrub() {
@@ -121,6 +122,10 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         });
         add(VerdanceBlocks.CANTALOUPE_STEM, block -> this.createStemDrops(block, VerdanceItems.CANTALOUPE_SEEDS));
         add(VerdanceBlocks.ATTACHED_CANTALOUPE_STEM, block -> this.createAttachedStemDrops(block, VerdanceItems.CANTALOUPE_SEEDS));
+    }
+
+    private void silkWormEggs() {
+        add(VerdanceBlocks.SILK_WORM_EGGS, BlockLootSubProvider::createSilkTouchOnlyTable);
     }
 
     public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {

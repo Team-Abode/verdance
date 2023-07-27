@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-26T15:19:07.061358	Verdance/Block Loot Tables
+// 1.20.1	2023-07-27T15:20:37.338274	Verdance/Block Loot Tables
 9dbe388111195f93d6ee55c0f53ebf92a560cc56 data\verdance\loot_tables\blocks\light_gray_stucco_slab.json
 32dc0bc4166430d24e7f67fd93ff9ebcc552b796 data\verdance\loot_tables\blocks\white_stucco.json
 a9f075179dc01bac11bb5c1d7d705ddd5c87cf6f data\verdance\loot_tables\blocks\mulberry_planks.json
@@ -13,6 +13,7 @@ ff8519dc5d92f47423f779ebe72ff514492cdabe data\verdance\loot_tables\blocks\brown_
 fd9434b5893ff0673904847cc851df865f363eae data\verdance\loot_tables\blocks\cantaloupe_stem.json
 120663b12212fa90d0d81f042aab532a14c900a4 data\verdance\loot_tables\blocks\light_gray_stucco_wall.json
 12ab651f10202117f12ff97718d8b0fd94d438e3 data\verdance\loot_tables\blocks\black_stucco_wall.json
+3beb4736a3ad713bf9bc3d4f7eb1d679ff03bfb7 data\verdance\loot_tables\blocks\silk_worm_eggs.json
 059066621c88cf58cc3858e29f22ea1eba21bdea data\verdance\loot_tables\blocks\red_stucco_slab.json
 eb14117d24bb3cebf7fe6b69fea05589c4248fe1 data\verdance\loot_tables\blocks\light_gray_stucco.json
 cd792e76a535b734e96ec5cb49687396dbc61cf2 data\verdance\loot_tables\blocks\orange_stucco_wall.json
@@ -20,8 +21,8 @@ ba490043def08a15f4667e4412eddce603dee4e9 data\verdance\loot_tables\blocks\brown_
 5755749d31c8ce070531413a38afb35b00a62c14 data\verdance\loot_tables\blocks\mulberry_log.json
 ef3b4d4d94bd13b7fbc7cb76bc2f0984c0fb9832 data\verdance\loot_tables\blocks\attached_cantaloupe_stem.json
 8f7cac99f8f6e58bf45799d582ef4535c0aa970e data\verdance\loot_tables\blocks\shrub.json
-5d093406ba2a3f318467e3d4dcd530549b252bf9 data\verdance\loot_tables\blocks\mulberry_sapling.json
 68268b1ec042a37da0aeb7d1058edbcdc16eb6d5 data\verdance\loot_tables\blocks\gray_stucco_stairs.json
+5d093406ba2a3f318467e3d4dcd530549b252bf9 data\verdance\loot_tables\blocks\mulberry_sapling.json
 188c86220b63022e67d94f8ae0bba16b8ab06662 data\verdance\loot_tables\blocks\red_stucco_stairs.json
 3edf5e5b343530283e1678115a64e6e9f871ab83 data\verdance\loot_tables\blocks\gray_stucco_slab.json
 97f38859767dfcc26513ad7339ae19f4b77646fd data\verdance\loot_tables\blocks\brown_stucco_wall.json
