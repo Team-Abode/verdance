@@ -17,9 +17,9 @@ public class VerdanceEntities {
             FabricEntityTypeBuilder.createMob()
                     .spawnGroup(MobCategory.CREATURE)
                     .entityFactory(SilkMoth::new)
-                    .dimensions(EntityDimensions.scalable(1.1f, 0.9f))
+                    .dimensions(EntityDimensions.scalable(0.9f, 0.9f))
                     .defaultAttributes(SilkMoth::createSilkMothAttributes)
-                    .spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SilkMoth::checkSilkMothSpawnRules)
+                    .spawnRestriction(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, SilkMoth::checkSilkMothSpawnRules)
                     .build()
     );
 

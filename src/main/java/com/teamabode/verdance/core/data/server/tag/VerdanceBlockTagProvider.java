@@ -39,6 +39,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         mineableAxe();
 
         ghostTownReplaceable();
+        silkMothsSpawnableOn();
     }
 
     private void shrubPlaceables() {
@@ -229,5 +230,12 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     private void ghostTownReplaceable() {
         this.getOrCreateTagBuilder(VerdanceBlockTags.GHOST_TOWN_REPLACEABLE).setReplace(false)
                 .add(Blocks.SAND);
+    }
+
+    private void silkMothsSpawnableOn() {
+        this.getOrCreateTagBuilder(VerdanceBlockTags.SILK_MOTHS_SPAWNABLE_ON).setReplace(false)
+                .add(VerdanceBlocks.MULBERRY_LEAVES)
+                .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES)
+                .add(Blocks.GRASS_BLOCK);
     }
 }

@@ -1,10 +1,15 @@
 package com.teamabode.verdance.common.entity.silk_moth;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.entity.silk_moth.behaviors.TakeOff;
+import com.teamabode.verdance.common.entity.silk_moth.behaviors.TryFindLeaves;
+import com.teamabode.verdance.common.entity.silk_moth.behaviors.TryLayEggsOnLeaves;
+import com.teamabode.verdance.core.registry.VerdanceActivities;
+import com.teamabode.verdance.core.registry.VerdanceEntities;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleType;
 import com.teamabode.verdance.core.registry.VerdanceSensorType;
 import net.minecraft.tags.ItemTags;
@@ -13,6 +18,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
@@ -36,7 +42,8 @@ public class SilkMothAi {
             MemoryModuleType.IS_TEMPTED,
             MemoryModuleType.TEMPTING_PLAYER,
             MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
-            VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS
+            VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS,
+            MemoryModuleType.IS_PREGNANT
     );
     public static final ImmutableList<SensorType<? extends Sensor<? super SilkMoth>>> SENSOR_TYPES = ImmutableList.of(
             SensorType.NEAREST_LIVING_ENTITIES,
@@ -51,6 +58,7 @@ public class SilkMothAi {
     protected static Brain<?> makeBrain(Brain<SilkMoth> brain) {
         initCoreActivity(brain);
         initIdleActivity(brain);
+        initLayEggsActivity(brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         brain.setDefaultActivity(Activity.IDLE);
         brain.useDefaultActivity();
@@ -63,6 +71,7 @@ public class SilkMothAi {
                 new AnimalPanic(1.75f),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
+                new TakeOff(),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
                 new CountDownCooldownTicks(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS)
         ));
@@ -71,14 +80,26 @@ public class SilkMothAi {
     private static void initIdleActivity(Brain<SilkMoth> brain) {
         brain.addActivity(Activity.IDLE, ImmutableList.of(
                 Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(20, 40))),
-                Pair.of(1, new FollowTemptation(livingEntity -> 1.5f)),
-                Pair.of(2, new RunOne<>(List.of(
+                Pair.of(1, new AnimalMakeLove(VerdanceEntities.SILK_MOTH, 1.0f)),
+                Pair.of(2, new FollowTemptation(livingEntity -> 1.5f)),
+                Pair.of(3, new RunOne<>(List.of(
                         Pair.of(RandomStroll.stroll(1.0f), 1),
                         Pair.of(new DoNothing(10, 20), 1),
                         Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 5), 2)
-                ))),
-                Pair.of(3, new TakeOff())
+                )))
         ));
+    }
+
+    private static void initLayEggsActivity(Brain<SilkMoth> brain) {
+        brain.addActivityWithConditions(VerdanceActivities.LAY_EGGS, ImmutableList.of(
+                Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(10, 20))),
+                Pair.of(1, new RunOne<>(List.of(
+                        Pair.of(RandomStroll.stroll(1.0f), 1),
+                        Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 5), 2)
+                ))),
+                Pair.of(2, TryFindLeaves.create()),
+                Pair.of(3, TryLayEggsOnLeaves.create())
+        ), ImmutableSet.of(Pair.of(MemoryModuleType.IS_PREGNANT, MemoryStatus.VALUE_PRESENT)));
     }
 
     public static Ingredient getTemptations() {
@@ -86,6 +107,6 @@ public class SilkMothAi {
     }
 
     public static void updateActivity(SilkMoth silkMoth) {
-        silkMoth.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.IDLE));
+        silkMoth.getBrain().setActiveActivityToFirstValid(ImmutableList.of(VerdanceActivities.LAY_EGGS, Activity.IDLE));
     }
 }

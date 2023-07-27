@@ -1,9 +1,10 @@
-// 1.20	2023-06-09T18:48:49.9543999	Verdance/Tags for minecraft:block
+// 1.20.1	2023-07-26T15:19:07.0573693	Verdance/Tags for minecraft:block
 6eb82bb5cbee11edc622aa289512f8b2e95494c7 data\minecraft\tags\blocks\stairs.json
 9aea83ebb2efb53eec4c54149e6bfb543e800106 data\minecraft\tags\blocks\wooden_buttons.json
 242badb5ca6814f4654e8eda89b45f006153f9e0 data\minecraft\tags\blocks\leaves.json
 5e349cf47539fbcf77051f7bacf54290fae2d8d0 data\minecraft\tags\blocks\ceiling_hanging_signs.json
 278f9d0ff0c137c51e45049a49dc3d5f1b1822cb data\verdance\tags\blocks\mulberry_logs.json
+7cdce8639cc0d21b3214f01938bb55f00ea9c96d data\verdance\tags\blocks\silk_moths_spawnable_on.json
 fa011c5db162709b03ef42585ea0b671a80a1114 data\minecraft\tags\blocks\planks.json
 142f4b6eec280ab84050602fe5f8d8e7d61af5a5 data\minecraft\tags\blocks\wooden_trapdoors.json
 ca30db3415d936706a86fdc128660409036227d4 data\minecraft\tags\blocks\walls.json

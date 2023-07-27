@@ -2,6 +2,7 @@ package com.teamabode.verdance.common.entity.silk_moth;
 
 import com.mojang.serialization.Dynamic;
 import com.teamabode.verdance.common.entity.silk_moth.pathing.SilkMothFlyingMoveControl;
+import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -10,19 +11,22 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.TimeUtil;
-import net.minecraft.world.Difficulty;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -159,6 +163,10 @@ public class SilkMoth extends Animal {
         }
     }
 
+    public boolean isFood(ItemStack stack) {
+        return stack.is(ItemTags.FLOWERS);
+    }
+
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("Flying", this.isFlying());
@@ -187,17 +195,21 @@ public class SilkMoth extends Animal {
         return this.entityData.get(LAND_COOLDOWN);
     }
 
-    // Spawning Mechanics
     public float getWalkTargetValue(BlockPos pos, LevelReader level) {
         return -level.getPathfindingCostFromLightLevels(pos);
     }
 
     public static boolean checkSilkMothSpawnRules(EntityType<? extends Animal> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return Monster.isDarkEnoughToSpawn(level, pos, random) && checkMobSpawnRules(type, level, spawnType, pos, random);
+        return level.getBlockState(pos.below()).is(VerdanceBlockTags.SILK_MOTHS_SPAWNABLE_ON) && Monster.isDarkEnoughToSpawn(level, pos, random);
     }
 
     public MobType getMobType() {
         return MobType.ARTHROPOD;
+    }
+
+    public void spawnChildFromBreeding(ServerLevel level, Animal mate) {
+        this.finalizeSpawnChildFromBreeding(level, mate, null);
+        this.getBrain().setMemory(MemoryModuleType.IS_PREGNANT, Unit.INSTANCE);
     }
 
     @Nullable
