@@ -1,27 +1,26 @@
 package com.teamabode.verdance.common.entity.silk_moth.behaviors;
 
-import com.google.common.collect.ImmutableMap;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleType;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.ai.behavior.Behavior;
+import net.minecraft.world.entity.ai.behavior.BehaviorControl;
+import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
-public class TakeOff extends Behavior<SilkMoth> {
+public class TakeOff {
 
-    public TakeOff() {
-        super(ImmutableMap.of(
-                MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT,
-                VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS, MemoryStatus.VALUE_ABSENT
-        ));
+    public static BehaviorControl<SilkMoth> create() {
+        return BehaviorBuilder.create(instance -> instance.group(
+                instance.absent(MemoryModuleType.WALK_TARGET),
+                instance.absent(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS)
+        ).apply(instance, (walkTargetMemory, flightCooldownMemory) -> TakeOff::attemptStart));
     }
 
-    protected boolean checkExtraStartConditions(ServerLevel level, SilkMoth owner) {
-        return owner.onGround() && !owner.isFlying();
-    }
-
-    protected void start(ServerLevel level, SilkMoth entity, long gameTime) {
-        entity.takeOff();
+    private static boolean attemptStart(ServerLevel level, SilkMoth entity, long gameTime) {
+        if (entity.onGround() && !entity.isFlying()) {
+            entity.takeOff();
+            return true;
+        }
+        return false;
     }
 }

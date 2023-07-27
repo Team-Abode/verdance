@@ -71,7 +71,7 @@ public class SilkMothAi {
                 new AnimalPanic(1.75f),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
-                new TakeOff(),
+                TakeOff.create(),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
                 new CountDownCooldownTicks(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS)
         ));
@@ -93,13 +93,14 @@ public class SilkMothAi {
     private static void initLayEggsActivity(Brain<SilkMoth> brain) {
         brain.addActivityWithConditions(VerdanceActivities.LAY_EGGS, ImmutableList.of(
                 Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(10, 20))),
-                Pair.of(1, new RunOne<>(List.of(
-                        Pair.of(RandomStroll.stroll(1.0f), 1),
-                        Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 5), 2)
-                ))),
+                Pair.of(1, RandomStroll.stroll(1.0f)),
                 Pair.of(2, TryFindLeaves.create()),
                 Pair.of(3, TryLayEggsOnLeaves.create())
         ), ImmutableSet.of(Pair.of(MemoryModuleType.IS_PREGNANT, MemoryStatus.VALUE_PRESENT)));
+    }
+
+    private static void initPollinateActivity(Brain<SilkMoth> brain) {
+
     }
 
     public static Ingredient getTemptations() {

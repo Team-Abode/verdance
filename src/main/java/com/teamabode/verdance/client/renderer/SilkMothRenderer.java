@@ -8,10 +8,11 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class SilkMothRenderer extends MobRenderer<SilkMoth, SilkMothModel> {
-    private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(Verdance.MOD_ID, "textures/entity/silk_moth.png");
+    private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(Verdance.MOD_ID, "textures/entity/silk_moth/silk_moth.png");
 
     public SilkMothRenderer(EntityRendererProvider.Context context) {
         super(context, new SilkMothModel(context.bakeLayer(SilkMothModel.LAYER_LOCATION)), 0.5f);
+        this.addLayer(new SilkMothEyesLayer(this));
     }
 
     public ResourceLocation getTextureLocation(SilkMoth entity) {

@@ -15,6 +15,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.util.Unit;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -93,6 +94,11 @@ public class SilkMoth extends Animal {
 
         this.setFlying(false);
         this.getBrain().setMemory(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS, randomTime);
+    }
+
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
+        this.getBrain().setMemory(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS, 200);
+        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 
     protected void customServerAiStep() {
