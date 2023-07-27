@@ -6,7 +6,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.schedule.Activity;
 
 public class VerdanceActivities {
-    public static final Activity POLLINATE = register("pollinate");
     public static final Activity LAY_EGGS = register("lay_eggs");
 
     public static Activity register(String name) {
