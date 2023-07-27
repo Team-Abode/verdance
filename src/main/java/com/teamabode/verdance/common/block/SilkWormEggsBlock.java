@@ -1,5 +1,6 @@
 package com.teamabode.verdance.common.block;
 
+import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
 import com.teamabode.verdance.core.registry.VerdanceEntities;
 import net.minecraft.core.BlockPos;
@@ -38,7 +39,7 @@ public class SilkWormEggsBlock extends Block {
     }
 
     public int getHatchDelay(RandomSource random) {
-        return random.nextInt(1200, 2400);
+        return random.nextInt(4800, 6000);
     }
 
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
@@ -65,5 +66,6 @@ public class SilkWormEggsBlock extends Block {
             silkMoth.setPersistenceRequired();
             level.addFreshEntity(silkMoth);
         }
+        level.destroyBlock(pos, false);
     }
 }

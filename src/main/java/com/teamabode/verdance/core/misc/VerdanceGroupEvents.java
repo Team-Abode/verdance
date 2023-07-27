@@ -39,7 +39,6 @@ public class VerdanceGroupEvents {
                 VerdanceItems.MULBERRY_HANGING_SIGN
         );
 
-
         appendItemsAfter(CreativeModeTabs.FOOD_AND_DRINKS, Items.GLOW_BERRIES, VerdanceItems.MULBERRY);
         appendItemsAfter(CreativeModeTabs.FOOD_AND_DRINKS, Items.MELON_SLICE, VerdanceItems.CANTALOUPE_SLICE);
         appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Items.MELON, VerdanceBlocks.CANTALOUPE);
@@ -82,6 +81,7 @@ public class VerdanceGroupEvents {
                 VerdanceBlocks.ORANGE_STUCCO_SLAB,
                 VerdanceBlocks.ORANGE_STUCCO_WALL
         );
+        appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Items.FROGSPAWN, VerdanceBlocks.SILK_WORM_EGGS);
         appendItemsBefore(CreativeModeTabs.SPAWN_EGGS, Items.SILVERFISH_SPAWN_EGG, VerdanceItems.SILK_MOTH_SPAWN_EGG);
     }
 
