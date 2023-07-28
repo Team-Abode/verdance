@@ -89,7 +89,7 @@ public class VerdanceBlocks {
     public static final Block ORANGE_STUCCO_SLAB = register("orange_stucco_slab", new SlabBlock(Properties.copy(ORANGE_STUCCO)));
     public static final Block ORANGE_STUCCO_WALL = register("orange_stucco_wall", new WallBlock(Properties.copy(ORANGE_STUCCO)));
 
-    public static final Block SILK_WORM_EGGS = register("silk_worm_eggs", new SilkWormEggsBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.FROGSPAWN).instabreak().noOcclusion().noCollission().pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops()));
+    public static final Block SILKWORM_EGGS = register("silkworm_eggs", new SilkWormEggsBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.FROGSPAWN).instabreak().noOcclusion().noCollission().pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops()));
 
     private static Block registerStucco(DyeColor dyeColor) {
         return new Block(Properties.of().mapColor(dyeColor).requiresCorrectToolForDrops().strength(1.5F, 5.5F));

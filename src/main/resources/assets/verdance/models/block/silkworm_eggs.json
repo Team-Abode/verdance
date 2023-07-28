@@ -1,8 +1,8 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "verdance:block/silk_worm_eggs",
-    "texture": "verdance:block/silk_worm_eggs"
+    "particle": "verdance:block/silkworm_eggs",
+    "texture": "verdance:block/silkworm_eggs"
   },
   "elements": [
     {   "from": [  0, 0.25,  0 ],

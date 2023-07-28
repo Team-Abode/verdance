@@ -3,13 +3,12 @@ package com.teamabode.verdance.common.entity.silk_moth;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
-import com.teamabode.verdance.common.entity.silk_moth.behaviors.TakeOff;
-import com.teamabode.verdance.common.entity.silk_moth.behaviors.SearchForLeaves;
-import com.teamabode.verdance.common.entity.silk_moth.behaviors.TryLayEggs;
+import com.teamabode.verdance.common.entity.silk_moth.behaviors.*;
 import com.teamabode.verdance.core.registry.VerdanceActivities;
 import com.teamabode.verdance.core.registry.VerdanceEntities;
-import com.teamabode.verdance.core.registry.VerdanceMemoryModuleType;
-import com.teamabode.verdance.core.registry.VerdanceSensorType;
+import com.teamabode.verdance.core.registry.VerdanceMemories;
+import com.teamabode.verdance.core.registry.VerdanceSensors;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
@@ -21,8 +20,12 @@ import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 
 @SuppressWarnings("deprecation")
@@ -40,14 +43,20 @@ public class SilkMothAi {
             MemoryModuleType.IS_TEMPTED,
             MemoryModuleType.TEMPTING_PLAYER,
             MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
-            VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS,
-            MemoryModuleType.IS_PREGNANT
+            VerdanceMemories.FLIGHT_COOLDOWN_TICKS,
+            MemoryModuleType.IS_PREGNANT,
+            VerdanceMemories.IS_POLLINATING
     );
     public static final ImmutableList<SensorType<? extends Sensor<? super SilkMoth>>> SENSOR_TYPES = ImmutableList.of(
             SensorType.NEAREST_LIVING_ENTITIES,
             SensorType.HURT_BY,
-            VerdanceSensorType.SILK_MOTH_TEMPTATIONS
+            VerdanceSensors.SILK_MOTH_TEMPTATIONS
     );
+
+    public static final Predicate<BlockState> CANNOT_POLLINATE = state -> {
+        if (!state.is(BlockTags.SAPLINGS) || !state.hasProperty(BlockStateProperties.STAGE)) return true;
+        return state.getValue(BlockStateProperties.STAGE) >= 1;
+    };
 
     public static Brain.Provider<SilkMoth> brainProvider() {
         return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
@@ -71,7 +80,7 @@ public class SilkMothAi {
                 new MoveToTargetSink(),
                 TakeOff.create(),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
-                new CountDownCooldownTicks(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS)
+                new CountDownCooldownTicks(VerdanceMemories.FLIGHT_COOLDOWN_TICKS)
         ));
     }
 
@@ -84,7 +93,9 @@ public class SilkMothAi {
                         Pair.of(RandomStroll.stroll(1.0f), 1),
                         Pair.of(new DoNothing(10, 20), 1),
                         Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 5), 2)
-                )))
+                ))),
+                Pair.of(4, GrowSapling.create()),
+                Pair.of(5, SearchForSapling.create())
         ));
     }
 
@@ -95,10 +106,6 @@ public class SilkMothAi {
                 Pair.of(2, SearchForLeaves.create()),
                 Pair.of(3, TryLayEggs.create())
         ), ImmutableSet.of(Pair.of(MemoryModuleType.IS_PREGNANT, MemoryStatus.VALUE_PRESENT)));
-    }
-
-    private static void initSleepActivity(Brain<SilkMoth> brain) {
-
     }
 
     public static Ingredient getTemptations() {

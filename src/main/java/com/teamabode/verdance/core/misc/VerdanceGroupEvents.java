@@ -4,7 +4,6 @@ import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
@@ -81,7 +80,7 @@ public class VerdanceGroupEvents {
                 VerdanceBlocks.ORANGE_STUCCO_SLAB,
                 VerdanceBlocks.ORANGE_STUCCO_WALL
         );
-        appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Items.FROGSPAWN, VerdanceBlocks.SILK_WORM_EGGS);
+        appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Items.FROGSPAWN, VerdanceBlocks.SILKWORM_EGGS);
         appendItemsBefore(CreativeModeTabs.SPAWN_EGGS, Items.SILVERFISH_SPAWN_EGG, VerdanceItems.SILK_MOTH_SPAWN_EGG);
     }
 

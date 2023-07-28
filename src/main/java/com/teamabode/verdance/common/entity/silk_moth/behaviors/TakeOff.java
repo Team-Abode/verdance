@@ -1,7 +1,7 @@
 package com.teamabode.verdance.common.entity.silk_moth.behaviors;
 
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
-import com.teamabode.verdance.core.registry.VerdanceMemoryModuleType;
+import com.teamabode.verdance.core.registry.VerdanceMemories;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
@@ -12,7 +12,7 @@ public class TakeOff {
     public static BehaviorControl<SilkMoth> create() {
         return BehaviorBuilder.create(instance -> instance.group(
                 instance.absent(MemoryModuleType.WALK_TARGET),
-                instance.absent(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS)
+                instance.absent(VerdanceMemories.FLIGHT_COOLDOWN_TICKS)
         ).apply(instance, (walkTargetMemory, flightCooldownMemory) -> TakeOff::attemptStart));
     }
 

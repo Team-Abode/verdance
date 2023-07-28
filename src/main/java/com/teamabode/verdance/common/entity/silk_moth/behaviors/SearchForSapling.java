@@ -1,26 +1,29 @@
 package com.teamabode.verdance.common.entity.silk_moth.behaviors;
 
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
+import com.teamabode.verdance.common.entity.silk_moth.SilkMothAi;
+import com.teamabode.verdance.core.registry.VerdanceMemories;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
 import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
+import net.minecraft.world.level.block.state.BlockState;
 import org.apache.commons.lang3.mutable.MutableLong;
 
-public class SearchForLeaves {
+public class SearchForSapling {
     private static final MutableLong LAST_EXECUTION = new MutableLong(0L);
 
     public static BehaviorControl<SilkMoth> create() {
         return BehaviorBuilder.create(instance -> instance.group(
                 instance.absent(MemoryModuleType.WALK_TARGET),
+                instance.absent(VerdanceMemories.IS_POLLINATING),
                 instance.registered(MemoryModuleType.LOOK_TARGET)
-        ).apply(instance, (walkTargetMemory, lookTargetMemory) -> SearchForLeaves::tryStart));
+        ).apply(instance, (walkTargetMemory, isPollinatingMemory, lookTargetMemory) -> SearchForSapling::tryStart));
     }
 
     private static boolean tryStart(ServerLevel level, SilkMoth entity, long gameTime) {
@@ -28,23 +31,18 @@ public class SearchForLeaves {
             LAST_EXECUTION.setValue(gameTime + 40L);
             return true;
         }
-        BlockPos entityPos = entity.blockPosition();
         MutableBlockPos mutablePos = new MutableBlockPos();
 
-        for (BlockPos scanPos : BlockPos.withinManhattan(entityPos, 15, 15, 15)) {
-            boolean excludeCurrentPos = entityPos.getX() != scanPos.getX() || entityPos.getX() != scanPos.getZ();
-            boolean foundLeaves = level.getBlockState(mutablePos.set(scanPos)).is(BlockTags.LEAVES);
-            boolean isValidSpace = level.getBlockState(mutablePos.setWithOffset(scanPos, Direction.UP)).isAir();
+        for (BlockPos scanPos : BlockPos.withinManhattan(entity.blockPosition(), 15, 8, 15)) {
+            BlockState state = level.getBlockState(mutablePos.set(scanPos));
+            if (SilkMothAi.CANNOT_POLLINATE.test(state)) continue;
 
-            if (excludeCurrentPos && foundLeaves && isValidSpace) {
-                BlockPosTracker tracker = new BlockPosTracker(mutablePos);
-
-                entity.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, tracker);
-                entity.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(tracker, 1.0f, 0));
-                return true;
-            }
+            BlockPosTracker tracker = new BlockPosTracker(mutablePos);
+            entity.getBrain().setMemory(VerdanceMemories.IS_POLLINATING, Unit.INSTANCE);
+            entity.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, tracker);
+            entity.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(tracker, 1.0f, 0));
+            return true;
         }
-        LAST_EXECUTION.setValue(gameTime + 40L);
-        return true;
+        return false;
     }
 }

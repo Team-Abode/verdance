@@ -32,8 +32,8 @@ public class Verdance implements ModInitializer {
         VerdanceBoatType.register();
         VerdanceTrunkPlacerType.register();
         VerdanceActivities.register();
-        VerdanceSensorType.register();
-        VerdanceMemoryModuleType.register();
+        VerdanceSensors.register();
+        VerdanceMemories.register();
 
         registerDispenserBehaviors();
         registerTrades();

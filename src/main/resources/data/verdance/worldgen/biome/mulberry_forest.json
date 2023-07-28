@@ -47,12 +47,6 @@
         "maxCount": 3
       },
       {
-        "type": "verdance:silk_moth",
-        "weight": 3,
-        "minCount": 2,
-        "maxCount": 3
-      },
-      {
         "type": "minecraft:wolf",
         "weight": 1,
         "minCount": 4,
@@ -61,6 +55,12 @@
     ],
     "misc": [],
     "monster": [
+      {
+        "type": "verdance:silk_moth",
+        "weight": 100,
+        "minCount": 1,
+        "maxCount": 2
+      },
       {
         "type": "minecraft:spider",
         "weight": 100,

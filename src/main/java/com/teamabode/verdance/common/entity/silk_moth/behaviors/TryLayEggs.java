@@ -18,10 +18,10 @@ public class TryLayEggs {
         return BehaviorBuilder.create(instance -> instance.group(
                 instance.present(MemoryModuleType.WALK_TARGET),
                 instance.present(MemoryModuleType.IS_PREGNANT)
-        ).apply(instance, (walkTargetMemory, isPregnantMemory) -> TryLayEggs::attemptStart));
+        ).apply(instance, (walkTargetMemory, isPregnantMemory) -> TryLayEggs::tryStart));
     }
 
-    private static boolean attemptStart(ServerLevel level, SilkMoth entity, long gameTime) {
+    private static boolean tryStart(ServerLevel level, SilkMoth entity, long gameTime) {
         BlockPos entityPos = entity.blockPosition();
 
         BlockPos relativePos = entityPos.below();
@@ -31,7 +31,7 @@ public class TryLayEggs {
         boolean isLeaves = level.getBlockState(relativePos).is(BlockTags.LEAVES);
 
         if (isEmpty && isLeaves) {
-            BlockState eggState = VerdanceBlocks.SILK_WORM_EGGS.defaultBlockState();
+            BlockState eggState = VerdanceBlocks.SILKWORM_EGGS.defaultBlockState();
 
             level.setBlock(eggPos, eggState, 3);
             level.playSound(null, eggPos, eggState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0f, 1.0f);

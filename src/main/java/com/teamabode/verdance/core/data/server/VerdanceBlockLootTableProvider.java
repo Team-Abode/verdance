@@ -13,7 +13,6 @@ import net.minecraft.world.level.storage.loot.IntRange;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.LimitCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
@@ -125,7 +124,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     }
 
     private void silkWormEggs() {
-        add(VerdanceBlocks.SILK_WORM_EGGS, BlockLootSubProvider::createSilkTouchOnlyTable);
+        add(VerdanceBlocks.SILKWORM_EGGS, BlockLootSubProvider::createSilkTouchOnlyTable);
     }
 
     public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {

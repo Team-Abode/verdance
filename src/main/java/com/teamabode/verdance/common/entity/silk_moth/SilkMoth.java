@@ -1,10 +1,9 @@
 package com.teamabode.verdance.common.entity.silk_moth;
 
 import com.mojang.serialization.Dynamic;
-import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.entity.silk_moth.pathing.SilkMothFlyingMoveControl;
 import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
-import com.teamabode.verdance.core.registry.VerdanceMemoryModuleType;
+import com.teamabode.verdance.core.registry.VerdanceMemories;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -94,11 +93,11 @@ public class SilkMoth extends Animal {
         int randomTime = TimeUtil.rangeOfSeconds(10, 12).sample(this.getRandom());
 
         this.setFlying(false);
-        this.getBrain().setMemory(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS, randomTime);
+        this.getBrain().setMemory(VerdanceMemories.FLIGHT_COOLDOWN_TICKS, randomTime);
     }
 
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        this.getBrain().setMemory(VerdanceMemoryModuleType.FLIGHT_COOLDOWN_TICKS, 100);
+        this.getBrain().setMemory(VerdanceMemories.FLIGHT_COOLDOWN_TICKS, 100);
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 

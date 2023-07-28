@@ -85,7 +85,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_HOE)
                 .add(VerdanceBlocks.MULBERRY_LEAVES)
                 .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES)
-                .add(VerdanceBlocks.SILK_WORM_EGGS)
+                .add(VerdanceBlocks.SILKWORM_EGGS)
                 .setReplace(false);
     }
 
