@@ -21,7 +21,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "verdance:silk_worm_eggs"
+          "name": "verdance:silkworm_eggs"
         }
       ],
       "rolls": 1.0
