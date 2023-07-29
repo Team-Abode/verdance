@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -39,7 +40,7 @@ public class SilkMothSpecificSensor extends Sensor<SilkMoth> {
             if (entity.level().dimension() == pollinateTarget.get().dimension() && distance < 3) {
                 isPollinating = Optional.of(Unit.INSTANCE);
             }
-            if (SilkMothAi.CANNOT_POLLINATE.test(state) || distance > 25.0 || entity.level().dimension() != pollinateTarget.get().dimension() || brain.isMemoryValue(MemoryModuleType.IS_PANICKING, true)) {
+            if (SilkMothAi.CANNOT_POLLINATE.test(state) || distance > 25.0 || entity.level().dimension() != pollinateTarget.get().dimension() || brain.checkMemory(MemoryModuleType.IS_PANICKING, MemoryStatus.VALUE_PRESENT)) {
                 brain.eraseMemory(VerdanceMemories.POLLINATE_TARGET);
             }
         }

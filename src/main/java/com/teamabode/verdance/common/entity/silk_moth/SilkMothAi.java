@@ -94,9 +94,7 @@ public class SilkMothAi {
                         Pair.of(RandomStroll.stroll(1.0f), 1),
                         Pair.of(OccasionalTakeOff.create(), 1),
                         Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 5), 2)
-                ))),
-                Pair.of(4, new PollinateSapling()),
-                Pair.of(5, new SearchForSapling())
+                )))
         ));
     }
 
