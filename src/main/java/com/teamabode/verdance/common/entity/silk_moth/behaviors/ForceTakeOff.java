@@ -7,17 +7,18 @@ import net.minecraft.world.entity.ai.behavior.BehaviorControl;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 
-public class TakeOff {
+public class ForceTakeOff {
 
     public static BehaviorControl<SilkMoth> create() {
         return BehaviorBuilder.create(instance -> instance.group(
-                instance.absent(MemoryModuleType.WALK_TARGET),
-                instance.absent(VerdanceMemories.FLIGHT_COOLDOWN_TICKS)
-        ).apply(instance, (walkTarget, flightCooldown) -> TakeOff::attemptStart));
+                instance.present(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE),
+                instance.registered(VerdanceMemories.FLIGHT_COOLDOWN_TICKS)
+        ).apply(instance, (walkTarget, flightCooldown) -> ForceTakeOff::tryStart));
     }
 
-    private static boolean attemptStart(ServerLevel level, SilkMoth entity, long gameTime) {
+    private static boolean tryStart(ServerLevel level, SilkMoth entity, long gameTime) {
         if (entity.onGround() && !entity.isFlying()) {
+            entity.getBrain().eraseMemory(VerdanceMemories.FLIGHT_COOLDOWN_TICKS);
             entity.takeOff();
             return true;
         }
