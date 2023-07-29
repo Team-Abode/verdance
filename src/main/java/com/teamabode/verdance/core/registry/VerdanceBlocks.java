@@ -89,6 +89,51 @@ public class VerdanceBlocks {
     public static final Block ORANGE_STUCCO_SLAB = register("orange_stucco_slab", new SlabBlock(Properties.copy(ORANGE_STUCCO)));
     public static final Block ORANGE_STUCCO_WALL = register("orange_stucco_wall", new WallBlock(Properties.copy(ORANGE_STUCCO)));
 
+    public static final Block YELLOW_STUCCO = register("yellow_stucco", registerStucco(DyeColor.YELLOW));
+    public static final Block YELLOW_STUCCO_STAIRS = register("yellow_stucco_stairs", new StairBlock(YELLOW_STUCCO.defaultBlockState(), Properties.copy(YELLOW_STUCCO)));
+    public static final Block YELLOW_STUCCO_SLAB = register("yellow_stucco_slab", new SlabBlock(Properties.copy(YELLOW_STUCCO)));
+    public static final Block YELLOW_STUCCO_WALL = register("yellow_stucco_wall", new WallBlock(Properties.copy(YELLOW_STUCCO)));
+
+    public static final Block LIME_STUCCO = register("lime_stucco", registerStucco(DyeColor.LIME));
+    public static final Block LIME_STUCCO_STAIRS = register("lime_stucco_stairs", new StairBlock(LIME_STUCCO.defaultBlockState(), Properties.copy(LIME_STUCCO)));
+    public static final Block LIME_STUCCO_SLAB = register("lime_stucco_slab", new SlabBlock(Properties.copy(LIME_STUCCO)));
+    public static final Block LIME_STUCCO_WALL = register("lime_stucco_wall", new WallBlock(Properties.copy(LIME_STUCCO)));
+
+    public static final Block GREEN_STUCCO = register("green_stucco", registerStucco(DyeColor.GREEN));
+    public static final Block GREEN_STUCCO_STAIRS = register("green_stucco_stairs", new StairBlock(GREEN_STUCCO.defaultBlockState(), Properties.copy(GREEN_STUCCO)));
+    public static final Block GREEN_STUCCO_SLAB = register("green_stucco_slab", new SlabBlock(Properties.copy(GREEN_STUCCO)));
+    public static final Block GREEN_STUCCO_WALL = register("green_stucco_wall", new WallBlock(Properties.copy(GREEN_STUCCO)));
+
+    public static final Block CYAN_STUCCO = register("cyan_stucco", registerStucco(DyeColor.CYAN));
+    public static final Block CYAN_STUCCO_STAIRS = register("cyan_stucco_stairs", new StairBlock(CYAN_STUCCO.defaultBlockState(), Properties.copy(CYAN_STUCCO)));
+    public static final Block CYAN_STUCCO_SLAB = register("cyan_stucco_slab", new SlabBlock(Properties.copy(CYAN_STUCCO)));
+    public static final Block CYAN_STUCCO_WALL = register("cyan_stucco_wall", new WallBlock(Properties.copy(CYAN_STUCCO)));
+
+    public static final Block LIGHT_BLUE_STUCCO = register("light_blue_stucco", registerStucco(DyeColor.LIGHT_BLUE));
+    public static final Block LIGHT_BLUE_STUCCO_STAIRS = register("light_blue_stucco_stairs", new StairBlock(LIGHT_BLUE_STUCCO.defaultBlockState(), Properties.copy(LIGHT_BLUE_STUCCO)));
+    public static final Block LIGHT_BLUE_STUCCO_SLAB = register("light_blue_stucco_slab", new SlabBlock(Properties.copy(LIGHT_BLUE_STUCCO)));
+    public static final Block LIGHT_BLUE_STUCCO_WALL = register("light_blue_stucco_wall", new WallBlock(Properties.copy(LIGHT_BLUE_STUCCO)));
+
+    public static final Block BLUE_STUCCO = register("blue_stucco", registerStucco(DyeColor.BLUE));
+    public static final Block BLUE_STUCCO_STAIRS = register("blue_stucco_stairs", new StairBlock(BLUE_STUCCO.defaultBlockState(), Properties.copy(BLUE_STUCCO)));
+    public static final Block BLUE_STUCCO_SLAB = register("blue_stucco_slab", new SlabBlock(Properties.copy(BLUE_STUCCO)));
+    public static final Block BLUE_STUCCO_WALL = register("blue_stucco_wall", new WallBlock(Properties.copy(BLUE_STUCCO)));
+
+    public static final Block PURPLE_STUCCO = register("purple_stucco", registerStucco(DyeColor.PURPLE));
+    public static final Block PURPLE_STUCCO_STAIRS = register("purple_stucco_stairs", new StairBlock(PURPLE_STUCCO.defaultBlockState(), Properties.copy(PURPLE_STUCCO)));
+    public static final Block PURPLE_STUCCO_SLAB = register("purple_stucco_slab", new SlabBlock(Properties.copy(PURPLE_STUCCO)));
+    public static final Block PURPLE_STUCCO_WALL = register("purple_stucco_wall", new WallBlock(Properties.copy(PURPLE_STUCCO)));
+
+    public static final Block MAGENTA_STUCCO = register("magenta_stucco", registerStucco(DyeColor.MAGENTA));
+    public static final Block MAGENTA_STUCCO_STAIRS = register("magenta_stucco_stairs", new StairBlock(MAGENTA_STUCCO.defaultBlockState(), Properties.copy(MAGENTA_STUCCO)));
+    public static final Block MAGENTA_STUCCO_SLAB = register("magenta_stucco_slab", new SlabBlock(Properties.copy(MAGENTA_STUCCO)));
+    public static final Block MAGENTA_STUCCO_WALL = register("magenta_stucco_wall", new WallBlock(Properties.copy(MAGENTA_STUCCO)));
+
+    public static final Block PINK_STUCCO = register("pink_stucco", registerStucco(DyeColor.PINK));
+    public static final Block PINK_STUCCO_STAIRS = register("pink_stucco_stairs", new StairBlock(PINK_STUCCO.defaultBlockState(), Properties.copy(PINK_STUCCO)));
+    public static final Block PINK_STUCCO_SLAB = register("pink_stucco_slab", new SlabBlock(Properties.copy(PINK_STUCCO)));
+    public static final Block PINK_STUCCO_WALL = register("pink_stucco_wall", new WallBlock(Properties.copy(PINK_STUCCO)));
+
     public static final Block SILKWORM_EGGS = register("silkworm_eggs", new SilkWormEggsBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.FROGSPAWN).instabreak().noOcclusion().noCollission().pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops()));
 
     private static Block registerStucco(DyeColor dyeColor) {

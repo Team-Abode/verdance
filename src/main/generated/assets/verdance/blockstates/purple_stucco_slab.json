@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "verdance:block/purple_stucco_slab"
+    },
+    "type=double": {
+      "model": "verdance:block/purple_stucco"
+    },
+    "type=top": {
+      "model": "verdance:block/purple_stucco_slab_top"
+    }
+  }
+}

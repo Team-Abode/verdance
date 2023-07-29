@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "verdance:block/green_stucco",
+    "side": "verdance:block/green_stucco",
+    "top": "verdance:block/green_stucco"
+  }
+}

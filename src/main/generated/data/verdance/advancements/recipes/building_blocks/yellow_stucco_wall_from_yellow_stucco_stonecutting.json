@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:yellow_stucco_wall_from_yellow_stucco_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_yellow_stucco": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "verdance:yellow_stucco"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_yellow_stucco",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:yellow_stucco_wall_from_yellow_stucco_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

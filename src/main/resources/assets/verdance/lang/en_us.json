@@ -57,6 +57,51 @@
   "block.verdance.white_stucco_wall": "White Stucco Wall",
   "block.verdance.silkworm_eggs": "Silkworm Eggs",
 
+  "block.verdance.yellow_stucco": "Yellow Stucco",
+  "block.verdance.yellow_stucco_stairs": "Yellow Stucco Stairs",
+  "block.verdance.yellow_stucco_slab": "Yellow Stucco Slab",
+  "block.verdance.yellow_stucco_wall": "Yellow Stucco Wall",
+
+  "block.verdance.lime_stucco": "Lime Stucco",
+  "block.verdance.lime_stucco_stairs": "Lime Stucco Stairs",
+  "block.verdance.lime_stucco_slab": "Lime Stucco Slab",
+  "block.verdance.lime_stucco_wall": "Lime Stucco Wall",
+
+  "block.verdance.green_stucco": "Green Stucco",
+  "block.verdance.green_stucco_stairs": "Green Stucco Stairs",
+  "block.verdance.green_stucco_slab": "Green Stucco Slab",
+  "block.verdance.green_stucco_wall": "Green Stucco Wall",
+
+  "block.verdance.cyan_stucco": "Cyan Stucco",
+  "block.verdance.cyan_stucco_stairs": "Cyan Stucco Stairs",
+  "block.verdance.cyan_stucco_slab": "Cyan Stucco Slab",
+  "block.verdance.cyan_stucco_wall": "Cyan Stucco Wall",
+
+  "block.verdance.light_blue_stucco": "Light Blue Stucco",
+  "block.verdance.light_blue_stucco_stairs": "Light Blue Stucco Stairs",
+  "block.verdance.light_blue_stucco_slab": "Light Blue Stucco Slab",
+  "block.verdance.light_blue_stucco_wall": "Light Blue Stucco Wall",
+
+  "block.verdance.blue_stucco": "Blue Stucco",
+  "block.verdance.blue_stucco_stairs": "Blue Stucco Stairs",
+  "block.verdance.blue_stucco_slab": "Blue Stucco Slab",
+  "block.verdance.blue_stucco_wall": "Blue Stucco Wall",
+
+  "block.verdance.purple_stucco": "Purple Stucco",
+  "block.verdance.purple_stucco_stairs": "Purple Stucco Stairs",
+  "block.verdance.purple_stucco_slab": "Purple Stucco Slab",
+  "block.verdance.purple_stucco_wall": "Purple Stucco Wall",
+
+  "block.verdance.magenta_stucco": "Magenta Stucco",
+  "block.verdance.magenta_stucco_stairs": "Magenta Stucco Stairs",
+  "block.verdance.magenta_stucco_slab": "Magenta Stucco Slab",
+  "block.verdance.magenta_stucco_wall": "Magenta Stucco Wall",
+
+  "block.verdance.pink_stucco": "Pink Stucco",
+  "block.verdance.pink_stucco_stairs": "Pink Stucco Stairs",
+  "block.verdance.pink_stucco_slab": "Pink Stucco Slab",
+  "block.verdance.pink_stucco_wall": "Pink Stucco Wall",
+
   "item.verdance.cantaloupe_seeds": "Cantaloupe Seeds",
   "item.verdance.cantaloupe_slice": "Cantaloupe Slice",
   "item.verdance.mulberry": "Mulberry",

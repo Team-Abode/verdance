@@ -1,9 +1,11 @@
 package com.teamabode.verdance.core.data.server;
 
+import com.teamabode.verdance.core.misc.datagen.VerdanceFamilies;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -84,34 +86,29 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     }
 
     private void stucco() {
-        dropSelf(VerdanceBlocks.WHITE_STUCCO);
-        dropSelf(VerdanceBlocks.WHITE_STUCCO_STAIRS);
-        add(VerdanceBlocks.WHITE_STUCCO_SLAB, this::createSlabItemTable);
-        dropSelf(VerdanceBlocks.WHITE_STUCCO_WALL);
-        dropSelf(VerdanceBlocks.LIGHT_GRAY_STUCCO);
-        dropSelf(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS);
-        add(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB, this::createSlabItemTable);
-        dropSelf(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL);
-        dropSelf(VerdanceBlocks.GRAY_STUCCO);
-        dropSelf(VerdanceBlocks.GRAY_STUCCO_STAIRS);
-        add(VerdanceBlocks.GRAY_STUCCO_SLAB, this::createSlabItemTable);
-        dropSelf(VerdanceBlocks.GRAY_STUCCO_WALL);
-        dropSelf(VerdanceBlocks.BLACK_STUCCO);
-        dropSelf(VerdanceBlocks.BLACK_STUCCO_STAIRS);
-        add(VerdanceBlocks.BLACK_STUCCO_SLAB, this::createSlabItemTable);
-        dropSelf(VerdanceBlocks.BLACK_STUCCO_WALL);
-        dropSelf(VerdanceBlocks.BROWN_STUCCO);
-        dropSelf(VerdanceBlocks.BROWN_STUCCO_STAIRS);
-        add(VerdanceBlocks.BROWN_STUCCO_SLAB, this::createSlabItemTable);
-        dropSelf(VerdanceBlocks.BROWN_STUCCO_WALL);
-        dropSelf(VerdanceBlocks.RED_STUCCO);
-        dropSelf(VerdanceBlocks.RED_STUCCO_STAIRS);
-        add(VerdanceBlocks.RED_STUCCO_SLAB, this::createSlabItemTable);
-        dropSelf(VerdanceBlocks.RED_STUCCO_WALL);
-        dropSelf(VerdanceBlocks.ORANGE_STUCCO);
-        dropSelf(VerdanceBlocks.ORANGE_STUCCO_STAIRS);
-        add(VerdanceBlocks.ORANGE_STUCCO_SLAB, this::createSlabItemTable);
-        dropSelf(VerdanceBlocks.ORANGE_STUCCO_WALL);
+        addStucco(VerdanceFamilies.WHITE_STUCCO);
+        addStucco(VerdanceFamilies.LIGHT_GRAY_STUCCO);
+        addStucco(VerdanceFamilies.GRAY_STUCCO);
+        addStucco(VerdanceFamilies.BLACK_STUCCO);
+        addStucco(VerdanceFamilies.BROWN_STUCCO);
+        addStucco(VerdanceFamilies.RED_STUCCO);
+        addStucco(VerdanceFamilies.ORANGE_STUCCO);
+        addStucco(VerdanceFamilies.YELLOW_STUCCO);
+        addStucco(VerdanceFamilies.LIME_STUCCO);
+        addStucco(VerdanceFamilies.GREEN_STUCCO);
+        addStucco(VerdanceFamilies.CYAN_STUCCO);
+        addStucco(VerdanceFamilies.LIGHT_BLUE_STUCCO);
+        addStucco(VerdanceFamilies.BLUE_STUCCO);
+        addStucco(VerdanceFamilies.PURPLE_STUCCO);
+        addStucco(VerdanceFamilies.MAGENTA_STUCCO);
+        addStucco(VerdanceFamilies.PINK_STUCCO);
+    }
+
+    private void addStucco(BlockFamily stuccoFamily) {
+        dropSelf(stuccoFamily.getBaseBlock());
+        dropSelf(stuccoFamily.get(BlockFamily.Variant.STAIRS));
+        add(stuccoFamily.get(BlockFamily.Variant.SLAB), this::createSlabItemTable);
+        dropSelf(stuccoFamily.get(BlockFamily.Variant.WALL));
     }
 
     private void cantaloupe() {

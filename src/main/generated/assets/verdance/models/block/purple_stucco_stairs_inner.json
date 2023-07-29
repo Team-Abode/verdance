@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "verdance:block/purple_stucco",
+    "side": "verdance:block/purple_stucco",
+    "top": "verdance:block/purple_stucco"
+  }
+}

@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-28T13:12:22.421284	Verdance/Tags for minecraft:item
+// 1.20.1	2023-07-28T21:37:19.9833409	Verdance/Tags for minecraft:item
 278f9d0ff0c137c51e45049a49dc3d5f1b1822cb data\verdance\tags\items\mulberry_logs.json
 ca30db3415d936706a86fdc128660409036227d4 data\minecraft\tags\items\walls.json
 31e6cf2746bf5e0508cdc04d5eb73594ba6059fb data\minecraft\tags\items\wooden_pressure_plates.json
@@ -16,8 +16,8 @@ a6ab8ba916601f7420ae94a9986c44d91e52ca7d data\minecraft\tags\items\signs.json
 b66991f48a5e2b8f58576c280c4f5dc1c901ead7 data\minecraft\tags\items\wooden_slabs.json
 b2b9e848b7fd0fff4c51734cc940431ac5995442 data\minecraft\tags\items\slabs.json
 9722b128b26624e071c0c81c5af7be61e88b5ea6 data\minecraft\tags\items\logs_that_burn.json
-c3690c6f3034a1e42926f539845b7aa2824e879e data\minecraft\tags\items\music_discs.json
 6c463ac476927fcc165570238dc33f3bb7237fea data\c\tags\items\foods.json
+c3690c6f3034a1e42926f539845b7aa2824e879e data\minecraft\tags\items\music_discs.json
 5e349cf47539fbcf77051f7bacf54290fae2d8d0 data\minecraft\tags\items\hanging_signs.json
 9aea83ebb2efb53eec4c54149e6bfb543e800106 data\minecraft\tags\items\wooden_buttons.json
 142f4b6eec280ab84050602fe5f8d8e7d61af5a5 data\minecraft\tags\items\wooden_trapdoors.json
