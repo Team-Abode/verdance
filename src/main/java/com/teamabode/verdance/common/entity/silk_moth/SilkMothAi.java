@@ -20,7 +20,6 @@ import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
@@ -80,7 +79,7 @@ public class SilkMothAi {
                 new AnimalPanic(1.75f),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
-                TakeOff.create(),
+                ForceTakeOff.create(),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
                 new CountDownCooldownTicks(VerdanceMemories.FLIGHT_COOLDOWN_TICKS)
         ));
@@ -93,7 +92,7 @@ public class SilkMothAi {
                 Pair.of(2, new FollowTemptation(livingEntity -> 1.5f)),
                 Pair.of(3, new RunOne<>(List.of(
                         Pair.of(RandomStroll.stroll(1.0f), 1),
-                        Pair.of(new DoNothing(10, 20), 1),
+                        Pair.of(OccasionalTakeOff.create(), 1),
                         Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 5), 2)
                 ))),
                 Pair.of(4, new PollinateSapling()),
