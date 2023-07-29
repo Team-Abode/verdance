@@ -13,7 +13,7 @@ public class TakeOff {
         return BehaviorBuilder.create(instance -> instance.group(
                 instance.absent(MemoryModuleType.WALK_TARGET),
                 instance.absent(VerdanceMemories.FLIGHT_COOLDOWN_TICKS)
-        ).apply(instance, (walkTargetMemory, flightCooldownMemory) -> TakeOff::attemptStart));
+        ).apply(instance, (walkTarget, flightCooldown) -> TakeOff::attemptStart));
     }
 
     private static boolean attemptStart(ServerLevel level, SilkMoth entity, long gameTime) {

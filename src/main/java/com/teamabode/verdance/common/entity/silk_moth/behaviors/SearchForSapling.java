@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.behavior.Behavior;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -16,7 +17,8 @@ public class SearchForSapling extends Behavior<SilkMoth> {
 
     public SearchForSapling() {
         super(ImmutableMap.of(
-                VerdanceMemories.POLLINATE_TARGET, MemoryStatus.VALUE_ABSENT
+                VerdanceMemories.POLLINATE_TARGET, MemoryStatus.VALUE_ABSENT,
+                MemoryModuleType.IS_PANICKING, MemoryStatus.VALUE_ABSENT
         ));
     }
 

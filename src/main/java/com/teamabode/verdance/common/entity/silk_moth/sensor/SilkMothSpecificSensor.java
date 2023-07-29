@@ -21,7 +21,8 @@ public class SilkMothSpecificSensor extends Sensor<SilkMoth> {
     public Set<MemoryModuleType<?>> requires() {
         return ImmutableSet.of(
                 VerdanceMemories.IS_POLLINATING,
-                VerdanceMemories.POLLINATE_TARGET
+                VerdanceMemories.POLLINATE_TARGET,
+                MemoryModuleType.IS_PANICKING
         );
     }
 
@@ -38,7 +39,7 @@ public class SilkMothSpecificSensor extends Sensor<SilkMoth> {
             if (entity.level().dimension() == pollinateTarget.get().dimension() && distance < 3) {
                 isPollinating = Optional.of(Unit.INSTANCE);
             }
-            if (SilkMothAi.CANNOT_POLLINATE.test(state) || distance > 25.0 || entity.level().dimension() != pollinateTarget.get().dimension()) {
+            if (SilkMothAi.CANNOT_POLLINATE.test(state) || distance > 25.0 || entity.level().dimension() != pollinateTarget.get().dimension() || brain.isMemoryValue(MemoryModuleType.IS_PANICKING, true)) {
                 brain.eraseMemory(VerdanceMemories.POLLINATE_TARGET);
             }
         }

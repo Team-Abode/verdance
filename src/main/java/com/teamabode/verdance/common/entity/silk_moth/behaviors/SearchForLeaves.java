@@ -19,8 +19,9 @@ public class SearchForLeaves {
     public static BehaviorControl<SilkMoth> create() {
         return BehaviorBuilder.create(instance -> instance.group(
                 instance.absent(MemoryModuleType.WALK_TARGET),
+                instance.absent(MemoryModuleType.IS_PANICKING),
                 instance.registered(MemoryModuleType.LOOK_TARGET)
-        ).apply(instance, (walkTargetMemory, lookTargetMemory) -> SearchForLeaves::tryStart));
+        ).apply(instance, (walkTarget, isPanicking, lookTarget) -> SearchForLeaves::tryStart));
     }
 
     private static boolean tryStart(ServerLevel level, SilkMoth entity, long gameTime) {
