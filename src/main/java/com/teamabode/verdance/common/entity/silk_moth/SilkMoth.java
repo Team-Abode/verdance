@@ -68,7 +68,7 @@ public class SilkMoth extends Animal {
         if (this.idleCooldown > 0) {
             this.idleCooldown--;
         }
-        this.flyAnimationState.animateWhen(!this.onGround() && this.isFlying(), this.tickCount);
+        this.flyAnimationState.animateWhen(this.isFlying(), this.tickCount);
     }
 
     public void aiStep() {
@@ -76,7 +76,6 @@ public class SilkMoth extends Animal {
 
         int landCooldown = this.getLandCooldown();
         if (this.isFlying() && this.onGround() && landCooldown <= 0) {
-            this.setLandCooldown(0);
             this.stopFlying();
         }
         if (landCooldown > 0) {
@@ -86,12 +85,11 @@ public class SilkMoth extends Animal {
 
     public void takeOff() {
         this.setFlying(true);
-        this.setLandCooldown(100);
+        this.setLandCooldown(50);
     }
 
     public void stopFlying() {
         int randomTime = TimeUtil.rangeOfSeconds(10, 12).sample(this.getRandom());
-
         this.setFlying(false);
         this.getBrain().setMemory(VerdanceMemories.FLIGHT_COOLDOWN_TICKS, randomTime);
     }
@@ -102,12 +100,8 @@ public class SilkMoth extends Animal {
     }
 
     protected void customServerAiStep() {
-        this.level().getProfiler().push("silkMothBrain");
         this.getBrain().tick((ServerLevel) this.level(), this);
-        this.level().getProfiler().pop();
-        this.level().getProfiler().push("silkMothActivityUpdate");
         SilkMothAi.updateActivity(this);
-        this.level().getProfiler().pop();
         super.customServerAiStep();
     }
 
@@ -165,6 +159,7 @@ public class SilkMoth extends Animal {
                 this.moveControl = new MoveControl(this);
                 this.navigation = this.createNavigation(this.level());
                 this.setNoGravity(false);
+                this.setOnGround(true);
             }
         }
     }
