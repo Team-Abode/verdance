@@ -13,7 +13,6 @@ import java.util.Optional;
 public class VerdanceMemories {
     public static final MemoryModuleType<Integer> FLIGHT_COOLDOWN_TICKS = register("flight_cooldown_ticks", Codec.INT);
     public static final MemoryModuleType<Unit> IS_POLLINATING = register("is_pollinating", Codec.unit(Unit.INSTANCE));
-    public static final MemoryModuleType<GlobalPos> POLLINATE_TARGET = register("pollinate_target", GlobalPos.CODEC);
     public static final MemoryModuleType<Integer> SAPLINGS_POLLINATED = register("saplings_pollinated", Codec.INT);
 
     public static <U> MemoryModuleType<U> register(String name) {

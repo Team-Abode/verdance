@@ -1,70 +1,56 @@
 package com.teamabode.verdance.common.entity.silk_moth.behaviors;
 
-import com.google.common.collect.ImmutableMap;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
-import com.teamabode.verdance.common.entity.silk_moth.SilkMothAi;
 import com.teamabode.verdance.core.registry.VerdanceMemories;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.GlobalPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.Brain;
-import net.minecraft.world.entity.ai.behavior.Behavior;
-import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
+import net.minecraft.world.entity.ai.behavior.BehaviorControl;
+import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.memory.MemoryStatus;
-import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.Optional;
 
-public class PollinateSapling extends Behavior<SilkMoth> {
+import static com.teamabode.verdance.common.entity.silk_moth.SilkMothAi.CANNOT_POLLINATE;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.STAGE;
 
-    public PollinateSapling() {
-        super(ImmutableMap.of(
-                VerdanceMemories.POLLINATE_TARGET, MemoryStatus.VALUE_PRESENT,
-                MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT,
-                MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED,
-                VerdanceMemories.IS_POLLINATING, MemoryStatus.REGISTERED
-        ));
+public class PollinateSapling {
+
+    public static BehaviorControl<SilkMoth> create() {
+        return BehaviorBuilder.create(instance -> instance.group(
+                instance.present(MemoryModuleType.WALK_TARGET),
+                instance.present(VerdanceMemories.IS_POLLINATING),
+                instance.registered(VerdanceMemories.SAPLINGS_POLLINATED)
+        ).apply(instance, (walkTarget, isPollinating, saplingsPollinated) -> PollinateSapling::tryStart));
     }
 
-    protected boolean canStillUse(ServerLevel level, SilkMoth entity, long gameTime) {
-        return entity.getBrain().getMemory(VerdanceMemories.POLLINATE_TARGET).isPresent();
+    private static boolean tryStart(ServerLevel level, SilkMoth entity, long gameTime) {
+        for (Direction dir : Direction.Plane.HORIZONTAL) {
+            BlockPos pos = entity.blockPosition().relative(dir);
+            BlockState state = level.getBlockState(pos);
+
+            if (CANNOT_POLLINATE.test(state)) continue;
+
+            level.levelEvent(1505, pos, 0);
+            level.setBlockAndUpdate(pos, state.setValue(STAGE, 1));
+            updateMemory(entity.getBrain());
+            return true;
+        }
+        return false;
     }
 
-    protected void start(ServerLevel level, SilkMoth entity, long gameTime) {
-        Brain<SilkMoth> brain = entity.getBrain();
-        if (brain.getMemory(VerdanceMemories.POLLINATE_TARGET).isEmpty()) return;
-        this.moveToTarget(brain, brain.getMemory(VerdanceMemories.POLLINATE_TARGET).get().pos());
-    }
+    private static void updateMemory(Brain<SilkMoth> brain) {
+        Optional<Integer> saplingsPollianted = brain.getMemory(VerdanceMemories.SAPLINGS_POLLINATED);
 
-    protected void tick(ServerLevel level, SilkMoth entity, long gameTime) {
-        Brain<SilkMoth> brain = entity.getBrain();
-        Optional<GlobalPos> pollinateTarget = brain.getMemory(VerdanceMemories.POLLINATE_TARGET);
-        if (pollinateTarget.isEmpty()) return;
-
-        if (brain.getMemory(VerdanceMemories.IS_POLLINATING).isPresent()) {
-            BlockState state = level.getBlockState(pollinateTarget.get().pos());
-            if (SilkMothAi.CANNOT_POLLINATE.test(state)) return;
-            entity.getNavigation().stop();
-            level.levelEvent(1505, pollinateTarget.get().pos(), 0);
-            level.setBlock(pollinateTarget.get().pos(), state.setValue(BlockStateProperties.STAGE, 1), 3);
-            brain.eraseMemory(VerdanceMemories.IS_POLLINATING);
-            brain.eraseMemory(VerdanceMemories.POLLINATE_TARGET);
+        if (saplingsPollianted.isEmpty()) {
+            brain.setMemory(VerdanceMemories.SAPLINGS_POLLINATED, 1);
             return;
         }
-        this.moveToTarget(brain, pollinateTarget.get().pos());
-    }
-
-    public void moveToTarget(Brain<SilkMoth> brain, BlockPos pos) {
-        BlockPosTracker tracker = new BlockPosTracker(pos);
-        brain.setMemory(MemoryModuleType.LOOK_TARGET, tracker);
-        brain.setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(tracker, 0.75f, 0));
-    }
-
-    protected void stop(ServerLevel level, SilkMoth entity, long gameTime) {
-        entity.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
-        entity.getBrain().eraseMemory(MemoryModuleType.LOOK_TARGET);
+        if (saplingsPollianted.get() >= 20) {
+            brain.eraseMemory(VerdanceMemories.IS_POLLINATING);
+        }
+        brain.setMemory(VerdanceMemories.SAPLINGS_POLLINATED, saplingsPollianted.get() + 1);
     }
 }

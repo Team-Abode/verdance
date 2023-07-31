@@ -45,7 +45,7 @@ public class SilkMothAi {
             VerdanceMemories.FLIGHT_COOLDOWN_TICKS,
             MemoryModuleType.IS_PREGNANT,
             VerdanceMemories.IS_POLLINATING,
-            VerdanceMemories.POLLINATE_TARGET
+            VerdanceMemories.SAPLINGS_POLLINATED
     );
     public static final ImmutableList<SensorType<? extends Sensor<? super SilkMoth>>> SENSOR_TYPES = ImmutableList.of(
             SensorType.NEAREST_LIVING_ENTITIES,
@@ -66,6 +66,7 @@ public class SilkMothAi {
     protected static Brain<?> makeBrain(Brain<SilkMoth> brain) {
         initCoreActivity(brain);
         initIdleActivity(brain);
+        initPollinateActivity(brain);
         initLayEggsActivity(brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         brain.setDefaultActivity(Activity.IDLE);
@@ -98,6 +99,19 @@ public class SilkMothAi {
         ));
     }
 
+    private static void initPollinateActivity(Brain<SilkMoth> brain) {
+        brain.addActivityWithConditions(VerdanceActivities.POLLINATE, ImmutableList.of(
+                Pair.of(1, new AnimalMakeLove(VerdanceEntities.SILK_MOTH, 1.0f)),
+                Pair.of(2, new FollowTemptation(livingEntity -> 1.5f)),
+                Pair.of(3, PollinateSapling.create()),
+                Pair.of(4, new SearchForSapling()),
+                Pair.of(5, new RunOne<>(List.of(
+                        Pair.of(RandomStroll.stroll(1.0f), 1),
+                        Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 5), 2)
+                )))
+        ), ImmutableSet.of(Pair.of(VerdanceMemories.IS_POLLINATING, MemoryStatus.VALUE_PRESENT)));
+    }
+
     private static void initLayEggsActivity(Brain<SilkMoth> brain) {
         brain.addActivityWithConditions(VerdanceActivities.LAY_EGGS, ImmutableList.of(
                 Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(10, 20))),
@@ -112,6 +126,6 @@ public class SilkMothAi {
     }
 
     public static void updateActivity(SilkMoth silkMoth) {
-        silkMoth.getBrain().setActiveActivityToFirstValid(ImmutableList.of(VerdanceActivities.LAY_EGGS, Activity.IDLE));
+        silkMoth.getBrain().setActiveActivityToFirstValid(ImmutableList.of(VerdanceActivities.LAY_EGGS, VerdanceActivities.POLLINATE, Activity.IDLE));
     }
 }

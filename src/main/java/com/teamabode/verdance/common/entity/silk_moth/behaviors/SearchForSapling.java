@@ -8,26 +8,31 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.Behavior;
+import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class SearchForSapling extends Behavior<SilkMoth> {
 
     public SearchForSapling() {
         super(ImmutableMap.of(
-                VerdanceMemories.POLLINATE_TARGET, MemoryStatus.VALUE_ABSENT,
-                MemoryModuleType.IS_PANICKING, MemoryStatus.VALUE_ABSENT
+                MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT,
+                MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED
         ));
     }
 
     protected void start(ServerLevel level, SilkMoth entity, long gameTime) {
+        Brain<SilkMoth> brain = entity.getBrain();
         BlockPos pos = this.targetPosition(level, entity.blockPosition());
 
         if (pos != null) {
-            GlobalPos pollinateTarget = GlobalPos.of(entity.level().dimension(), pos);
-            entity.getBrain().setMemory(VerdanceMemories.POLLINATE_TARGET, pollinateTarget);
+            BlockPosTracker tracker = new BlockPosTracker(pos);
+            brain.setMemory(MemoryModuleType.LOOK_TARGET, tracker);
+            brain.setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(tracker, 1.25f, 0));
         }
     }
 
