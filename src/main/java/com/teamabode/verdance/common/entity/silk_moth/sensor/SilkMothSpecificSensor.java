@@ -31,11 +31,7 @@ public class SilkMothSpecificSensor extends Sensor<SilkMoth> {
        if (saplingsPollinated.isEmpty() || saplingsPollinated.get() < 20) {
            isPollinating = Optional.of(Unit.INSTANCE);
        }
-
-        Verdance.LOGGER.info("Time of day: " + level.dayTime());
-
        if (level.dayTime() >= 13000 && level.dayTime() <= 13080) {
-           Verdance.LOGGER.info("Can pollinate once more!");
            brain.eraseMemory(VerdanceMemories.SAPLINGS_POLLINATED);
        }
        brain.setMemory(VerdanceMemories.IS_POLLINATING, isPollinating);

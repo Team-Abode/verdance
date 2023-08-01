@@ -14,6 +14,6 @@
     "ore_state": {
       "Name": "minecraft:coal_ore"
     },
-    "ore_chance": 0
+    "ore_chance": 0.15
   }
 }

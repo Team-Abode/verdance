@@ -1,5 +1,5 @@
 {
-  "feature": "verdance:sandstone_boulder",
+  "feature": "verdance:weighted_sandstone_boulder",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
