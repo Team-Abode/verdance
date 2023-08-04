@@ -70,6 +70,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         dropPottedContents(VerdanceBlocks.POTTED_MULBERRY_SAPLING);
         dropSelf(VerdanceBlocks.MULBERRY_SIGN);
         dropSelf(VerdanceBlocks.MULBERRY_HANGING_SIGN);
+        dropSelf(VerdanceBlocks.MULBERRY_CABINET);
     }
 
     private LootTable.Builder createMulberryLeaves(Block leafBlock) {

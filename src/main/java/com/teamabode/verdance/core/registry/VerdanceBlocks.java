@@ -1,8 +1,10 @@
 package com.teamabode.verdance.core.registry;
 
+import com.nhoryzon.mc.farmersdelight.block.CabinetBlock;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.block.*;
 import com.teamabode.verdance.common.feature.MulberryTreeGrower;
+import com.teamabode.verdance.core.integration.farmersdelight.VerdanceCabinetBlock;
 import com.teamabode.verdance.core.misc.datagen.VerdanceBlockSetType;
 import com.teamabode.verdance.core.misc.datagen.VerdanceWoodType;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -47,6 +49,8 @@ public class VerdanceBlocks {
 
     public static final Block MULBERRY_HANGING_SIGN = registerNoItem("mulberry_hanging_sign", new CeilingHangingSignBlock(Properties.copy(Blocks.OAK_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW), VerdanceWoodType.MULBERRY));
     public static final Block MULBERRY_WALL_HANGING_SIGN = registerNoItem("mulberry_wall_hanging_sign", new WallHangingSignBlock(Properties.copy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW).dropsLike(MULBERRY_HANGING_SIGN), VerdanceWoodType.MULBERRY));
+
+    public static final Block MULBERRY_CABINET = register("mulberry_cabinet", new VerdanceCabinetBlock());
 
     public static final Block CANTALOUPE = register("cantaloupe", new CantaloupeBlock(Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD)));
     public static final Block ATTACHED_CANTALOUPE_STEM = registerNoItem("attached_cantaloupe_stem", new AttachedCantaloupeStemBlock(Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP)));
@@ -165,6 +169,7 @@ public class VerdanceBlocks {
         FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_SLAB, 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_FENCE, 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_FENCE_GATE, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_CABINET, 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(MULBERRY_LEAVES, 30, 60);
         StrippableBlockRegistry.register(MULBERRY_LOG, STRIPPED_MULBERRY_LOG);
         StrippableBlockRegistry.register(MULBERRY_WOOD, STRIPPED_MULBERRY_WOOD);
