@@ -1,18 +1,19 @@
-package com.teamabode.verdance.core.misc.worldgen;
+package com.teamabode.verdance.core.registry;
 
 import com.mojang.serialization.Codec;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.feature.MulberryTrunkPlacer;
-import com.teamabode.verdance.core.mixin.general.TrunkPlacerTypeMixin;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 
-public class VerdanceTrunkPlacerType {
+public class VerdanceTrunkPlacers {
+
     public static final TrunkPlacerType<MulberryTrunkPlacer> MULBERRY_TRUNK_PLACER = register("mulberry_trunk_placer", MulberryTrunkPlacer.CODEC);
 
-    private static <P extends TrunkPlacer> TrunkPlacerType<P> register(String key, Codec<P> codec) {
-        return TrunkPlacerTypeMixin.callRegister(new ResourceLocation(Verdance.MOD_ID, key).toString(), codec);
+    private static <P extends TrunkPlacer> TrunkPlacerType<P> register(String name, Codec<P> codec) {
+        return Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE, Verdance.id(name), new TrunkPlacerType<>(codec));
     }
 
     public static void register() {

@@ -26,6 +26,10 @@
         },
         {
           "type": "minecraft:item",
+          "name": "minecraft:green_dye"
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:wooden_hoe"
         },
         {
@@ -52,5 +56,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "verdance:archaeology/ghost_town_farm_archaeology_common"
+  "random_sequence": "verdance:archaeology/ghost_town_farm"
 }

@@ -292,7 +292,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
 
     private void ghostTownReplaceable() {
-        this.getOrCreateTagBuilder(VerdanceBlockTags.GHOST_TOWN_REPLACEABLE).setReplace(false)
+        this.getOrCreateTagBuilder(VerdanceBlockTags.GHOST_TOWN_DEGRADABLE).setReplace(false)
                 .add(Blocks.SAND);
     }
 

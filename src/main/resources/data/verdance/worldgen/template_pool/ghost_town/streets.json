@@ -1,31 +1,40 @@
 {
-  "fallback": "verdance:ghost_town/terminator",
+  "fallback": "verdance:ghost_town/terminators",
   "elements": [
     {
-      "weight": 2,
+      "weight": 4,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "verdance:ghost_town/streets/straight",
         "projection": "terrain_matching",
-        "processors": "verdance:street_degradation"
-      }
-    },
-    {
-      "weight": 3,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
         "location": "verdance:ghost_town/streets/corner",
-        "projection": "terrain_matching",
-        "processors": "verdance:street_degradation"
+        "processors": "verdance:ghost_town/street"
       }
     },
     {
       "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "verdance:ghost_town/streets/crossroad",
         "projection": "terrain_matching",
-        "processors": "verdance:street_degradation"
+        "location": "verdance:ghost_town/streets/crossroads",
+        "processors": "verdance:ghost_town/street"
+      }
+    },
+    {
+      "weight": 6,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "terrain_matching",
+        "location": "verdance:ghost_town/streets/straight_1",
+        "processors": "verdance:ghost_town/street"
+      }
+    },
+    {
+      "weight": 4,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "terrain_matching",
+        "location": "verdance:ghost_town/streets/straight_2",
+        "processors": "verdance:ghost_town/street"
       }
     }
   ]

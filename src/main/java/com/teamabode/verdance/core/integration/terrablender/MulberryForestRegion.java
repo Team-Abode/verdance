@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 
 public class MulberryForestRegion extends Region {
     public MulberryForestRegion() {
-        super(Verdance.id("mulberry_forest"), RegionType.OVERWORLD, 4);
+        super(Verdance.id("mulberry_forest"), RegionType.OVERWORLD, Verdance.CONFIG.getGroup("biomes").getIntProperty("mulberry_forest_weight"));
     }
 
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {

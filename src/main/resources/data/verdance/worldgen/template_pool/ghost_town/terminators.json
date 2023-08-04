@@ -5,9 +5,9 @@
       "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "verdance:ghost_town/streets/terminator",
         "projection": "terrain_matching",
-        "processors": "minecraft:empty"
+        "location": "verdance:ghost_town/streets/fallback",
+        "processors": "verdance:ghost_town/street"
       }
     }
   ]

@@ -13,7 +13,7 @@ public class VerdanceMixinPlugin implements IMixinConfigPlugin {
 
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.contains("SugarCaneBlock")) {
-            boolean isEnabled = Verdance.CONFIG.getBooleanProperty("bonemealable_sugar_cane");
+            boolean isEnabled = Verdance.CONFIG.getGroup("general").getBooleanProperty("bonemealable_sugar_cane");
 
             return isEnabled;
         }

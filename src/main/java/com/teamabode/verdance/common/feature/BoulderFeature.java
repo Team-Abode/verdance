@@ -2,6 +2,8 @@ package com.teamabode.verdance.common.feature;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -36,13 +38,17 @@ public class BoulderFeature extends Feature<BoulderConfiguration> {
                     BlockPos pos = origin.offset(x, layer, z);
                     BlockState state = level.getBlockState(pos);
 
-                    if (withinRadius && (state.isAir() || isDirt(state))) {
+                    if (withinRadius && canPlace(state)) {
                         this.setBlock(level, pos, this.getBlockState(config, random));
                     }
                 }
             }
         }
         return true;
+    }
+
+    private static boolean canPlace(BlockState state) {
+        return isDirt(state) || isStone(state) || state.is(BlockTags.SAND) || state.isAir() || state.getFluidState().is(FluidTags.WATER) || state.canBeReplaced();
     }
 
     private BlockState getBlockState(BoulderConfiguration config, RandomSource random) {

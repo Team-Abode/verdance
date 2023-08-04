@@ -22,9 +22,6 @@ import java.util.function.BiConsumer;
 public class VerdanceArchaeologyLootTableProvider implements FabricLootTableProvider {
     private final FabricDataOutput output;
 
-    public static final ResourceLocation GHOST_TOWN_ARCHAEOLOGY_COMMON = new ResourceLocation(Verdance.MOD_ID, "archaeology/ghost_town_archaeology_common");
-    public static final ResourceLocation GHOST_TOWN_ARCHAEOLOGY_RARE = new ResourceLocation(Verdance.MOD_ID, "archaeology/ghost_town_archaeology_rare");
-
     public VerdanceArchaeologyLootTableProvider(FabricDataOutput output) {
         this.output = output;
     }
@@ -50,6 +47,7 @@ public class VerdanceArchaeologyLootTableProvider implements FabricLootTableProv
                 Items.SUGAR,
                 Items.CLAY,
                 Items.CLAY_BALL,
+                Items.GREEN_DYE,
                 Items.WOODEN_HOE,
                 Items.SPRUCE_SAPLING,
                 VerdanceItems.CANTALOUPE_SEEDS,
@@ -59,15 +57,16 @@ public class VerdanceArchaeologyLootTableProvider implements FabricLootTableProv
         );
         LootTable.Builder rareTable = lootTableBuilder(
                 VerdanceItems.DISC_FRAGMENT_RANGE,
+                VerdanceItems.DISC_FRAGMENT_RANGE,
                 Items.BURN_POTTERY_SHERD,
                 Items.DANGER_POTTERY_SHERD,
                 Items.SHEAF_POTTERY_SHERD,
                 Items.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE,
                 Items.RAW_GOLD
         );
-        addArchaeologyLoot("ghost_town_archaeology_common", commonTable, exporter);
-        addArchaeologyLoot("ghost_town_farm_archaeology_common", commonFarmTable, exporter);
-        addArchaeologyLoot("ghost_town_archaeology_rare", rareTable, exporter);
+        addArchaeologyLoot("ghost_town_common", commonTable, exporter);
+        addArchaeologyLoot("ghost_town_farm", commonFarmTable, exporter);
+        addArchaeologyLoot("ghost_town_rare", rareTable, exporter);
     }
 
     private static void addArchaeologyLoot(String name, LootTable.Builder lootTable, BiConsumer<ResourceLocation, LootTable.Builder> exporter) {

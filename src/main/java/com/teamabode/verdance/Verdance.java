@@ -3,14 +3,15 @@ package com.teamabode.verdance;
 import com.teamabode.scribe.common.entity.boat.ScribeBoatDispenseItemBehavior;
 import com.teamabode.scribe.core.api.config.Config;
 import com.teamabode.scribe.core.api.config.ConfigBuilder;
+import com.teamabode.scribe.core.api.misc.BlockEntityAdditions;
 import com.teamabode.verdance.core.registry.*;
 import com.teamabode.verdance.core.misc.*;
-import com.teamabode.verdance.core.misc.worldgen.VerdanceTrunkPlacerType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,15 @@ public class Verdance implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public static final Config CONFIG = new ConfigBuilder(MOD_ID)
-            .addBooleanProperty("bonemealable_sugar_cane", true)
+            .addGroup("general", builder -> {
+                builder.addBooleanProperty("bonemealable_sugar_cane", true);
+                return builder;
+            })
+            .addGroup("biomes", builder -> {
+                builder.addIntProperty("mulberry_forest_weight", 4);
+                builder.addIntProperty("shrublands_weight", 15);
+                return builder;
+            })
             .build();
 
     public void onInitialize() {
@@ -30,13 +39,19 @@ public class Verdance implements ModInitializer {
         VerdanceSounds.register();
         VerdanceGroupEvents.register();
         VerdanceBoatType.register();
-        VerdanceTrunkPlacerType.register();
+        VerdanceTrunkPlacers.register();
         VerdanceActivities.register();
         VerdanceSensors.register();
         VerdanceMemories.register();
 
+        registerBlockEntityAdditions();
         registerDispenserBehaviors();
         registerTrades();
+    }
+
+    public static void registerBlockEntityAdditions() {
+        BlockEntityAdditions.appendBlocks(BlockEntityType.SIGN, VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN);
+        BlockEntityAdditions.appendBlocks(BlockEntityType.HANGING_SIGN, VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
     }
 
     public static void registerDispenserBehaviors() {

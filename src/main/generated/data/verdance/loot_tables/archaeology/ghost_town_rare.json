@@ -10,6 +10,10 @@
         },
         {
           "type": "minecraft:item",
+          "name": "verdance:disc_fragment_range"
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:burn_pottery_sherd"
         },
         {
@@ -32,5 +36,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "verdance:archaeology/ghost_town_archaeology_rare"
+  "random_sequence": "verdance:archaeology/ghost_town_rare"
 }

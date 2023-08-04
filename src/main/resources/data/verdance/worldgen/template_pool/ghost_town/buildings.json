@@ -1,22 +1,49 @@
 {
-  "fallback": "verdance:ghost_town/terminator",
+  "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "verdance:ghost_town/buildings/house_01",
         "projection": "rigid",
-        "processors": "verdance:ghost_town_archaeology"
+        "location": "verdance:ghost_town/buildings/farm",
+        "processors": "verdance:ghost_town/farm"
       }
     },
     {
       "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "verdance:ghost_town/buildings/farm",
         "projection": "rigid",
-        "processors": "verdance:ghost_town_farm_archaeology"
+        "location": "verdance:ghost_town/buildings/large_house",
+        "processors": "verdance:ghost_town/buildings"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "verdance:ghost_town/buildings/medium_house",
+        "processors": "verdance:ghost_town/buildings"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "verdance:ghost_town/buildings/small_house",
+        "processors": "verdance:ghost_town/small_buildings"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "verdance:ghost_town/buildings/tall_house",
+        "processors": "verdance:ghost_town/small_buildings"
       }
     }
   ]

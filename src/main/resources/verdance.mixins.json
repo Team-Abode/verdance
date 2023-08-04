@@ -4,10 +4,8 @@
   "package": "com.teamabode.verdance.core.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "general.BlockEntityTypeMixin",
     "general.LightningBoltMixin",
-    "general.SugarCaneBlockMixin",
-    "general.TrunkPlacerTypeMixin"
+    "general.SugarCaneBlockMixin"
   ],
   "plugin": "com.teamabode.verdance.core.mixin.VerdanceMixinPlugin",
   "client": [],
