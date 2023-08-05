@@ -4,6 +4,7 @@ import com.teamabode.scribe.common.entity.boat.ScribeBoatDispenseItemBehavior;
 import com.teamabode.scribe.core.api.config.Config;
 import com.teamabode.scribe.core.api.config.ConfigBuilder;
 import com.teamabode.scribe.core.api.misc.BlockEntityAdditions;
+import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
 import com.teamabode.verdance.core.registry.*;
 import com.teamabode.verdance.core.misc.*;
 import net.fabricmc.api.ModInitializer;

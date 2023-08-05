@@ -1,7 +1,5 @@
 package com.teamabode.verdance.core.misc;
 
-import com.nhoryzon.mc.farmersdelight.FarmersDelightMod;
-import com.nhoryzon.mc.farmersdelight.registry.BlocksRegistry;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -120,17 +118,17 @@ public class VerdanceGroupEvents {
         );
         appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Items.FROGSPAWN, VerdanceBlocks.SILKWORM_EGGS);
         appendItemsBefore(CreativeModeTabs.SPAWN_EGGS, Items.SILVERFISH_SPAWN_EGG, VerdanceItems.SILK_MOTH_SPAWN_EGG);
-        appendItemsBefore(FarmersDelightMod.ITEM_GROUP, BlocksRegistry.CRIMSON_CABINET.get(), VerdanceBlocks.MULBERRY_CABINET);
+
     }
 
 
-    private static void appendItemsAfter(ResourceKey<CreativeModeTab> tab, ItemLike target, ItemLike... appendedItems) {
+    public static void appendItemsAfter(ResourceKey<CreativeModeTab> tab, ItemLike target, ItemLike... appendedItems) {
         ItemGroupEvents.modifyEntriesEvent(tab).register(entries -> {
             entries.addAfter(target, appendedItems);
         });
     }
 
-    private static void appendItemsBefore(ResourceKey<CreativeModeTab> tab, ItemLike target, ItemLike... appendedItems) {
+    public static void appendItemsBefore(ResourceKey<CreativeModeTab> tab, ItemLike target, ItemLike... appendedItems) {
         ItemGroupEvents.modifyEntriesEvent(tab).register(entries -> {
             entries.addBefore(target, appendedItems);
         });

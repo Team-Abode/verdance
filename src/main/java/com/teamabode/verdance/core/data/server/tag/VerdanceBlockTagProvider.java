@@ -1,7 +1,7 @@
 package com.teamabode.verdance.core.data.server.tag;
 
-import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
+import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
@@ -128,7 +128,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     private void mineableAxe() {
         this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
                 .add(VerdanceBlocks.CANTALOUPE)
-                .add(VerdanceBlocks.MULBERRY_CABINET)
+                //.add(VerdanceBlocks.MULBERRY_CABINET)
                 .setReplace(false);
     }
 
