@@ -18,6 +18,12 @@ repositories {
 	maven {
 		url = 'https://jitpack.io'
 	}
+	maven {
+		url "https://cursemaven.com"
+		content {
+			includeGroup "curse.maven"
+		}
+	}
 }
 
 dependencies {
@@ -37,6 +43,9 @@ dependencies {
 
 	// Terrablender
 	modApi "com.github.glitchfiend:TerraBlender-fabric:1.20-${rootProject.terrablender_version}"
+
+	// Farmer's Delight
+	modImplementation "curse.maven:farmersdelight-482834:${project.farmersdelight_version}"
 }
 
 base {

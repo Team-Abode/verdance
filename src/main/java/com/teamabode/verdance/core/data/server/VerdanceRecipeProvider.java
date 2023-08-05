@@ -8,13 +8,11 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.BlockFamily.Variant;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
 
@@ -22,6 +20,10 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
 
     public VerdanceRecipeProvider(FabricDataOutput output) {
         super(output);
+    }
+
+    private static void cabinet(Consumer<FinishedRecipe> exporter, ItemLike cabinet, ItemLike trapdoor, ItemLike slab) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, cabinet).define('D', trapdoor).define('_', slab).pattern("___").pattern("D D").pattern("___").unlockedBy(getHasName(trapdoor), has(trapdoor)).save(exporter);
     }
 
     private static void rangeDisc(Consumer<FinishedRecipe> exporter) {
@@ -50,6 +52,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         twoByTwoPacker(exporter, RecipeCategory.MISC, VerdanceBlocks.CANTALOUPE, VerdanceItems.CANTALOUPE_SLICE);
 
         hangingSign(exporter, VerdanceItems.MULBERRY_HANGING_SIGN, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
+        cabinet(exporter, VerdanceBlocks.MULBERRY_CABINET, VerdanceBlocks.MULBERRY_TRAPDOOR, VerdanceBlocks.MULBERRY_SLAB);
         rangeDisc(exporter);
         stucco(exporter, VerdanceFamilies.WHITE_STUCCO, Items.WHITE_DYE);
         stucco(exporter, VerdanceFamilies.LIGHT_GRAY_STUCCO, Items.LIGHT_GRAY_DYE);
