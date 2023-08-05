@@ -1,0 +1,9 @@
+{
+  "parent": "twigs:block/template_table_leg",
+  "textures": {
+    "side": "verdance:block/mulberry_table",
+    "bottom": "verdance:block/mulberry_table_bottom",
+    "top": "verdance:block/mulberry_table_top",
+    "particle": "verdance:block/mulberry_planks"
+  }
+}
