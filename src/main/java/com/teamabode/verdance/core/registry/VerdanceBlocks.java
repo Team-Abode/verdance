@@ -3,8 +3,8 @@ package com.teamabode.verdance.core.registry;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.block.*;
 import com.teamabode.verdance.common.feature.MulberryTreeGrower;
+import com.teamabode.verdance.core.integration.farmersdelight.CompatCabinetBlock;
 import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
-import com.teamabode.verdance.core.integration.general.CompatBlock;
 import com.teamabode.verdance.core.integration.general.CompatUtils;
 import com.teamabode.verdance.core.misc.datagen.VerdanceBlockSetType;
 import com.teamabode.verdance.core.misc.datagen.VerdanceWoodType;
@@ -50,7 +50,7 @@ public class VerdanceBlocks {
 
     public static final Block MULBERRY_HANGING_SIGN = registerNoItem("mulberry_hanging_sign", new CeilingHangingSignBlock(Properties.copy(Blocks.OAK_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW), VerdanceWoodType.MULBERRY));
     public static final Block MULBERRY_WALL_HANGING_SIGN = registerNoItem("mulberry_wall_hanging_sign", new WallHangingSignBlock(Properties.copy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW).dropsLike(MULBERRY_HANGING_SIGN), VerdanceWoodType.MULBERRY));
-    public static final Block MULBERRY_CABINET = CompatUtils.registerBlock("mulberry_cabinet", !CompatUtils.isModLoaded("farmersdelight") ? new CompatBlock() : VerdanceFD.createMulberryCabinet());
+    public static final Block MULBERRY_CABINET = CompatUtils.registerBlock("mulberry_cabinet", !CompatUtils.isModLoaded("farmersdelight") ? new CompatCabinetBlock() : VerdanceFD.createMulberryCabinet());
 
     public static final Block CANTALOUPE = register("cantaloupe", new CantaloupeBlock(Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD)));
     public static final Block ATTACHED_CANTALOUPE_STEM = registerNoItem("attached_cantaloupe_stem", new AttachedCantaloupeStemBlock(Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP)));

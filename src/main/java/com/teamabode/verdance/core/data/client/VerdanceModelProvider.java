@@ -35,7 +35,10 @@ public class VerdanceModelProvider extends FabricModelProvider {
         ResourceLocation resourceLocation3 = modelProvider.get(cabinetBlock).updateTextures((textureMapping) -> {
             textureMapping.put(TextureSlot.FRONT, resourceLocation2);
         }).createWithSuffix(cabinetBlock, "_open", generator.modelOutput);
-        generator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cabinetBlock).with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.OPEN, resourceLocation3, resourceLocation)).with(BlockModelGenerators.createHorizontalFacingDispatch()));
+        generator.blockStateOutput.accept(
+                MultiVariantGenerator.multiVariant(cabinetBlock)
+                        .with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.OPEN, resourceLocation3, resourceLocation))
+                        .with(BlockModelGenerators.createHorizontalFacingDispatch()));
     }
 
     public void generateBlockStateModels(BlockModelGenerators generator) {
