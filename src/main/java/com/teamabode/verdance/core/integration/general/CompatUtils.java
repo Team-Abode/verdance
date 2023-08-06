@@ -1,6 +1,7 @@
 package com.teamabode.verdance.core.integration.general;
 
 import com.teamabode.verdance.Verdance;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -20,13 +21,7 @@ public class CompatUtils {
         return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Verdance.MOD_ID, name), item);
     }
 
-    /*
-    public static Block createMulberryCabinet() {
-        if (!FabricLoader.getInstance().isModLoaded("farmersdelight")) {
-            return new CompatBlock();
-        }
-        return new CabinetBlock();
+    public static boolean isModLoaded(String id) {
+        return FabricLoader.getInstance().isModLoaded(id);
     }
-
-     */
 }

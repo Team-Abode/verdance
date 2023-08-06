@@ -5,6 +5,7 @@ import com.teamabode.scribe.core.api.config.Config;
 import com.teamabode.scribe.core.api.config.ConfigBuilder;
 import com.teamabode.scribe.core.api.misc.BlockEntityAdditions;
 import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
+import com.teamabode.verdance.core.integration.general.CompatUtils;
 import com.teamabode.verdance.core.registry.*;
 import com.teamabode.verdance.core.misc.*;
 import net.fabricmc.api.ModInitializer;
@@ -44,6 +45,10 @@ public class Verdance implements ModInitializer {
         VerdanceActivities.register();
         VerdanceSensors.register();
         VerdanceMemories.register();
+
+        if (CompatUtils.isModLoaded("farmersdelight")) {
+            VerdanceFD.register();
+        }
 
         registerBlockEntityAdditions();
         registerDispenserBehaviors();
