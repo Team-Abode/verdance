@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
+import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -38,10 +39,7 @@ public class SearchForLeaves {
             boolean isValidSpace = level.getBlockState(mutablePos.setWithOffset(scanPos, Direction.UP)).isAir();
 
             if (excludeCurrentPos && foundLeaves && isValidSpace) {
-                BlockPosTracker tracker = new BlockPosTracker(mutablePos);
-
-                entity.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, tracker);
-                entity.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(tracker, 1.0f, 0));
+                BehaviorUtils.setWalkAndLookTargetMemories(entity, mutablePos, 1.0f, 1);
                 return true;
             }
         }

@@ -84,18 +84,18 @@ public class SilkMoth extends Animal {
     }
 
     public void takeOff() {
-        this.setFlying(true);
         this.setLandCooldown(50);
+        this.setFlying(true);
     }
 
     public void stopFlying() {
         int randomTime = TimeUtil.rangeOfSeconds(10, 12).sample(this.getRandom());
         this.setFlying(false);
-        this.getBrain().setMemory(VerdanceMemories.FLIGHT_COOLDOWN_TICKS, randomTime);
+        this.getBrain().setMemory(VerdanceMemories.OCCASIONAL_FLIGHT_COOLDOWN, randomTime);
     }
 
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        this.getBrain().setMemory(VerdanceMemories.FLIGHT_COOLDOWN_TICKS, 100);
+        this.getBrain().setMemory(VerdanceMemories.OCCASIONAL_FLIGHT_COOLDOWN, 100);
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 

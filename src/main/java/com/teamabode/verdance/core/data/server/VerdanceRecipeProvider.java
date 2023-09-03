@@ -52,7 +52,6 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         twoByTwoPacker(exporter, RecipeCategory.MISC, VerdanceBlocks.CANTALOUPE, VerdanceItems.CANTALOUPE_SLICE);
 
         hangingSign(exporter, VerdanceItems.MULBERRY_HANGING_SIGN, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
-        cabinet(exporter, VerdanceBlocks.MULBERRY_CABINET, VerdanceBlocks.MULBERRY_TRAPDOOR, VerdanceBlocks.MULBERRY_SLAB);
         rangeDisc(exporter);
         stucco(exporter, VerdanceFamilies.WHITE_STUCCO, Items.WHITE_DYE);
         stucco(exporter, VerdanceFamilies.LIGHT_GRAY_STUCCO, Items.LIGHT_GRAY_DYE);

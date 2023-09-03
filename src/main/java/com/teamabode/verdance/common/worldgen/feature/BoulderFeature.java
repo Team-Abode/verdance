@@ -1,4 +1,4 @@
-package com.teamabode.verdance.common.feature;
+package com.teamabode.verdance.common.worldgen.feature;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;

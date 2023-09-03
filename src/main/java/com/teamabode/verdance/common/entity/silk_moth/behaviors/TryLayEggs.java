@@ -1,5 +1,6 @@
 package com.teamabode.verdance.common.entity.silk_moth.behaviors;
 
+import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import net.minecraft.core.BlockPos;
@@ -16,9 +17,8 @@ public class TryLayEggs {
 
     public static BehaviorControl<SilkMoth> create() {
         return BehaviorBuilder.create(instance -> instance.group(
-                instance.present(MemoryModuleType.WALK_TARGET),
                 instance.present(MemoryModuleType.IS_PREGNANT)
-        ).apply(instance, (walkTargetMemory, isPregnantMemory) -> TryLayEggs::tryStart));
+        ).apply(instance, (isPregnantMemory) -> TryLayEggs::tryStart));
     }
 
     private static boolean tryStart(ServerLevel level, SilkMoth entity, long gameTime) {
@@ -30,6 +30,9 @@ public class TryLayEggs {
         boolean isEmpty = level.getBlockState(eggPos).isAir();
         boolean isLeaves = level.getBlockState(relativePos).is(BlockTags.LEAVES);
 
+        Verdance.LOGGER.info("Is Empty:" + isEmpty);
+        Verdance.LOGGER.info("Is Leaves: " + isLeaves);
+
         if (isEmpty && isLeaves) {
             BlockState eggState = VerdanceBlocks.SILKWORM_EGGS.defaultBlockState();
 
@@ -39,6 +42,6 @@ public class TryLayEggs {
             entity.getBrain().eraseMemory(MemoryModuleType.IS_PREGNANT);
             return true;
         }
-        return true;
+        return false;
     }
 }

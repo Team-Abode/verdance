@@ -12,12 +12,12 @@ public class OccasionalTakeOff {
     public static BehaviorControl<SilkMoth> create() {
         return BehaviorBuilder.create(instance -> instance.group(
                 instance.absent(MemoryModuleType.WALK_TARGET),
-                instance.absent(VerdanceMemories.FLIGHT_COOLDOWN_TICKS)
+                instance.absent(VerdanceMemories.OCCASIONAL_FLIGHT_COOLDOWN)
         ).apply(instance, (walkTarget, flightCooldown) -> OccasionalTakeOff::tryStart));
     }
 
     private static boolean tryStart(ServerLevel level, SilkMoth entity, long gameTime) {
-        if (entity.onGround() && !entity.isFlying()) {
+        if (!entity.isFlying() && entity.onGround()) {
             entity.takeOff();
             return true;
         }

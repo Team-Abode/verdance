@@ -128,7 +128,6 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     private void mineableAxe() {
         this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
                 .add(VerdanceBlocks.CANTALOUPE)
-                .add(VerdanceBlocks.MULBERRY_CABINET)
                 .setReplace(false);
     }
 

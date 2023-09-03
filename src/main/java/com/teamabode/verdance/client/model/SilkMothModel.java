@@ -89,7 +89,7 @@ public class SilkMothModel extends ScribeAnimatableModel<SilkMoth> {
 		this.setupBones();
 		this.animate(entity.idleAnimationState, VerdanceAnimations.SILK_MOTH_IDLE, ageInTicks);
 		
-		if (entity.onGround()) {
+		if (entity.onGround() && !entity.isFlying()) {
 			this.animateWalk(VerdanceAnimations.SILK_MOTH_WALK, limbSwing, limbSwingAmount, 2.0f, 2.5f);
 		}
 		this.animate(entity.flyAnimationState, VerdanceAnimations.SILK_MOTH_FLY, ageInTicks);

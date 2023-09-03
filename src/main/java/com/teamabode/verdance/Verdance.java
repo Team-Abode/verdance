@@ -46,10 +46,6 @@ public class Verdance implements ModInitializer {
         VerdanceSensors.register();
         VerdanceMemories.register();
 
-        if (CompatUtils.isModLoaded("farmersdelight")) {
-            VerdanceFD.register();
-        }
-
         registerBlockEntityAdditions();
         registerDispenserBehaviors();
         registerTrades();

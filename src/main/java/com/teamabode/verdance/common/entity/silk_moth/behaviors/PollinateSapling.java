@@ -1,6 +1,7 @@
 package com.teamabode.verdance.common.entity.silk_moth.behaviors;
 
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
+import com.teamabode.verdance.common.entity.silk_moth.SilkMothAi;
 import com.teamabode.verdance.core.registry.VerdanceMemories;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,7 +14,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Optional;
 
-import static com.teamabode.verdance.common.entity.silk_moth.SilkMothAi.CANNOT_POLLINATE;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.STAGE;
 
 public class PollinateSapling {
@@ -21,9 +21,9 @@ public class PollinateSapling {
     public static BehaviorControl<SilkMoth> create() {
         return BehaviorBuilder.create(instance -> instance.group(
                 instance.present(MemoryModuleType.WALK_TARGET),
-                instance.present(VerdanceMemories.IS_POLLINATING),
+                instance.absent(VerdanceMemories.POLLINATE_COOLDOWN),
                 instance.registered(VerdanceMemories.SAPLINGS_POLLINATED)
-        ).apply(instance, (walkTarget, isPollinating, saplingsPollinated) -> PollinateSapling::tryStart));
+        ).apply(instance, (walkTarget, cooldown, saplingsPollinated) -> PollinateSapling::tryStart));
     }
 
     private static boolean tryStart(ServerLevel level, SilkMoth entity, long gameTime) {
@@ -31,26 +31,28 @@ public class PollinateSapling {
             BlockPos pos = entity.blockPosition().relative(dir);
             BlockState state = level.getBlockState(pos);
 
-            if (CANNOT_POLLINATE.test(state)) continue;
-
-            level.levelEvent(1505, pos, 0);
-            level.setBlockAndUpdate(pos, state.setValue(STAGE, 1));
-            updateMemory(entity.getBrain());
-            return true;
+            if (SilkMothAi.CAN_POLLINATE.test(state)) {
+                level.levelEvent(1505, pos, 0);
+                level.setBlockAndUpdate(pos, state.setValue(STAGE, 1));
+                updateMemory(entity.getBrain());
+                return true;
+            }
         }
         return false;
     }
 
     private static void updateMemory(Brain<SilkMoth> brain) {
-        Optional<Integer> saplingsPollianted = brain.getMemory(VerdanceMemories.SAPLINGS_POLLINATED);
+        Optional<Integer> saplingsPollinated = brain.getMemory(VerdanceMemories.SAPLINGS_POLLINATED);
 
-        if (saplingsPollianted.isEmpty()) {
+        if (saplingsPollinated.isEmpty()) {
             brain.setMemory(VerdanceMemories.SAPLINGS_POLLINATED, 1);
             return;
         }
-        if (saplingsPollianted.get() >= 20) {
-            brain.eraseMemory(VerdanceMemories.IS_POLLINATING);
+        if (saplingsPollinated.get() < 20) {
+            brain.setMemory(VerdanceMemories.SAPLINGS_POLLINATED, saplingsPollinated.get() + 1);
         }
-        brain.setMemory(VerdanceMemories.SAPLINGS_POLLINATED, saplingsPollianted.get() + 1);
+        if (saplingsPollinated.get() >= 20) {
+            brain.setMemory(VerdanceMemories.POLLINATE_COOLDOWN, 6000);
+        }
     }
 }

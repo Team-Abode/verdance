@@ -1,6 +1,7 @@
 package com.teamabode.verdance.common.entity.silk_moth;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import com.teamabode.verdance.common.entity.silk_moth.behaviors.*;
@@ -21,7 +22,7 @@ import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.STAGE;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -42,22 +43,26 @@ public class SilkMothAi {
             MemoryModuleType.IS_TEMPTED,
             MemoryModuleType.TEMPTING_PLAYER,
             MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
-            VerdanceMemories.FLIGHT_COOLDOWN_TICKS,
+            VerdanceMemories.OCCASIONAL_FLIGHT_COOLDOWN,
+            VerdanceMemories.POLLINATE_COOLDOWN,
             MemoryModuleType.IS_PREGNANT,
-            VerdanceMemories.IS_POLLINATING,
             VerdanceMemories.SAPLINGS_POLLINATED
     );
     public static final ImmutableList<SensorType<? extends Sensor<? super SilkMoth>>> SENSOR_TYPES = ImmutableList.of(
             SensorType.NEAREST_LIVING_ENTITIES,
             SensorType.HURT_BY,
-            VerdanceSensors.SILK_MOTH_TEMPTATIONS,
-            VerdanceSensors.SILK_MOTH_SPECIFIC_SENSOR
+            VerdanceSensors.SILK_MOTH_TEMPTATIONS
     );
 
-    public static final Predicate<BlockState> CANNOT_POLLINATE = state -> {
-        if (!state.is(BlockTags.SAPLINGS) || !state.hasProperty(BlockStateProperties.STAGE)) return true;
-        return state.getValue(BlockStateProperties.STAGE) >= 1;
-    };
+    private static final RunOne<SilkMoth> MOVEMENT_OPTIONS = new RunOne<>(ImmutableMap.of(
+            MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT
+    ), List.of(
+            Pair.of(RandomStroll.stroll(1.0f), 1),
+            Pair.of(OccasionalTakeOff.create(), 1),
+            Pair.of(new DoNothing(40, 80), 1)
+    ));
+
+    public static final Predicate<BlockState> CAN_POLLINATE = state -> state.is(BlockTags.SAPLINGS) && state.hasProperty(STAGE) && state.getValue(STAGE) < 1;
 
     public static Brain.Provider<SilkMoth> brainProvider() {
         return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
@@ -77,12 +82,13 @@ public class SilkMothAi {
     private static void initCoreActivity(Brain<SilkMoth> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new Swim(0.8f),
-                new AnimalPanic(1.75f),
+                new AnimalPanic(2.5f),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
-                ForceTakeOff.create(),
+                TakeOff.create(),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
-                new CountDownCooldownTicks(VerdanceMemories.FLIGHT_COOLDOWN_TICKS)
+                new CountDownCooldownTicks(VerdanceMemories.OCCASIONAL_FLIGHT_COOLDOWN),
+                new CountDownPollinateCooldown()
         ));
     }
 
@@ -91,11 +97,7 @@ public class SilkMothAi {
                 Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(20, 40))),
                 Pair.of(1, new AnimalMakeLove(VerdanceEntities.SILK_MOTH, 1.0f)),
                 Pair.of(2, new FollowTemptation(livingEntity -> 1.5f)),
-                Pair.of(3, new RunOne<>(List.of(
-                        Pair.of(RandomStroll.stroll(1.0f), 1),
-                        Pair.of(OccasionalTakeOff.create(), 1),
-                        Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 5), 2)
-                )))
+                Pair.of(3, MOVEMENT_OPTIONS)
         ));
     }
 
@@ -105,18 +107,15 @@ public class SilkMothAi {
                 Pair.of(2, new FollowTemptation(livingEntity -> 1.5f)),
                 Pair.of(3, PollinateSapling.create()),
                 Pair.of(4, new SearchForSapling()),
-                Pair.of(5, new RunOne<>(List.of(
-                        Pair.of(RandomStroll.stroll(1.0f), 1),
-                        Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 5), 2)
-                )))
-        ), ImmutableSet.of(Pair.of(VerdanceMemories.IS_POLLINATING, MemoryStatus.VALUE_PRESENT)));
+                Pair.of(5, MOVEMENT_OPTIONS)
+        ), ImmutableSet.of(Pair.of(VerdanceMemories.POLLINATE_COOLDOWN, MemoryStatus.VALUE_ABSENT)));
     }
 
     private static void initLayEggsActivity(Brain<SilkMoth> brain) {
         brain.addActivityWithConditions(VerdanceActivities.LAY_EGGS, ImmutableList.of(
                 Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(10, 20))),
                 Pair.of(1, SearchForLeaves.create()),
-                Pair.of(2, RandomStroll.stroll(1.0f)),
+                Pair.of(2, MOVEMENT_OPTIONS),
                 Pair.of(3, TryLayEggs.create())
         ), ImmutableSet.of(Pair.of(MemoryModuleType.IS_PREGNANT, MemoryStatus.VALUE_PRESENT)));
     }

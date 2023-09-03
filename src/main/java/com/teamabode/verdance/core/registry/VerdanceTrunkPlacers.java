@@ -2,7 +2,7 @@ package com.teamabode.verdance.core.registry;
 
 import com.mojang.serialization.Codec;
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.common.feature.MulberryTrunkPlacer;
+import com.teamabode.verdance.common.worldgen.feature.MulberryTrunkPlacer;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;

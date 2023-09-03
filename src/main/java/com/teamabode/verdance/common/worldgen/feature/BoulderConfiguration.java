@@ -1,4 +1,4 @@
-package com.teamabode.verdance.common.feature;
+package com.teamabode.verdance.common.worldgen.feature;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

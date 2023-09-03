@@ -1,4 +1,4 @@
-package com.teamabode.verdance.common.feature;
+package com.teamabode.verdance.common.worldgen.feature;
 
 import com.teamabode.verdance.core.misc.worldgen.VerdanceConfiguredFeatures;
 import net.minecraft.resources.ResourceKey;
