@@ -1,6 +1,7 @@
 package com.teamabode.verdance.core.integration.terrablender;
 
 import com.teamabode.verdance.Verdance;
+import com.teamabode.verdance.common.worldgen.biome.MulberryForestBiomeBuilder;
 import com.teamabode.verdance.core.misc.worldgen.VerdanceSurfaceRules;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
@@ -10,9 +11,7 @@ import terrablender.api.TerraBlenderApi;
 public class VerdanceTerraBlender implements TerraBlenderApi {
 
     public void onTerraBlenderInitialized() {
-        Regions.register(new MulberryForestRegion());
-        Regions.register(new ShrublandsRegion());
-
+        Regions.register(new VerdanceRegion(new MulberryForestBiomeBuilder()));
 
         SurfaceRuleManager.addSurfaceRules(RuleCategory.OVERWORLD, Verdance.MOD_ID, VerdanceSurfaceRules.OVERWORLD);
     }
