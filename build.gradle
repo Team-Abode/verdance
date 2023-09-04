@@ -56,7 +56,13 @@ dependencies {
 	modApi "com.github.glitchfiend:TerraBlender-fabric:1.20-${rootProject.terrablender_version}"
 
 	// Farmer's Delight
-	modCompileOnly "maven.modrinth:farmers-delight-fabric:${project.farmersdelight_version}"
+	modImplementation "maven.modrinth:farmers-delight-fabric:${project.farmersdelight_version}"
+
+	// Every Compat
+	modImplementation "maven.modrinth:every-compat:${rootProject.everycompat_version}"
+
+	// Moonlight
+	modImplementation "maven.modrinth:moonlight:${rootProject.moonlight_version}"
 }
 
 base {

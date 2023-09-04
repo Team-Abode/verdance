@@ -1,8 +1,0 @@
-{
-  "parent": "wilderwild:block/template_hollowed_log",
-  "textures": {
-    "top": "verdance:block/hollowed_mulberry_log_top",
-    "inner": "verdance:block/stripped_hollowed_mulberry_log",
-    "outer": "verdance:block/hollowed_mulberry_log"
-  }
-}

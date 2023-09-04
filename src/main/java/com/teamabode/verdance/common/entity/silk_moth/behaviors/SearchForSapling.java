@@ -26,9 +26,6 @@ public class SearchForSapling extends Behavior<SilkMoth> {
 
     protected void start(ServerLevel level, SilkMoth entity, long gameTime) {
         BlockPos pos = this.targetPosition(level, entity.blockPosition(), entity.getRandom());
-
-        Verdance.LOGGER.info("Target: " + pos);
-
         if (pos != null) {
             entity.takeOff();
             BehaviorUtils.setWalkAndLookTargetMemories(entity, pos, 1.25f, 1);
