@@ -6,6 +6,7 @@ import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.client.VerdanceAnimations;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
 import net.minecraft.client.animation.KeyframeAnimations;
+import net.minecraft.client.model.ModelUtils;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -15,10 +16,7 @@ import net.minecraft.util.Mth;
 import org.joml.Vector3f;
 
 public class SilkMothModel extends ScribeAnimatableModel<SilkMoth> {
-	private static final Vector3f ANIMATION_VECTOR_CACHE = new Vector3f();
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Verdance.MOD_ID, "silk_moth"), "main");
-
-	public static final ResourceLocation IDLE = Verdance.id("silk_moth/idle");
 
 	private final ModelPart root;
 	private final ModelPart body;

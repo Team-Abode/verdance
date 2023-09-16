@@ -30,9 +30,6 @@ public class TryLayEggs {
         boolean isEmpty = level.getBlockState(eggPos).isAir();
         boolean isLeaves = level.getBlockState(relativePos).is(BlockTags.LEAVES);
 
-        Verdance.LOGGER.info("Is Empty:" + isEmpty);
-        Verdance.LOGGER.info("Is Leaves: " + isLeaves);
-
         if (isEmpty && isLeaves) {
             BlockState eggState = VerdanceBlocks.SILKWORM_EGGS.defaultBlockState();
 

@@ -18,6 +18,7 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
     }
 
     protected void addTags(HolderLookup.Provider arg) {
+        silkwormFood();
         planks();
         stairs();
         slabs();
@@ -36,6 +37,14 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
         leaves();
 
         this.getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(VerdanceItems.MUSIC_DISC_RANGE).setReplace(false);
+    }
+
+    private void silkwormFood() {
+        this.getOrCreateTagBuilder(VerdanceItemTags.SILKWORM_FOOD)
+                .add(VerdanceItems.MULBERRY)
+                .add(VerdanceBlocks.MULBERRY_LEAVES.asItem())
+                .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES.asItem())
+                .setReplace(false);
     }
 
     private void planks() {

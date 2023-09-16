@@ -10,10 +10,8 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import java.util.Optional;
 
 public class VerdanceMemories {
-    public static final MemoryModuleType<Integer> OCCASIONAL_FLIGHT_COOLDOWN = register("occasional_flight_cooldown", Codec.INT);
-    public static final MemoryModuleType<Unit> IS_POLLINATING = register("is_pollinating", Codec.unit(Unit.INSTANCE));
-    public static final MemoryModuleType<Integer> POLLINATE_COOLDOWN = register("pollinate_cooldown", Codec.INT);
-    public static final MemoryModuleType<Integer> SAPLINGS_POLLINATED = register("saplings_pollinated", Codec.INT);
+    public static final MemoryModuleType<Unit> IS_FLYING = register("is_flying");
+    public static final MemoryModuleType<Unit> WANTS_TO_SLEEP = register("wants_to_sleep");
 
     public static <U> MemoryModuleType<U> register(String name) {
         return Registry.register(BuiltInRegistries.MEMORY_MODULE_TYPE, Verdance.id(name), new MemoryModuleType<>(Optional.empty()));

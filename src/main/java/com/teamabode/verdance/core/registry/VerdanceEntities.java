@@ -2,6 +2,7 @@ package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
+import com.teamabode.verdance.common.entity.silkworm.Silkworm;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,6 +21,16 @@ public class VerdanceEntities {
                     .dimensions(EntityDimensions.scalable(0.9f, 0.9f))
                     .defaultAttributes(SilkMoth::createSilkMothAttributes)
                     .spawnRestriction(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, SilkMoth::checkSilkMothSpawnRules)
+                    .build()
+    );
+
+    public static final EntityType<Silkworm> SILKWORM = register(
+            "silkworm",
+            FabricEntityTypeBuilder.createMob()
+                    .spawnGroup(MobCategory.MONSTER)
+                    .entityFactory(Silkworm::new)
+                    .defaultAttributes(Silkworm::createSilkwormAttributes)
+                    .dimensions(EntityDimensions.scalable(0.4f, 0.25f))
                     .build()
     );
 

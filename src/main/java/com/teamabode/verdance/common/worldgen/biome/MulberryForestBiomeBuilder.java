@@ -35,6 +35,7 @@ public class MulberryForestBiomeBuilder extends VerdanceBiomeBuilder {
             {null, null, Biomes.PLAINS, Biomes.SPARSE_JUNGLE, Biomes.BAMBOO_JUNGLE},
             {null, null, null, null, null}
     };
+    @SuppressWarnings("all")
     private static final ResourceKey<Biome>[][] PLATEAU_BIOMES = new ResourceKey[][]{
             {Biomes.SNOWY_PLAINS, Biomes.SNOWY_PLAINS, Biomes.SNOWY_PLAINS, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA},
             {VerdanceBiomes.MULBERRY_FOREST, VerdanceBiomes.MULBERRY_FOREST, VerdanceBiomes.MULBERRY_FOREST, VerdanceBiomes.MULBERRY_FOREST, VerdanceBiomes.MULBERRY_FOREST},

@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-03T21:06:49.4285286	Verdance/Tags for minecraft:item
+// 1.20.1	2023-09-12T18:09:22.8782552	Verdance/Tags for minecraft:item
 278f9d0ff0c137c51e45049a49dc3d5f1b1822cb data\verdance\tags\items\mulberry_logs.json
 ca30db3415d936706a86fdc128660409036227d4 data\minecraft\tags\items\walls.json
 31e6cf2746bf5e0508cdc04d5eb73594ba6059fb data\minecraft\tags\items\wooden_pressure_plates.json
@@ -20,4 +20,5 @@ b2b9e848b7fd0fff4c51734cc940431ac5995442 data\minecraft\tags\items\slabs.json
 c3690c6f3034a1e42926f539845b7aa2824e879e data\minecraft\tags\items\music_discs.json
 5e349cf47539fbcf77051f7bacf54290fae2d8d0 data\minecraft\tags\items\hanging_signs.json
 9aea83ebb2efb53eec4c54149e6bfb543e800106 data\minecraft\tags\items\wooden_buttons.json
+ec31a64d5b95979d6ce66f839e7325c3d0e6c33c data\verdance\tags\items\silkworm_food.json
 142f4b6eec280ab84050602fe5f8d8e7d61af5a5 data\minecraft\tags\items\wooden_trapdoors.json

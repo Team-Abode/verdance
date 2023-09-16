@@ -112,8 +112,10 @@
   "item.verdance.disc_fragment_range": "Disc Fragment",
   "item.verdance.disc_fragment_range.desc": "Music Disc - Range",
   "item.verdance.silk_moth_spawn_egg": "Silk Moth Spawn Egg",
+  "item.verdance.silkworm_spawn_egg": "Silkworm Spawn Egg",
 
   "entity.verdance.silk_moth": "Silk Moth",
+  "entity.verdance.silkworm": "Silkworm",
 
   "subtitles.verdance.block.cantaloupe.grow": "Fruit grows"
 }

@@ -117,8 +117,10 @@ public class VerdanceGroupEvents {
                 VerdanceBlocks.PINK_STUCCO_WALL
         );
         appendItemsAfter(CreativeModeTabs.NATURAL_BLOCKS, Items.FROGSPAWN, VerdanceBlocks.SILKWORM_EGGS);
-        appendItemsBefore(CreativeModeTabs.SPAWN_EGGS, Items.SILVERFISH_SPAWN_EGG, VerdanceItems.SILK_MOTH_SPAWN_EGG);
-
+        appendItemsBefore(CreativeModeTabs.SPAWN_EGGS, Items.SILVERFISH_SPAWN_EGG,
+                VerdanceItems.SILK_MOTH_SPAWN_EGG,
+                VerdanceItems.SILKWORM_SPAWN_EGG
+        );
     }
 
 

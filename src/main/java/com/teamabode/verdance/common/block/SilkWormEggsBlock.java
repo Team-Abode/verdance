@@ -1,11 +1,9 @@
 package com.teamabode.verdance.common.block;
 
-import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
+import com.teamabode.verdance.common.entity.silkworm.Silkworm;
 import com.teamabode.verdance.core.registry.VerdanceEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -59,12 +57,12 @@ public class SilkWormEggsBlock extends Block {
         int count = random.nextInt(2, 4);
 
         for (int i = 0; i < count; i++) {
-            SilkMoth silkMoth = VerdanceEntities.SILK_MOTH.create(level); // place holder mob
-            if (silkMoth == null) continue;
+            Silkworm silkworm = VerdanceEntities.SILKWORM.create(level);
+            if (silkworm == null) continue;
 
-            silkMoth.setPos(pos.getCenter().offsetRandom(random, 0.1f));
-            silkMoth.setPersistenceRequired();
-            level.addFreshEntity(silkMoth);
+            silkworm.setPos(pos.getCenter().offsetRandom(random, 0.1f));
+            silkworm.setPersistenceRequired();
+            level.addFreshEntity(silkworm);
         }
         level.destroyBlock(pos, false);
     }
