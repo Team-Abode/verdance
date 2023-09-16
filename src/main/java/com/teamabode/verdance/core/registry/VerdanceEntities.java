@@ -30,7 +30,7 @@ public class VerdanceEntities {
                     .spawnGroup(MobCategory.MONSTER)
                     .entityFactory(Silkworm::new)
                     .defaultAttributes(Silkworm::createSilkwormAttributes)
-                    .dimensions(EntityDimensions.scalable(0.4f, 0.25f))
+                    .dimensions(EntityDimensions.scalable(0.6f, 0.25f))
                     .build()
     );
 

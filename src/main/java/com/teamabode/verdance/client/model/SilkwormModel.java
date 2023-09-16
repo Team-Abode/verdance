@@ -33,7 +33,7 @@ public class SilkwormModel extends HierarchicalModel<Silkworm> {
 	}
 
 	public void setupAnim(Silkworm entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float additionalScale = Mth.cos(ageInTicks * 0.25f) * limbSwingAmount;
+		float additionalScale = Mth.cos(ageInTicks * 0.25f) * 1.4f * limbSwingAmount;
 
 		this.root.zScale = Mth.clamp(1.0f + additionalScale, 1.0f, 2.0f);
 	}

@@ -1,5 +1,6 @@
 package com.teamabode.verdance.common.entity.silkworm;
 
+import com.mojang.serialization.Dynamic;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
 import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
 import com.teamabode.verdance.core.registry.VerdanceEntities;
@@ -13,6 +14,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -23,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("unchecked")
 public class Silkworm extends PathfinderMob {
     private static final EntityDataAccessor<Boolean> CLIMBING = SynchedEntityData.defineId(Silkworm.class, EntityDataSerializers.BOOLEAN);
     private int age = 0;
@@ -45,6 +48,18 @@ public class Silkworm extends PathfinderMob {
             this.setClimbing(horizontalCollision);
         }
         super.tick();
+    }
+
+    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
+        return SilkwormAi.createBrain(this.brainProvider().makeBrain(dynamic));
+    }
+
+    protected Brain.Provider<Silkworm> brainProvider() {
+        return Brain.provider(SilkwormAi.MEMORY_MODULES, SilkwormAi.SENSORS);
+    }
+
+    public Brain<Silkworm> getBrain() {
+        return (Brain<Silkworm>) super.getBrain();
     }
 
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
@@ -72,6 +87,12 @@ public class Silkworm extends PathfinderMob {
     public void aiStep() {
         this.setAge(this.age + 1);
         super.aiStep();
+    }
+
+    protected void customServerAiStep() {
+        this.getBrain().tick((ServerLevel) this.level(), this);
+        SilkwormAi.updateActivity(this);
+        super.customServerAiStep();
     }
 
     @Nullable
@@ -151,7 +172,7 @@ public class Silkworm extends PathfinderMob {
     public static AttributeSupplier.Builder createSilkwormAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 5.0f)
-                .add(Attributes.MOVEMENT_SPEED, 0.2d)
+                .add(Attributes.MOVEMENT_SPEED, 0.1d)
                 .add(Attributes.FOLLOW_RANGE, 48.0);
     }
 }

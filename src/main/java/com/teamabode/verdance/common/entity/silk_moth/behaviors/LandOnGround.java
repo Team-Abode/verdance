@@ -16,7 +16,7 @@ public class LandOnGround extends ImprovedOneShot<SilkMoth> {
     }
 
     public boolean canRun(ServerLevel level, SilkMoth entity, long gameTime) {
-        return entity.onGround();
+        return entity.onGround() && entity.getRandom().nextInt(3) == 0;
     }
 
     public void run(ServerLevel level, SilkMoth entity, long gameTime) {

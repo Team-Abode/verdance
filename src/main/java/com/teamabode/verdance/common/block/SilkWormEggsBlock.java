@@ -54,13 +54,13 @@ public class SilkWormEggsBlock extends Block {
     }
 
     private static void spawnBabies(ServerLevel level, BlockPos pos, RandomSource random) {
-        int count = random.nextInt(2, 4);
+        int count = random.nextInt(2) + 2;
 
         for (int i = 0; i < count; i++) {
             Silkworm silkworm = VerdanceEntities.SILKWORM.create(level);
             if (silkworm == null) continue;
 
-            silkworm.setPos(pos.getCenter().offsetRandom(random, 0.1f));
+            silkworm.setPos(pos.getCenter().offsetRandom(random, 0.25f));
             silkworm.setPersistenceRequired();
             level.addFreshEntity(silkworm);
         }
