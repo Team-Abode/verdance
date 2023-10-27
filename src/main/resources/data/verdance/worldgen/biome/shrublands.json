@@ -169,8 +169,7 @@
       "minecraft:patch_sugar_cane_desert",
       "minecraft:patch_cactus_desert",
       "verdance:sparse_shrub_patch",
-      "verdance:shrublands_patch",
-      "verdance:patch_cantaloupe"
+      "verdance:shrublands_patch"
     ],
     [
       "minecraft:freeze_top_layer"

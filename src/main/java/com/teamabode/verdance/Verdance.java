@@ -5,13 +5,18 @@ import com.teamabode.scribe.core.api.config.Config;
 import com.teamabode.scribe.core.api.config.ConfigBuilder;
 import com.teamabode.scribe.core.api.misc.BlockEntityAdditions;
 import com.teamabode.verdance.core.misc.VerdanceGroupEvents;
+import com.teamabode.verdance.core.misc.tag.VerdanceBiomeTags;
+import com.teamabode.verdance.core.misc.worldgen.VerdancePlacedFeatures;
 import com.teamabode.verdance.core.registry.*;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,6 +51,7 @@ public class Verdance implements ModInitializer {
 
         registerBlockEntityAdditions();
         registerDispenserBehaviors();
+        registerBiomeModifications();
         registerTrades();
     }
 
@@ -57,6 +63,14 @@ public class Verdance implements ModInitializer {
     public static void registerDispenserBehaviors() {
         DispenserBlock.registerBehavior(VerdanceItems.MULBERRY_BOAT, new ScribeBoatDispenseItemBehavior(VerdanceBoatType.MULBERRY));
         DispenserBlock.registerBehavior(VerdanceItems.MULBERRY_CHEST_BOAT, new ScribeBoatDispenseItemBehavior(VerdanceBoatType.MULBERRY, true));
+    }
+
+    public static void registerBiomeModifications() {
+        BiomeModifications.addFeature(
+                BiomeSelectors.tag(VerdanceBiomeTags.HAS_CANTALOUPE),
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                VerdancePlacedFeatures.PATCH_CANTALOUPE
+        );
     }
 
     public static void registerTrades() {
