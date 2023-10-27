@@ -16,7 +16,7 @@ public class VerdanceEntities {
     public static final EntityType<SilkMoth> SILK_MOTH = register(
             "silk_moth",
             FabricEntityTypeBuilder.createMob()
-                    .spawnGroup(MobCategory.MONSTER)
+                    .spawnGroup(MobCategory.CREATURE)
                     .entityFactory(SilkMoth::new)
                     .dimensions(EntityDimensions.scalable(0.9f, 0.9f))
                     .defaultAttributes(SilkMoth::createSilkMothAttributes)
@@ -27,7 +27,7 @@ public class VerdanceEntities {
     public static final EntityType<Silkworm> SILKWORM = register(
             "silkworm",
             FabricEntityTypeBuilder.createMob()
-                    .spawnGroup(MobCategory.MONSTER)
+                    .spawnGroup(MobCategory.CREATURE)
                     .entityFactory(Silkworm::new)
                     .defaultAttributes(Silkworm::createSilkwormAttributes)
                     .dimensions(EntityDimensions.scalable(0.6f, 0.25f))
