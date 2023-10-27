@@ -2,7 +2,7 @@ package com.teamabode.verdance.core.integration.terrablender;
 
 import com.mojang.datafixers.util.Pair;
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.common.worldgen.biome.VerdanceBiomeBuilder;
+import com.teamabode.verdance.common.worldgen.biome.BiomeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
@@ -13,9 +13,9 @@ import terrablender.api.RegionType;
 import java.util.function.Consumer;
 
 public class VerdanceRegion extends Region {
-    private final VerdanceBiomeBuilder biomeBuilder;
+    private final BiomeBuilder biomeBuilder;
 
-    public VerdanceRegion(VerdanceBiomeBuilder biomeBuilder) {
+    public VerdanceRegion(BiomeBuilder biomeBuilder) {
         super(biomeBuilder.getId(), RegionType.OVERWORLD, Verdance.CONFIG.getGroup("biomes").getIntProperty(biomeBuilder.getId().getPath() + "_weight"));
         this.biomeBuilder = biomeBuilder;
     }

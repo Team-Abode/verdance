@@ -168,6 +168,7 @@
       "minecraft:patch_grass_badlands",
       "minecraft:patch_sugar_cane_desert",
       "minecraft:patch_cactus_desert",
+      "verdance:patch_dead_bush_shrublands",
       "verdance:sparse_shrub_patch",
       "verdance:shrublands_patch"
     ],

@@ -2,7 +2,7 @@
   "type": "minecraft:random_patch",
   "config": {
     "tries": 96,
-    "xz_spread": 12,
+    "xz_spread": 8,
     "y_spread": 3,
     "feature": {
       "feature": {
@@ -11,7 +11,10 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "verdance:cantaloupe"
+              "Name": "verdance:cantaloupe",
+              "Properties": {
+                "facing": "up"
+              }
             }
           }
         }

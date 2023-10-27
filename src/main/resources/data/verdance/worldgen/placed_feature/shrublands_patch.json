@@ -2,18 +2,10 @@
   "feature": "verdance:shrublands_patch",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 2
-    },
-    {
-      "type": "minecraft:count",
-      "count": {
-        "type": "minecraft:uniform",
-        "value": {
-          "min_inclusive": 1,
-          "max_inclusive": 2
-        }
-      }
+      "type": "minecraft:noise_based_count",
+      "noise_to_count_ratio": 3,
+      "noise_factor": 1,
+      "noise_offset": 0.5
     },
     {
       "type": "minecraft:in_square"
