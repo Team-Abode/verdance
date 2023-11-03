@@ -12,6 +12,8 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
@@ -20,10 +22,6 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
 
     public VerdanceRecipeProvider(FabricDataOutput output) {
         super(output);
-    }
-
-    private static void cabinet(Consumer<FinishedRecipe> exporter, ItemLike cabinet, ItemLike trapdoor, ItemLike slab) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, cabinet).define('D', trapdoor).define('_', slab).pattern("___").pattern("D D").pattern("___").unlockedBy(getHasName(trapdoor), has(trapdoor)).save(exporter);
     }
 
     private static void rangeDisc(Consumer<FinishedRecipe> exporter) {
@@ -36,6 +34,35 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, family.get(Variant.STAIRS), family.getBaseBlock());
         stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, family.get(Variant.SLAB), family.getBaseBlock(), 2);
         stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, family.get(Variant.WALL), family.getBaseBlock());
+    }
+
+    private static void cantaloupe(Consumer<FinishedRecipe> exporter) {
+        SimpleCookingRecipeBuilder.smelting(
+                Ingredient.of(VerdanceItems.CANTALOUPE_SLICE),
+                RecipeCategory.FOOD,
+                VerdanceItems.GRILLED_CANTALOUPE_SLICE,
+                0.25f,
+                200)
+                .unlockedBy("has_cantaloupe_slice", has(VerdanceItems.CANTALOUPE_SLICE))
+                .save(exporter);
+        RecipeProvider.simpleCookingRecipe(
+                exporter,
+                "smoking",
+                RecipeSerializer.SMOKING_RECIPE,
+                100,
+                VerdanceItems.CANTALOUPE_SLICE,
+                VerdanceItems.GRILLED_CANTALOUPE_SLICE,
+                0.25f
+        );
+        RecipeProvider.simpleCookingRecipe(
+                exporter,
+                "campfire_cooking",
+                RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
+                600,
+                VerdanceItems.CANTALOUPE_SLICE,
+                VerdanceItems.GRILLED_CANTALOUPE_SLICE,
+                0.25f
+        );
     }
 
     public void buildRecipes(Consumer<FinishedRecipe> exporter) {
@@ -51,6 +78,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
 
         twoByTwoPacker(exporter, RecipeCategory.MISC, VerdanceBlocks.CANTALOUPE, VerdanceItems.CANTALOUPE_SLICE);
 
+        cantaloupe(exporter);
         hangingSign(exporter, VerdanceItems.MULBERRY_HANGING_SIGN, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
         rangeDisc(exporter);
         stucco(exporter, VerdanceFamilies.WHITE_STUCCO, Items.WHITE_DYE);
