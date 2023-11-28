@@ -4,6 +4,7 @@ import com.teamabode.scribe.common.entity.boat.ScribeBoatDispenseItemBehavior;
 import com.teamabode.scribe.core.api.config.Config;
 import com.teamabode.scribe.core.api.config.ConfigBuilder;
 import com.teamabode.scribe.core.api.misc.BlockEntityAdditions;
+import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
 import com.teamabode.verdance.core.misc.VerdanceGroupEvents;
 import com.teamabode.verdance.core.misc.tag.VerdanceBiomeTags;
 import com.teamabode.verdance.core.misc.worldgen.VerdancePlacedFeatures;
@@ -12,6 +13,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -49,6 +51,9 @@ public class Verdance implements ModInitializer {
         VerdanceSensors.register();
         VerdanceMemories.register();
 
+        if (FabricLoader.getInstance().isModLoaded("farmersdelight")) {
+            VerdanceFD.register();
+        }
         registerBlockEntityAdditions();
         registerDispenserBehaviors();
         registerBiomeModifications();

@@ -2,6 +2,7 @@ package com.teamabode.verdance.core.registry;
 
 import com.teamabode.scribe.common.item.ScribeBoatItem;
 import com.teamabode.verdance.Verdance;
+import com.teamabode.verdance.common.item.CantaloupeJuiceItem;
 import com.teamabode.verdance.common.item.CantaloupeSliceItem;
 import com.teamabode.verdance.core.misc.VerdanceFoods;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.*;
 public class VerdanceItems {
     public static final Item CANTALOUPE_SLICE = register("cantaloupe_slice", new CantaloupeSliceItem((new Item.Properties()).food(VerdanceFoods.CANTALOUPE_SLICE)));
     public static final Item GRILLED_CANTALOUPE_SLICE = register("grilled_cantaloupe_slice", new Item(new Item.Properties().food(VerdanceFoods.GRILLED_CANTALOUPE_SLICE)));
+    public static final Item CANTALOUPE_JUICE = register("cantaloupe_juice", new CantaloupeJuiceItem(new Item.Properties().stacksTo(16)));
 
     public static final Item CANTALOUPE_SEEDS = register("cantaloupe_seeds", new ItemNameBlockItem(VerdanceBlocks.CANTALOUPE_STEM, new Item.Properties()));
 
