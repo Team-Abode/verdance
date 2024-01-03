@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_magenta_stucco": {
+    "has_stucco": {
       "conditions": {
         "items": [
           {
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_magenta_stucco",
+      "has_stucco",
       "has_the_recipe"
     ]
   ],

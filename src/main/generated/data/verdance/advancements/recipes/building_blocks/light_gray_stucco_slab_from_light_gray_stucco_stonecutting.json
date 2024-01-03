@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:light_gray_stucco_slab_from_light_gray_stucco_stonecutting"
+        "recipe": "verdance:light_gray_stucco_slab_from_light_gray_stucco_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:light_gray_stucco_slab_from_light_gray_stucco_stonecutting"
+      "verdance:light_gray_stucco_slab_from_light_gray_stucco_stonecutting"
     ]
   },
   "sends_telemetry_event": false
