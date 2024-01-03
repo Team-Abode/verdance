@@ -6,13 +6,13 @@ import net.minecraft.world.food.FoodProperties;
 public class VerdanceFoods {
     public static final FoodProperties CANTALOUPE_SLICE = new FoodProperties.Builder()
             .nutrition(2)
-            .saturationMod(FoodConstants.FOOD_SATURATION_LOW)
+            .saturationMod(FoodConstants.FOOD_SATURATION_POOR)
             .alwaysEat()
             .build();
 
     public static final FoodProperties GRILLED_CANTALOUPE_SLICE = new FoodProperties.Builder()
             .nutrition(6)
-            .saturationMod(FoodConstants.FOOD_SATURATION_NORMAL)
+            .saturationMod(FoodConstants.FOOD_SATURATION_LOW)
             .build();
 
     public static final FoodProperties MULBERRY = new FoodProperties.Builder()

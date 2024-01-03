@@ -54,8 +54,8 @@ public class VerdanceBlocks {
     public static final Block MULBERRY_WALL_HANGING_SIGN = registerNoItem("mulberry_wall_hanging_sign", new WallHangingSignBlock(Properties.copy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASS).dropsLike(MULBERRY_HANGING_SIGN), VerdanceWoodType.MULBERRY));
 
     public static final Block CANTALOUPE = register("cantaloupe", new CantaloupeBlock(Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD)));
-    public static final Block ATTACHED_CANTALOUPE_STEM = registerNoItem("attached_cantaloupe_stem", new AttachedCantaloupeStemBlock(Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP)));
-    public static final Block CANTALOUPE_STEM = registerNoItem("cantaloupe_stem", new CantaloupeStemBlock(Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP)));
+    public static final Block ATTACHED_CANTALOUPE_STEM = registerNoItem("attached_cantaloupe_stem", new AttachedStemBlock((StemGrownBlock) CANTALOUPE, () -> VerdanceItems.CANTALOUPE_SEEDS, Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP)));
+    public static final Block CANTALOUPE_STEM = registerNoItem("cantaloupe_stem", new StemBlock((StemGrownBlock) CANTALOUPE, () -> VerdanceItems.CANTALOUPE_SEEDS, Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP)));
 
     public static final Block SHRUB = register("shrub", new ShrubBlock(Properties.copy(Blocks.AZALEA)));
 
