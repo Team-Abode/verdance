@@ -25,13 +25,13 @@ public class AerialStroll extends ImprovedOneShot<SilkMoth> {
     public void run(ServerLevel level, SilkMoth entity, long gameTime) {
         Vec3 pos = this.findPos(entity);
 
-        entity.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(new BlockPosTracker(pos), 1.0f, 0));
+        if (pos != null) {
+            entity.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(new BlockPosTracker(pos), 1.0f, 0));
+        }
     }
 
     private Vec3 findPos(SilkMoth entity) {
         Vec3 view = entity.getViewVector(0.0f);
-        Vec3 randomPos = HoverRandomPos.getPos(entity, 10, 7, view.x(), view.z(), 90.0f * Mth.DEG_TO_RAD, 3, 1);
-
-        return randomPos != null ? randomPos : AirAndWaterRandomPos.getPos(entity, 10, 7, -2, view.x(), view.z(), 90.0f * Mth.DEG_TO_RAD);
+        return HoverRandomPos.getPos(entity, 10, 7, view.x(), view.z(), 90.0f * Mth.DEG_TO_RAD, 3, 1);
     }
 }
