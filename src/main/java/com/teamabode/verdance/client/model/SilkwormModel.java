@@ -19,15 +19,14 @@ public class SilkwormModel extends HierarchicalModel<Silkworm> {
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition mesh = new MeshDefinition();
-		PartDefinition rootPart = mesh.getRoot();
+		PartDefinition meshRoot = mesh.getRoot();
 
-		PartDefinition root = rootPart.addOrReplaceChild("root", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -3.0F, -6.0F, 4.0F, 3.0F, 12.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 15).addBox(-4.0F, -5.0F, -3.0F, 8.0F, 5.0F, 0.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 15).mirror().addBox(-4.0F, -5.0F, 5.0F, 8.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false)
-		.texOffs(0, 15).addBox(-4.0F, -5.0F, 2.0F, 8.0F, 5.0F, 0.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 15).mirror().addBox(-4.0F, -5.0F, -1.0F, 8.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false)
-		.texOffs(-7, 0).addBox(2.0F, 0.0F, -3.0F, 2.0F, 0.0F, 7.0F, new CubeDeformation(0.0F))
-		.texOffs(-7, 0).mirror().addBox(-4.0F, 0.0F, -3.0F, 2.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition root = meshRoot.addOrReplaceChild("root", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -3.0F, -5.5F, 4.0F, 3.0F, 11.0F, new CubeDeformation(0.0F))
+				.texOffs(-7, 0).addBox(2.0F, 0.0F, -2.5F, 1.0F, 0.0F, 7.0F, new CubeDeformation(0.0F))
+				.texOffs(-7, 0).addBox(-3.0F, 0.0F, -2.5F, 1.0F, 0.0F, 7.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 14).addBox(-3.0F, -4.0F, -3.5F, 6.0F, 4.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 18).addBox(-3.0F, -4.0F, 0.5F, 6.0F, 4.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 18).addBox(-3.0F, -4.0F, 3.5F, 6.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
 		return LayerDefinition.create(mesh, 32, 32);
 	}

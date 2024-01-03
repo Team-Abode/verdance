@@ -11,7 +11,7 @@ public class VerdanceFoods {
             .build();
 
     public static final FoodProperties GRILLED_CANTALOUPE_SLICE = new FoodProperties.Builder()
-            .nutrition(6)
+            .nutrition(5)
             .saturationMod(FoodConstants.FOOD_SATURATION_LOW)
             .build();
 
