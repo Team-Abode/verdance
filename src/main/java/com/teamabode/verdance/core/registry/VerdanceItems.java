@@ -31,7 +31,7 @@ public class VerdanceItems {
     public static final Item MULBERRY_CHEST_BOAT = register("mulberry_chest_boat", new ScribeBoatItem(new Item.Properties().stacksTo(1), VerdanceBoatType.MULBERRY, true));
 
     public static final Item SILK_MOTH_SPAWN_EGG = register("silk_moth_spawn_egg", new SpawnEggItem(VerdanceEntities.SILK_MOTH, 13542773, 16383172, new Item.Properties()));
-    public static final Item SILKWORM_SPAWN_EGG = register("silkworm_spawn_egg", new SpawnEggItem(VerdanceEntities.SILKWORM, 16774902, 2497296, new Item.Properties()));
+    public static final Item SILKWORM_SPAWN_EGG = register("silkworm_spawn_egg", new SpawnEggItem(VerdanceEntities.SILKWORM, 0xEBEDE6, 0x75665D, new Item.Properties()));
 
     private static <T extends Item> T register(String name, T item) {
         return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Verdance.MOD_ID, name), item);
