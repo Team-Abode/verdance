@@ -63,8 +63,6 @@ dependencies {
 	modRuntimeOnly "maven.modrinth:moonlight:${rootProject.moonlight_version}"
 	// Twigs
 	modRuntimeOnly "maven.modrinth:twigs:${rootProject.twigs_version}"
-
-	modCompileOnly "maven.modrinth:species:eh9J38KG"
 }
 
 base {

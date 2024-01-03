@@ -40,7 +40,7 @@ public class VerdanceBiomeBuilder extends BiomeBuilder {
             {VerdanceBiomes.MULBERRY_FOREST, VerdanceBiomes.MULBERRY_FOREST, VerdanceBiomes.MULBERRY_FOREST, VerdanceBiomes.MULBERRY_FOREST, VerdanceBiomes.MULBERRY_FOREST},
             {VerdanceBiomes.MULBERRY_FOREST, VerdanceBiomes.MULBERRY_FOREST, VerdanceBiomes.MULBERRY_FOREST, VerdanceBiomes.MULBERRY_FOREST, VerdanceBiomes.MULBERRY_FOREST},
             {Biomes.SAVANNA_PLATEAU, Biomes.SAVANNA_PLATEAU, Biomes.FOREST, Biomes.FOREST, Biomes.JUNGLE},
-            {Biomes.BADLANDS, Biomes.BADLANDS, Biomes.BADLANDS, Biomes.WOODED_BADLANDS, Biomes.WOODED_BADLANDS}
+            {VerdanceBiomes.SHRUBLANDS, VerdanceBiomes.SHRUBLANDS, Biomes.BADLANDS, Biomes.WOODED_BADLANDS, Biomes.WOODED_BADLANDS}
     };
     @SuppressWarnings("all")
     private static final ResourceKey<Biome>[][] PLATEAU_BIOME_VARIANTS = new ResourceKey[][]{
