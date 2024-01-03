@@ -3,6 +3,8 @@ package com.teamabode.verdance.core.registry;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.block.*;
 import com.teamabode.verdance.common.worldgen.feature.MulberryTreeGrower;
+import com.teamabode.verdance.core.integration.compat.CompatBlock;
+import com.teamabode.verdance.core.integration.compat.CompatBlockItem;
 import com.teamabode.verdance.core.misc.datagen.VerdanceBlockSetType;
 import com.teamabode.verdance.core.misc.datagen.VerdanceWoodType;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -36,6 +38,8 @@ public class VerdanceBlocks {
     public static final Block MULBERRY_TRAPDOOR = register("mulberry_trapdoor", new TrapDoorBlock(Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(3.0F).instrument(NoteBlockInstrument.BASS).noOcclusion().isValidSpawn((blockState, blockGetter, blockPos, object) -> false), VerdanceBlockSetType.MULBERRY));
     public static final Block MULBERRY_PRESSURE_PLATE = register("mulberry_pressure_plate", new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Properties.of().instrument(NoteBlockInstrument.BASS).mapColor(MapColor.TERRACOTTA_YELLOW).noCollission().strength(0.5F), VerdanceBlockSetType.MULBERRY));
     public static final Block MULBERRY_BUTTON = register("mulberry_button", new ButtonBlock(Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).noCollission().strength(0.5F), VerdanceBlockSetType.MULBERRY, 30, true));
+
+    public static final Block MULBERRY_CRATE = registerCompat("mulberry_crate", "farmersdelight", Properties.copy(Blocks.OAK_PLANKS));
 
     public static final Block MULBERRY_LEAVES = register("mulberry_leaves", new LeavesBlock(Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn((state, level, pos, entityType) -> entityType == EntityType.OCELOT || entityType == EntityType.PARROT).isSuffocating((blockState, blockGetter, blockPos) -> false).isViewBlocking((blockState, blockGetter, blockPos) -> false)));
     public static final Block FLOWERING_MULBERRY_LEAVES = register("flowering_mulberry_leaves", new LeavesBlock(Properties.copy(MULBERRY_LEAVES)));
@@ -147,10 +151,15 @@ public class VerdanceBlocks {
         );
     }
 
-    private static <T extends Block> T register(String name, T block) {
+    private static Block register(String name, Block block) {
         var registry = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Verdance.MOD_ID, name), block);
         Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Verdance.MOD_ID, name), new BlockItem(registry, new Item.Properties()));
+        return registry;
+    }
 
+    private static Block registerCompat(String name, String mod, Properties properties) {
+        var registry = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Verdance.MOD_ID, name), new CompatBlock(mod, properties));
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Verdance.MOD_ID, name), new CompatBlockItem(mod, registry, new Item.Properties()));
         return registry;
     }
 
