@@ -123,8 +123,4 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     private void silkWormEggs() {
         add(VerdanceBlocks.SILKWORM_EGGS, BlockLootSubProvider::createSilkTouchOnlyTable);
     }
-
-    public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
-        super.generate(consumer);
-    }
 }

@@ -157,6 +157,11 @@ public class Silkworm extends PathfinderMob {
         }
     }
 
+    @Override
+    protected int calculateFallDamage(float fallDistance, float damageMultiplier) {
+        return super.calculateFallDamage(fallDistance, damageMultiplier) - 10;
+    }
+
     public boolean onClimbable() {
         return this.isClimbing();
     }

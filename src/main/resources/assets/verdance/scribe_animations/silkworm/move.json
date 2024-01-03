@@ -1,0 +1,44 @@
+{
+	"length": 0.3,
+	"looping": true,
+	"bones": {
+		"root": {
+			"position": {
+				"0": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 0]
+				},
+				"0.1": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, -2]
+				},
+				"0.2": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 2]
+				},
+				"0.3": {
+					"interpolation": "catmullrom",
+					"value": [0, 0, 0]
+				}
+			},
+			"scale": {
+				"0.0": {
+					"interpolation": "catmullrom",
+					"value": [1, 1, 1]
+				},
+				"0.1": {
+					"interpolation": "catmullrom",
+					"value": [1, 1, 1]
+				},
+				"0.2": {
+					"interpolation": "catmullrom",
+					"value": [1, 1, 1.4]
+				},
+				"0.3": {
+					"interpolation": "catmullrom",
+					"value": [1, 1, 1]
+				}
+			}
+		}
+	}
+}

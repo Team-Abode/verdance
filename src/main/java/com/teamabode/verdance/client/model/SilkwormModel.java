@@ -1,6 +1,8 @@
 package com.teamabode.verdance.client.model;
 
+import com.teamabode.scribe.client.model.ScribeAnimatableModel;
 import com.teamabode.verdance.Verdance;
+import com.teamabode.verdance.client.VerdanceAnimations;
 import com.teamabode.verdance.common.entity.silkworm.Silkworm;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -8,8 +10,9 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
+import org.joml.Vector3f;
 
-public class SilkwormModel extends HierarchicalModel<Silkworm> {
+public class SilkwormModel extends ScribeAnimatableModel<Silkworm> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Verdance.id("silkworm"), "main");
 	private final ModelPart root;
 
@@ -32,9 +35,8 @@ public class SilkwormModel extends HierarchicalModel<Silkworm> {
 	}
 
 	public void setupAnim(Silkworm entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float additionalScale = Mth.cos(ageInTicks * 0.25f) * 1.4f * limbSwingAmount;
-
-		this.root.zScale = Mth.clamp(1.0f + additionalScale, 1.0f, 2.0f);
+		this.root().getAllParts().forEach(ModelPart::resetPose);
+		this.animateWalk(VerdanceAnimations.SILKWORM_MOVE, limbSwing, limbSwingAmount, 2.0f, 4.0f);
 	}
 
 	public ModelPart root() {

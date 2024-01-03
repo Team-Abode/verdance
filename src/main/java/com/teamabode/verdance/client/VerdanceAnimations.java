@@ -9,4 +9,6 @@ public class VerdanceAnimations {
     public static final ResourceLocation SILK_MOTH_WALK = Verdance.id("silk_moth/walk");
     public static final ResourceLocation SILK_MOTH_FLY = Verdance.id("silk_moth/fly");
 
+    public static final ResourceLocation SILKWORM_MOVE = Verdance.id("silkworm/move");
+
 }
