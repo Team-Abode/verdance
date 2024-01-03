@@ -13,25 +13,11 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_light_blue_dye": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:light_blue_dye"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_sand": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:sand"
-            ]
+            "tag": "minecraft:sand"
           }
         ]
       },
@@ -48,7 +34,6 @@
     [
       "has_clay",
       "has_sand",
-      "has_light_blue_dye",
       "has_the_recipe"
     ]
   ],

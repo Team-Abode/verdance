@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:magenta_stucco_slab_from_magenta_stucco_stonecutting"
+        "recipe": "verdance:magenta_stucco_slab_from_magenta_stucco_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:magenta_stucco_slab_from_magenta_stucco_stonecutting"
+      "verdance:magenta_stucco_slab_from_magenta_stucco_stonecutting"
     ]
   },
   "sends_telemetry_event": false

@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:green_stucco_stairs_from_green_stucco_stonecutting"
+        "recipe": "verdance:green_stucco_stairs_from_green_stucco_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:green_stucco_stairs_from_green_stucco_stonecutting"
+      "verdance:green_stucco_stairs_from_green_stucco_stonecutting"
     ]
   },
   "sends_telemetry_event": false

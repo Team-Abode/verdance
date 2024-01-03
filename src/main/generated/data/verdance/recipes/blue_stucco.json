@@ -1,25 +1,38 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "building",
+  "group": "stucco",
   "ingredients": [
     {
-      "item": "minecraft:clay"
-    },
-    {
-      "item": "minecraft:clay"
-    },
-    {
-      "item": "minecraft:sand"
-    },
-    {
-      "item": "minecraft:sand"
-    },
-    {
       "item": "minecraft:blue_dye"
+    },
+    {
+      "item": "minecraft:clay"
+    },
+    {
+      "item": "minecraft:clay"
+    },
+    {
+      "item": "minecraft:clay"
+    },
+    {
+      "item": "minecraft:clay"
+    },
+    {
+      "tag": "minecraft:sand"
+    },
+    {
+      "tag": "minecraft:sand"
+    },
+    {
+      "tag": "minecraft:sand"
+    },
+    {
+      "tag": "minecraft:sand"
     }
   ],
   "result": {
-    "count": 6,
+    "count": 8,
     "item": "verdance:blue_stucco"
   }
 }

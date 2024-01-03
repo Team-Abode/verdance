@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:yellow_stucco_wall_from_yellow_stucco_stonecutting"
+        "recipe": "verdance:yellow_stucco_wall_from_yellow_stucco_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:yellow_stucco_wall_from_yellow_stucco_stonecutting"
+      "verdance:yellow_stucco_wall_from_yellow_stucco_stonecutting"
     ]
   },
   "sends_telemetry_event": false

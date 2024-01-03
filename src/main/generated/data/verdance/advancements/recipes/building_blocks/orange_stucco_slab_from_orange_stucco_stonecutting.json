@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:orange_stucco_slab_from_orange_stucco_stonecutting"
+        "recipe": "verdance:orange_stucco_slab_from_orange_stucco_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:orange_stucco_slab_from_orange_stucco_stonecutting"
+      "verdance:orange_stucco_slab_from_orange_stucco_stonecutting"
     ]
   },
   "sends_telemetry_event": false

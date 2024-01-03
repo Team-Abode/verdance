@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:cyan_stucco_slab_from_cyan_stucco_stonecutting"
+        "recipe": "verdance:cyan_stucco_slab_from_cyan_stucco_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:cyan_stucco_slab_from_cyan_stucco_stonecutting"
+      "verdance:cyan_stucco_slab_from_cyan_stucco_stonecutting"
     ]
   },
   "sends_telemetry_event": false

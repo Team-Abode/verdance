@@ -1,0 +1,19 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["farmersdelight"]
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {
+      "item": "verdance:mulberry_crate"
+    }
+  ],
+  "result": {
+    "item": "verdance:mulberry",
+    "count": 9
+  }
+}

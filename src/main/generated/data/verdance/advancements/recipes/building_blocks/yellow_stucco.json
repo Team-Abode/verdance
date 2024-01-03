@@ -17,9 +17,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:sand"
-            ]
+            "tag": "minecraft:sand"
           }
         ]
       },
@@ -30,25 +28,12 @@
         "recipe": "verdance:yellow_stucco"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_yellow_dye": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:yellow_dye"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
       "has_clay",
       "has_sand",
-      "has_yellow_dye",
       "has_the_recipe"
     ]
   ],

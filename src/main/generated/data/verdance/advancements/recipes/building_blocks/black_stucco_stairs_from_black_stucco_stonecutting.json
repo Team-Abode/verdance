@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:black_stucco_stairs_from_black_stucco_stonecutting"
+        "recipe": "verdance:black_stucco_stairs_from_black_stucco_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:black_stucco_stairs_from_black_stucco_stonecutting"
+      "verdance:black_stucco_stairs_from_black_stucco_stonecutting"
     ]
   },
   "sends_telemetry_event": false

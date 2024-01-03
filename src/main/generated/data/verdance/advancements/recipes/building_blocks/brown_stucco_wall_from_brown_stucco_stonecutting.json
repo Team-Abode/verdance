@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:brown_stucco_wall_from_brown_stucco_stonecutting"
+        "recipe": "verdance:brown_stucco_wall_from_brown_stucco_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:brown_stucco_wall_from_brown_stucco_stonecutting"
+      "verdance:brown_stucco_wall_from_brown_stucco_stonecutting"
     ]
   },
   "sends_telemetry_event": false

@@ -1,19 +1,21 @@
 package com.teamabode.verdance.core.data.server;
 
-import com.teamabode.verdance.core.registry.VerdanceBlocks;
-import com.teamabode.verdance.core.registry.VerdanceItems;
+import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.core.misc.datagen.VerdanceFamilies;
 import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
+import com.teamabode.verdance.core.registry.VerdanceBlocks;
+import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.BlockFamily.Variant;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
@@ -29,7 +31,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
     }
 
     private static void stucco(Consumer<FinishedRecipe> exporter, BlockFamily family, Item dye) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, family.getBaseBlock(), 6).requires(Items.CLAY, 2).requires(Items.SAND, 2).requires(dye).unlockedBy(getHasName(Items.CLAY), has(Items.CLAY)).unlockedBy(getHasName(Items.SAND), has(Items.SAND)).unlockedBy(getHasName(dye), has(dye)).save(exporter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, family.getBaseBlock(), 8).requires(dye).requires(Items.CLAY, 4).requires(Ingredient.of(ItemTags.SAND), 4).group("stucco").unlockedBy(getHasName(Items.CLAY), has(Items.CLAY)).unlockedBy("has_sand", has(ItemTags.SAND)).save(exporter);
 
         stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, family.get(Variant.STAIRS), family.getBaseBlock());
         stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, family.get(Variant.SLAB), family.getBaseBlock(), 2);
@@ -37,32 +39,45 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
     }
 
     private static void cantaloupe(Consumer<FinishedRecipe> exporter) {
+        twoByTwoPacker(exporter, RecipeCategory.BUILDING_BLOCKS, VerdanceBlocks.CANTALOUPE, VerdanceItems.CANTALOUPE_SLICE);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, VerdanceItems.CANTALOUPE_SEEDS)
+                .requires(VerdanceItems.CANTALOUPE_SLICE)
+                .unlockedBy(getHasName(VerdanceItems.CANTALOUPE_SLICE), has(VerdanceItems.CANTALOUPE_SLICE))
+                .save(exporter);
+
         SimpleCookingRecipeBuilder.smelting(
-                Ingredient.of(VerdanceItems.CANTALOUPE_SLICE),
-                RecipeCategory.FOOD,
-                VerdanceItems.GRILLED_CANTALOUPE_SLICE,
-                0.25f,
-                200)
+                        Ingredient.of(VerdanceItems.CANTALOUPE_SLICE),
+                        RecipeCategory.FOOD,
+                        VerdanceItems.GRILLED_CANTALOUPE_SLICE,
+                        0.25f,
+                        200)
                 .unlockedBy("has_cantaloupe_slice", has(VerdanceItems.CANTALOUPE_SLICE))
                 .save(exporter);
-        RecipeProvider.simpleCookingRecipe(
-                exporter,
-                "smoking",
-                RecipeSerializer.SMOKING_RECIPE,
-                100,
-                VerdanceItems.CANTALOUPE_SLICE,
-                VerdanceItems.GRILLED_CANTALOUPE_SLICE,
-                0.25f
-        );
-        RecipeProvider.simpleCookingRecipe(
-                exporter,
-                "campfire_cooking",
-                RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
-                600,
-                VerdanceItems.CANTALOUPE_SLICE,
-                VerdanceItems.GRILLED_CANTALOUPE_SLICE,
-                0.25f
-        );
+        SimpleCookingRecipeBuilder.smoking(
+                        Ingredient.of(VerdanceItems.CANTALOUPE_SLICE),
+                        RecipeCategory.FOOD,
+                        VerdanceItems.GRILLED_CANTALOUPE_SLICE,
+                        0.25f,
+                        100)
+                .unlockedBy("has_cantaloupe_slice", has(VerdanceItems.CANTALOUPE_SLICE))
+                .save(exporter, new ResourceLocation(Verdance.MOD_ID, "grilled_cantaloupe_slice_from_smoking"));
+        SimpleCookingRecipeBuilder.campfireCooking(
+                        Ingredient.of(VerdanceItems.CANTALOUPE_SLICE),
+                        RecipeCategory.FOOD,
+                        VerdanceItems.GRILLED_CANTALOUPE_SLICE,
+                        0.25f,
+                        600)
+                .unlockedBy("has_cantaloupe_slice", has(VerdanceItems.CANTALOUPE_SLICE))
+                .save(exporter, new ResourceLocation(Verdance.MOD_ID, "grilled_cantaloupe_slice_from_campfire_cooking"));
+    }
+
+    public static void stonecutterResultFromBase(Consumer<FinishedRecipe> exporter, RecipeCategory category, ItemLike result, ItemLike material) {
+        stonecutterResultFromBase(exporter, category, result, material, 1);
+    }
+
+    public static void stonecutterResultFromBase(Consumer<FinishedRecipe> exporter, RecipeCategory category, ItemLike result, ItemLike material, int resultCount) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(material), category, result, resultCount).unlockedBy(RecipeProvider.getHasName(material), RecipeProvider.has(material)).save(exporter, new ResourceLocation(Verdance.MOD_ID, getConversionRecipeName(result, material) + "_stonecutting"));
     }
 
     public void buildRecipes(Consumer<FinishedRecipe> exporter) {
@@ -70,13 +85,6 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         woodFromLogs(exporter, VerdanceBlocks.MULBERRY_WOOD, VerdanceBlocks.MULBERRY_LOG);
         woodFromLogs(exporter, VerdanceBlocks.STRIPPED_MULBERRY_WOOD, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
         planksFromLog(exporter, VerdanceBlocks.MULBERRY_PLANKS, VerdanceItemTags.MULBERRY_LOGS, 4);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, VerdanceItems.CANTALOUPE_SEEDS, 4)
-        .requires(VerdanceItems.CANTALOUPE_SLICE)
-        .unlockedBy(getHasName(VerdanceItems.CANTALOUPE_SLICE), has(VerdanceItems.CANTALOUPE_SLICE))
-        .save(exporter);
-
-        twoByTwoPacker(exporter, RecipeCategory.MISC, VerdanceBlocks.CANTALOUPE, VerdanceItems.CANTALOUPE_SLICE);
 
         cantaloupe(exporter);
         hangingSign(exporter, VerdanceItems.MULBERRY_HANGING_SIGN, VerdanceBlocks.STRIPPED_MULBERRY_LOG);

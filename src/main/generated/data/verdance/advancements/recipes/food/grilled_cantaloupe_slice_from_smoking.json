@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:grilled_cantaloupe_slice_from_smoking"
+        "recipe": "verdance:grilled_cantaloupe_slice_from_smoking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:grilled_cantaloupe_slice_from_smoking"
+      "verdance:grilled_cantaloupe_slice_from_smoking"
     ]
   },
   "sends_telemetry_event": false
