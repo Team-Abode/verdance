@@ -1,18 +1,15 @@
 package com.teamabode.verdance.client.model;
 
-import com.teamabode.scribe.client.model.ScribeAnimatableModel;
+import com.teamabode.sketch.client.model.SketchAnimatableModel;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.client.VerdanceAnimations;
 import com.teamabode.verdance.common.entity.silkworm.Silkworm;
-import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.Mth;
-import org.joml.Vector3f;
 
-public class SilkwormModel extends ScribeAnimatableModel<Silkworm> {
+public class SilkwormModel extends SketchAnimatableModel<Silkworm> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Verdance.id("silkworm"), "main");
 	private final ModelPart root;
 

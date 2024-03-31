@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_light_gray_stucco",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_light_gray_stucco"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:light_gray_stucco_stairs_from_light_gray_stucco_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

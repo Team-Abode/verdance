@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_orange_stucco",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_orange_stucco"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:orange_stucco_wall_from_orange_stucco_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

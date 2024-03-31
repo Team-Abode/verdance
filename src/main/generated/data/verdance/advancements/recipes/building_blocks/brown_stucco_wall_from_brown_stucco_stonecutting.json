@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_brown_stucco",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_brown_stucco"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:brown_stucco_wall_from_brown_stucco_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

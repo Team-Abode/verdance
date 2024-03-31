@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_fragment",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_fragment"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:music_disc_range"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

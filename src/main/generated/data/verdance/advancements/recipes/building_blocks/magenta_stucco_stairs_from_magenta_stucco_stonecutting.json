@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_magenta_stucco",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_magenta_stucco"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:magenta_stucco_stairs_from_magenta_stucco_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

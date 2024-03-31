@@ -1,6 +1,6 @@
 package com.teamabode.verdance.core.registry;
 
-import com.teamabode.scribe.common.item.ScribeBoatItem;
+import com.teamabode.sketch.common.item.SketchBoatItem;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.item.CantaloupeJuiceItem;
 import com.teamabode.verdance.common.item.CantaloupeSliceItem;
@@ -9,7 +9,6 @@ import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.*;
 
 public class VerdanceItems {
@@ -27,8 +26,8 @@ public class VerdanceItems {
     public static final Item MULBERRY_SIGN = register("mulberry_sign", new SignItem(new Item.Properties().stacksTo(16), VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN));
     public static final Item MULBERRY_HANGING_SIGN = register("mulberry_hanging_sign", new HangingSignItem(VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN, new Item.Properties().stacksTo(16)));
 
-    public static final Item MULBERRY_BOAT = register("mulberry_boat", new ScribeBoatItem(new Item.Properties().stacksTo(1), VerdanceBoatType.MULBERRY, false));
-    public static final Item MULBERRY_CHEST_BOAT = register("mulberry_chest_boat", new ScribeBoatItem(new Item.Properties().stacksTo(1), VerdanceBoatType.MULBERRY, true));
+    public static final Item MULBERRY_BOAT = register("mulberry_boat", new SketchBoatItem(new Item.Properties().stacksTo(1), VerdanceBoatType.MULBERRY, false));
+    public static final Item MULBERRY_CHEST_BOAT = register("mulberry_chest_boat", new SketchBoatItem(new Item.Properties().stacksTo(1), VerdanceBoatType.MULBERRY, true));
 
     public static final Item SILK_MOTH_SPAWN_EGG = register("silk_moth_spawn_egg", new SpawnEggItem(VerdanceEntities.SILK_MOTH, 13542773, 16383172, new Item.Properties()));
     public static final Item SILKWORM_SPAWN_EGG = register("silkworm_spawn_egg", new SpawnEggItem(VerdanceEntities.SILKWORM, 0xEBEDE6, 0x75665D, new Item.Properties()));

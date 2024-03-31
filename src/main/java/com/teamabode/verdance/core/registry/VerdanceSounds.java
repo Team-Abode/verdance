@@ -8,7 +8,6 @@ import net.minecraft.sounds.SoundEvent;
 
 public class VerdanceSounds {
 
-    public static final SoundEvent BLOCK_CANTALOUPE_GROW = register("block.cantaloupe.grow");
     public static final SoundEvent MUSIC_DISC_RANGE = register("music_disc.range");
 
     public static void register() {

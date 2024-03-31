@@ -6,7 +6,7 @@
         "chance": 0.05,
         "feature": {
           "feature": {
-            "type": "scribe:sequence",
+            "type": "sketch:sequence",
             "config": {
               "features": [
                   {

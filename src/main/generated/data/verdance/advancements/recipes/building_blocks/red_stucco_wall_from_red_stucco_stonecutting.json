@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_red_stucco",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_red_stucco"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:red_stucco_wall_from_red_stucco_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

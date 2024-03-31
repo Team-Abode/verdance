@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_purple_stucco",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_purple_stucco"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:purple_stucco_stairs_from_purple_stucco_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

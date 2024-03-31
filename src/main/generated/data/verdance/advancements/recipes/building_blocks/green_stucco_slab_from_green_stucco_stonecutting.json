@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_green_stucco",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_green_stucco"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:green_stucco_slab_from_green_stucco_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

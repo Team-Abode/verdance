@@ -15,14 +15,18 @@ import org.spongepowered.asm.mixin.Mixin;
 public class SugarCaneBlockMixin implements BonemealableBlock {
     SugarCaneBlock sugarCaneBlock = SugarCaneBlock.class.cast(this);
 
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
-        return level.getBlockState(pos.above()).isAir() || this.getCaneHeight(level, pos) < 3;
+    @Override
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+        BlockPos abovePos = pos.above();
+        return level.getBlockState(abovePos).isAir() || this.getCaneHeight(level, pos) < 3;
     }
 
+    @Override
     public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         return randomSource.nextFloat() < 0.75F;
     }
 
+    @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos blockPos, BlockState blockState) {
         for (int i = 1; i < 3; i++) {
             if (level.getBlockState(blockPos.above(i)).canBeReplaced()) {

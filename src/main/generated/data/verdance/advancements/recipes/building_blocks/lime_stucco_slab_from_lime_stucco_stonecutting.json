@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_lime_stucco",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_lime_stucco"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:lime_stucco_slab_from_lime_stucco_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

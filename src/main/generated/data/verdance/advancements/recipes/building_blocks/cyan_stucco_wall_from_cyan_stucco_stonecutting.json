@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cyan_stucco",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cyan_stucco"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:cyan_stucco_wall_from_cyan_stucco_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

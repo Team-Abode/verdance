@@ -1,21 +1,17 @@
 package com.teamabode.verdance.client.model;
 
-import com.teamabode.scribe.client.model.ScribeAnimatableModel;
-import com.teamabode.scribe.core.api.animation.AnimationManager;
+import com.teamabode.sketch.client.model.SketchAnimatableModel;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.client.VerdanceAnimations;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
-import net.minecraft.client.animation.KeyframeAnimations;
-import net.minecraft.client.model.ModelUtils;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import org.joml.Vector3f;
 
-public class SilkMothModel extends ScribeAnimatableModel<SilkMoth> {
+public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Verdance.MOD_ID, "silk_moth"), "main");
 
 	private final ModelPart root;

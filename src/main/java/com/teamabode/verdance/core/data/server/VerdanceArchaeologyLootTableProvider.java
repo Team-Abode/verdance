@@ -18,7 +18,6 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
-@SuppressWarnings("all")
 public class VerdanceArchaeologyLootTableProvider implements FabricLootTableProvider {
     private final FabricDataOutput output;
 
@@ -85,6 +84,7 @@ public class VerdanceArchaeologyLootTableProvider implements FabricLootTableProv
         return tableBuilder.withPool(poolBuilder);
     }
 
+    @SuppressWarnings("all")
     public CompletableFuture<?> run(CachedOutput writer) {
         return FabricLootTableProviderImpl.run(writer, this, LootContextParamSets.ARCHAEOLOGY, output);
     }

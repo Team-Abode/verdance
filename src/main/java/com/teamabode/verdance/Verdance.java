@@ -1,9 +1,8 @@
 package com.teamabode.verdance;
 
-import com.teamabode.scribe.common.entity.boat.ScribeBoatDispenseItemBehavior;
-import com.teamabode.scribe.core.api.config.Config;
-import com.teamabode.scribe.core.api.config.ConfigBuilder;
-import com.teamabode.scribe.core.api.misc.BlockEntityAdditions;
+import com.teamabode.sketch.core.api.config.Config;
+import com.teamabode.sketch.core.api.config.ConfigBuilder;
+import com.teamabode.sketch.core.api.misc.BlockEntityAdditions;
 import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
 import com.teamabode.verdance.core.misc.VerdanceGroupEvents;
 import com.teamabode.verdance.core.misc.tag.VerdanceBiomeTags;
@@ -55,7 +54,6 @@ public class Verdance implements ModInitializer {
             VerdanceFD.register();
         }
         registerBlockEntityAdditions();
-        registerDispenserBehaviors();
         registerBiomeModifications();
         registerTrades();
     }
@@ -63,11 +61,6 @@ public class Verdance implements ModInitializer {
     public static void registerBlockEntityAdditions() {
         BlockEntityAdditions.appendBlocks(BlockEntityType.SIGN, VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN);
         BlockEntityAdditions.appendBlocks(BlockEntityType.HANGING_SIGN, VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
-    }
-
-    public static void registerDispenserBehaviors() {
-        DispenserBlock.registerBehavior(VerdanceItems.MULBERRY_BOAT, new ScribeBoatDispenseItemBehavior(VerdanceBoatType.MULBERRY));
-        DispenserBlock.registerBehavior(VerdanceItems.MULBERRY_CHEST_BOAT, new ScribeBoatDispenseItemBehavior(VerdanceBoatType.MULBERRY, true));
     }
 
     public static void registerBiomeModifications() {

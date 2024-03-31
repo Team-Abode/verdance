@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_yellow_stucco",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_yellow_stucco"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:yellow_stucco_slab_from_yellow_stucco_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

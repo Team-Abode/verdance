@@ -1,6 +1,6 @@
 package com.teamabode.verdance.core.data.client;
 
-import com.teamabode.verdance.core.misc.datagen.VerdanceFamilies;
+import com.teamabode.verdance.core.misc.data.VerdanceFamilies;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;

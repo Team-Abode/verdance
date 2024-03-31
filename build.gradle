@@ -53,8 +53,9 @@ dependencies {
 	include "com.github.Team-Abode:scribe:${rootProject.scribe_version}"
 
 	// Terrablender
-	modApi "com.github.glitchfiend:TerraBlender-fabric:1.20.1-${rootProject.terrablender_version}"
+	modApi "com.github.glitchfiend:TerraBlender-fabric:${rootProject.minecraft_version}-${rootProject.terrablender_version}"
 
+	/*
 	// Farmer's Delight
 	modImplementation "maven.modrinth:farmers-delight-fabric:${project.farmersdelight_version}"
 	// Every Compat
@@ -63,6 +64,7 @@ dependencies {
 	modRuntimeOnly "maven.modrinth:moonlight:${rootProject.moonlight_version}"
 	// Twigs
 	modRuntimeOnly "maven.modrinth:twigs:${rootProject.twigs_version}"
+	*/
 }
 
 base {

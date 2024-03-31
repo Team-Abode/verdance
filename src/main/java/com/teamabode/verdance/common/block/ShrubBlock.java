@@ -1,5 +1,6 @@
 package com.teamabode.verdance.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.teamabode.verdance.core.misc.worldgen.VerdanceConfiguredFeatures;
 import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
 import net.minecraft.core.BlockPos;
@@ -24,22 +25,32 @@ public class ShrubBlock extends BushBlock implements BonemealableBlock {
         super(properties);
     }
 
+    @Override
+    protected MapCodec<? extends BushBlock> codec() {
+        return null;
+    }
+
+    @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return SHAPE;
     }
 
+    @Override
     protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return blockState.is(VerdanceBlockTags.SHRUB_MAY_PLACE_ON);
     }
 
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos blockPos, BlockState blockState, boolean bl) {
-        return true;
+    @Override
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+        return false;
     }
 
+    @Override
     public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         return level.random.nextBoolean();
     }
 
+    @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
         level.registryAccess()
                 .registry(Registries.CONFIGURED_FEATURE)

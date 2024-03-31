@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cantaloupe_slice",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cantaloupe_slice"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:cantaloupe_seeds"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

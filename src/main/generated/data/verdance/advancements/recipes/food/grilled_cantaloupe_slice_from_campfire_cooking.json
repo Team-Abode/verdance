@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cantaloupe_slice",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cantaloupe_slice"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:grilled_cantaloupe_slice_from_campfire_cooking"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

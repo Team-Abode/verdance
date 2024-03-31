@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_stucco",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_stucco"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:red_stucco_wall"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

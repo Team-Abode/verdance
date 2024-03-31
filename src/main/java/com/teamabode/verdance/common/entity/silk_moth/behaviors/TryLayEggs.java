@@ -1,6 +1,5 @@
 package com.teamabode.verdance.common.entity.silk_moth.behaviors;
 
-import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import net.minecraft.core.BlockPos;
