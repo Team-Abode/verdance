@@ -4,9 +4,10 @@ import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.block.*;
 import com.teamabode.verdance.core.integration.compat.CompatBlock;
 import com.teamabode.verdance.core.integration.compat.CompatBlockItem;
-import com.teamabode.verdance.core.misc.data.VerdanceBlockSets;
-import com.teamabode.verdance.core.misc.data.VerdanceTreeGrowers;
-import com.teamabode.verdance.core.misc.data.VerdanceWoodType;
+import com.teamabode.verdance.core.misc.VerdanceBlockSets;
+import com.teamabode.verdance.core.misc.VerdanceSoundType;
+import com.teamabode.verdance.core.misc.VerdanceTreeGrowers;
+import com.teamabode.verdance.core.misc.VerdanceWoodType;
 import com.teamabode.verdance.core.misc.reference.VerdanceBlockReferences;
 import com.teamabode.verdance.core.misc.reference.VerdanceItemReferences;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -71,82 +72,82 @@ public class VerdanceBlocks {
 
     public static final Block SHRUB = register("shrub", new ShrubBlock(Properties.ofFullCopy(Blocks.AZALEA)));
 
-    public static final Block WHITE_STUCCO = register("white_stucco", stuccoBlock(DyeColor.WHITE));
+    public static final Block WHITE_STUCCO = register("white_stucco", createStuccoBlock(DyeColor.WHITE));
     public static final Block WHITE_STUCCO_STAIRS = register("white_stucco_stairs", new StairBlock(WHITE_STUCCO.defaultBlockState(), Properties.ofFullCopy(WHITE_STUCCO)));
     public static final Block WHITE_STUCCO_SLAB = register("white_stucco_slab", new SlabBlock(Properties.ofFullCopy(WHITE_STUCCO)));
     public static final Block WHITE_STUCCO_WALL = register("white_stucco_wall", new WallBlock(Properties.ofFullCopy(WHITE_STUCCO)));
 
-    public static final Block LIGHT_GRAY_STUCCO = register("light_gray_stucco", stuccoBlock(DyeColor.LIGHT_GRAY));
+    public static final Block LIGHT_GRAY_STUCCO = register("light_gray_stucco", createStuccoBlock(DyeColor.LIGHT_GRAY));
     public static final Block LIGHT_GRAY_STUCCO_STAIRS = register("light_gray_stucco_stairs", new StairBlock(LIGHT_GRAY_STUCCO.defaultBlockState(), Properties.ofFullCopy(LIGHT_GRAY_STUCCO)));
     public static final Block LIGHT_GRAY_STUCCO_SLAB = register("light_gray_stucco_slab", new SlabBlock(Properties.ofFullCopy(LIGHT_GRAY_STUCCO)));
     public static final Block LIGHT_GRAY_STUCCO_WALL = register("light_gray_stucco_wall", new WallBlock(Properties.ofFullCopy(LIGHT_GRAY_STUCCO)));
 
-    public static final Block GRAY_STUCCO = register("gray_stucco", stuccoBlock(DyeColor.GRAY));
+    public static final Block GRAY_STUCCO = register("gray_stucco", createStuccoBlock(DyeColor.GRAY));
     public static final Block GRAY_STUCCO_STAIRS = register("gray_stucco_stairs", new StairBlock(GRAY_STUCCO.defaultBlockState(), Properties.ofFullCopy(GRAY_STUCCO)));
     public static final Block GRAY_STUCCO_SLAB = register("gray_stucco_slab", new SlabBlock(Properties.ofFullCopy(GRAY_STUCCO)));
     public static final Block GRAY_STUCCO_WALL = register("gray_stucco_wall", new WallBlock(Properties.ofFullCopy(GRAY_STUCCO)));
 
-    public static final Block BLACK_STUCCO = register("black_stucco", stuccoBlock(DyeColor.BLACK));
+    public static final Block BLACK_STUCCO = register("black_stucco", createStuccoBlock(DyeColor.BLACK));
     public static final Block BLACK_STUCCO_STAIRS = register("black_stucco_stairs", new StairBlock(BLACK_STUCCO.defaultBlockState(), Properties.ofFullCopy(BLACK_STUCCO)));
     public static final Block BLACK_STUCCO_SLAB = register("black_stucco_slab", new SlabBlock(Properties.ofFullCopy(BLACK_STUCCO)));
     public static final Block BLACK_STUCCO_WALL = register("black_stucco_wall", new WallBlock(Properties.ofFullCopy(BLACK_STUCCO)));
 
-    public static final Block BROWN_STUCCO = register("brown_stucco", stuccoBlock(DyeColor.BROWN));
+    public static final Block BROWN_STUCCO = register("brown_stucco", createStuccoBlock(DyeColor.BROWN));
     public static final Block BROWN_STUCCO_STAIRS = register("brown_stucco_stairs", new StairBlock(BROWN_STUCCO.defaultBlockState(), Properties.ofFullCopy(BROWN_STUCCO)));
     public static final Block BROWN_STUCCO_SLAB = register("brown_stucco_slab", new SlabBlock(Properties.ofFullCopy(BROWN_STUCCO)));
     public static final Block BROWN_STUCCO_WALL = register("brown_stucco_wall", new WallBlock(Properties.ofFullCopy(BROWN_STUCCO)));
 
-    public static final Block RED_STUCCO = register("red_stucco", stuccoBlock(DyeColor.RED));
+    public static final Block RED_STUCCO = register("red_stucco", createStuccoBlock(DyeColor.RED));
     public static final Block RED_STUCCO_STAIRS = register("red_stucco_stairs", new StairBlock(RED_STUCCO.defaultBlockState(), Properties.ofFullCopy(RED_STUCCO)));
     public static final Block RED_STUCCO_SLAB = register("red_stucco_slab", new SlabBlock(Properties.ofFullCopy(RED_STUCCO)));
     public static final Block RED_STUCCO_WALL = register("red_stucco_wall", new WallBlock(Properties.ofFullCopy(RED_STUCCO)));
 
-    public static final Block ORANGE_STUCCO = register("orange_stucco", stuccoBlock(DyeColor.ORANGE));
+    public static final Block ORANGE_STUCCO = register("orange_stucco", createStuccoBlock(DyeColor.ORANGE));
     public static final Block ORANGE_STUCCO_STAIRS = register("orange_stucco_stairs", new StairBlock(ORANGE_STUCCO.defaultBlockState(), Properties.ofFullCopy(ORANGE_STUCCO)));
     public static final Block ORANGE_STUCCO_SLAB = register("orange_stucco_slab", new SlabBlock(Properties.ofFullCopy(ORANGE_STUCCO)));
     public static final Block ORANGE_STUCCO_WALL = register("orange_stucco_wall", new WallBlock(Properties.ofFullCopy(ORANGE_STUCCO)));
 
-    public static final Block YELLOW_STUCCO = register("yellow_stucco", stuccoBlock(DyeColor.YELLOW));
+    public static final Block YELLOW_STUCCO = register("yellow_stucco", createStuccoBlock(DyeColor.YELLOW));
     public static final Block YELLOW_STUCCO_STAIRS = register("yellow_stucco_stairs", new StairBlock(YELLOW_STUCCO.defaultBlockState(), Properties.ofFullCopy(YELLOW_STUCCO)));
     public static final Block YELLOW_STUCCO_SLAB = register("yellow_stucco_slab", new SlabBlock(Properties.ofFullCopy(YELLOW_STUCCO)));
     public static final Block YELLOW_STUCCO_WALL = register("yellow_stucco_wall", new WallBlock(Properties.ofFullCopy(YELLOW_STUCCO)));
 
-    public static final Block LIME_STUCCO = register("lime_stucco", stuccoBlock(DyeColor.LIME));
+    public static final Block LIME_STUCCO = register("lime_stucco", createStuccoBlock(DyeColor.LIME));
     public static final Block LIME_STUCCO_STAIRS = register("lime_stucco_stairs", new StairBlock(LIME_STUCCO.defaultBlockState(), Properties.ofFullCopy(LIME_STUCCO)));
     public static final Block LIME_STUCCO_SLAB = register("lime_stucco_slab", new SlabBlock(Properties.ofFullCopy(LIME_STUCCO)));
     public static final Block LIME_STUCCO_WALL = register("lime_stucco_wall", new WallBlock(Properties.ofFullCopy(LIME_STUCCO)));
 
-    public static final Block GREEN_STUCCO = register("green_stucco", stuccoBlock(DyeColor.GREEN));
+    public static final Block GREEN_STUCCO = register("green_stucco", createStuccoBlock(DyeColor.GREEN));
     public static final Block GREEN_STUCCO_STAIRS = register("green_stucco_stairs", new StairBlock(GREEN_STUCCO.defaultBlockState(), Properties.ofFullCopy(GREEN_STUCCO)));
     public static final Block GREEN_STUCCO_SLAB = register("green_stucco_slab", new SlabBlock(Properties.ofFullCopy(GREEN_STUCCO)));
     public static final Block GREEN_STUCCO_WALL = register("green_stucco_wall", new WallBlock(Properties.ofFullCopy(GREEN_STUCCO)));
 
-    public static final Block CYAN_STUCCO = register("cyan_stucco", stuccoBlock(DyeColor.CYAN));
+    public static final Block CYAN_STUCCO = register("cyan_stucco", createStuccoBlock(DyeColor.CYAN));
     public static final Block CYAN_STUCCO_STAIRS = register("cyan_stucco_stairs", new StairBlock(CYAN_STUCCO.defaultBlockState(), Properties.ofFullCopy(CYAN_STUCCO)));
     public static final Block CYAN_STUCCO_SLAB = register("cyan_stucco_slab", new SlabBlock(Properties.ofFullCopy(CYAN_STUCCO)));
     public static final Block CYAN_STUCCO_WALL = register("cyan_stucco_wall", new WallBlock(Properties.ofFullCopy(CYAN_STUCCO)));
 
-    public static final Block LIGHT_BLUE_STUCCO = register("light_blue_stucco", stuccoBlock(DyeColor.LIGHT_BLUE));
+    public static final Block LIGHT_BLUE_STUCCO = register("light_blue_stucco", createStuccoBlock(DyeColor.LIGHT_BLUE));
     public static final Block LIGHT_BLUE_STUCCO_STAIRS = register("light_blue_stucco_stairs", new StairBlock(LIGHT_BLUE_STUCCO.defaultBlockState(), Properties.ofFullCopy(LIGHT_BLUE_STUCCO)));
     public static final Block LIGHT_BLUE_STUCCO_SLAB = register("light_blue_stucco_slab", new SlabBlock(Properties.ofFullCopy(LIGHT_BLUE_STUCCO)));
     public static final Block LIGHT_BLUE_STUCCO_WALL = register("light_blue_stucco_wall", new WallBlock(Properties.ofFullCopy(LIGHT_BLUE_STUCCO)));
 
-    public static final Block BLUE_STUCCO = register("blue_stucco", stuccoBlock(DyeColor.BLUE));
+    public static final Block BLUE_STUCCO = register("blue_stucco", createStuccoBlock(DyeColor.BLUE));
     public static final Block BLUE_STUCCO_STAIRS = register("blue_stucco_stairs", new StairBlock(BLUE_STUCCO.defaultBlockState(), Properties.ofFullCopy(BLUE_STUCCO)));
     public static final Block BLUE_STUCCO_SLAB = register("blue_stucco_slab", new SlabBlock(Properties.ofFullCopy(BLUE_STUCCO)));
     public static final Block BLUE_STUCCO_WALL = register("blue_stucco_wall", new WallBlock(Properties.ofFullCopy(BLUE_STUCCO)));
 
-    public static final Block PURPLE_STUCCO = register("purple_stucco", stuccoBlock(DyeColor.PURPLE));
+    public static final Block PURPLE_STUCCO = register("purple_stucco", createStuccoBlock(DyeColor.PURPLE));
     public static final Block PURPLE_STUCCO_STAIRS = register("purple_stucco_stairs", new StairBlock(PURPLE_STUCCO.defaultBlockState(), Properties.ofFullCopy(PURPLE_STUCCO)));
     public static final Block PURPLE_STUCCO_SLAB = register("purple_stucco_slab", new SlabBlock(Properties.ofFullCopy(PURPLE_STUCCO)));
     public static final Block PURPLE_STUCCO_WALL = register("purple_stucco_wall", new WallBlock(Properties.ofFullCopy(PURPLE_STUCCO)));
 
-    public static final Block MAGENTA_STUCCO = register("magenta_stucco", stuccoBlock(DyeColor.MAGENTA));
+    public static final Block MAGENTA_STUCCO = register("magenta_stucco", createStuccoBlock(DyeColor.MAGENTA));
     public static final Block MAGENTA_STUCCO_STAIRS = register("magenta_stucco_stairs", new StairBlock(MAGENTA_STUCCO.defaultBlockState(), Properties.ofFullCopy(MAGENTA_STUCCO)));
     public static final Block MAGENTA_STUCCO_SLAB = register("magenta_stucco_slab", new SlabBlock(Properties.ofFullCopy(MAGENTA_STUCCO)));
     public static final Block MAGENTA_STUCCO_WALL = register("magenta_stucco_wall", new WallBlock(Properties.ofFullCopy(MAGENTA_STUCCO)));
 
-    public static final Block PINK_STUCCO = register("pink_stucco", stuccoBlock(DyeColor.PINK));
+    public static final Block PINK_STUCCO = register("pink_stucco", createStuccoBlock(DyeColor.PINK));
     public static final Block PINK_STUCCO_STAIRS = register("pink_stucco_stairs", new StairBlock(PINK_STUCCO.defaultBlockState(), Properties.ofFullCopy(PINK_STUCCO)));
     public static final Block PINK_STUCCO_SLAB = register("pink_stucco_slab", new SlabBlock(Properties.ofFullCopy(PINK_STUCCO)));
     public static final Block PINK_STUCCO_WALL = register("pink_stucco_wall", new WallBlock(Properties.ofFullCopy(PINK_STUCCO)));
@@ -154,9 +155,10 @@ public class VerdanceBlocks {
     public static final Block SILKWORM_EGGS = register("silkworm_eggs", new SilkWormEggsBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.FROGSPAWN).instabreak().noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
 
 
-    private static Block stuccoBlock(DyeColor dyeColor) {
+    private static Block createStuccoBlock(DyeColor dyeColor) {
         return new Block(Properties.of()
                 .mapColor(dyeColor)
+                .sound(VerdanceSoundType.STUCCO)
                 .requiresCorrectToolForDrops()
                 .instrument(NoteBlockInstrument.BASEDRUM)
                 .strength(1.5F, 5.5F)

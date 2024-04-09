@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.misc.data;
+package com.teamabode.verdance.core.misc;
 
 import com.teamabode.verdance.Verdance;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;

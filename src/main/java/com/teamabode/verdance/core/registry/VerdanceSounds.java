@@ -8,9 +8,16 @@ import net.minecraft.sounds.SoundEvent;
 
 public class VerdanceSounds {
 
+    public static final SoundEvent BLOCK_STUCCO_BREAK = register("block.stucco.break");
+    public static final SoundEvent BLOCK_STUCCO_FALL = register("block.stucco.fall");
+    public static final SoundEvent BLOCK_STUCCO_HIT = register("block.stucco.hit");
+    public static final SoundEvent BLOCK_STUCCO_STEP = register("block.stucco.step");
+    public static final SoundEvent BLOCK_STUCCO_PLACE = register("block.stucco.place");
+
     public static final SoundEvent MUSIC_DISC_RANGE = register("music_disc.range");
 
     public static void register() {
+
 
     }
 

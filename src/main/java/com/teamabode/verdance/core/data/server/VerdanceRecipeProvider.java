@@ -1,7 +1,7 @@
 package com.teamabode.verdance.core.data.server;
 
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.core.misc.data.VerdanceFamilies;
+import com.teamabode.verdance.core.misc.VerdanceFamilies;
 import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;

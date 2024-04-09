@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.misc.data;
+package com.teamabode.verdance.core.misc;
 
 import com.google.common.collect.Maps;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;

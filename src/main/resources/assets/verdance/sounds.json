@@ -1,12 +1,53 @@
 {
-  "block.cantaloupe.grow": {
+  "block.stucco.break": {
     "sounds": [
-      "verdance:block/cantaloupe/grow1",
-      "verdance:block/cantaloupe/grow2",
-      "verdance:block/cantaloupe/grow3",
-      "verdance:block/cantaloupe/grow4"
+      "verdance:block/stucco/break1",
+      "verdance:block/stucco/break2",
+      "verdance:block/stucco/break3",
+      "verdance:block/stucco/break4"
     ],
-    "subtitle": "subtitles.verdance.block.cantaloupe.grow"
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.stucco.fall": {
+    "sounds": [
+      "verdance:block/stucco/step1",
+      "verdance:block/stucco/step2",
+      "verdance:block/stucco/step3",
+      "verdance:block/stucco/step4",
+      "verdance:block/stucco/step5",
+      "verdance:block/stucco/step6"
+    ]
+  },
+  "block.stucco.hit": {
+    "sounds": [
+      "verdance:block/stucco/step1",
+      "verdance:block/stucco/step2",
+      "verdance:block/stucco/step3",
+      "verdance:block/stucco/step4",
+      "verdance:block/stucco/step5",
+      "verdance:block/stucco/step6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.stucco.place": {
+    "sounds": [
+      "verdance:block/stucco/break1",
+      "verdance:block/stucco/break2",
+      "verdance:block/stucco/break3",
+      "verdance:block/stucco/break4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.stucco.step": {
+    "sounds": [
+      "verdance:block/stucco/step1",
+      "verdance:block/stucco/step2",
+      "verdance:block/stucco/step3",
+      "verdance:block/stucco/step4",
+      "verdance:block/stucco/step5",
+      "verdance:block/stucco/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
   },
   "music_disc.range": {
     "sounds": [
