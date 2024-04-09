@@ -5,7 +5,7 @@ import com.teamabode.verdance.client.model.SilkwormModel;
 import com.teamabode.verdance.client.renderer.SilkMothRenderer;
 import com.teamabode.verdance.client.renderer.SilkwormRenderer;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
-import com.teamabode.verdance.core.registry.VerdanceEntities;
+import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
@@ -29,8 +29,8 @@ public class VerdanceClient implements ClientModInitializer {
     private static void registerRenderers() {
         EntityModelLayerRegistry.registerModelLayer(SilkMothModel.LAYER_LOCATION, SilkMothModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(SilkwormModel.LAYER_LOCATION, SilkwormModel::createBodyLayer);
-        EntityRendererRegistry.register(VerdanceEntities.SILK_MOTH, SilkMothRenderer::new);
-        EntityRendererRegistry.register(VerdanceEntities.SILKWORM, SilkwormRenderer::new);
+        EntityRendererRegistry.register(VerdanceEntityTypes.SILK_MOTH, SilkMothRenderer::new);
+        EntityRendererRegistry.register(VerdanceEntityTypes.SILKWORM, SilkwormRenderer::new);
     }
 
     private static void setRenderTypes() {

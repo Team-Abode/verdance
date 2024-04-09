@@ -1,14 +1,13 @@
 package com.teamabode.verdance.common.entity.silk_moth.behaviors;
 
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
-import com.teamabode.verdance.core.registry.VerdanceMemories;
+import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
-import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.phys.Vec3;
 
@@ -19,7 +18,7 @@ public class AerialStroll extends ImprovedOneShot<SilkMoth> {
     public void requires(Map<MemoryModuleType<?>, MemoryStatus> map) {
         map.put(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT);
         map.put(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED);
-        map.put(VerdanceMemories.IS_FLYING, MemoryStatus.VALUE_PRESENT);
+        map.put(VerdanceMemoryModuleTypes.IS_FLYING, MemoryStatus.VALUE_PRESENT);
     }
 
     public void run(ServerLevel level, SilkMoth entity, long gameTime) {

@@ -8,10 +8,9 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.levelgen.Heightmap;
 
-public class VerdanceEntities {
+public class VerdanceEntityTypes {
 
     public static final EntityType<SilkMoth> SILK_MOTH = register(
             "silk_moth",

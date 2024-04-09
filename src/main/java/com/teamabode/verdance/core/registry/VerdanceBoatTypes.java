@@ -7,7 +7,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 
-public class VerdanceBoatType {
+public class VerdanceBoatTypes {
     public static final SketchBoatType MULBERRY = register("mulberry");
 
     private static SketchBoatType register(String name) {

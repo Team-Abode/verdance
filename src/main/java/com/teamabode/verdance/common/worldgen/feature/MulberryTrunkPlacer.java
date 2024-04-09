@@ -2,7 +2,7 @@ package com.teamabode.verdance.common.worldgen.feature;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.teamabode.verdance.core.registry.VerdanceTrunkPlacers;
+import com.teamabode.verdance.core.registry.VerdanceTrunkPlacerTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -78,6 +78,6 @@ public class MulberryTrunkPlacer extends TrunkPlacer {
     }
 
     protected TrunkPlacerType<?> type() {
-        return VerdanceTrunkPlacers.MULBERRY_TRUNK_PLACER;
+        return VerdanceTrunkPlacerTypes.MULBERRY_TRUNK_PLACER;
     }
 }

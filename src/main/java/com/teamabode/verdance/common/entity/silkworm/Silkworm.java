@@ -3,7 +3,7 @@ package com.teamabode.verdance.common.entity.silkworm;
 import com.mojang.serialization.Dynamic;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
 import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
-import com.teamabode.verdance.core.registry.VerdanceEntities;
+import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -142,7 +142,7 @@ public class Silkworm extends PathfinderMob {
 
     protected void convert() {
         if (this.level() instanceof ServerLevel server) {
-            SilkMoth silkMoth = VerdanceEntities.SILK_MOTH.create(this.level());
+            SilkMoth silkMoth = VerdanceEntityTypes.SILK_MOTH.create(this.level());
             if (silkMoth != null) {
                 silkMoth.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
                 silkMoth.finalizeSpawn(server, server.getCurrentDifficultyAt(silkMoth.blockPosition()), MobSpawnType.CONVERSION, null, null);

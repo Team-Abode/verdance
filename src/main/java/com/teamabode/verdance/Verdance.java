@@ -4,7 +4,7 @@ import com.teamabode.sketch.core.api.config.Config;
 import com.teamabode.sketch.core.api.config.ConfigBuilder;
 import com.teamabode.sketch.core.api.misc.BlockEntityAdditions;
 import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
-import com.teamabode.verdance.core.misc.VerdanceGroupEvents;
+import com.teamabode.verdance.core.misc.VerdanceItemGroupEvents;
 import com.teamabode.verdance.core.misc.tag.VerdanceBiomeTags;
 import com.teamabode.verdance.core.misc.worldgen.VerdancePlacedFeatures;
 import com.teamabode.verdance.core.registry.*;
@@ -15,7 +15,6 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerTrades;
-import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import org.slf4j.Logger;
@@ -38,17 +37,17 @@ public class Verdance implements ModInitializer {
             .build();
 
     public void onInitialize() {
-        VerdanceEntities.register();
+        VerdanceEntityTypes.register();
         VerdanceBlocks.register();
         VerdanceItems.register();
         VerdanceFeatures.register();
-        VerdanceSounds.register();
-        VerdanceGroupEvents.register();
-        VerdanceBoatType.register();
-        VerdanceTrunkPlacers.register();
+        VerdanceSoundEvents.register();
+        VerdanceItemGroupEvents.register();
+        VerdanceBoatTypes.register();
+        VerdanceTrunkPlacerTypes.register();
         VerdanceActivities.register();
-        VerdanceSensors.register();
-        VerdanceMemories.register();
+        VerdanceSensorTypes.register();
+        VerdanceMemoryModuleTypes.register();
 
         if (FabricLoader.getInstance().isModLoaded("farmersdelight")) {
             VerdanceFD.register();

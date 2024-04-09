@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
-import com.teamabode.verdance.core.registry.VerdanceSensors;
+import com.teamabode.verdance.core.registry.VerdanceSensorTypes;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -33,7 +33,7 @@ public class SilkwormAi {
     );
 
     public static final List<SensorType<? extends Sensor<? super Silkworm>>> SENSORS = ImmutableList.of(
-            VerdanceSensors.SILKWORM_TEMPTATIONS,
+            VerdanceSensorTypes.SILKWORM_TEMPTATIONS,
             SensorType.NEAREST_LIVING_ENTITIES,
             SensorType.HURT_BY
     );

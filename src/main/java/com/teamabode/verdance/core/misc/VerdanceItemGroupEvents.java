@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
-public class VerdanceGroupEvents {
+public class VerdanceItemGroupEvents {
 
     public static void register() {
         appendItemsAfter(CreativeModeTabs.BUILDING_BLOCKS, Items.CHERRY_BUTTON,

@@ -1,7 +1,7 @@
 package com.teamabode.verdance.common.block;
 
 import com.teamabode.verdance.common.entity.silkworm.Silkworm;
-import com.teamabode.verdance.core.registry.VerdanceEntities;
+import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -57,7 +57,7 @@ public class SilkWormEggsBlock extends Block {
         int count = random.nextInt(2) + 2;
 
         for (int i = 0; i < count; i++) {
-            Silkworm silkworm = VerdanceEntities.SILKWORM.create(level);
+            Silkworm silkworm = VerdanceEntityTypes.SILKWORM.create(level);
             if (silkworm == null) continue;
 
             silkworm.setPos(pos.getCenter().offsetRandom(random, 0.25f));

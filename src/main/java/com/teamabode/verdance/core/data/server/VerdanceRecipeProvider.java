@@ -1,7 +1,7 @@
 package com.teamabode.verdance.core.data.server;
 
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.core.misc.VerdanceFamilies;
+import com.teamabode.verdance.core.misc.VerdanceBlockFamilies;
 import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
@@ -80,7 +80,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
     }
 
     public void buildRecipes(RecipeOutput exporter) {
-        VerdanceFamilies.getAllFamilies().filter(BlockFamily::shouldGenerateRecipe).forEach(family -> RecipeProvider.generateRecipes(exporter, family, FeatureFlagSet.of(FeatureFlags.VANILLA)));
+        VerdanceBlockFamilies.getAllFamilies().filter(BlockFamily::shouldGenerateRecipe).forEach(family -> RecipeProvider.generateRecipes(exporter, family, FeatureFlagSet.of(FeatureFlags.VANILLA)));
         woodFromLogs(exporter, VerdanceBlocks.MULBERRY_WOOD, VerdanceBlocks.MULBERRY_LOG);
         woodFromLogs(exporter, VerdanceBlocks.STRIPPED_MULBERRY_WOOD, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
         planksFromLog(exporter, VerdanceBlocks.MULBERRY_PLANKS, VerdanceItemTags.MULBERRY_LOGS, 4);
@@ -88,21 +88,21 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         cantaloupe(exporter);
         hangingSign(exporter, VerdanceItems.MULBERRY_HANGING_SIGN, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
         rangeDisc(exporter);
-        stucco(exporter, VerdanceFamilies.WHITE_STUCCO, Items.WHITE_DYE);
-        stucco(exporter, VerdanceFamilies.LIGHT_GRAY_STUCCO, Items.LIGHT_GRAY_DYE);
-        stucco(exporter, VerdanceFamilies.GRAY_STUCCO, Items.GRAY_DYE);
-        stucco(exporter, VerdanceFamilies.BLACK_STUCCO, Items.BLACK_DYE);
-        stucco(exporter, VerdanceFamilies.BROWN_STUCCO, Items.BROWN_DYE);
-        stucco(exporter, VerdanceFamilies.RED_STUCCO, Items.RED_DYE);
-        stucco(exporter, VerdanceFamilies.ORANGE_STUCCO, Items.ORANGE_DYE);
-        stucco(exporter, VerdanceFamilies.YELLOW_STUCCO, Items.YELLOW_DYE);
-        stucco(exporter, VerdanceFamilies.LIME_STUCCO, Items.LIME_DYE);
-        stucco(exporter, VerdanceFamilies.GREEN_STUCCO, Items.GREEN_DYE);
-        stucco(exporter, VerdanceFamilies.CYAN_STUCCO, Items.CYAN_DYE);
-        stucco(exporter, VerdanceFamilies.LIGHT_BLUE_STUCCO, Items.LIGHT_BLUE_DYE);
-        stucco(exporter, VerdanceFamilies.BLUE_STUCCO, Items.BLUE_DYE);
-        stucco(exporter, VerdanceFamilies.PURPLE_STUCCO, Items.PURPLE_DYE);
-        stucco(exporter, VerdanceFamilies.MAGENTA_STUCCO, Items.MAGENTA_DYE);
-        stucco(exporter, VerdanceFamilies.PINK_STUCCO, Items.PINK_DYE);
+        stucco(exporter, VerdanceBlockFamilies.WHITE_STUCCO, Items.WHITE_DYE);
+        stucco(exporter, VerdanceBlockFamilies.LIGHT_GRAY_STUCCO, Items.LIGHT_GRAY_DYE);
+        stucco(exporter, VerdanceBlockFamilies.GRAY_STUCCO, Items.GRAY_DYE);
+        stucco(exporter, VerdanceBlockFamilies.BLACK_STUCCO, Items.BLACK_DYE);
+        stucco(exporter, VerdanceBlockFamilies.BROWN_STUCCO, Items.BROWN_DYE);
+        stucco(exporter, VerdanceBlockFamilies.RED_STUCCO, Items.RED_DYE);
+        stucco(exporter, VerdanceBlockFamilies.ORANGE_STUCCO, Items.ORANGE_DYE);
+        stucco(exporter, VerdanceBlockFamilies.YELLOW_STUCCO, Items.YELLOW_DYE);
+        stucco(exporter, VerdanceBlockFamilies.LIME_STUCCO, Items.LIME_DYE);
+        stucco(exporter, VerdanceBlockFamilies.GREEN_STUCCO, Items.GREEN_DYE);
+        stucco(exporter, VerdanceBlockFamilies.CYAN_STUCCO, Items.CYAN_DYE);
+        stucco(exporter, VerdanceBlockFamilies.LIGHT_BLUE_STUCCO, Items.LIGHT_BLUE_DYE);
+        stucco(exporter, VerdanceBlockFamilies.BLUE_STUCCO, Items.BLUE_DYE);
+        stucco(exporter, VerdanceBlockFamilies.PURPLE_STUCCO, Items.PURPLE_DYE);
+        stucco(exporter, VerdanceBlockFamilies.MAGENTA_STUCCO, Items.MAGENTA_DYE);
+        stucco(exporter, VerdanceBlockFamilies.PINK_STUCCO, Items.PINK_DYE);
     }
 }

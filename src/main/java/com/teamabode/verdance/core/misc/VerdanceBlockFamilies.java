@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class VerdanceFamilies {
+public class VerdanceBlockFamilies {
     private static final Map<Block, BlockFamily> MAP = Maps.newHashMap();
     public static final BlockFamily MULBERRY = create(VerdanceBlocks.MULBERRY_PLANKS).stairs(VerdanceBlocks.MULBERRY_STAIRS).slab(VerdanceBlocks.MULBERRY_SLAB).fence(VerdanceBlocks.MULBERRY_FENCE).fenceGate(VerdanceBlocks.MULBERRY_FENCE_GATE).door(VerdanceBlocks.MULBERRY_DOOR).trapdoor(VerdanceBlocks.MULBERRY_TRAPDOOR).pressurePlate(VerdanceBlocks.MULBERRY_PRESSURE_PLATE).button(VerdanceBlocks.MULBERRY_BUTTON).sign(VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN).recipeGroupPrefix("wooden").recipeUnlockedBy("has_planks").getFamily();
 

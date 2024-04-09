@@ -2,7 +2,7 @@ package com.teamabode.verdance.common.entity.silk_moth.sensor;
 
 import com.google.common.collect.ImmutableSet;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
-import com.teamabode.verdance.core.registry.VerdanceMemories;
+import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.ai.Brain;
@@ -25,14 +25,14 @@ public class SilkMothSensor extends Sensor<SilkMoth> {
         if (entity.level().isDay()) {
             wantsToSleep = Optional.of(Unit.INSTANCE);
         }
-        brain.setMemory(VerdanceMemories.IS_FLYING, isFlying);
-        brain.setMemory(VerdanceMemories.WANTS_TO_SLEEP, wantsToSleep);
+        brain.setMemory(VerdanceMemoryModuleTypes.IS_FLYING, isFlying);
+        brain.setMemory(VerdanceMemoryModuleTypes.WANTS_TO_SLEEP, wantsToSleep);
     }
 
     public Set<MemoryModuleType<?>> requires() {
         return ImmutableSet.of(
-                VerdanceMemories.IS_FLYING,
-                VerdanceMemories.WANTS_TO_SLEEP
+                VerdanceMemoryModuleTypes.IS_FLYING,
+                VerdanceMemoryModuleTypes.WANTS_TO_SLEEP
         );
     }
 }

@@ -2,7 +2,7 @@ package com.teamabode.verdance.common.entity.silk_moth.behaviors;
 
 import com.google.common.collect.ImmutableMap;
 import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
-import com.teamabode.verdance.core.registry.VerdanceMemories;
+import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.ai.behavior.Behavior;
@@ -14,7 +14,7 @@ public class TakeOff extends Behavior<SilkMoth> {
     public TakeOff() {
         super(ImmutableMap.of(
                 MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryStatus.VALUE_PRESENT,
-                VerdanceMemories.IS_FLYING, MemoryStatus.VALUE_ABSENT
+                VerdanceMemoryModuleTypes.IS_FLYING, MemoryStatus.VALUE_ABSENT
         ));
     }
 
@@ -24,6 +24,6 @@ public class TakeOff extends Behavior<SilkMoth> {
 
     protected void start(ServerLevel level, SilkMoth entity, long gameTime) {
         entity.setFlying(true);
-        entity.getBrain().setMemory(VerdanceMemories.IS_FLYING, Unit.INSTANCE);
+        entity.getBrain().setMemory(VerdanceMemoryModuleTypes.IS_FLYING, Unit.INSTANCE);
     }
 }

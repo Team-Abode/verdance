@@ -1,6 +1,6 @@
 package com.teamabode.verdance.core.data.client;
 
-import com.teamabode.verdance.core.misc.VerdanceFamilies;
+import com.teamabode.verdance.core.misc.VerdanceBlockFamilies;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -26,7 +26,7 @@ public class VerdanceModelProvider extends FabricModelProvider {
     }
 
     public void generateBlockStateModels(BlockModelGenerators generator) {
-        VerdanceFamilies.getAllFamilies().forEach(family -> generator.family(family.getBaseBlock()).generateFor(family));
+        VerdanceBlockFamilies.getAllFamilies().forEach(family -> generator.family(family.getBaseBlock()).generateFor(family));
         generator.woodProvider(VerdanceBlocks.MULBERRY_LOG).logWithHorizontal(VerdanceBlocks.MULBERRY_LOG).wood(VerdanceBlocks.MULBERRY_WOOD);
         generator.woodProvider(VerdanceBlocks.STRIPPED_MULBERRY_LOG).logWithHorizontal(VerdanceBlocks.STRIPPED_MULBERRY_LOG).wood(VerdanceBlocks.STRIPPED_MULBERRY_WOOD);
         generator.createTrivialBlock(VerdanceBlocks.MULBERRY_LEAVES, TexturedModel.LEAVES);

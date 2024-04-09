@@ -6,7 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 
-public class VerdanceSounds {
+public class VerdanceSoundEvents {
 
     public static final SoundEvent BLOCK_STUCCO_BREAK = register("block.stucco.break");
     public static final SoundEvent BLOCK_STUCCO_FALL = register("block.stucco.fall");

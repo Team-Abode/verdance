@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 
 import java.util.Optional;
 
-public class VerdanceMemories {
+public class VerdanceMemoryModuleTypes {
     public static final MemoryModuleType<Unit> IS_FLYING = register("is_flying");
     public static final MemoryModuleType<Unit> WANTS_TO_SLEEP = register("wants_to_sleep");
 

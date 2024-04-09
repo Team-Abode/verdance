@@ -5,9 +5,9 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import com.teamabode.verdance.common.entity.silk_moth.behaviors.*;
 import com.teamabode.verdance.core.registry.VerdanceActivities;
-import com.teamabode.verdance.core.registry.VerdanceEntities;
-import com.teamabode.verdance.core.registry.VerdanceMemories;
-import com.teamabode.verdance.core.registry.VerdanceSensors;
+import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
+import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
+import com.teamabode.verdance.core.registry.VerdanceSensorTypes;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
@@ -41,13 +41,13 @@ public class SilkMothAi {
             MemoryModuleType.BREED_TARGET,
             MemoryModuleType.NEAREST_LIVING_ENTITIES,
             MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
-            VerdanceMemories.IS_FLYING,
-            VerdanceMemories.WANTS_TO_SLEEP
+            VerdanceMemoryModuleTypes.IS_FLYING,
+            VerdanceMemoryModuleTypes.WANTS_TO_SLEEP
     );
 
     public static final List<SensorType<? extends Sensor<? super SilkMoth>>> SENSORS = ImmutableList.of(
-            VerdanceSensors.SILK_MOTH_SENSOR,
-            VerdanceSensors.SILK_MOTH_TEMPTATIONS,
+            VerdanceSensorTypes.SILK_MOTH_SENSOR,
+            VerdanceSensorTypes.SILK_MOTH_TEMPTATIONS,
             SensorType.NEAREST_LIVING_ENTITIES,
             SensorType.HURT_BY
     );
@@ -75,7 +75,7 @@ public class SilkMothAi {
 
     private static void addIdleActivities(Brain<SilkMoth> brain) {
         brain.addActivity(Activity.IDLE, ImmutableList.of(
-                Pair.of(0, new AnimalMakeLove(VerdanceEntities.SILK_MOTH, 1.0f)),
+                Pair.of(0, new AnimalMakeLove(VerdanceEntityTypes.SILK_MOTH, 1.0f)),
                 Pair.of(1, new FollowTemptation(livingEntity -> 1.5f)),
                 Pair.of(2, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
                 Pair.of(3, addIdleBehaviors())
@@ -93,7 +93,7 @@ public class SilkMothAi {
     private static void addSleepActivities(Brain<SilkMoth> brain) {
         brain.addActivityWithConditions(VerdanceActivities.SLEEP, ImmutableList.of(
                 Pair.of(1, addIdleBehaviors())
-        ), ImmutableSet.of(Pair.of(VerdanceMemories.WANTS_TO_SLEEP, MemoryStatus.VALUE_PRESENT)));
+        ), ImmutableSet.of(Pair.of(VerdanceMemoryModuleTypes.WANTS_TO_SLEEP, MemoryStatus.VALUE_PRESENT)));
     }
 
     public static void updateActivity(SilkMoth silkMoth) {

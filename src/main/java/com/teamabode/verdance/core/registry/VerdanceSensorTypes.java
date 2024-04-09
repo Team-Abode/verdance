@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.sensing.TemptingSensor;
 
 import java.util.function.Supplier;
 
-public class VerdanceSensors {
+public class VerdanceSensorTypes {
 
     public static final SensorType<SilkMothSensor> SILK_MOTH_SENSOR = register("silk_moth_sensor", SilkMothSensor::new);
     public static final SensorType<TemptingSensor> SILK_MOTH_TEMPTATIONS = register("silk_moth_temptations", () -> new TemptingSensor(SilkMothAi.getTemptations()));

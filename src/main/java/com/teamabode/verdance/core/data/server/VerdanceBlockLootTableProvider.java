@@ -1,6 +1,6 @@
 package com.teamabode.verdance.core.data.server;
 
-import com.teamabode.verdance.core.misc.VerdanceFamilies;
+import com.teamabode.verdance.core.misc.VerdanceBlockFamilies;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -83,22 +83,22 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     }
 
     private void stucco() {
-        addStucco(VerdanceFamilies.WHITE_STUCCO);
-        addStucco(VerdanceFamilies.LIGHT_GRAY_STUCCO);
-        addStucco(VerdanceFamilies.GRAY_STUCCO);
-        addStucco(VerdanceFamilies.BLACK_STUCCO);
-        addStucco(VerdanceFamilies.BROWN_STUCCO);
-        addStucco(VerdanceFamilies.RED_STUCCO);
-        addStucco(VerdanceFamilies.ORANGE_STUCCO);
-        addStucco(VerdanceFamilies.YELLOW_STUCCO);
-        addStucco(VerdanceFamilies.LIME_STUCCO);
-        addStucco(VerdanceFamilies.GREEN_STUCCO);
-        addStucco(VerdanceFamilies.CYAN_STUCCO);
-        addStucco(VerdanceFamilies.LIGHT_BLUE_STUCCO);
-        addStucco(VerdanceFamilies.BLUE_STUCCO);
-        addStucco(VerdanceFamilies.PURPLE_STUCCO);
-        addStucco(VerdanceFamilies.MAGENTA_STUCCO);
-        addStucco(VerdanceFamilies.PINK_STUCCO);
+        addStucco(VerdanceBlockFamilies.WHITE_STUCCO);
+        addStucco(VerdanceBlockFamilies.LIGHT_GRAY_STUCCO);
+        addStucco(VerdanceBlockFamilies.GRAY_STUCCO);
+        addStucco(VerdanceBlockFamilies.BLACK_STUCCO);
+        addStucco(VerdanceBlockFamilies.BROWN_STUCCO);
+        addStucco(VerdanceBlockFamilies.RED_STUCCO);
+        addStucco(VerdanceBlockFamilies.ORANGE_STUCCO);
+        addStucco(VerdanceBlockFamilies.YELLOW_STUCCO);
+        addStucco(VerdanceBlockFamilies.LIME_STUCCO);
+        addStucco(VerdanceBlockFamilies.GREEN_STUCCO);
+        addStucco(VerdanceBlockFamilies.CYAN_STUCCO);
+        addStucco(VerdanceBlockFamilies.LIGHT_BLUE_STUCCO);
+        addStucco(VerdanceBlockFamilies.BLUE_STUCCO);
+        addStucco(VerdanceBlockFamilies.PURPLE_STUCCO);
+        addStucco(VerdanceBlockFamilies.MAGENTA_STUCCO);
+        addStucco(VerdanceBlockFamilies.PINK_STUCCO);
     }
 
     private void addStucco(BlockFamily stuccoFamily) {

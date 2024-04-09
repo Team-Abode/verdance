@@ -4,10 +4,10 @@ import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.block.*;
 import com.teamabode.verdance.core.integration.compat.CompatBlock;
 import com.teamabode.verdance.core.integration.compat.CompatBlockItem;
-import com.teamabode.verdance.core.misc.VerdanceBlockSets;
-import com.teamabode.verdance.core.misc.VerdanceSoundType;
+import com.teamabode.verdance.core.misc.VerdanceBlockSetTypes;
+import com.teamabode.verdance.core.misc.VerdanceSoundTypes;
 import com.teamabode.verdance.core.misc.VerdanceTreeGrowers;
-import com.teamabode.verdance.core.misc.VerdanceWoodType;
+import com.teamabode.verdance.core.misc.VerdanceWoodTypes;
 import com.teamabode.verdance.core.misc.reference.VerdanceBlockReferences;
 import com.teamabode.verdance.core.misc.reference.VerdanceItemReferences;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -36,11 +36,11 @@ public class VerdanceBlocks {
     public static final Block MULBERRY_STAIRS = register("mulberry_stairs", new StairBlock(MULBERRY_PLANKS.defaultBlockState(), Properties.ofFullCopy(MULBERRY_PLANKS)));
     public static final Block MULBERRY_SLAB = register("mulberry_slab", new SlabBlock(Properties.ofFullCopy(MULBERRY_PLANKS)));
     public static final Block MULBERRY_FENCE = register("mulberry_fence", new FenceBlock(Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-    public static final Block MULBERRY_FENCE_GATE = register("mulberry_fence_gate", new FenceGateBlock(VerdanceWoodType.MULBERRY, Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F)));
-    public static final Block MULBERRY_DOOR = register("mulberry_door", new DoorBlock(VerdanceBlockSets.MULBERRY, Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(3.0F).instrument(NoteBlockInstrument.BASS).noOcclusion()));
-    public static final Block MULBERRY_TRAPDOOR = register("mulberry_trapdoor", new TrapDoorBlock(VerdanceBlockSets.MULBERRY, Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(3.0F).instrument(NoteBlockInstrument.BASS).noOcclusion().isValidSpawn((blockState, blockGetter, blockPos, object) -> false)));
-    public static final Block MULBERRY_PRESSURE_PLATE = register("mulberry_pressure_plate", new PressurePlateBlock(VerdanceBlockSets.MULBERRY, Properties.of().instrument(NoteBlockInstrument.BASS).mapColor(MapColor.TERRACOTTA_YELLOW).noCollission().strength(0.5F)));
-    public static final Block MULBERRY_BUTTON = register("mulberry_button", new ButtonBlock(VerdanceBlockSets.MULBERRY, 30, Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).noCollission().strength(0.5F)));
+    public static final Block MULBERRY_FENCE_GATE = register("mulberry_fence_gate", new FenceGateBlock(VerdanceWoodTypes.MULBERRY, Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F)));
+    public static final Block MULBERRY_DOOR = register("mulberry_door", new DoorBlock(VerdanceBlockSetTypes.MULBERRY, Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(3.0F).instrument(NoteBlockInstrument.BASS).noOcclusion()));
+    public static final Block MULBERRY_TRAPDOOR = register("mulberry_trapdoor", new TrapDoorBlock(VerdanceBlockSetTypes.MULBERRY, Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(3.0F).instrument(NoteBlockInstrument.BASS).noOcclusion().isValidSpawn((blockState, blockGetter, blockPos, object) -> false)));
+    public static final Block MULBERRY_PRESSURE_PLATE = register("mulberry_pressure_plate", new PressurePlateBlock(VerdanceBlockSetTypes.MULBERRY, Properties.of().instrument(NoteBlockInstrument.BASS).mapColor(MapColor.TERRACOTTA_YELLOW).noCollission().strength(0.5F)));
+    public static final Block MULBERRY_BUTTON = register("mulberry_button", new ButtonBlock(VerdanceBlockSetTypes.MULBERRY, 30, Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).noCollission().strength(0.5F)));
 
     public static final Block MULBERRY_CRATE = registerCompat("mulberry_crate", "farmersdelight", Properties.ofFullCopy(Blocks.OAK_PLANKS));
 
@@ -50,11 +50,11 @@ public class VerdanceBlocks {
     public static final Block MULBERRY_SAPLING = registerNoItem("mulberry_sapling", new SaplingBlock(VerdanceTreeGrowers.MULBERRY, Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).noCollission().randomTicks().instabreak().sound(SoundType.CROP)));
     public static final Block POTTED_MULBERRY_SAPLING = registerNoItem("potted_mulberry_sapling", new FlowerPotBlock(MULBERRY_SAPLING, Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).instabreak().noOcclusion()));
 
-    public static final Block MULBERRY_SIGN = registerNoItem("mulberry_sign", new StandingSignBlock(VerdanceWoodType.MULBERRY, Properties.ofFullCopy(Blocks.OAK_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASS)));
-    public static final Block MULBERRY_WALL_SIGN = registerNoItem("mulberry_wall_sign", new WallSignBlock(VerdanceWoodType.MULBERRY, Properties.ofFullCopy(Blocks.OAK_WALL_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW).dropsLike(MULBERRY_SIGN).instrument(NoteBlockInstrument.BASS)));
+    public static final Block MULBERRY_SIGN = registerNoItem("mulberry_sign", new StandingSignBlock(VerdanceWoodTypes.MULBERRY, Properties.ofFullCopy(Blocks.OAK_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASS)));
+    public static final Block MULBERRY_WALL_SIGN = registerNoItem("mulberry_wall_sign", new WallSignBlock(VerdanceWoodTypes.MULBERRY, Properties.ofFullCopy(Blocks.OAK_WALL_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW).dropsLike(MULBERRY_SIGN).instrument(NoteBlockInstrument.BASS)));
 
-    public static final Block MULBERRY_HANGING_SIGN = registerNoItem("mulberry_hanging_sign", new CeilingHangingSignBlock(VerdanceWoodType.MULBERRY, Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASS)));
-    public static final Block MULBERRY_WALL_HANGING_SIGN = registerNoItem("mulberry_wall_hanging_sign", new WallHangingSignBlock(VerdanceWoodType.MULBERRY, Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASS).dropsLike(MULBERRY_HANGING_SIGN)));
+    public static final Block MULBERRY_HANGING_SIGN = registerNoItem("mulberry_hanging_sign", new CeilingHangingSignBlock(VerdanceWoodTypes.MULBERRY, Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASS)));
+    public static final Block MULBERRY_WALL_HANGING_SIGN = registerNoItem("mulberry_wall_hanging_sign", new WallHangingSignBlock(VerdanceWoodTypes.MULBERRY, Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_YELLOW).instrument(NoteBlockInstrument.BASS).dropsLike(MULBERRY_HANGING_SIGN)));
 
     public static final Block CANTALOUPE = register("cantaloupe", new Block(Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD)));
     public static final Block ATTACHED_CANTALOUPE_STEM = registerNoItem("attached_cantaloupe_stem", new AttachedStemBlock(
@@ -158,7 +158,7 @@ public class VerdanceBlocks {
     private static Block createStuccoBlock(DyeColor dyeColor) {
         return new Block(Properties.of()
                 .mapColor(dyeColor)
-                .sound(VerdanceSoundType.STUCCO)
+                .sound(VerdanceSoundTypes.STUCCO)
                 .requiresCorrectToolForDrops()
                 .instrument(NoteBlockInstrument.BASEDRUM)
                 .strength(1.5F, 5.5F)
