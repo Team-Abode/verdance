@@ -17,7 +17,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
 
     protected void addTags(HolderLookup.Provider arg) {
-        shrubPlaceables();
+        shrubMayPlaceOn();
         walls();
         planks();
         stairs();
@@ -40,9 +40,10 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
 
         ghostTownReplaceable();
         silkMothsSpawnableOn();
+        replaceableBySugarCane();
     }
 
-    private void shrubPlaceables() {
+    private void shrubMayPlaceOn() {
         this.getOrCreateTagBuilder(VerdanceBlockTags.SHRUB_MAY_PLACE_ON)
                 .forceAddTag(BlockTags.DIRT)
                 .forceAddTag(BlockTags.SAND);
@@ -300,5 +301,11 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
                 .add(VerdanceBlocks.MULBERRY_LEAVES)
                 .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES)
                 .add(Blocks.GRASS_BLOCK);
+    }
+
+    private void replaceableBySugarCane() {
+        this.getOrCreateTagBuilder(VerdanceBlockTags.REPLACEABLE_BY_SUGAR_CANE).setReplace(false)
+                .forceAddTag(BlockTags.REPLACEABLE)
+                .add(Blocks.SUGAR_CANE);
     }
 }

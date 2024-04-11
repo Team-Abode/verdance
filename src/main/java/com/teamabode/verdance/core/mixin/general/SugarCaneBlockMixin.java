@@ -1,5 +1,6 @@
 package com.teamabode.verdance.core.mixin.general;
 
+import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -32,7 +33,7 @@ public class SugarCaneBlockMixin implements BonemealableBlock {
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos blockPos, BlockState blockState) {
         for (int i = 1; i < 3; i++) {
             BlockState aboveState = level.getBlockState(blockPos.above(i));
-            if (aboveState.is(BlockTags.REPLACEABLE) || aboveState.is(Blocks.SUGAR_CANE)) {
+            if (aboveState.is(VerdanceBlockTags.REPLACEABLE_BY_SUGAR_CANE)) {
                 level.setBlock(blockPos.above(i), sugarCaneBlock.defaultBlockState(), 2);
                 continue;
             }
