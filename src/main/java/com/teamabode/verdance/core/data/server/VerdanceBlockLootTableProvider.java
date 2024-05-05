@@ -5,6 +5,7 @@ import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.item.Items;
@@ -22,13 +23,15 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
+import java.util.concurrent.CompletableFuture;
+
 public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider {
     private static final float[] NORMAL_LEAVES_STICK_CHANCES = {0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
     private static final LootItemCondition.Builder HAS_SHEARS_OR_SILK_TOUCH = HAS_SHEARS.or(HAS_SILK_TOUCH);
     private static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = HAS_SHEARS_OR_SILK_TOUCH.invert();
 
-    public VerdanceBlockLootTableProvider(FabricDataOutput dataOutput) {
-        super(dataOutput);
+    public VerdanceBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        super(dataOutput, registryLookup);
     }
 
     public void generate() {
@@ -74,7 +77,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
 
         return createSilkTouchOrShearsDispatchTable(
                 leafBlock,
-                this.applyExplosionCondition(leafBlock, lootItem).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, NORMAL_LEAVES_STICK_CHANCES))
+                this.applyExplosionCondition(leafBlock, lootItem).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.FORTUNE, NORMAL_LEAVES_STICK_CHANCES))
         );
     }
 
@@ -110,7 +113,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
 
     private void cantaloupe() {
         add(VerdanceBlocks.CANTALOUPE, block -> {
-            var lootItem = LootItem.lootTableItem(VerdanceItems.CANTALOUPE_SLICE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 4.0f))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)).apply(LimitCount.limitCount(IntRange.upperBound(4)));
+            var lootItem = LootItem.lootTableItem(VerdanceItems.CANTALOUPE_SLICE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 4.0f))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.FORTUNE)).apply(LimitCount.limitCount(IntRange.upperBound(4)));
             return createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, lootItem));
         });
         add(VerdanceBlocks.CANTALOUPE_STEM, block -> this.createStemDrops(block, VerdanceItems.CANTALOUPE_SEEDS));

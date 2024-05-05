@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "verdance:yellow_stucco"
-            ]
+            "items": "verdance:yellow_stucco"
           }
         ]
       },

@@ -1,4 +1,4 @@
-package com.teamabode.verdance.common.entity.silk_moth.behaviors;
+package com.teamabode.verdance.common.entity.silkmoth.behaviors;
 
 import com.google.common.collect.Maps;
 import net.minecraft.server.level.ServerLevel;

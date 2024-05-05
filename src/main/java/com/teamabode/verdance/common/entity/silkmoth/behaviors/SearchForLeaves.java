@@ -1,6 +1,6 @@
-package com.teamabode.verdance.common.entity.silk_moth.behaviors;
+package com.teamabode.verdance.common.entity.silkmoth.behaviors;
 
-import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -8,10 +8,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
-import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.memory.WalkTarget;
 import org.apache.commons.lang3.mutable.MutableLong;
 
 public class SearchForLeaves {

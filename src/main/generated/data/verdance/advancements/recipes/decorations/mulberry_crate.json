@@ -1,13 +1,19 @@
 {
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "farmersdelight"
+      ]
+    }
+  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cantaloupe_slice": {
+    "has_mulberry": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "verdance:cantaloupe_slice"
-            ]
+            "items": "verdance:mulberry"
           }
         ]
       },
@@ -15,7 +21,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "verdance:grilled_cantaloupe_slice"
+        "recipe": "verdance:mulberry_crate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -23,12 +29,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cantaloupe_slice"
+      "has_mulberry"
     ]
   ],
   "rewards": {
     "recipes": [
-      "verdance:grilled_cantaloupe_slice"
+      "verdance:mulberry_crate"
     ]
   }
 }

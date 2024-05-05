@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 2,
   "ingredient": {
     "item": "verdance:purple_stucco"
   },
-  "result": "verdance:purple_stucco_slab"
+  "result": {
+    "count": 2,
+    "id": "verdance:purple_stucco_slab"
+  }
 }

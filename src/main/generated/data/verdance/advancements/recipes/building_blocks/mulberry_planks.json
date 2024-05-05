@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "verdance:mulberry_logs"
+            "items": "#verdance:mulberry_logs"
           }
         ]
       },

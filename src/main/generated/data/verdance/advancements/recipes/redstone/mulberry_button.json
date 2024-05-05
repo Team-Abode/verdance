@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "verdance:mulberry_planks"
-            ]
+            "items": "verdance:mulberry_planks"
           }
         ]
       },

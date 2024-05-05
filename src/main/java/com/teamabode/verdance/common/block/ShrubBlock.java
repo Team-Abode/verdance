@@ -20,14 +20,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ShrubBlock extends BushBlock implements BonemealableBlock {
     private static final VoxelShape SHAPE = Shapes.or(Block.box(7.0D, 0.0D, 7.0D, 9.0D, 4.0D, 9.0D), Block.box(3.0D, 3.0D, 3.0D, 13.0D, 13.0D, 13.0D));
+    public static final MapCodec<ShrubBlock> CODEC = simpleCodec(ShrubBlock::new);
 
     public ShrubBlock(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    protected MapCodec<? extends BushBlock> codec() {
-        return null;
     }
 
     @Override
@@ -57,5 +53,10 @@ public class ShrubBlock extends BushBlock implements BonemealableBlock {
                 .flatMap(registry -> registry.getHolder(VerdanceConfiguredFeatures.SHRUB_PATCH_BONEMEAL))
                 .ifPresent(reference -> reference.value().place(level, level.getChunkSource().getGenerator(), random, pos)
         );
+    }
+
+    @Override
+    protected MapCodec<? extends BushBlock> codec() {
+        return CODEC;
     }
 }

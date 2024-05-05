@@ -1,13 +1,19 @@
 {
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "farmersdelight"
+      ]
+    }
+  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_mulberry_crate": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "verdance:mulberry_crate"
-            ]
+            "items": "verdance:mulberry_crate"
           }
         ]
       },
@@ -22,14 +28,13 @@
   },
   "requirements": [
     [
-      "has_mulberry_crate",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_mulberry_crate"
     ]
   ],
   "rewards": {
     "recipes": [
       "verdance:mulberry"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

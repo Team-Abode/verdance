@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-@SuppressWarnings("deprecation")
 public class SilkWormEggsBlock extends Block {
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 1.5, 16.0);
 
@@ -50,10 +49,10 @@ public class SilkWormEggsBlock extends Block {
     }
 
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        spawnBabies(level, pos, random);
+        spawnWorms(level, pos, random);
     }
 
-    private static void spawnBabies(ServerLevel level, BlockPos pos, RandomSource random) {
+    private static void spawnWorms(ServerLevel level, BlockPos pos, RandomSource random) {
         int count = random.nextInt(2) + 2;
 
         for (int i = 0; i < count; i++) {

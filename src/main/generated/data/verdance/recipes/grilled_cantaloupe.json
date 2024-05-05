@@ -6,5 +6,7 @@
   "ingredient": {
     "item": "verdance:cantaloupe_slice"
   },
-  "result": "verdance:grilled_cantaloupe_slice"
+  "result": {
+    "id": "verdance:grilled_cantaloupe_slice"
+  }
 }

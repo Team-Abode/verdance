@@ -61,9 +61,9 @@ public class CantaloupeJuiceItem extends CompatItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
-        tooltipComponents.add(Component.translatable("verdance.tooltip.cantaloupe_juice").withStyle(ChatFormatting.BLUE));
+    public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> components, TooltipFlag flag) {
+        super.appendHoverText(itemStack, tooltipContext, components, flag);
+        components.add(Component.translatable("verdance.tooltip.cantaloupe_juice").withStyle(ChatFormatting.BLUE));
     }
 
     @Override

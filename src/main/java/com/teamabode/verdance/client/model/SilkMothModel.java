@@ -3,7 +3,7 @@ package com.teamabode.verdance.client.model;
 import com.teamabode.sketch.client.model.SketchAnimatableModel;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.client.VerdanceAnimations;
-import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

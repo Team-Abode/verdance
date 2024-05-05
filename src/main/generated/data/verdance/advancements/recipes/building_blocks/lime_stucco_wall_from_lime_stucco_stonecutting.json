@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "verdance:lime_stucco"
-            ]
+            "items": "verdance:lime_stucco"
           }
         ]
       },

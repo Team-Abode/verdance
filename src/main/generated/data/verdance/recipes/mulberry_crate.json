@@ -2,11 +2,13 @@
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",
-      "values": ["farmersdelight"]
+      "values": [
+        "farmersdelight"
+      ]
     }
   ],
   "type": "minecraft:crafting_shaped",
-  "category": "decorations",
+  "category": "misc",
   "key": {
     "#": {
       "item": "verdance:mulberry"
@@ -18,6 +20,7 @@
     "###"
   ],
   "result": {
-    "item": "verdance:mulberry_crate"
+    "count": 1,
+    "id": "verdance:mulberry_crate"
   }
 }

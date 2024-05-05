@@ -1,8 +1,8 @@
 package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.common.entity.silk_moth.SilkMothAi;
-import com.teamabode.verdance.common.entity.silk_moth.sensor.SilkMothSensor;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMothAi;
+import com.teamabode.verdance.common.entity.silkmoth.sensor.SilkMothSensor;
 import com.teamabode.verdance.common.entity.silkworm.SilkwormAi;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "verdance:magenta_stucco"
-            ]
+            "items": "verdance:magenta_stucco"
           }
         ]
       },

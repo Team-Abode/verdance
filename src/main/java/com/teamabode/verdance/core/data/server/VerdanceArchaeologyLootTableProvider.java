@@ -1,12 +1,11 @@
 package com.teamabode.verdance.core.data.server;
 
-import com.teamabode.verdance.Verdance;
+import com.teamabode.verdance.core.misc.reference.VerdanceLootTables;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricLootTableProvider;
-import net.fabricmc.fabric.impl.datagen.loot.FabricLootTableProviderImpl;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -18,15 +17,35 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
-public class VerdanceArchaeologyLootTableProvider implements FabricLootTableProvider {
-    private final FabricDataOutput output;
+public class VerdanceArchaeologyLootTableProvider extends SimpleFabricLootTableProvider {
 
-    public VerdanceArchaeologyLootTableProvider(FabricDataOutput output) {
-        this.output = output;
+    public VerdanceArchaeologyLootTableProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        super(output, registryLookup, LootContextParamSets.ARCHAEOLOGY);
     }
 
-    public void generate(BiConsumer<ResourceLocation, LootTable.Builder> exporter) {
-        LootTable.Builder commonTable = lootTableBuilder(
+    private static void addArchaeologyLoot(ResourceKey<LootTable> reference, LootTable.Builder lootTable, BiConsumer<ResourceKey<LootTable>, LootTable.Builder> exporter) {
+        lootTable.setRandomSequence(reference.location());
+        exporter.accept(reference, lootTable);
+    }
+
+    private static LootTable.Builder build(ItemLike... items) {
+        LootTable.Builder tableBuilder = LootTable.lootTable();
+        LootPool.Builder poolBuilder = LootPool.lootPool().setRolls(ConstantValue.exactly(1)).setBonusRolls(ConstantValue.exactly(1));
+
+        for (ItemLike item : items) {
+            poolBuilder.add(LootItem.lootTableItem(item));
+        }
+        return tableBuilder.withPool(poolBuilder);
+    }
+
+    @Override
+    public String getName() {
+        return "Verdance Archaeology Loot Tables";
+    }
+
+    @Override
+    public void generate(HolderLookup.Provider provider, BiConsumer<ResourceKey<LootTable>, LootTable.Builder> exporter) {
+        LootTable.Builder commonTable = build(
                 Items.CANDLE,
                 Items.YELLOW_CANDLE,
                 Items.BROWN_CANDLE,
@@ -40,7 +59,7 @@ public class VerdanceArchaeologyLootTableProvider implements FabricLootTableProv
                 Items.WOODEN_SHOVEL,
                 Items.GLASS_BOTTLE
         );
-        LootTable.Builder commonFarmTable = lootTableBuilder(
+        LootTable.Builder commonFarmTable = build(
                 Items.FEATHER,
                 Items.FLINT,
                 Items.SUGAR,
@@ -54,7 +73,7 @@ public class VerdanceArchaeologyLootTableProvider implements FabricLootTableProv
                 Items.COARSE_DIRT,
                 Items.GLASS_BOTTLE
         );
-        LootTable.Builder rareTable = lootTableBuilder(
+        LootTable.Builder rareTable = build(
                 VerdanceItems.DISC_FRAGMENT_RANGE,
                 VerdanceItems.DISC_FRAGMENT_RANGE,
                 Items.BURN_POTTERY_SHERD,
@@ -63,33 +82,8 @@ public class VerdanceArchaeologyLootTableProvider implements FabricLootTableProv
                 Items.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE,
                 Items.RAW_GOLD
         );
-        addArchaeologyLoot("ghost_town_common", commonTable, exporter);
-        addArchaeologyLoot("ghost_town_farm", commonFarmTable, exporter);
-        addArchaeologyLoot("ghost_town_rare", rareTable, exporter);
-    }
-
-    private static void addArchaeologyLoot(String name, LootTable.Builder lootTable, BiConsumer<ResourceLocation, LootTable.Builder> exporter) {
-        ResourceLocation location = new ResourceLocation(Verdance.MOD_ID, "archaeology/" + name);
-        lootTable.setRandomSequence(location);
-        exporter.accept(location, lootTable);
-    }
-
-    private static LootTable.Builder lootTableBuilder(ItemLike... items) {
-        LootTable.Builder tableBuilder = LootTable.lootTable();
-        LootPool.Builder poolBuilder = LootPool.lootPool().setRolls(ConstantValue.exactly(1)).setBonusRolls(ConstantValue.exactly(1));
-
-        for (ItemLike item : items) {
-            poolBuilder.add(LootItem.lootTableItem(item));
-        }
-        return tableBuilder.withPool(poolBuilder);
-    }
-
-    @SuppressWarnings("all")
-    public CompletableFuture<?> run(CachedOutput writer) {
-        return FabricLootTableProviderImpl.run(writer, this, LootContextParamSets.ARCHAEOLOGY, output);
-    }
-
-    public String getName() {
-        return "Archaeology Loot Tables";
+        addArchaeologyLoot(VerdanceLootTables.GHOST_TOWN_ARCHAEOLOGY_COMMON, commonTable, exporter);
+        addArchaeologyLoot(VerdanceLootTables.GHOST_TOWN_ARCHAEOLOGY_FARM, commonFarmTable, exporter);
+        addArchaeologyLoot(VerdanceLootTables.GHOST_TOWN_ARCHAEOLOGY_RARE, rareTable, exporter);
     }
 }

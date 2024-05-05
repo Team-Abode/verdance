@@ -1,9 +1,9 @@
 package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import com.teamabode.verdance.common.entity.silkworm.Silkworm;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -14,23 +14,12 @@ public class VerdanceEntityTypes {
 
     public static final EntityType<SilkMoth> SILK_MOTH = register(
             "silk_moth",
-            FabricEntityTypeBuilder.createMob()
-                    .spawnGroup(MobCategory.CREATURE)
-                    .entityFactory(SilkMoth::new)
-                    .dimensions(EntityDimensions.scalable(0.9f, 0.9f))
-                    .defaultAttributes(SilkMoth::createSilkMothAttributes)
-                    .spawnRestriction(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, SilkMoth::checkSilkMothSpawnRules)
-                    .build()
+            EntityType.Builder.of(SilkMoth::new, MobCategory.CREATURE).sized(0.9f, 0.9f).build("silk_moth")
     );
 
     public static final EntityType<Silkworm> SILKWORM = register(
             "silkworm",
-            FabricEntityTypeBuilder.createMob()
-                    .spawnGroup(MobCategory.CREATURE)
-                    .entityFactory(Silkworm::new)
-                    .defaultAttributes(Silkworm::createSilkwormAttributes)
-                    .dimensions(EntityDimensions.scalable(0.6f, 0.25f))
-                    .build()
+            EntityType.Builder.of(Silkworm::new, MobCategory.CREATURE).sized(0.6f, 0.25f).build("silkworm")
     );
 
     private static <E extends Entity, T extends EntityType<E>> EntityType<E> register(String name, T entity) {
@@ -38,6 +27,8 @@ public class VerdanceEntityTypes {
     }
 
     public static void register() {
-
+        SpawnPlacements.register(SILK_MOTH, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, SilkMoth::checkSilkMothSpawnRules);
+        FabricDefaultAttributeRegistry.register(SILK_MOTH, SilkMoth.createSilkMothAttributes());
+        FabricDefaultAttributeRegistry.register(SILKWORM, Silkworm.createSilkwormAttributes());
     }
 }

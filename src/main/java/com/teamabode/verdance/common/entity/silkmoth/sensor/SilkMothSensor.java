@@ -1,7 +1,7 @@
-package com.teamabode.verdance.common.entity.silk_moth.sensor;
+package com.teamabode.verdance.common.entity.silkmoth.sensor;
 
 import com.google.common.collect.ImmutableSet;
-import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Unit;

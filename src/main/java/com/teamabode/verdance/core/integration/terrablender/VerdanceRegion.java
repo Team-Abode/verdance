@@ -15,8 +15,8 @@ import java.util.function.Consumer;
 public class VerdanceRegion extends Region {
     private final BiomeBuilder biomeBuilder;
 
-    public VerdanceRegion(BiomeBuilder biomeBuilder) {
-        super(biomeBuilder.getId(), RegionType.OVERWORLD, Verdance.CONFIG.getGroup("biomes").getIntProperty(biomeBuilder.getId().getPath() + "_weight"));
+    public VerdanceRegion(BiomeBuilder biomeBuilder, int weight) {
+        super(biomeBuilder.getId(), RegionType.OVERWORLD, weight);
         this.biomeBuilder = biomeBuilder;
     }
 

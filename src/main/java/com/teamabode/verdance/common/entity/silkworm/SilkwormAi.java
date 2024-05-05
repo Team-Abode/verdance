@@ -50,7 +50,7 @@ public class SilkwormAi {
     private static void addCoreActivities(Brain<Silkworm> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new Swim(1.0f),
-                new AnimalPanic(1.5f),
+                new AnimalPanic<>(1.5f),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)

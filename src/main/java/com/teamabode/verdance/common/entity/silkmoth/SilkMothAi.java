@@ -1,9 +1,9 @@
-package com.teamabode.verdance.common.entity.silk_moth;
+package com.teamabode.verdance.common.entity.silkmoth;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
-import com.teamabode.verdance.common.entity.silk_moth.behaviors.*;
+import com.teamabode.verdance.common.entity.silkmoth.behaviors.*;
 import com.teamabode.verdance.core.registry.VerdanceActivities;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
@@ -65,7 +65,7 @@ public class SilkMothAi {
     private static void addCoreActivities(Brain<SilkMoth> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new Swim(1.0f),
-                new AnimalPanic(1.5f),
+                new AnimalPanic<>(1.5f),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
                 new TakeOff(),
@@ -75,7 +75,7 @@ public class SilkMothAi {
 
     private static void addIdleActivities(Brain<SilkMoth> brain) {
         brain.addActivity(Activity.IDLE, ImmutableList.of(
-                Pair.of(0, new AnimalMakeLove(VerdanceEntityTypes.SILK_MOTH, 1.0f)),
+                Pair.of(0, new AnimalMakeLove(VerdanceEntityTypes.SILK_MOTH)),
                 Pair.of(1, new FollowTemptation(livingEntity -> 1.5f)),
                 Pair.of(2, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
                 Pair.of(3, addIdleBehaviors())

@@ -1,7 +1,7 @@
 package com.teamabode.verdance.common.entity.silkworm;
 
 import com.mojang.serialization.Dynamic;
-import com.teamabode.verdance.common.entity.silk_moth.SilkMoth;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import net.minecraft.core.particles.ParticleTypes;
@@ -10,7 +10,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
@@ -22,8 +21,6 @@ import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
-import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unchecked")
 public class Silkworm extends PathfinderMob {
@@ -34,15 +31,18 @@ public class Silkworm extends PathfinderMob {
         super(entityType, level);
     }
 
+    @Override
     protected PathNavigation createNavigation(Level level) {
         return new WallClimberNavigation(this, level);
     }
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.getEntityData().define(CLIMBING, false);
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(CLIMBING, false);
     }
 
+    @Override
     public void tick() {
         if (!this.level().isClientSide()) {
             this.setClimbing(horizontalCollision);
@@ -50,18 +50,22 @@ public class Silkworm extends PathfinderMob {
         super.tick();
     }
 
+    @Override
     protected Brain<?> makeBrain(Dynamic<?> dynamic) {
         return SilkwormAi.createBrain(this.brainProvider().makeBrain(dynamic));
     }
 
+    @Override
     protected Brain.Provider<Silkworm> brainProvider() {
         return Brain.provider(SilkwormAi.MEMORY_MODULES, SilkwormAi.SENSORS);
     }
 
+    @Override
     public Brain<Silkworm> getBrain() {
         return (Brain<Silkworm>) super.getBrain();
     }
 
+    @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
@@ -84,28 +88,27 @@ public class Silkworm extends PathfinderMob {
         return super.mobInteract(player, hand);
     }
 
+    @Override
     public void aiStep() {
         this.setAge(this.age + 1);
         super.aiStep();
     }
 
+    @Override
     protected void customServerAiStep() {
         this.getBrain().tick((ServerLevel) this.level(), this);
         SilkwormAi.updateActivity(this);
         super.customServerAiStep();
     }
 
-    @Nullable
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
-    }
-
+    @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.setClimbing(compound.getBoolean("Climbing"));
         this.setAge(compound.getInt("Age"));
     }
 
+    @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("Climbing", this.isClimbing());
@@ -145,7 +148,7 @@ public class Silkworm extends PathfinderMob {
             SilkMoth silkMoth = VerdanceEntityTypes.SILK_MOTH.create(this.level());
             if (silkMoth != null) {
                 silkMoth.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
-                silkMoth.finalizeSpawn(server, server.getCurrentDifficultyAt(silkMoth.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                silkMoth.finalizeSpawn(server, server.getCurrentDifficultyAt(silkMoth.blockPosition()), MobSpawnType.CONVERSION, null);
                 if (this.hasCustomName()) {
                     silkMoth.setCustomName(this.getCustomName());
                     silkMoth.setCustomNameVisible(this.isCustomNameVisible());
@@ -162,6 +165,7 @@ public class Silkworm extends PathfinderMob {
         return super.calculateFallDamage(fallDistance, damageMultiplier) - 10;
     }
 
+    @Override
     public boolean onClimbable() {
         return this.isClimbing();
     }
@@ -170,6 +174,7 @@ public class Silkworm extends PathfinderMob {
         return stack.is(VerdanceItemTags.SILKWORM_FOOD);
     }
 
+    @Override
     public boolean shouldDropExperience() {
         return false;
     }

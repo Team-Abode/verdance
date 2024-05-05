@@ -2,11 +2,13 @@
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",
-      "values": ["farmersdelight"]
+      "values": [
+        "farmersdelight"
+      ]
     }
   ],
   "type": "minecraft:crafting_shapeless",
-  "category": "food",
+  "category": "misc",
   "ingredients": [
     {
       "item": "verdance:cantaloupe_slice"
@@ -28,6 +30,7 @@
     }
   ],
   "result": {
-    "item": "verdance:cantaloupe_juice"
+    "count": 1,
+    "id": "verdance:cantaloupe_juice"
   }
 }

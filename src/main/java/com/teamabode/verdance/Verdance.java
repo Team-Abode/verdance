@@ -1,8 +1,6 @@
 package com.teamabode.verdance;
 
-import com.teamabode.sketch.core.api.config.Config;
-import com.teamabode.sketch.core.api.config.ConfigBuilder;
-import com.teamabode.sketch.core.api.misc.BlockEntityAdditions;
+import com.teamabode.sketch.core.api.misc.BlockEntityExtender;
 import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
 import com.teamabode.verdance.core.misc.VerdanceItemGroupEvents;
 import com.teamabode.verdance.core.misc.tag.VerdanceBiomeTags;
@@ -23,18 +21,6 @@ import org.slf4j.LoggerFactory;
 public class Verdance implements ModInitializer {
     public static final String MOD_ID = "verdance";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-
-    public static final Config CONFIG = new ConfigBuilder(MOD_ID)
-            .addGroup("general", builder -> {
-                builder.addBooleanProperty("bonemealable_sugar_cane", true);
-                return builder;
-            })
-            .addGroup("biomes", builder -> {
-                builder.addIntProperty("mulberry_forest_weight", 4);
-                builder.addIntProperty("shrublands_weight", 15);
-                return builder;
-            })
-            .build();
 
     public void onInitialize() {
         VerdanceEntityTypes.register();
@@ -58,8 +44,8 @@ public class Verdance implements ModInitializer {
     }
 
     public static void registerBlockEntityAdditions() {
-        BlockEntityAdditions.appendBlocks(BlockEntityType.SIGN, VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN);
-        BlockEntityAdditions.appendBlocks(BlockEntityType.HANGING_SIGN, VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
+        BlockEntityExtender.addValidBlocks(BlockEntityType.SIGN, VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN);
+        BlockEntityExtender.addValidBlocks(BlockEntityType.HANGING_SIGN, VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
     }
 
     public static void registerBiomeModifications() {

@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_mulberry": {
+    "has_cantaloupe_slice": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "verdance:mulberry"
-            ]
+            "items": "verdance:cantaloupe_slice"
           }
         ]
       },
@@ -15,21 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "verdance:mulberry_crate"
+        "recipe": "verdance:grilled_cantaloupe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_mulberry",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cantaloupe_slice"
     ]
   ],
   "rewards": {
     "recipes": [
-      "verdance:mulberry_crate"
+      "verdance:grilled_cantaloupe"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
