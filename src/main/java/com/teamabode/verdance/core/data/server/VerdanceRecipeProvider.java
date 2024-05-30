@@ -74,6 +74,14 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
                         600)
                 .unlockedBy("has_cantaloupe_slice", has(VerdanceItems.CANTALOUPE_SLICE))
                 .save(exporter, Verdance.id("grilled_cantaloupe_slice_from_campfire_cooking"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, VerdanceItems.CANTALOUPE_JUICE)
+                .requires(VerdanceItems.CANTALOUPE_SLICE, 4)
+                .requires(Items.SUGAR)
+                .requires(Items.GLASS_BOTTLE)
+                .unlockedBy("has_cantaloupe_slice", has(VerdanceItems.CANTALOUPE_SLICE))
+                .unlockedBy("has_sugar", has(Items.SUGAR))
+                .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
+                .save(exporter, Verdance.id("cantaloupe_juice"));
     }
 
     public static void stonecutterResultFromBase(RecipeOutput exporter, RecipeCategory category, ItemLike result, ItemLike material) {
@@ -86,15 +94,6 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
 
     private static void farmersDelightCompat(VerdanceRecipeProvider provider, RecipeOutput exporter) {
         RecipeOutput compatExporter = provider.withConditions(exporter, ResourceConditions.allModsLoaded("farmersdelight"));
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, VerdanceItems.CANTALOUPE_JUICE)
-                .requires(VerdanceItems.CANTALOUPE_SLICE, 4)
-                .requires(Items.SUGAR)
-                .requires(Items.GLASS_BOTTLE)
-                .unlockedBy("has_cantaloupe_slice", has(VerdanceItems.CANTALOUPE_SLICE))
-                .unlockedBy("has_sugar", has(Items.SUGAR))
-                .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
-                .save(compatExporter, Verdance.id("cantaloupe_juice"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, VerdanceItems.MULBERRY, 9)
                 .requires(VerdanceBlocks.MULBERRY_CRATE)

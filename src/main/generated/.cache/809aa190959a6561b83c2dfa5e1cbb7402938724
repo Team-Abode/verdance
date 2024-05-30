@@ -1,4 +1,4 @@
-// 1.20.6	2024-05-04T21:48:25.4578072	Verdance/Model Definitions
+// 1.20.6	2024-05-30T12:04:24.9571205	Verdance/Model Definitions
 858a75cb3224eb3ef24f01dd104fcb50d04573fd assets\verdance\models\block\light_blue_stucco_wall_post.json
 9b75e9fa989690a7dca466fa77949389eb6f6660 assets\verdance\models\item\white_stucco_stairs.json
 cef76207cc459e043209c99e4d2cdbb5e463bc12 assets\verdance\models\block\pink_stucco.json
@@ -200,8 +200,8 @@ da5db08dc45100bcd4b7de833d8bcc43d3ad0952 assets\verdance\models\block\orange_stu
 9d9b86973c83d0904667ef38b7b1e1b9fed199c1 assets\verdance\models\block\mulberry_door_top_left.json
 4f6d110d864473a728af44238ff4efb4c76022f8 assets\verdance\models\item\mulberry_chest_boat.json
 75b2d4316ac206dddc082517a7dc2215422f7555 assets\verdance\models\block\attached_cantaloupe_stem.json
-5d4aafca8e3a337f11e9c11167047adb5c626ec7 assets\verdance\models\item\red_stucco.json
 b1608b56b9e08b7d9050ddcd68e593afc93a7caf assets\verdance\blockstates\mulberry_stairs.json
+5d4aafca8e3a337f11e9c11167047adb5c626ec7 assets\verdance\models\item\red_stucco.json
 753f2f0bf0b35bb3d92106ab4d2f7a5a78d674ba assets\verdance\models\block\stripped_mulberry_wood.json
 4d9169711146788008fa1e16e6003910900ebc3b assets\verdance\blockstates\pink_stucco_slab.json
 d5fe3362cf59f9da7a8529a88bc3f645125cd4a3 assets\verdance\models\block\brown_stucco.json
@@ -211,8 +211,8 @@ b5132a5cbe8d88a23ffe2c85ff7d62e8b5f0a887 assets\verdance\models\block\blue_stucc
 8de4da56904bb749d8833b5936c7058b9dcb8e91 assets\verdance\models\block\stripped_mulberry_log.json
 a05496c6ea9c8f6d4b6667f38c50d622253dea32 assets\verdance\models\block\mulberry_slab.json
 14265b5f74f50b293f52df980ee9c3b38a3640aa assets\verdance\blockstates\orange_stucco_wall.json
-5d1087d8f5fd8b160d1fc0a7f4cc5916aebde35b assets\verdance\models\block\black_stucco_wall_side.json
 8833d1fc7a0ba1768a284a073e540354a9d8e291 assets\verdance\models\block\black_stucco_slab.json
+5d1087d8f5fd8b160d1fc0a7f4cc5916aebde35b assets\verdance\models\block\black_stucco_wall_side.json
 04858862d71352d83758e8aacfd87ee8db3f03ad assets\verdance\models\block\mulberry_fence_gate_open.json
 67c88b31e6d22b85df0e4cdf5492a9688912694e assets\verdance\models\block\purple_stucco_slab_top.json
 0827bb4ba52d326edb7a85f3c1913ade587dc1ae assets\verdance\blockstates\gray_stucco_wall.json
@@ -381,8 +381,8 @@ c39e5737d290c4d06b6d99bd5bcc6a83c00ae9a1 assets\verdance\models\block\gray_stucc
 dd53bfa504dc4dae096debb15562c1d5e54336d5 assets\verdance\models\block\orange_stucco_stairs_inner.json
 601fb18b2fa472bc38c11bcbe3181c7b6a65a195 assets\verdance\models\item\gray_stucco_slab.json
 322f68a452da6d61903bd30f30fee5863e6a5ae7 assets\verdance\blockstates\blue_stucco_wall.json
-8bb6df298944ac41c170ec3f88c478bee85f2567 assets\verdance\models\block\blue_stucco_slab_top.json
 c26ab3585969949e382a4bb77111e4bc1c00faad assets\verdance\models\item\magenta_stucco_stairs.json
+8bb6df298944ac41c170ec3f88c478bee85f2567 assets\verdance\models\block\blue_stucco_slab_top.json
 14c7f89fcb34c6acf452affa59661d62d48657ab assets\verdance\blockstates\brown_stucco_stairs.json
 55e22790c8b09e6970d5349eb26ae7fbd6c985f8 assets\verdance\models\block\orange_stucco_wall_post.json
 20416462a1b81e597af5bdd34793414eb519cea4 assets\verdance\models\block\orange_stucco_wall_side.json

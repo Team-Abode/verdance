@@ -1,4 +1,4 @@
-// 1.20.6	2024-05-04T21:48:25.4488048	Verdance/Tags for minecraft:block
+// 1.20.6	2024-05-30T12:04:24.9501199	Verdance/Tags for minecraft:block
 93ed3cf0e644c77c2fa470356f27f2b95dea7417 data\minecraft\tags\blocks\stairs.json
 2dffbd05e950b8805a77a32038117d7184b00aea data\minecraft\tags\blocks\wooden_buttons.json
 82aeade700265a023adf13ac5e3866b479208176 data\verdance\tags\blocks\ghost_town_degradable.json
@@ -11,9 +11,9 @@ c1040a9f2cc5d5d93cec266adab2819f7392a3a6 data\minecraft\tags\blocks\planks.json
 690efe34873bf01d39fbc7be4f584838a162ab2d data\minecraft\tags\blocks\walls.json
 d21dae819dfa0cdec3d22810d79aa51715e80981 data\minecraft\tags\blocks\wall_signs.json
 7d78a0cedd1d2ed962d271f687137f0b052cec22 data\minecraft\tags\blocks\logs_that_burn.json
-0498119d7a84aa4f58b89b1b597bcb59b8d13cfb data\minecraft\tags\blocks\wooden_stairs.json
-1f488710f7952be1bc4e13ef5f84446f27b992b8 data\minecraft\tags\blocks\overworld_natural_logs.json
 e45b16b80e20d2cb8f7660f7f4fa7c532c7231fb data\minecraft\tags\blocks\flower_pots.json
+1f488710f7952be1bc4e13ef5f84446f27b992b8 data\minecraft\tags\blocks\overworld_natural_logs.json
+0498119d7a84aa4f58b89b1b597bcb59b8d13cfb data\minecraft\tags\blocks\wooden_stairs.json
 cd27927a41f163bd8354eaf988e279cfe8d27577 data\verdance\tags\blocks\replaceable_by_sugar_cane.json
 236626952d19df32e45caaaf4419eeea0cc18e70 data\minecraft\tags\blocks\wooden_fences.json
 9b20fbd98b5e9333686763db62249b3a3c25be65 data\minecraft\tags\blocks\slabs.json

@@ -1,10 +1,6 @@
 package com.teamabode.verdance.common.item;
 
-import com.teamabode.verdance.core.integration.compat.CompatItem;
-import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -17,16 +13,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
-public class CantaloupeJuiceItem extends CompatItem {
+public class CantaloupeJuiceItem extends Item {
 
     public CantaloupeJuiceItem(Properties properties) {
-        super("farmersdelight", properties);
+        super(properties);
     }
 
     @Override
@@ -37,7 +28,7 @@ public class CantaloupeJuiceItem extends CompatItem {
         }
         if (!level.isClientSide()) {
             level.playSound(null, user.blockPosition(), SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.25f, 1.0f);
-            this.addCoolingParticles((ServerLevel) level, user);
+            CantaloupeSliceItem.addCoolingParticles((ServerLevel) level, user);
             user.extinguishFire();
         }
         if (user instanceof Player player && !player.getAbilities().instabuild) {
@@ -61,12 +52,6 @@ public class CantaloupeJuiceItem extends CompatItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> components, TooltipFlag flag) {
-        super.appendHoverText(itemStack, tooltipContext, components, flag);
-        components.add(Component.translatable("verdance.tooltip.cantaloupe_juice").withStyle(ChatFormatting.BLUE));
-    }
-
-    @Override
     public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.DRINK;
     }
@@ -84,12 +69,5 @@ public class CantaloupeJuiceItem extends CompatItem {
     @Override
     public int getUseDuration(ItemStack stack) {
         return 40;
-    }
-
-    private void addCoolingParticles(ServerLevel level, LivingEntity user) {
-        AABB box = user.getBoundingBox();
-        Vec3 center = box.getCenter();
-
-        level.sendParticles(ParticleTypes.SNOWFLAKE, center.x, center.y, center.z, 15, 0.5f, box.getYsize() / 2, 0.5f, 0.0d);
     }
 }

@@ -37,14 +37,14 @@ public class CantaloupeSliceItem extends Item {
 
             if (fireTicks > 0) {
                 level.playSound(null, user.blockPosition(), SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.25f, 1.0f);
-                this.addCoolingParticles((ServerLevel) level, user);
+                addCoolingParticles((ServerLevel) level, user);
                 user.setRemainingFireTicks(Math.max(0, fireTicks - 60));
             }
         }
         return user.eat(level, stack);
     }
 
-    private void addCoolingParticles(ServerLevel level, LivingEntity user) {
+    public static void addCoolingParticles(ServerLevel level, LivingEntity user) {
         AABB box = user.getBoundingBox();
         Vec3 center = box.getCenter();
 
