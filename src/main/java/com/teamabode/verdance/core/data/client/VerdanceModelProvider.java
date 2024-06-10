@@ -43,6 +43,7 @@ public class VerdanceModelProvider extends FabricModelProvider {
 
         generator.generateFlatItem(VerdanceItems.CANTALOUPE_SLICE, ModelTemplates.FLAT_ITEM);
         generator.generateFlatItem(VerdanceItems.GRILLED_CANTALOUPE_SLICE, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(VerdanceItems.CANTALOUPE_JUICE, ModelTemplates.FLAT_ITEM);
 
         generator.generateFlatItem(VerdanceItems.MULBERRY_BOAT, ModelTemplates.FLAT_ITEM);
         generator.generateFlatItem(VerdanceItems.MULBERRY_CHEST_BOAT, ModelTemplates.FLAT_ITEM);
