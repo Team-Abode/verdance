@@ -89,7 +89,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
     }
 
     public static void stonecutterResultFromBase(RecipeOutput exporter, RecipeCategory category, ItemLike result, ItemLike material, int resultCount) {
-        SingleItemRecipeBuilder.stonecutting(Ingredient.of(material), category, result, resultCount).unlockedBy(RecipeProvider.getHasName(material), RecipeProvider.has(material)).save(exporter, new ResourceLocation(Verdance.MOD_ID, getConversionRecipeName(result, material) + "_stonecutting"));
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(material), category, result, resultCount).unlockedBy(RecipeProvider.getHasName(material), RecipeProvider.has(material)).save(exporter, Verdance.id(getConversionRecipeName(result, material) + "_stonecutting"));
     }
 
     private static void farmersDelightCompat(VerdanceRecipeProvider provider, RecipeOutput exporter) {

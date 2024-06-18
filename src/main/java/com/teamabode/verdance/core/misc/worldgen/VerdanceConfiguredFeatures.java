@@ -12,7 +12,7 @@ public class VerdanceConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> MULBERRY = create("mulberry");
 
     private static ResourceKey<ConfiguredFeature<?, ?>> create(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Verdance.MOD_ID, name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, Verdance.id(name));
     }
 
 }

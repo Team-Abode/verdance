@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 
 public class VerdanceSoundEvents {
-
     public static final SoundEvent BLOCK_STUCCO_BREAK = register("block.stucco.break");
     public static final SoundEvent BLOCK_STUCCO_FALL = register("block.stucco.fall");
     public static final SoundEvent BLOCK_STUCCO_HIT = register("block.stucco.hit");
@@ -18,10 +17,9 @@ public class VerdanceSoundEvents {
 
     public static void register() {
 
-
     }
 
     private static SoundEvent register(String name) {
-        return Registry.register(BuiltInRegistries.SOUND_EVENT, new ResourceLocation(Verdance.MOD_ID, name), SoundEvent.createVariableRangeEvent(new ResourceLocation(Verdance.MOD_ID, name)));
+        return Registry.register(BuiltInRegistries.SOUND_EVENT, Verdance.id(name), SoundEvent.createVariableRangeEvent(Verdance.id(name)));
     }
 }

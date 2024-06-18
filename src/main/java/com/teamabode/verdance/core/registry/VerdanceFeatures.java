@@ -14,7 +14,7 @@ public class VerdanceFeatures {
     public static final Feature<BoulderConfiguration> BOULDER = register("boulder", new BoulderFeature());
 
     private static <T extends Feature<? extends FeatureConfiguration>> T register(String name, T feature) {
-        return Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation(Verdance.MOD_ID, name), feature);
+        return Registry.register(BuiltInRegistries.FEATURE, Verdance.id(name), feature);
     }
 
     public static void register() {

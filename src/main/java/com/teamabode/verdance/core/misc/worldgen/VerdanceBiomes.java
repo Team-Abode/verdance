@@ -12,6 +12,6 @@ public class VerdanceBiomes {
     public static final ResourceKey<Biome> MULBERRY_FOREST = create("mulberry_forest");
 
     private static ResourceKey<Biome> create(String name) {
-        return ResourceKey.create(Registries.BIOME, new ResourceLocation(Verdance.MOD_ID, name));
+        return ResourceKey.create(Registries.BIOME, Verdance.id(name));
     }
 }

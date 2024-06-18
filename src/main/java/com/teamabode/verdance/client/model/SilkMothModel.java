@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Verdance.MOD_ID, "silk_moth"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Verdance.id("silk_moth"), "main");
 
 	private final ModelPart root;
 	private final ModelPart body;

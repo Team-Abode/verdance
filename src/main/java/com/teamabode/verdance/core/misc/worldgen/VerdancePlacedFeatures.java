@@ -11,6 +11,6 @@ public class VerdancePlacedFeatures {
     public static final ResourceKey<PlacedFeature> PATCH_CANTALOUPE = create("patch_cantaloupe");
 
     private static ResourceKey<PlacedFeature> create(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(Verdance.MOD_ID, name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, Verdance.id(name));
     }
 }

@@ -23,7 +23,7 @@ public class VerdanceEntityTypes {
     );
 
     private static <E extends Entity, T extends EntityType<E>> EntityType<E> register(String name, T entity) {
-        return Registry.register(BuiltInRegistries.ENTITY_TYPE, new ResourceLocation(Verdance.MOD_ID, name), entity);
+        return Registry.register(BuiltInRegistries.ENTITY_TYPE, Verdance.id(name), entity);
     }
 
     public static void register() {
