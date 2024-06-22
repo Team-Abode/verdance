@@ -14,6 +14,6 @@ public class VerdanceBlockTags {
     public static final TagKey<Block> REPLACEABLE_BY_SUGAR_CANE = create("replaceable_by_sugar_cane");
 
     private static TagKey<Block> create(String name) {
-        return TagKey.create(Registries.BLOCK, Verdance.id(name));
+        return TagKey.create(Registries.BLOCK, new ResourceLocation(Verdance.MOD_ID, name));
     }
 }

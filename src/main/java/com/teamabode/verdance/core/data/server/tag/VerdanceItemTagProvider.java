@@ -37,7 +37,7 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
         saplings();
         leaves();
 
-        this.getOrCreateTagBuilder(ConventionalItemTags.MUSIC_DISCS).add(VerdanceItems.MUSIC_DISC_RANGE);
+        this.getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(VerdanceItems.MUSIC_DISC_RANGE).setReplace(false);
     }
 
     private void silkwormFood() {

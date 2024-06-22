@@ -8,13 +8,14 @@ import com.teamabode.verdance.core.misc.VerdanceBlockSetTypes;
 import com.teamabode.verdance.core.misc.VerdanceSoundTypes;
 import com.teamabode.verdance.core.misc.VerdanceTreeGrowers;
 import com.teamabode.verdance.core.misc.VerdanceWoodTypes;
-import com.teamabode.verdance.core.misc.key.VerdanceBlockReferences;
-import com.teamabode.verdance.core.misc.key.VerdanceItemReferences;
+import com.teamabode.verdance.core.misc.reference.VerdanceBlockReferences;
+import com.teamabode.verdance.core.misc.reference.VerdanceItemReferences;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
@@ -165,19 +166,19 @@ public class VerdanceBlocks {
     }
 
     private static Block register(String name, Block block) {
-        var registry = Registry.register(BuiltInRegistries.BLOCK, Verdance.id(name), block);
-        Registry.register(BuiltInRegistries.ITEM, Verdance.id(name), new BlockItem(registry, new Item.Properties()));
+        var registry = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Verdance.MOD_ID, name), block);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Verdance.MOD_ID, name), new BlockItem(registry, new Item.Properties()));
         return registry;
     }
 
     private static Block registerCompat(String name, String mod, Properties properties) {
-        var registry = Registry.register(BuiltInRegistries.BLOCK, Verdance.id(name), new CompatBlock(mod, properties));
-        Registry.register(BuiltInRegistries.ITEM, Verdance.id(name), new CompatBlockItem(mod, registry, new Item.Properties()));
+        var registry = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Verdance.MOD_ID, name), new CompatBlock(mod, properties));
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Verdance.MOD_ID, name), new CompatBlockItem(mod, registry, new Item.Properties()));
         return registry;
     }
 
     private static <T extends Block> T registerNoItem(String name, T block) {
-        return Registry.register(BuiltInRegistries.BLOCK, Verdance.id(name), block);
+        return Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Verdance.MOD_ID, name), block);
     }
 
     private static MapColor getMulberryLogMapColor(BlockState state) {

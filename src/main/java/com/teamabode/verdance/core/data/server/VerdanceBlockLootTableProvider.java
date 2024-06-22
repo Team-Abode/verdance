@@ -6,11 +6,9 @@ import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.IntRange;
@@ -29,6 +27,8 @@ import java.util.concurrent.CompletableFuture;
 
 public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider {
     private static final float[] NORMAL_LEAVES_STICK_CHANCES = {0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
+    private static final LootItemCondition.Builder HAS_SHEARS_OR_SILK_TOUCH = HAS_SHEARS.or(HAS_SILK_TOUCH);
+    private static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = HAS_SHEARS_OR_SILK_TOUCH.invert();
 
     public VerdanceBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(dataOutput, registryLookup);
@@ -39,12 +39,13 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         shrub();
         stucco();
         cantaloupe();
-        add(VerdanceBlocks.SILKWORM_EGGS, this::createSilkTouchOnlyTable);
+        silkWormEggs();
     }
 
     private void shrub() {
         this.add(VerdanceBlocks.SHRUB, block -> {
             var lootItem = LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f)));
+
             return createShearsDispatchTable(block, this.applyExplosionDecay(block, lootItem));
         });
     }
@@ -72,19 +73,16 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     }
 
     private LootTable.Builder createMulberryLeaves(Block leafBlock) {
-        HolderLookup.RegistryLookup<Enchantment> registryLookup = registries.lookupOrThrow(Registries.ENCHANTMENT);
         var lootItem = LootItem.lootTableItem(Items.STICK);
 
         return createSilkTouchOrShearsDispatchTable(
                 leafBlock,
-                this.applyExplosionCondition(leafBlock, lootItem).when(BonusLevelTableCondition.bonusLevelFlatChance(registryLookup.getOrThrow(Enchantments.FORTUNE), NORMAL_LEAVES_STICK_CHANCES))
+                this.applyExplosionCondition(leafBlock, lootItem).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.FORTUNE, NORMAL_LEAVES_STICK_CHANCES))
         );
     }
 
     private LootTable.Builder createFloweringMulberryLeaves(Block leafBlock) {
-        return createMulberryLeaves(leafBlock).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f))
-                .when(this.doesNotHaveShearsOrSilkTouch())
-                .add(this.applyExplosionCondition(leafBlock, LootItem.lootTableItem(VerdanceItems.MULBERRY).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 2.0f))))));
+        return createMulberryLeaves(leafBlock).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f)).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(this.applyExplosionCondition(leafBlock, LootItem.lootTableItem(VerdanceItems.MULBERRY).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 2.0f))))));
     }
 
     private void stucco() {
@@ -115,11 +113,14 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
 
     private void cantaloupe() {
         add(VerdanceBlocks.CANTALOUPE, block -> {
-            HolderLookup.RegistryLookup<Enchantment> registryLookup = registries.lookupOrThrow(Registries.ENCHANTMENT);
-            var lootItem = LootItem.lootTableItem(VerdanceItems.CANTALOUPE_SLICE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 4.0f))).apply(ApplyBonusCount.addUniformBonusCount(registryLookup.getOrThrow(Enchantments.FORTUNE))).apply(LimitCount.limitCount(IntRange.upperBound(4)));
+            var lootItem = LootItem.lootTableItem(VerdanceItems.CANTALOUPE_SLICE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 4.0f))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.FORTUNE)).apply(LimitCount.limitCount(IntRange.upperBound(4)));
             return createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, lootItem));
         });
         add(VerdanceBlocks.CANTALOUPE_STEM, block -> this.createStemDrops(block, VerdanceItems.CANTALOUPE_SEEDS));
         add(VerdanceBlocks.ATTACHED_CANTALOUPE_STEM, block -> this.createAttachedStemDrops(block, VerdanceItems.CANTALOUPE_SEEDS));
+    }
+
+    private void silkWormEggs() {
+        add(VerdanceBlocks.SILKWORM_EGGS, BlockLootSubProvider::createSilkTouchOnlyTable);
     }
 }

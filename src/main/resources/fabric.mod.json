@@ -1,42 +1,43 @@
 {
-    "schemaVersion": 1,
-    "id": "verdance",
-    "version": "${version}",
+  "schemaVersion": 1,
+  "id": "verdance",
+  "version": "${version}",
 
-    "name": "Verdance",
-    "description": "",
-    "authors": [
-        "Team Abode"
+  "name": "Verdance",
+  "description": "",
+  "authors": [
+    "Team Abode",
+    "Chikorita Lover"
+  ],
+  "contact": {
+    "homepage": "https://twitter.com/TeamAbodeMC",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "All Rights Reserved",
+  "icon": "assets/verdance/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.teamabode.verdance.Verdance"
     ],
-    "contact": {
-        "homepage": "https://twitter.com/TeamAbodeMC",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
-    },
-    "license": "All Rights Reserved",
-    "icon": "assets/verdance/icon.png",
-    "environment": "*",
-    "entrypoints": {
-        "main": [
-            "com.teamabode.verdance.Verdance"
-        ],
-        "client": [
-            "com.teamabode.verdance.client.VerdanceClient"
-        ],
-        "fabric-datagen": [
-            "com.teamabode.verdance.core.data.VerdanceData"
-        ],
-        "terrablender": [
-            "com.teamabode.verdance.core.integration.terrablender.VerdanceTerraBlender"
-        ]
-    },
-    "mixins": [
-        "verdance.mixins.json"
+    "client": [
+      "com.teamabode.verdance.client.VerdanceClient"
     ],
-    "depends": {
-        "fabricloader": ">=0.15.11",
-        "fabric-api": "*",
-        "minecraft": "1.21",
-        "java": ">=21"
-    },
-    "suggests": {}
+    "fabric-datagen": [
+      "com.teamabode.verdance.core.data.VerdanceData"
+    ],
+    "terrablender": [
+      "com.teamabode.verdance.core.integration.terrablender.VerdanceTerraBlender"
+    ]
+  },
+  "mixins": [
+    "verdance.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.10",
+    "fabric-api": "*",
+    "minecraft": "~1.20.5",
+    "java": ">=21"
+  },
+  "suggests": {}
 }

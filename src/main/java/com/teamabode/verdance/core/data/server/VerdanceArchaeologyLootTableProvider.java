@@ -1,6 +1,6 @@
 package com.teamabode.verdance.core.data.server;
 
-import com.teamabode.verdance.core.misc.key.VerdanceLootTables;
+import com.teamabode.verdance.core.misc.reference.VerdanceLootTables;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
@@ -44,7 +44,7 @@ public class VerdanceArchaeologyLootTableProvider extends SimpleFabricLootTableP
     }
 
     @Override
-    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> exporter) {
+    public void generate(HolderLookup.Provider provider, BiConsumer<ResourceKey<LootTable>, LootTable.Builder> exporter) {
         LootTable.Builder commonTable = build(
                 Items.CANDLE,
                 Items.YELLOW_CANDLE,

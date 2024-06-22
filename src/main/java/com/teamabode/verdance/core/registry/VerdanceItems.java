@@ -5,11 +5,10 @@ import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.item.CantaloupeJuiceItem;
 import com.teamabode.verdance.common.item.CantaloupeSliceItem;
 import com.teamabode.verdance.core.misc.VerdanceFoodProperties;
-import com.teamabode.verdance.core.misc.key.VerdanceBoatTypes;
-import com.teamabode.verdance.core.misc.key.VerdanceJukeboxSongs;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 
 public class VerdanceItems {
@@ -21,7 +20,7 @@ public class VerdanceItems {
 
     public static final Item MULBERRY = register("mulberry", new ItemNameBlockItem(VerdanceBlocks.MULBERRY_SAPLING, new Item.Properties().food(VerdanceFoodProperties.MULBERRY)));
 
-    public static final Item MUSIC_DISC_RANGE = register("music_disc_range", new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(VerdanceJukeboxSongs.RANGE)));
+    public static final Item MUSIC_DISC_RANGE = register("music_disc_range", new RecordItem(1, VerdanceSoundEvents.MUSIC_DISC_RANGE, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 87));
     public static final Item DISC_FRAGMENT_RANGE = register("disc_fragment_range", new DiscFragmentItem(new Item.Properties()));
 
     public static final Item MULBERRY_SIGN = register("mulberry_sign", new SignItem(new Item.Properties().stacksTo(16), VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN));
@@ -34,7 +33,7 @@ public class VerdanceItems {
     public static final Item SILKWORM_SPAWN_EGG = register("silkworm_spawn_egg", new SpawnEggItem(VerdanceEntityTypes.SILKWORM, 0xEBEDE6, 0x75665D, new Item.Properties()));
 
     private static <T extends Item> T register(String name, T item) {
-        return Registry.register(BuiltInRegistries.ITEM, Verdance.id(name), item);
+        return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Verdance.MOD_ID, name), item);
     }
 
     public static void register() {
