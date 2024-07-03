@@ -23,8 +23,10 @@ public class VerdanceBiomeBuilder extends BiomeBuilder {
             {Biomes.SNOWY_PLAINS, Biomes.SNOWY_PLAINS, Biomes.SNOWY_PLAINS, Biomes.SNOWY_TAIGA, Biomes.TAIGA},
             {Biomes.PLAINS, Biomes.PLAINS, Biomes.FOREST, Biomes.TAIGA, Biomes.OLD_GROWTH_SPRUCE_TAIGA},
             {Biomes.FLOWER_FOREST, Biomes.PLAINS, Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.DARK_FOREST},
-            {VerdanceBiomes.SHRUBLANDS, Biomes.SAVANNA, Biomes.FOREST, Biomes.JUNGLE, Biomes.JUNGLE},
-            {VerdanceBiomes.SHRUBLANDS, Biomes.DESERT, Biomes.DESERT, Biomes.DESERT, VerdanceBiomes.SHRUBLANDS}
+            {Biomes.SAVANNA, Biomes.SAVANNA, Biomes.FOREST, Biomes.JUNGLE, Biomes.JUNGLE},
+            {Biomes.DESERT, Biomes.DESERT, Biomes.DESERT, Biomes.DESERT, Biomes.DESERT}
+            //{VerdanceBiomes.SHRUBLANDS, Biomes.SAVANNA, Biomes.FOREST, Biomes.JUNGLE, Biomes.JUNGLE},
+            //{VerdanceBiomes.SHRUBLANDS, Biomes.DESERT, Biomes.DESERT, Biomes.DESERT, VerdanceBiomes.SHRUBLANDS}
     };
     @SuppressWarnings("all")
     private static final ResourceKey<Biome>[][] MIDDLE_BIOME_VARIANTS = new ResourceKey[][]{
