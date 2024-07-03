@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.data.server.tag;
+package com.teamabode.verdance.datagen.server.tag;
 
 import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;

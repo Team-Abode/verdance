@@ -1,11 +1,11 @@
-package com.teamabode.verdance.core.data;
+package com.teamabode.verdance.datagen;
 
-import com.teamabode.verdance.core.data.client.VerdanceModelProvider;
-import com.teamabode.verdance.core.data.server.VerdanceArchaeologyLootTableProvider;
-import com.teamabode.verdance.core.data.server.VerdanceBlockLootTableProvider;
-import com.teamabode.verdance.core.data.server.tag.VerdanceBlockTagProvider;
-import com.teamabode.verdance.core.data.server.tag.VerdanceItemTagProvider;
-import com.teamabode.verdance.core.data.server.VerdanceRecipeProvider;
+import com.teamabode.verdance.datagen.client.VerdanceModelProvider;
+import com.teamabode.verdance.datagen.server.VerdanceArchaeologyLootTableProvider;
+import com.teamabode.verdance.datagen.server.VerdanceBlockLootTableProvider;
+import com.teamabode.verdance.datagen.server.tag.VerdanceBlockTagProvider;
+import com.teamabode.verdance.datagen.server.tag.VerdanceItemTagProvider;
+import com.teamabode.verdance.datagen.server.VerdanceRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 

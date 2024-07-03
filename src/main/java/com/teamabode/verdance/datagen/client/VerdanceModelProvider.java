@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.data.client;
+package com.teamabode.verdance.datagen.client;
 
 import com.teamabode.verdance.core.misc.VerdanceBlockFamilies;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;

@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.data.server;
+package com.teamabode.verdance.datagen.server;
 
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.core.misc.VerdanceBlockFamilies;
@@ -12,14 +12,12 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.BlockFamily.Variant;
 import net.minecraft.data.recipes.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.concurrent.CompletableFuture;

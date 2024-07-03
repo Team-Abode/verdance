@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.data.server;
+package com.teamabode.verdance.datagen.server;
 
 import com.teamabode.verdance.core.misc.key.VerdanceLootTables;
 import com.teamabode.verdance.core.registry.VerdanceItems;
