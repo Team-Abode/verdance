@@ -1,0 +1,7 @@
+{
+  "parent": "verdance:block/template_cushion",
+  "textures": {
+    "side": "verdance:block/light_blue_cushion_side",
+    "top": "verdance:block/light_blue_cushion"
+  }
+}

@@ -14,6 +14,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,14 +24,19 @@ public class VerdanceClient implements ClientModInitializer {
     public void onInitializeClient() {
         setRenderTypes();
         addColorProviders();
+        registerModelLayers();
         registerRenderers();
     }
 
-    private static void registerRenderers() {
+    private static void registerModelLayers() {
         EntityModelLayerRegistry.registerModelLayer(SilkMothModel.LAYER_LOCATION, SilkMothModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(SilkwormModel.LAYER_LOCATION, SilkwormModel::createBodyLayer);
+    }
+
+    private static void registerRenderers() {
         EntityRendererRegistry.register(VerdanceEntityTypes.SILK_MOTH, SilkMothRenderer::new);
         EntityRendererRegistry.register(VerdanceEntityTypes.SILKWORM, SilkwormRenderer::new);
+        EntityRendererRegistry.register(VerdanceEntityTypes.CUSHION, NoopRenderer::new);
     }
 
     private static void setRenderTypes() {

@@ -20,13 +20,22 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
+import java.util.HashMap;
+
 public class VerdanceBlocks {
+
+    public static final HashMap<DyeColor, Block> CUSHIONS = new HashMap<>();
+
+
+
+
     public static final Block MULBERRY_LOG = register("mulberry_log", new RotatedPillarBlock(Properties.of().mapColor(VerdanceBlocks::getMulberryLogMapColor).strength(2.0F).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD)));
     public static final Block MULBERRY_WOOD = register("mulberry_wood", new RotatedPillarBlock(Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(2.0F).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD)));
     public static final Block STRIPPED_MULBERRY_LOG = register("stripped_mulberry_log", new RotatedPillarBlock(Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(2.0F).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD)));
@@ -153,6 +162,15 @@ public class VerdanceBlocks {
 
     public static final Block SILKWORM_EGGS = register("silkworm_eggs", new SilkWormEggsBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.FROGSPAWN).instabreak().noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
 
+    static {
+        for (DyeColor colours : DyeColor.values()) {
+            CUSHIONS.put(colours, register(colours + "_cushion", new CushionBlock(BlockBehaviour.Properties.of().mapColor(colours).sound(SoundType.WOOD).strength(0.2F).noOcclusion().ignitedByLava().pushReaction(PushReaction.IGNORE))));
+        }
+    }
+
+    public static Block getCushion(DyeColor colour) {
+        return CUSHIONS.get(colour);
+    }
 
     private static Block createStuccoBlock(DyeColor dyeColor) {
         return new Block(Properties.of()

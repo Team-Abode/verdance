@@ -23,7 +23,7 @@
             "com.teamabode.verdance.client.VerdanceClient"
         ],
         "fabric-datagen": [
-            "com.teamabode.verdance.core.data.VerdanceData"
+            "com.teamabode.verdance.datagen.VerdanceData"
         ],
         "terrablender": [
             "com.teamabode.verdance.core.integration.terrablender.VerdanceTerraBlender"
