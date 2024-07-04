@@ -2,8 +2,10 @@ package com.teamabode.verdance.client;
 
 import com.teamabode.verdance.client.model.SilkMothModel;
 import com.teamabode.verdance.client.model.SilkwormModel;
+import com.teamabode.verdance.client.renderer.SilkCocoonRenderer;
 import com.teamabode.verdance.client.renderer.SilkMothRenderer;
 import com.teamabode.verdance.client.renderer.SilkwormRenderer;
+import com.teamabode.verdance.core.registry.VerdanceBlockEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import net.fabricmc.api.ClientModInitializer;
@@ -14,6 +16,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.FoliageColor;
@@ -31,12 +34,14 @@ public class VerdanceClient implements ClientModInitializer {
     private static void registerModelLayers() {
         EntityModelLayerRegistry.registerModelLayer(SilkMothModel.LAYER_LOCATION, SilkMothModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(SilkwormModel.LAYER_LOCATION, SilkwormModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(SilkCocoonRenderer.LAYER_LOCATION, SilkCocoonRenderer::createBodyLayer);
     }
 
     private static void registerRenderers() {
         EntityRendererRegistry.register(VerdanceEntityTypes.SILK_MOTH, SilkMothRenderer::new);
         EntityRendererRegistry.register(VerdanceEntityTypes.SILKWORM, SilkwormRenderer::new);
         EntityRendererRegistry.register(VerdanceEntityTypes.CUSHION, NoopRenderer::new);
+        BlockEntityRenderers.register(VerdanceBlockEntityTypes.SILK_COCOON, SilkCocoonRenderer::new);
     }
 
     private static void setRenderTypes() {
@@ -49,6 +54,7 @@ public class VerdanceClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_DOOR, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_TRAPDOOR, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.SILKWORM_EGGS, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.SILK_COCOON, RenderType.cutout());
     }
 
     private static void addColorProviders() {

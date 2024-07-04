@@ -1,0 +1,8 @@
+{
+    "sources": [
+        {
+            "type": "single",
+            "resource": "verdance:entity/silk_cocoon"
+        }
+    ]
+}

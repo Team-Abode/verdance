@@ -32,6 +32,7 @@ public class Verdance implements ModInitializer {
     public void onInitialize() {
         VerdanceEntityTypes.register();
         VerdanceBlocks.register();
+        VerdanceBlockEntityTypes.register();
         VerdanceItems.register();
         VerdanceFeatures.register();
         VerdanceSoundEvents.register();

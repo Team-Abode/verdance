@@ -33,9 +33,6 @@ public class VerdanceBlocks {
 
     public static final HashMap<DyeColor, Block> CUSHIONS = new HashMap<>();
 
-
-
-
     public static final Block MULBERRY_LOG = register("mulberry_log", new RotatedPillarBlock(Properties.of().mapColor(VerdanceBlocks::getMulberryLogMapColor).strength(2.0F).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD)));
     public static final Block MULBERRY_WOOD = register("mulberry_wood", new RotatedPillarBlock(Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(2.0F).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD)));
     public static final Block STRIPPED_MULBERRY_LOG = register("stripped_mulberry_log", new RotatedPillarBlock(Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(2.0F).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD)));
@@ -161,6 +158,7 @@ public class VerdanceBlocks {
     public static final Block PINK_STUCCO_WALL = register("pink_stucco_wall", new WallBlock(Properties.ofFullCopy(PINK_STUCCO)));
 
     public static final Block SILKWORM_EGGS = register("silkworm_eggs", new SilkWormEggsBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.FROGSPAWN).instabreak().noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
+    public static final Block SILK_COCOON = registerNoItem("silk_cocoon", new SilkCocoonBlock(Properties.of().strength(0.8F).sound(SoundType.WOOL)));
 
     static {
         for (DyeColor colours : DyeColor.values()) {
