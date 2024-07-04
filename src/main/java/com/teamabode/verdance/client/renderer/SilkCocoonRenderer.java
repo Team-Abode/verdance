@@ -23,6 +23,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.state.BlockState;
 
+/*
+    TODO: The Silk Cocoon should wobble instead.
+ */
 public class SilkCocoonRenderer implements BlockEntityRenderer<SilkCocoonBlockEntity> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Verdance.id("silk_cocoon"), "main");
     public static final Material TEXTURE_LOCATION = new Material(InventoryMenu.BLOCK_ATLAS, Verdance.id("entity/silk_cocoon"));
@@ -52,21 +55,23 @@ public class SilkCocoonRenderer implements BlockEntityRenderer<SilkCocoonBlockEn
         VertexConsumer vertex = TEXTURE_LOCATION.buffer(bufferSource, RenderType::entitySolid);
         BlockState state = cocoon.getBlockState();
         Direction dir = state.getValue(SilkCocoonBlock.FACING);
-        int wobbleTicks = cocoon.getWobbleTicks();
-        float wobbleDelta = (partialTick + wobbleTicks);
 
+        float deltaTicks = (cocoon.getTicks() + partialTick);
+        float wobble = Mth.sin(deltaTicks * (cocoon.getTicks() / 2400f) / Mth.PI) * (5.0f * Mth.DEG_TO_RAD);
 
-
-        float wobble = Mth.sin(wobbleDelta);
-        if (wobbleTicks == 0) {
-            wobble = 0;
+        if (dir == Direction.NORTH || dir == Direction.SOUTH) {
+            poseStack.rotateAround(Axis.ZP.rotation(wobble), 0.5f, 0.5f, 0.5f);
         }
-        poseStack.rotateAround(Axis.XP.rotationDegrees(wobble), 0.5f, 0.5f, 0.5f);
+        else {
+            poseStack.rotateAround(Axis.XP.rotation(wobble), 0.5f, 0.5f, 0.5f);
+        }
+        Verdance.LOGGER.info(cocoon.getTicks() + "");
 
+        // Rotates the cocoon based off the direction it's facing.
+        // Translating 0.5f and back will shift the pivot point for this rotation.
         poseStack.translate(0.5f, 0.5f, 0.5f);
         poseStack.mulPose(Axis.YP.rotationDegrees(-dir.toYRot()));
         poseStack.translate(-0.5f, -0.5f, -0.5f);
-
 
         this.cocoon.render(poseStack, vertex, i, j);
         poseStack.popPose();
