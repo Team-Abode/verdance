@@ -43,11 +43,21 @@ public class CushionEntity extends Entity {
         return true;
     }
 
+
+    //To prevent removePassenger sometimes not removing the entity when spamming riding and not riding the cushion block
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.getPassengers().isEmpty()) {
+            this.discard();
+        }
+    }
+
     @Override
     protected void removePassenger(Entity entity) {
         super.removePassenger(entity);
         if (!this.isRemoved() && !entity.level().isClientSide) {
-            //entity.absMoveTo(entity.getX(), entity.getY(), entity.getZ(), entity.yRotO, entity.xRotO);
+            entity.absMoveTo(entity.getX(), entity.getY() + 0.6D, entity.getZ());
             this.discard();
         }
     }
