@@ -7,6 +7,7 @@ import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Unit;
 import net.minecraft.world.level.Level;
@@ -14,8 +15,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 /*
-    It takes a Silk Moth 2400 ticks to emerge from a Silk Cocoon.
-    The Silk Cocoon will begin to wobble and occasionally drop string at 1800 ticks.
+    It takes a Silk Moth 4800 ticks to emerge from a Silk Cocoon.
+    The Silk Cocoon will begin to wobble and occasionally drop string at 3600 ticks.
  */
 public class SilkCocoonBlockEntity extends BlockEntity {
     private int ticks = 0;
@@ -37,17 +38,15 @@ public class SilkCocoonBlockEntity extends BlockEntity {
             cocoon.wobbling = false;
             cocoon.wobbleTicks = 0;
         }
-
-        if (ticks >= 2400) {
+        if (ticks >= 4800) {
             SilkMoth silkMoth = new SilkMoth(VerdanceEntityTypes.SILK_MOTH, level);
             silkMoth.setPos(pos.getCenter());
-            silkMoth.setFlying(true);
-            silkMoth.getBrain().setMemory(VerdanceMemoryModuleTypes.IS_FLYING, Unit.INSTANCE);
+            silkMoth.takeOff();
 
             level.addFreshEntity(silkMoth);
             level.destroyBlock(pos, false);
         }
-        else if (ticks % 200 == 0) {
+        else if (ticks >= 3600 && ticks % 20 == 0) {
             cocoon.wobble();
         }
         cocoon.setTicks(ticks + 1);

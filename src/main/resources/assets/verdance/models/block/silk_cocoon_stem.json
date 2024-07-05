@@ -1,0 +1,18 @@
+{
+    "ambientocclusion": false,
+    "parent": "minecraft:block/block",
+    "textures": {
+        "stem": "verdance:block/silk_cocoon_stem",
+        "particle": "minecraft:block/white_wool"
+    },
+    "elements": [
+        {
+            "from": [8, 12, 11],
+            "to": [8, 17, 16],
+            "faces": {
+                "east": {"uv": [0, 0, 5, 5], "texture": "#stem"},
+                "west": {"uv": [5, 0, 0, 5], "texture": "#stem"}
+            }
+        }
+    ]
+}

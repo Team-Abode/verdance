@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "verdance:block/silk_cocoon_stem",
+            "y": 180
+        },
+        "facing=east": {
+            "model": "verdance:block/silk_cocoon_stem",
+            "y": 270
+        },
+        "facing=south": {
+            "model": "verdance:block/silk_cocoon_stem"
+        },
+        "facing=west": {
+            "model": "verdance:block/silk_cocoon_stem",
+            "y": 90
+        }
+    }
+}

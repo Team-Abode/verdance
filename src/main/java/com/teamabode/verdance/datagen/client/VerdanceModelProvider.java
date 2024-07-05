@@ -42,7 +42,6 @@ public class VerdanceModelProvider extends FabricModelProvider {
         generator.createTrivialBlock(VerdanceBlocks.CANTALOUPE, TexturedModel.COLUMN);
         generator.createStems(VerdanceBlocks.CANTALOUPE_STEM, VerdanceBlocks.ATTACHED_CANTALOUPE_STEM);
         generator.createTrivialBlock(VerdanceBlocks.MULBERRY_CRATE, TexturedModel.CUBE_TOP_BOTTOM);
-        generator.blockEntityModels(Verdance.id("block/silk_cocoon"), Blocks.WHITE_WOOL).createWithoutBlockItem(VerdanceBlocks.SILK_COCOON);
 
         for (DyeColor colour : DyeColor.values()) {
             this.createCushion(colour, VerdanceBlocks.getCushion(colour), generator);

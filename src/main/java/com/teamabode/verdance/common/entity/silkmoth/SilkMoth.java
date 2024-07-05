@@ -3,6 +3,7 @@ package com.teamabode.verdance.common.entity.silkmoth;
 import com.mojang.serialization.Dynamic;
 import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
+import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -157,6 +158,12 @@ public class SilkMoth extends Animal implements FlyingAnimal {
             }
         }
     }
+
+    public void takeOff() {
+        this.setFlying(true);
+        this.getBrain().setMemory(VerdanceMemoryModuleTypes.IS_FLYING, Unit.INSTANCE);
+    }
+
 
     public void setFlying(boolean flying) {
         this.entityData.set(FLYING, flying);
