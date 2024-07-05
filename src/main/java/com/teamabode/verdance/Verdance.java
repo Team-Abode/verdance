@@ -2,6 +2,7 @@ package com.teamabode.verdance;
 
 import com.google.common.reflect.Reflection;
 import com.teamabode.sketch.core.api.misc.BlockEntityExtender;
+import com.teamabode.verdance.common.util.CreativeCategoryUtils;
 import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
 import com.teamabode.verdance.core.misc.tag.VerdanceBiomeTags;
 import com.teamabode.verdance.core.misc.worldgen.VerdancePlacedFeatures;
@@ -17,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
@@ -30,6 +32,7 @@ public class Verdance implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public void onInitialize() {
+        CreativeCategoryUtils.addVanillaDyesToColourOrder();
         VerdanceEntityTypes.register();
         VerdanceBlocks.register();
         VerdanceBlockEntityTypes.register();
@@ -188,6 +191,9 @@ public class Verdance implements ModInitializer {
                     VerdanceBlocks.PINK_STUCCO_SLAB,
                     VerdanceBlocks.PINK_STUCCO_WALL
             );
+            for (DyeColor colours : CreativeCategoryUtils.colourOrder) {
+                entries.addAfter(Items.PINK_BED, VerdanceBlocks.getCushion(colours));
+            }
         });
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.SPAWN_EGGS).register(entries -> {
             entries.addAfter(

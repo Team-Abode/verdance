@@ -1,5 +1,21 @@
 {
   "values": [
-    "verdance:cantaloupe"
+    "verdance:cantaloupe",
+    "verdance:white_cushion",
+    "verdance:orange_cushion",
+    "verdance:magenta_cushion",
+    "verdance:light_blue_cushion",
+    "verdance:yellow_cushion",
+    "verdance:lime_cushion",
+    "verdance:pink_cushion",
+    "verdance:gray_cushion",
+    "verdance:light_gray_cushion",
+    "verdance:cyan_cushion",
+    "verdance:purple_cushion",
+    "verdance:blue_cushion",
+    "verdance:brown_cushion",
+    "verdance:green_cushion",
+    "verdance:red_cushion",
+    "verdance:black_cushion"
   ]
 }
