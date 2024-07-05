@@ -61,7 +61,7 @@ public class CushionBlock extends Block {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
-        if (!level.isClientSide() && !player.isCrouching()) {
+        if (!level.isClientSide() && !player.isShiftKeyDown()) {
             if (blockState.getValue(OCCUPIED)) {
                 return InteractionResult.FAIL;
             } else {

@@ -5,8 +5,28 @@ import net.minecraft.world.item.DyeColor;
 import java.util.ArrayList;
 
 public class CreativeCategoryUtils {
+    public static final ArrayList<DyeColor> COLORS = createColors();
 
-    public static ArrayList<DyeColor> colourOrder = new ArrayList<DyeColor>();
+    public static ArrayList<DyeColor> createColors() {
+        ArrayList<DyeColor> colors = new ArrayList<>();
+        colors.add(DyeColor.PINK);
+        colors.add(DyeColor.MAGENTA);
+        colors.add(DyeColor.PURPLE);
+        colors.add(DyeColor.BLUE);
+        colors.add(DyeColor.LIGHT_BLUE);
+        colors.add(DyeColor.CYAN);
+        colors.add(DyeColor.GREEN);
+        colors.add(DyeColor.LIME);
+        colors.add(DyeColor.YELLOW);
+        colors.add(DyeColor.ORANGE);
+        colors.add(DyeColor.RED);
+        colors.add(DyeColor.BROWN);
+        colors.add(DyeColor.BLACK);
+        colors.add(DyeColor.GRAY);
+        colors.add(DyeColor.LIGHT_GRAY);
+        colors.add(DyeColor.WHITE);
+        return colors;
+    }
 
     /**
      * This method allows you to add a custom dye to the colour order in the creative category (after adding a custom dye to this list the blocks should appear in the creative category)
@@ -15,24 +35,6 @@ public class CreativeCategoryUtils {
      * @param  index where it places the colour in the list
      */
     public static void addDyeToColourOrder(DyeColor color, int index) {
-        colourOrder.add(index, color);
-    }
-    public static void addVanillaDyesToColourOrder() {
-        colourOrder.add(DyeColor.PINK);
-        colourOrder.add(DyeColor.MAGENTA);
-        colourOrder.add(DyeColor.PURPLE);
-        colourOrder.add(DyeColor.BLUE);
-        colourOrder.add(DyeColor.LIGHT_BLUE);
-        colourOrder.add(DyeColor.CYAN);
-        colourOrder.add(DyeColor.GREEN);
-        colourOrder.add(DyeColor.LIME);
-        colourOrder.add(DyeColor.YELLOW);
-        colourOrder.add(DyeColor.ORANGE);
-        colourOrder.add(DyeColor.RED);
-        colourOrder.add(DyeColor.BROWN);
-        colourOrder.add(DyeColor.BLACK);
-        colourOrder.add(DyeColor.GRAY);
-        colourOrder.add(DyeColor.LIGHT_GRAY);
-        colourOrder.add(DyeColor.WHITE);
+        COLORS.add(index, color);
     }
 }
