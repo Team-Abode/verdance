@@ -5,6 +5,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,21 +45,13 @@ public class CushionEntity extends Entity {
         return true;
     }
 
-
-    //To prevent removePassenger sometimes not removing the entity when spamming riding and not riding the cushion block
-    @Override
-    public void tick() {
-        super.tick();
-        if (this.getPassengers().isEmpty()) {
-            this.discard();
-        }
-    }
-
     @Override
     protected void removePassenger(Entity entity) {
         super.removePassenger(entity);
         if (!this.isRemoved() && !entity.level().isClientSide) {
+            BlockState blockState = entity.getInBlockState();
             entity.absMoveTo(entity.getX(), entity.getY() + 0.6D, entity.getZ());
+            this.level().setBlockAndUpdate(entity.blockPosition(), blockState.setValue(BlockStateProperties.OCCUPIED, false));
             this.discard();
         }
     }

@@ -13,6 +13,10 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -27,8 +31,17 @@ public class CushionBlock extends Block {
 
     private static final VoxelShape CUSHION_SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 10.0, 16.0);
 
+
+    private static final BooleanProperty OCCUPIED = BlockStateProperties.OCCUPIED;
+
     public CushionBlock(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(OCCUPIED, false));
+    }
+
+    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(OCCUPIED);
     }
 
     @Override
@@ -39,31 +52,37 @@ public class CushionBlock extends Block {
     //When you sit on Cushion, it gives a redstone signal of 15
     @Override
     protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos blockPos) {
-        List<CushionEntity> aBunchOfCushions = level.getEntitiesOfClass(CushionEntity.class, new AABB(blockPos));
-       // System.out.println(aBunchOfCushions);
-        if (!(aBunchOfCushions.isEmpty())) {
+        if (blockState.getValue(OCCUPIED)) {
             return 15;
         } else {
-            return 8;
+            return 0;
         }
     }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
-        if (!level.isClientSide()) {
-            List<CushionEntity> entities = level.getEntitiesOfClass(CushionEntity.class, new AABB(blockPos));
-            if (!entities.isEmpty()) {
+        if (!level.isClientSide() && !player.isCrouching()) {
+            if (blockState.getValue(OCCUPIED)) {
                 return InteractionResult.FAIL;
             } else {
+                level.setBlockAndUpdate(blockPos, blockState.setValue(OCCUPIED, true));
                 CushionEntity cushionEntity = VerdanceEntityTypes.CUSHION.create(level);
                 cushionEntity.setPos(blockPos.getX() + 0.5D, blockPos.getY() + 0.4D, blockPos.getZ() + 0.5D);
-                //cushionEntity.setPos(blockPos.getX(), blockPos.getY(), blockPos.getZ());
                 level.addFreshEntity(cushionEntity);
                 player.startRiding(cushionEntity);
                 return InteractionResult.SUCCESS;
             }
         }
         return InteractionResult.FAIL;
+    }
+
+    @Override
+    protected void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        List<CushionEntity> entities = level.getEntitiesOfClass(CushionEntity.class, new AABB(blockPos));
+        for (CushionEntity cushionEntity : entities) {
+            cushionEntity.remove(Entity.RemovalReason.DISCARDED);
+        }
+        super.onRemove(blockState, level, blockPos, blockState2, bl);
     }
 
     public void fallOn(Level level, BlockState blockState, BlockPos blockPos, Entity entity, float f) {
@@ -83,7 +102,7 @@ public class CushionBlock extends Block {
         Vec3 vec3 = entity.getDeltaMovement();
         if (vec3.y < 0.0) {
             double d = entity instanceof LivingEntity ? 1.0 : 0.8;
-            entity.setDeltaMovement(vec3.x, -vec3.y * 0.7 * d, vec3.z);
+            entity.setDeltaMovement(vec3.x, -vec3.y * 0.8 * d, vec3.z);
         }
 
     }

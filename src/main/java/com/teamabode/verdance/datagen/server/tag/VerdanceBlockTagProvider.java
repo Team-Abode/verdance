@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
@@ -129,6 +130,11 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
                 .add(VerdanceBlocks.CANTALOUPE)
                 .setReplace(false);
+        for (DyeColor colour : DyeColor.values()) {
+            this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
+                    .setReplace(false)
+                    .add(VerdanceBlocks.getCushion(colour));
+        }
     }
 
     private void walls() {
