@@ -14,7 +14,7 @@ public class VerdanceEntityTypes {
 
     public static final EntityType<SilkMoth> SILK_MOTH = register(
             "silk_moth",
-            EntityType.Builder.of(SilkMoth::new, MobCategory.CREATURE).sized(0.9f, 0.9f).build("silk_moth")
+            EntityType.Builder.of(SilkMoth::new, MobCategory.CREATURE).sized(0.7f, 0.7f).eyeHeight(0.35f).build("silk_moth")
     );
 
     public static final EntityType<Silkworm> SILKWORM = register(

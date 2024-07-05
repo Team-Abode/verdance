@@ -2,6 +2,7 @@ package com.teamabode.verdance.common.entity.silkmoth;
 
 import com.mojang.serialization.Dynamic;
 import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
+import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -145,12 +146,14 @@ public class SilkMoth extends Animal implements FlyingAnimal {
             if (this.isFlying()) {
                 this.moveControl = new FlyingMoveControl(this, 20, true);
                 this.navigation = this.createFlightNavigation(this.level());
+                this.setPose(Pose.STANDING);
             }
             else {
                 this.moveControl = new MoveControl(this);
                 this.navigation = this.createNavigation(this.level());
                 this.setNoGravity(false);
                 this.setOnGround(true);
+                this.setPose(Pose.FALL_FLYING);
             }
         }
     }

@@ -22,6 +22,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.state.BlockState;
+import org.joml.Quaternionf;
 
 /*
     TODO: The Silk Cocoon should wobble instead.
@@ -56,16 +57,20 @@ public class SilkCocoonRenderer implements BlockEntityRenderer<SilkCocoonBlockEn
         BlockState state = cocoon.getBlockState();
         Direction dir = state.getValue(SilkCocoonBlock.FACING);
 
-        float deltaTicks = (cocoon.getTicks() + partialTick);
-        float wobble = Mth.sin(deltaTicks * (cocoon.getTicks() / 2400f) / Mth.PI) * (5.0f * Mth.DEG_TO_RAD);
+        float deltaTicks = (cocoon.wobbleTicks + partialTick);
+        float wobble = Mth.sin(deltaTicks * 3.0f / Mth.PI) * (5.0f * Mth.DEG_TO_RAD);
+
+        Quaternionf rotation;
 
         if (dir == Direction.NORTH || dir == Direction.SOUTH) {
-            poseStack.rotateAround(Axis.ZP.rotation(wobble), 0.5f, 0.5f, 0.5f);
+            rotation = Axis.ZP.rotation(wobble);
         }
         else {
-            poseStack.rotateAround(Axis.XP.rotation(wobble), 0.5f, 0.5f, 0.5f);
+            rotation = Axis.XP.rotation(wobble);
         }
-        Verdance.LOGGER.info(cocoon.getTicks() + "");
+        if (cocoon.wobbling) {
+            poseStack.rotateAround(rotation, 0.5f, 0.5f, 0.5f);
+        }
 
         // Rotates the cocoon based off the direction it's facing.
         // Translating 0.5f and back will shift the pivot point for this rotation.
