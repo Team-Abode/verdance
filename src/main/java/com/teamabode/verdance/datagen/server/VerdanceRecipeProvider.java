@@ -93,8 +93,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
     }
 
     private static void cushion(RecipeOutput exporter, ItemLike cushion, ItemLike wool) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, cushion)
-                .unlockedBy("has_planks", has(ItemTags.PLANKS))
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, cushion, 2)
                 .unlockedBy(getHasName(wool), has(wool))
                 .define('W', wool)
                 .define('#', ItemTags.PLANKS)
