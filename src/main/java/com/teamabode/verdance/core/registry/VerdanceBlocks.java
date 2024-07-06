@@ -1,5 +1,6 @@
 package com.teamabode.verdance.core.registry;
 
+import com.google.common.collect.ImmutableMap;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.block.*;
 import com.teamabode.verdance.core.integration.compat.CompatBlock;
@@ -27,11 +28,11 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class VerdanceBlocks {
 
-    public static final HashMap<DyeColor, Block> CUSHIONS = new HashMap<>();
+    public static final Map<DyeColor, Block> CUSHIONS = registerCushions();
 
     public static final Block MULBERRY_LOG = register("mulberry_log", new RotatedPillarBlock(Properties.of().mapColor(VerdanceBlocks::getMulberryLogMapColor).strength(2.0F).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD)));
     public static final Block MULBERRY_WOOD = register("mulberry_wood", new RotatedPillarBlock(Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(2.0F).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD)));
@@ -160,14 +161,8 @@ public class VerdanceBlocks {
     public static final Block SILKWORM_EGGS = register("silkworm_eggs", new SilkWormEggsBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.FROGSPAWN).instabreak().noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
     public static final Block SILK_COCOON = registerNoItem("silk_cocoon", new SilkCocoonBlock(Properties.of().strength(0.8F).sound(SoundType.WOOL)));
 
-    static {
-        for (DyeColor colours : DyeColor.values()) {
-            CUSHIONS.put(colours, register(colours + "_cushion", new CushionBlock(BlockBehaviour.Properties.of().mapColor(colours).sound(SoundType.WOOD).strength(0.2F).noOcclusion().ignitedByLava().pushReaction(PushReaction.IGNORE))));
-        }
-    }
-
-    public static Block getCushion(DyeColor colour) {
-        return CUSHIONS.get(colour);
+    public static Block getCushion(DyeColor color) {
+        return CUSHIONS.get(color);
     }
 
     private static Block createStuccoBlock(DyeColor dyeColor) {
@@ -186,14 +181,24 @@ public class VerdanceBlocks {
         return registry;
     }
 
+    private static <T extends Block> T registerNoItem(String name, T block) {
+        return Registry.register(BuiltInRegistries.BLOCK, Verdance.id(name), block);
+    }
+
+    private static Map<DyeColor, Block> registerCushions() {
+        ImmutableMap.Builder<DyeColor, Block> cushions = ImmutableMap.builder();
+        for (DyeColor color : DyeColor.values()) {
+            cushions.put(color, register(color.name().toLowerCase() +  "_cushion", new CushionBlock(
+                    BlockBehaviour.Properties.of().mapColor(color).sound(SoundType.WOOD).strength(0.2F).noOcclusion().ignitedByLava().pushReaction(PushReaction.IGNORE)
+            )));
+        }
+        return cushions.build();
+    }
+
     private static Block registerCompat(String name, String mod, Properties properties) {
         var registry = Registry.register(BuiltInRegistries.BLOCK, Verdance.id(name), new CompatBlock(mod, properties));
         Registry.register(BuiltInRegistries.ITEM, Verdance.id(name), new CompatBlockItem(mod, registry, new Item.Properties()));
         return registry;
-    }
-
-    private static <T extends Block> T registerNoItem(String name, T block) {
-        return Registry.register(BuiltInRegistries.BLOCK, Verdance.id(name), block);
     }
 
     private static MapColor getMulberryLogMapColor(BlockState state) {

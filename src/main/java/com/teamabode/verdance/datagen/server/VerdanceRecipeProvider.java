@@ -15,10 +15,12 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -90,6 +92,17 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(material), category, result, resultCount).unlockedBy(RecipeProvider.getHasName(material), RecipeProvider.has(material)).save(exporter, Verdance.id(getConversionRecipeName(result, material) + "_stonecutting"));
     }
 
+    private static void cushion(RecipeOutput exporter, ItemLike cushion, ItemLike wool) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, cushion)
+                .unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .unlockedBy(getHasName(wool), has(wool))
+                .define('W', wool)
+                .define('#', ItemTags.PLANKS)
+                .pattern("WW")
+                .pattern("##")
+                .save(exporter, Verdance.id(getItemName(cushion)));
+    }
+
     private static void farmersDelightCompat(VerdanceRecipeProvider provider, RecipeOutput exporter) {
         RecipeOutput compatExporter = provider.withConditions(exporter, ResourceConditions.allModsLoaded("farmersdelight"));
 
@@ -131,6 +144,24 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         stucco(exporter, VerdanceBlockFamilies.PURPLE_STUCCO, Items.PURPLE_DYE);
         stucco(exporter, VerdanceBlockFamilies.MAGENTA_STUCCO, Items.MAGENTA_DYE);
         stucco(exporter, VerdanceBlockFamilies.PINK_STUCCO, Items.PINK_DYE);
+
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.WHITE), Blocks.WHITE_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.LIGHT_GRAY), Blocks.LIGHT_GRAY_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.GRAY), Blocks.GRAY_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.BLACK), Blocks.BLACK_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.BROWN), Blocks.BROWN_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.RED), Blocks.RED_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.ORANGE), Blocks.ORANGE_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.YELLOW), Blocks.YELLOW_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.LIME), Blocks.LIME_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.GREEN), Blocks.GREEN_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.CYAN), Blocks.CYAN_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.LIGHT_BLUE), Blocks.LIGHT_BLUE_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.BLUE), Blocks.BLUE_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.PURPLE), Blocks.PURPLE_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.MAGENTA), Blocks.MAGENTA_WOOL);
+        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.PINK), Blocks.PINK_WOOL);
+
         farmersDelightCompat(this, exporter);
     }
 }

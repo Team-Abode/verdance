@@ -4,7 +4,7 @@ import com.teamabode.sketch.core.api.misc.BlockEntityExtender;
 import com.teamabode.verdance.common.util.CreativeCategoryUtils;
 import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
 import com.teamabode.verdance.core.misc.tag.VerdanceBiomeTags;
-import com.teamabode.verdance.core.misc.worldgen.VerdancePlacedFeatures;
+import com.teamabode.verdance.core.misc.key.VerdancePlacedFeatures;
 import com.teamabode.verdance.core.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;

@@ -1,6 +1,7 @@
 package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +14,7 @@ public class VerdanceSoundEvents {
     public static final SoundEvent BLOCK_STUCCO_STEP = register("block.stucco.step");
     public static final SoundEvent BLOCK_STUCCO_PLACE = register("block.stucco.place");
 
-    public static final SoundEvent MUSIC_DISC_RANGE = register("music_disc.range");
+    public static final Holder.Reference<SoundEvent> MUSIC_DISC_RANGE = registerHolder("music_disc.range");
 
     public static void register() {
 
@@ -21,5 +22,9 @@ public class VerdanceSoundEvents {
 
     private static SoundEvent register(String name) {
         return Registry.register(BuiltInRegistries.SOUND_EVENT, Verdance.id(name), SoundEvent.createVariableRangeEvent(Verdance.id(name)));
+    }
+
+    private static Holder.Reference<SoundEvent> registerHolder(String name) {
+        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, Verdance.id(name), SoundEvent.createVariableRangeEvent(Verdance.id(name)));
     }
 }

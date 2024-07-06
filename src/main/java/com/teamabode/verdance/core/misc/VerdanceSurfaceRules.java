@@ -1,5 +1,6 @@
-package com.teamabode.verdance.core.misc.worldgen;
+package com.teamabode.verdance.core.misc;
 
+import com.teamabode.verdance.core.misc.key.VerdanceBiomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.SurfaceRules.RuleSource;

@@ -2,7 +2,7 @@ package com.teamabode.verdance.common.worldgen.biome;
 
 import com.mojang.datafixers.util.Pair;
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.core.misc.worldgen.VerdanceBiomes;
+import com.teamabode.verdance.core.misc.key.VerdanceBiomes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
