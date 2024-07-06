@@ -4,16 +4,19 @@ import com.mojang.serialization.Dynamic;
 import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
+import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Unit;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -101,11 +104,6 @@ public class SilkMoth extends Animal implements FlyingAnimal {
     }
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.SILVERFISH_STEP, 0.3F, 1.0F);
-    }
-
-    @Override
     protected PathNavigation createNavigation(Level level) {
         GroundPathNavigation navigation = new GroundPathNavigation(this, level);
         navigation.setCanFloat(true);
@@ -188,6 +186,29 @@ public class SilkMoth extends Animal implements FlyingAnimal {
     public void spawnChildFromBreeding(ServerLevel level, Animal mate) {
         this.finalizeSpawnChildFromBreeding(level, mate, null);
         this.getBrain().setMemory(MemoryModuleType.IS_PREGNANT, Unit.INSTANCE);
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return VerdanceSoundEvents.ENTITY_SILK_MOTH_IDLE;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return VerdanceSoundEvents.ENTITY_SILK_MOTH_HURT;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return VerdanceSoundEvents.ENTITY_SILK_MOTH_DEATH;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        this.playSound(SoundEvents.SILVERFISH_STEP, 0.1F, 1.0F);
     }
 
     @Nullable

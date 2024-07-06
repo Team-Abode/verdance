@@ -37,7 +37,7 @@ public class SearchForLeaves {
             boolean isValidSpace = level.getBlockState(mutablePos.setWithOffset(scanPos, Direction.UP)).isAir();
 
             if (excludeCurrentPos && foundLeaves && isValidSpace) {
-                BehaviorUtils.setWalkAndLookTargetMemories(entity, mutablePos, 1.0f, 1);
+                BehaviorUtils.setWalkAndLookTargetMemories(entity, mutablePos, 1.0f, 0);
                 return true;
             }
         }

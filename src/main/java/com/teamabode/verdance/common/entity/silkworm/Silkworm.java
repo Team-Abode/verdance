@@ -4,14 +4,17 @@ import com.mojang.serialization.Dynamic;
 import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
+import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -21,6 +24,7 @@ import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unchecked")
 public class Silkworm extends PathfinderMob {
@@ -163,6 +167,18 @@ public class Silkworm extends PathfinderMob {
     @Override
     protected int calculateFallDamage(float fallDistance, float damageMultiplier) {
         return super.calculateFallDamage(fallDistance, damageMultiplier) - 10;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return VerdanceSoundEvents.ENTITY_SILKWORM_HURT;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return VerdanceSoundEvents.ENTITY_SILKWORM_DEATH;
     }
 
     @Override
