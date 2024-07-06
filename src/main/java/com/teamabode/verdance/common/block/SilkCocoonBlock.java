@@ -30,10 +30,10 @@ import java.util.Map;
 public class SilkCocoonBlock extends BaseEntityBlock {
     public static final MapCodec<SilkCocoonBlock> CODEC = simpleCodec(SilkCocoonBlock::new);
     public static final Map<Direction, VoxelShape> SHAPE_BY_DIR = Map.of(
-            Direction.NORTH, Block.box(3.0d, 0.0d, 0.0d, 13.0d, 14.0d, 10.0d),
-            Direction.EAST, Block.box(6.0d, 0.0d, 3.0d, 16.0d, 14.0d, 13.0d),
-            Direction.SOUTH, Block.box(3.0d,0.0d, 6.0d, 13.0d, 14.0d, 16.0d),
-            Direction.WEST, Block.box(0.0d, 0.0d, 3.0d, 10.0d, 14.0d, 13.0d)
+            Direction.NORTH, Block.box(3.0d, 0.0d, 0.0d, 13.0d, 12.0d, 10.0d),
+            Direction.EAST, Block.box(6.0d, 0.0d, 3.0d, 16.0d, 12.0d, 13.0d),
+            Direction.SOUTH, Block.box(3.0d,0.0d, 6.0d, 13.0d, 12.0d, 16.0d),
+            Direction.WEST, Block.box(0.0d, 0.0d, 3.0d, 10.0d, 12.0d, 13.0d)
     );
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 

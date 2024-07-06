@@ -44,7 +44,7 @@ public class SilkCocoonRenderer implements BlockEntityRenderer<SilkCocoonBlockEn
 
         root.addOrReplaceChild(
                 "cocoon",
-                CubeListBuilder.create().texOffs(0, 0).addBox(3,0, 6, 10.0f, 14.0f, 10.0f),
+                CubeListBuilder.create().texOffs(0, 0).addBox(3,0, 6, 10.0f, 12.0f, 10.0f),
                 PartPose.ZERO
         );
         return LayerDefinition.create(mesh, 64, 32);
@@ -71,7 +71,6 @@ public class SilkCocoonRenderer implements BlockEntityRenderer<SilkCocoonBlockEn
         if (cocoon.wobbling) {
             poseStack.rotateAround(rotation, 0.5f, 0.5f, 0.5f);
         }
-
         // Rotates the cocoon based off the direction it's facing.
         // Translating 0.5f and back will shift the pivot point for this rotation.
         poseStack.translate(0.5f, 0.5f, 0.5f);

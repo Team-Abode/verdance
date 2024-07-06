@@ -3,13 +3,9 @@ package com.teamabode.verdance.common.block.entity;
 import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import com.teamabode.verdance.core.registry.VerdanceBlockEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
-import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
-import net.minecraft.util.Unit;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,7 +42,7 @@ public class SilkCocoonBlockEntity extends BlockEntity {
             level.addFreshEntity(silkMoth);
             level.destroyBlock(pos, false);
         }
-        else if (ticks >= 3600 && ticks % 20 == 0) {
+        else if (ticks >= 3600 && ticks % 200 == 0) {
             cocoon.wobble();
         }
         cocoon.setTicks(ticks + 1);
