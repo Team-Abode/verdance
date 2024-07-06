@@ -140,5 +140,9 @@
 
   "verdance.tooltip.cantaloupe_juice": "Instant Fire Extinguish",
 
-  "subtitles.verdance.block.cantaloupe.grow": "Fruit grows"
+  "subtitles.verdance.entity.silk_moth.idle": "Silk Moth squeaks",
+  "subtitles.verdance.entity.silk_moth.hurt": "Silk Moth hurts",
+  "subtitles.verdance.entity.silk_moth.death": "Silk Moth dies",
+  "subtitles.verdance.entity.silkworm.hurt": "Silkworm hurts",
+  "subtitles.verdance.entity.silkworm.death": "Silkworm dies"
 }

@@ -1,60 +1,99 @@
 {
-  "block.stucco.break": {
-    "sounds": [
-      "verdance:block/stucco/break1",
-      "verdance:block/stucco/break2",
-      "verdance:block/stucco/break3",
-      "verdance:block/stucco/break4"
-    ],
-    "subtitle": "subtitles.block.generic.break"
-  },
-  "block.stucco.fall": {
-    "sounds": [
-      "verdance:block/stucco/step1",
-      "verdance:block/stucco/step2",
-      "verdance:block/stucco/step3",
-      "verdance:block/stucco/step4",
-      "verdance:block/stucco/step5",
-      "verdance:block/stucco/step6"
-    ]
-  },
-  "block.stucco.hit": {
-    "sounds": [
-      "verdance:block/stucco/step1",
-      "verdance:block/stucco/step2",
-      "verdance:block/stucco/step3",
-      "verdance:block/stucco/step4",
-      "verdance:block/stucco/step5",
-      "verdance:block/stucco/step6"
-    ],
-    "subtitle": "subtitles.block.generic.hit"
-  },
-  "block.stucco.place": {
-    "sounds": [
-      "verdance:block/stucco/break1",
-      "verdance:block/stucco/break2",
-      "verdance:block/stucco/break3",
-      "verdance:block/stucco/break4"
-    ],
-    "subtitle": "subtitles.block.generic.place"
-  },
-  "block.stucco.step": {
-    "sounds": [
-      "verdance:block/stucco/step1",
-      "verdance:block/stucco/step2",
-      "verdance:block/stucco/step3",
-      "verdance:block/stucco/step4",
-      "verdance:block/stucco/step5",
-      "verdance:block/stucco/step6"
-    ],
-    "subtitle": "subtitles.block.generic.footsteps"
-  },
-  "music_disc.range": {
-    "sounds": [
-      {
-        "name": "verdance:record/range",
-        "stream": true
-      }
-    ]
-  }
+    "block.stucco.break": {
+        "sounds": [
+            "verdance:block/stucco/break1",
+            "verdance:block/stucco/break2",
+            "verdance:block/stucco/break3",
+            "verdance:block/stucco/break4"
+        ],
+        "subtitle": "subtitles.block.generic.break"
+    },
+    "block.stucco.fall": {
+        "sounds": [
+            "verdance:block/stucco/step1",
+            "verdance:block/stucco/step2",
+            "verdance:block/stucco/step3",
+            "verdance:block/stucco/step4",
+            "verdance:block/stucco/step5",
+            "verdance:block/stucco/step6"
+        ]
+    },
+    "block.stucco.hit": {
+        "sounds": [
+            "verdance:block/stucco/step1",
+            "verdance:block/stucco/step2",
+            "verdance:block/stucco/step3",
+            "verdance:block/stucco/step4",
+            "verdance:block/stucco/step5",
+            "verdance:block/stucco/step6"
+        ],
+        "subtitle": "subtitles.block.generic.hit"
+    },
+    "block.stucco.place": {
+        "sounds": [
+            "verdance:block/stucco/break1",
+            "verdance:block/stucco/break2",
+            "verdance:block/stucco/break3",
+            "verdance:block/stucco/break4"
+        ],
+        "subtitle": "subtitles.block.generic.place"
+    },
+    "block.stucco.step": {
+        "sounds": [
+            "verdance:block/stucco/step1",
+            "verdance:block/stucco/step2",
+            "verdance:block/stucco/step3",
+            "verdance:block/stucco/step4",
+            "verdance:block/stucco/step5",
+            "verdance:block/stucco/step6"
+        ],
+        "subtitle": "subtitles.block.generic.footsteps"
+    },
+    "entity.silk_moth.idle": {
+        "sounds": [
+            "verdance:entity/silk_moth/idle1",
+            "verdance:entity/silk_moth/idle2",
+            "verdance:entity/silk_moth/idle3",
+            "verdance:entity/silk_moth/idle4"
+        ],
+        "subtitle": "subtitles.verdance.entity.silk_moth.idle"
+    },
+    "entity.silk_moth.hurt": {
+        "sounds": [
+            "verdance:entity/silk_moth/hurt1",
+            "verdance:entity/silk_moth/hurt2",
+            "verdance:entity/silk_moth/hurt3"
+        ],
+        "subtitle": "subtitles.verdance.entity.silk_moth.hurt"
+    },
+    "entity.silk_moth.death": {
+        "sounds": [
+            "verdance:entity/silk_moth/death1"
+        ],
+        "subtitle": "subtitles.verdance.entity.silk_moth.death"
+    },
+    "entity.silkworm.hurt": {
+        "sounds": [
+            "verdance:entity/silkworm/hurt1",
+            "verdance:entity/silkworm/hurt2",
+            "verdance:entity/silkworm/hurt3",
+            "verdance:entity/silkworm/hurt4"
+        ],
+        "subtitle": "subtitles.verdance.entity.silkworm.hurt"
+    },
+    "entity.silkworm.death": {
+        "sounds": [
+            "verdance:entity/silkworm/death1",
+            "verdance:entity/silkworm/death2"
+        ],
+        "subtitle": "subtitles.verdance.entity.silkworm.death"
+    },
+    "music_disc.range": {
+        "sounds": [
+            {
+                "name": "verdance:record/range",
+                "stream": true
+            }
+        ]
+    }
 }
