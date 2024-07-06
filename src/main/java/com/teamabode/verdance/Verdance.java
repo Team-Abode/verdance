@@ -101,6 +101,9 @@ public class Verdance implements ModInitializer {
                     VerdanceItems.MULBERRY_SIGN,
                     VerdanceItems.MULBERRY_HANGING_SIGN
             );
+            for (DyeColor colours : CreativeCategoryUtils.COLORS) {
+                entries.addAfter(Items.PINK_BED, VerdanceBlocks.getCushion(colours));
+            }
         });
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(entries -> {
             entries.addAfter(Items.GLOW_BERRIES, VerdanceItems.MULBERRY);
