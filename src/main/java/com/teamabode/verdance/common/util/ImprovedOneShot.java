@@ -18,19 +18,15 @@ public abstract class ImprovedOneShot<E extends LivingEntity> extends OneShot<E>
     public final boolean checkRequirements(Brain<?> brain) {
         this.requires(requiredMemories);
 
-        boolean successful = false;
-
         for (var entry : this.requiredMemories.entrySet()) {
             MemoryModuleType<?> memoryModule = entry.getKey();
             MemoryStatus memoryStatus = this.requiredMemories.get(memoryModule);
 
-            if (brain.checkMemory(memoryModule, memoryStatus)) {
-                successful = true;
-                continue;
+            if (!brain.checkMemory(memoryModule, memoryStatus)) {
+                return false;
             }
-            successful = false;
         }
-        return successful;
+        return true;
     }
 
     public boolean canRun(ServerLevel level, E entity, long gameTime) {
