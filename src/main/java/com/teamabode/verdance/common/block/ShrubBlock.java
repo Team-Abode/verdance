@@ -1,8 +1,8 @@
 package com.teamabode.verdance.common.block;
 
 import com.mojang.serialization.MapCodec;
-import com.teamabode.verdance.core.misc.key.VerdanceConfiguredFeatures;
-import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
+import com.teamabode.verdance.core.key.VerdanceConfiguredFeatures;
+import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;

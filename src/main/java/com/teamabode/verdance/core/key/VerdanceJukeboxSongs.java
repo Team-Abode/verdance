@@ -1,10 +1,7 @@
-package com.teamabode.verdance.core.misc.key;
+package com.teamabode.verdance.core.key;
 
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.JukeboxSong;
 

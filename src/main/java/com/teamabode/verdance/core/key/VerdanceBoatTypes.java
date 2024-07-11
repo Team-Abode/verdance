@@ -1,11 +1,8 @@
-package com.teamabode.verdance.core.misc.key;
+package com.teamabode.verdance.core.key;
 
 import com.teamabode.sketch.common.entity.boat.SketchBoatType;
 import com.teamabode.sketch.core.registry.SketchRegistries;
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.core.registry.VerdanceItems;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 
 public class VerdanceBoatTypes {

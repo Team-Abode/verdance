@@ -1,6 +1,6 @@
 package com.teamabode.verdance.datagen.server.tag;
 
-import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
+import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;

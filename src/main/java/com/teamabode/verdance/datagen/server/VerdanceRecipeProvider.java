@@ -2,7 +2,7 @@ package com.teamabode.verdance.datagen.server;
 
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.core.misc.VerdanceBlockFamilies;
-import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
+import com.teamabode.verdance.core.tag.VerdanceItemTags;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;

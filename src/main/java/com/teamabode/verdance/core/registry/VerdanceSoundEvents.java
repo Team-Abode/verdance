@@ -22,6 +22,13 @@ public class VerdanceSoundEvents {
 
     public static final SoundEvent MUSIC_DISC_RANGE = register("music_disc.range");
 
+    /*
+        TODO:
+        - BLOCK_SILK_COCOON_PLACE "block.silk_cocoon.place"
+        - BLOCK_SILK_COCOON_BREAK "block.silk_cocoon.break"
+        - ENTITY_SILK_MOTH_EAT "entity.silk_moth.eat"
+     */
+
     public static void register() {
 
     }

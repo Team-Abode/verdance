@@ -1,6 +1,6 @@
 package com.teamabode.verdance.datagen.server;
 
-import com.teamabode.verdance.core.misc.key.VerdanceLootTables;
+import com.teamabode.verdance.core.key.VerdanceLootTables;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;

@@ -1,4 +1,4 @@
-package com.teamabode.verdance.common.entity.silkmoth.behaviors;
+package com.teamabode.verdance.common.entity.silkmoth.behavior;
 
 import com.google.common.collect.ImmutableMap;
 import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;

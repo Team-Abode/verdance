@@ -1,8 +1,7 @@
 package com.teamabode.verdance.common.entity.silkmoth;
 
 import com.mojang.serialization.Dynamic;
-import com.teamabode.verdance.core.misc.tag.VerdanceBlockTags;
-import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
+import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
 import net.minecraft.core.BlockPos;

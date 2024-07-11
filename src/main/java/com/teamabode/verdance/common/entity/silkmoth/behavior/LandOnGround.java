@@ -1,6 +1,7 @@
-package com.teamabode.verdance.common.entity.silkmoth.behaviors;
+package com.teamabode.verdance.common.entity.silkmoth.behavior;
 
 import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
+import com.teamabode.verdance.common.util.ImprovedOneShot;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -8,11 +9,12 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
 import java.util.Map;
 
+// TODO: Target a surface properly and land on it.
 public class LandOnGround extends ImprovedOneShot<SilkMoth> {
 
-    public void requires(Map<MemoryModuleType<?>, MemoryStatus> map) {
-        map.put(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT);
-        map.put(VerdanceMemoryModuleTypes.IS_FLYING, MemoryStatus.VALUE_PRESENT);
+    public void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements) {
+        requirements.put(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT);
+        requirements.put(VerdanceMemoryModuleTypes.IS_FLYING, MemoryStatus.VALUE_PRESENT);
     }
 
     public boolean canRun(ServerLevel level, SilkMoth entity, long gameTime) {

@@ -1,9 +1,7 @@
 package com.teamabode.verdance.common.entity.silkworm;
 
 import com.mojang.serialization.Dynamic;
-import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
-import com.teamabode.verdance.core.misc.tag.VerdanceItemTags;
-import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
+import com.teamabode.verdance.core.tag.VerdanceItemTags;
 import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -133,10 +131,6 @@ public class Silkworm extends PathfinderMob {
 
     public void setAge(int value) {
         this.age = value;
-
-        if (this.age >= 24000) {
-            this.convert();
-        }
     }
 
     public void ageUp(int offset) {
@@ -145,23 +139,6 @@ public class Silkworm extends PathfinderMob {
 
     private int getTimeUntilAdult() {
         return Math.max(0, 24000 - this.age);
-    }
-
-    protected void convert() {
-        if (this.level() instanceof ServerLevel server) {
-            SilkMoth silkMoth = VerdanceEntityTypes.SILK_MOTH.create(this.level());
-            if (silkMoth != null) {
-                silkMoth.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
-                silkMoth.finalizeSpawn(server, server.getCurrentDifficultyAt(silkMoth.blockPosition()), MobSpawnType.CONVERSION, null);
-                if (this.hasCustomName()) {
-                    silkMoth.setCustomName(this.getCustomName());
-                    silkMoth.setCustomNameVisible(this.isCustomNameVisible());
-                }
-                silkMoth.setPersistenceRequired();
-                server.addFreshEntityWithPassengers(silkMoth);
-                this.discard();
-            }
-        }
     }
 
     @Override

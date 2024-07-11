@@ -1,4 +1,4 @@
-package com.teamabode.verdance.common.entity.silkmoth.behaviors;
+package com.teamabode.verdance.common.util;
 
 import com.google.common.collect.Maps;
 import net.minecraft.server.level.ServerLevel;
@@ -13,9 +13,9 @@ import java.util.Map;
 public abstract class ImprovedOneShot<E extends LivingEntity> extends OneShot<E> {
     private final Map<MemoryModuleType<?>, MemoryStatus> requiredMemories = Maps.newHashMap();
 
-    public abstract void requires(Map<MemoryModuleType<?>, MemoryStatus> map);
+    public abstract void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements);
 
-    public final boolean requiredMemories(Brain<?> brain) {
+    public final boolean checkRequirements(Brain<?> brain) {
         this.requires(requiredMemories);
 
         boolean successful = false;
@@ -38,7 +38,7 @@ public abstract class ImprovedOneShot<E extends LivingEntity> extends OneShot<E>
     }
 
     public boolean trigger(ServerLevel level, E entity, long gameTime) {
-        if (this.requiredMemories(entity.getBrain()) && this.canRun(level, entity, gameTime)) {
+        if (this.checkRequirements(entity.getBrain()) && this.canRun(level, entity, gameTime)) {
             this.run(level, entity, gameTime);
             return true;
         }

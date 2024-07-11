@@ -34,7 +34,7 @@ public class CreativeCategoryUtils {
      * @param  color a vanilla or modded dye
      * @param  index where it places the colour in the list
      */
-    public static void addDyeToColourOrder(DyeColor color, int index) {
+    public static void addDye(DyeColor color, int index) {
         COLORS.add(index, color);
     }
 }
