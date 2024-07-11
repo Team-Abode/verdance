@@ -23,7 +23,7 @@
             "com.teamabode.verdance.client.VerdanceClient"
         ],
         "fabric-datagen": [
-            "com.teamabode.verdance.datagen.VerdanceData"
+            "com.teamabode.verdance.datagen.VerdanceDataGenerator"
         ]
     },
     "mixins": [

@@ -2,12 +2,14 @@ package com.teamabode.verdance.datagen;
 
 import com.teamabode.sketch.core.registry.SketchRegistries;
 import com.teamabode.verdance.core.key.*;
+import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import com.teamabode.verdance.datagen.client.VerdanceModelProvider;
 import com.teamabode.verdance.datagen.server.VerdanceArchaeologyLootTableProvider;
 import com.teamabode.verdance.datagen.server.VerdanceBlockLootTableProvider;
 import com.teamabode.verdance.datagen.server.VerdanceDynamicRegistryProvider;
 import com.teamabode.verdance.datagen.server.tag.VerdanceBiomeTagProvider;
 import com.teamabode.verdance.datagen.server.tag.VerdanceBlockTagProvider;
+import com.teamabode.verdance.datagen.server.tag.VerdanceEntityTypeTagProvider;
 import com.teamabode.verdance.datagen.server.tag.VerdanceItemTagProvider;
 import com.teamabode.verdance.datagen.server.VerdanceRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -15,7 +17,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 
-public class VerdanceData implements DataGeneratorEntrypoint {
+public class VerdanceDataGenerator implements DataGeneratorEntrypoint {
 
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
@@ -25,6 +27,7 @@ public class VerdanceData implements DataGeneratorEntrypoint {
         pack.addProvider(VerdanceRecipeProvider::new);
         pack.addProvider(VerdanceBlockTagProvider::new);
         pack.addProvider(VerdanceItemTagProvider::new);
+        pack.addProvider(VerdanceEntityTypeTagProvider::new);
         pack.addProvider(VerdanceBiomeTagProvider::new);
         pack.addProvider(VerdanceBlockLootTableProvider::new);
         pack.addProvider(VerdanceArchaeologyLootTableProvider::new);
