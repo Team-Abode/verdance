@@ -1,15 +1,16 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "com.teamabode.verdance.core.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "general.LightningBoltMixin",
-    "general.SugarCaneBlockMixin"
-  ],
-  "plugin": "com.teamabode.verdance.core.mixin.VerdanceMixinPlugin",
-  "client": [],
-  "injectors": {
-    "defaultRequire": 1
-  }
+	"required": true,
+	"minVersion": "0.8",
+	"package": "com.teamabode.verdance.core.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"general.LightningBoltMixin",
+		"general.SporeBlossomBlockMixin",
+		"general.SugarCaneBlockMixin"
+	],
+	"plugin": "com.teamabode.verdance.core.mixin.VerdanceMixinPlugin",
+	"client": [],
+	"injectors": {
+		"defaultRequire": 1
+	}
 }

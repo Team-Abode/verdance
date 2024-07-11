@@ -161,6 +161,8 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         cushion(exporter, VerdanceBlocks.getCushion(DyeColor.MAGENTA), Blocks.MAGENTA_WOOL);
         cushion(exporter, VerdanceBlocks.getCushion(DyeColor.PINK), Blocks.PINK_WOOL);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.MAGENTA_DYE, 2).requires(Blocks.SPORE_BLOSSOM).group(getItemName(Items.MAGENTA_DYE)).unlockedBy(getHasName(Blocks.SPORE_BLOSSOM), has(Blocks.SPORE_BLOSSOM)).save(exporter, Verdance.id(getConversionRecipeName(Items.MAGENTA_DYE, Blocks.SPORE_BLOSSOM)));
+
         farmersDelightCompat(this, exporter);
     }
 }
