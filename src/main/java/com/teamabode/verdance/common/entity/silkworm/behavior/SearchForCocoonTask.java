@@ -2,7 +2,7 @@ package com.teamabode.verdance.common.entity.silkworm.behavior;
 
 import com.teamabode.verdance.common.util.ImprovedOneShot;
 import com.teamabode.verdance.common.entity.silkworm.Silkworm;
-import com.teamabode.verdance.common.util.SilkwormUtils;
+import com.teamabode.verdance.common.util.SilkUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import java.util.Map;
 import java.util.Optional;
 
-public class SearchForCocoon extends ImprovedOneShot<Silkworm> {
+public class SearchForCocoonTask extends ImprovedOneShot<Silkworm> {
     private long lastExecution = 0L; // It should only try to attempt this task around every four seconds.
 
     @Override
@@ -27,7 +27,7 @@ public class SearchForCocoon extends ImprovedOneShot<Silkworm> {
             this.lastExecution = gameTime + 80L;
             return;
         }
-        Optional<BlockPos> targetPos = SilkwormUtils.getTargetPos(level, entity.blockPosition());
+        Optional<BlockPos> targetPos = SilkUtils.getTargetPos(level, entity.blockPosition());
 
         if (targetPos.isPresent()) {
             BehaviorUtils.setWalkAndLookTargetMemories(entity, targetPos.get(), 2.0f, 0);

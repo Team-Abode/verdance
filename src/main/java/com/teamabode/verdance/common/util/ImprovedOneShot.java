@@ -37,7 +37,7 @@ public abstract class ImprovedOneShot<E extends LivingEntity> extends OneShot<E>
         return true;
     }
 
-    public boolean trigger(ServerLevel level, E entity, long gameTime) {
+    public final boolean trigger(ServerLevel level, E entity, long gameTime) {
         if (this.checkRequirements(entity.getBrain()) && this.canRun(level, entity, gameTime)) {
             this.run(level, entity, gameTime);
             return true;

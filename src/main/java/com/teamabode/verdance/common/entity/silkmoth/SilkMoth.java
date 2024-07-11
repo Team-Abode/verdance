@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Unit;
 import net.minecraft.world.damagesource.DamageSource;
@@ -46,6 +47,8 @@ public class SilkMoth extends Animal implements FlyingAnimal {
     public final AnimationState flyAnimationState = new AnimationState();
 
     private int idleCooldown = 100;
+    private double bodyLerp = 0.0d;
+    private double bodyPitch = 0.0d;
 
     public SilkMoth(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
@@ -87,7 +90,35 @@ public class SilkMoth extends Animal implements FlyingAnimal {
         if (this.idleCooldown > 0) {
             this.idleCooldown--;
         }
+        double yDelta = this.getDeltaMovement().y();
+
+        this.bodyPitch = -yDelta * 10;
+
+        if (yDelta > 0.0d || yDelta < 0.0) {
+            this.bodyLerp = Math.clamp(this.bodyLerp + 0.025d, 0.0d, 1.0d);
+        }
+        else {
+            this.bodyLerp = Math.clamp(this.bodyLerp - 0.025d, 0.0d, 1.0d);
+        }
+        /*
+        if (yDelta == 0.0d) {
+            this.bodyLerp += 0.25f;
+
+            this.bodyPitch = Mth.lerp(this.bodyPitch, 0.0d, bodyLerp);
+        }
+        if (yDelta < 0.0d) {
+            this.bodyPitch = Math.clamp(this.bodyPitch + 0.05d, 0.0d, 1.0d);
+        }
+        */
         this.flyAnimationState.animateWhen(this.isFlying(), this.tickCount);
+    }
+
+    public double getBodyPitch() {
+        return this.bodyPitch;
+    }
+
+    public double getBodyLerp() {
+        return this.bodyLerp;
     }
 
     @Override
@@ -144,14 +175,12 @@ public class SilkMoth extends Animal implements FlyingAnimal {
             if (this.isFlying()) {
                 this.moveControl = new FlyingMoveControl(this, 20, true);
                 this.navigation = this.createFlightNavigation(this.level());
-                this.setPose(Pose.STANDING);
             }
             else {
                 this.moveControl = new MoveControl(this);
                 this.navigation = this.createNavigation(this.level());
                 this.setNoGravity(false);
                 this.setOnGround(true);
-                this.setPose(Pose.FALL_FLYING);
             }
         }
     }
@@ -161,6 +190,11 @@ public class SilkMoth extends Animal implements FlyingAnimal {
         this.getBrain().setMemory(VerdanceMemoryModuleTypes.IS_FLYING, Unit.INSTANCE);
     }
 
+    public void land() {
+        this.setFlying(false);
+        this.getBrain().eraseMemory(VerdanceMemoryModuleTypes.IS_FLYING);
+        this.getBrain().eraseMemory(VerdanceMemoryModuleTypes.WANTS_TO_LAND);
+    }
 
     public void setFlying(boolean flying) {
         this.entityData.set(FLYING, flying);
@@ -207,7 +241,9 @@ public class SilkMoth extends Animal implements FlyingAnimal {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.SILVERFISH_STEP, 0.1F, 1.0F);
+        if (!this.isFlying()) {
+            this.playSound(SoundEvents.SILVERFISH_STEP, 0.1F, 1.0F);
+        }
     }
 
     @Nullable
@@ -222,7 +258,7 @@ public class SilkMoth extends Animal implements FlyingAnimal {
 
     public static AttributeSupplier.Builder createSilkMothAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 15.0f)
+                .add(Attributes.MAX_HEALTH, 10.0f)
                 .add(Attributes.FLYING_SPEED, 0.5d)
                 .add(Attributes.MOVEMENT_SPEED, 0.2d)
                 .add(Attributes.FOLLOW_RANGE, 48.0)

@@ -2,7 +2,7 @@ package com.teamabode.verdance.common.entity.silkworm.behavior;
 
 import com.teamabode.verdance.common.entity.silkworm.Silkworm;
 import com.teamabode.verdance.common.util.ImprovedOneShot;
-import com.teamabode.verdance.common.util.SilkwormUtils;
+import com.teamabode.verdance.common.util.SilkUtils;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Map;
 
-public class TurnIntoCocoon extends ImprovedOneShot<Silkworm> {
+public class TurnIntoCocoonTask extends ImprovedOneShot<Silkworm> {
 
     @Override
     public void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements) {
@@ -30,7 +30,7 @@ public class TurnIntoCocoon extends ImprovedOneShot<Silkworm> {
             BlockState dirState = level.getBlockState(dirPos);
             if (!dirState.is(BlockTags.LOGS_THAT_BURN)) continue;
 
-            SilkwormUtils.transformIntoCocoon(level, entity, entity.blockPosition(), dir);
+            SilkUtils.transformIntoCocoon(level, entity, entity.blockPosition(), dir);
         }
     }
 }

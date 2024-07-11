@@ -13,7 +13,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
 import java.util.Map;
 
-public class SearchForLeaves extends ImprovedOneShot<SilkMoth> {
+public class SearchForLeavesTask extends ImprovedOneShot<SilkMoth> {
     private long lastExecution = 0L;
 
     @Override

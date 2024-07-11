@@ -2,8 +2,7 @@ package com.teamabode.verdance.core.registry;
 
 import com.mojang.serialization.Codec;
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.common.util.CocoonPos;
-import net.minecraft.core.GlobalPos;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Unit;
@@ -14,6 +13,7 @@ import java.util.Optional;
 public class VerdanceMemoryModuleTypes {
     public static final MemoryModuleType<Unit> IS_FLYING = register("is_flying");
     public static final MemoryModuleType<Unit> WANTS_TO_COCOON = register("wants_to_cocoon");
+    public static final MemoryModuleType<Unit> WANTS_TO_LAND = register("wants_to_land");
 
     public static <U> MemoryModuleType<U> register(String name) {
         return Registry.register(BuiltInRegistries.MEMORY_MODULE_TYPE, Verdance.id(name), new MemoryModuleType<>(Optional.empty()));

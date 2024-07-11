@@ -8,9 +8,13 @@
 					"interpolation": "catmullrom",
 					"value": [0, 1, 0]
 				},
-				"0.32": {
+				"0.24": {
 					"interpolation": "catmullrom",
 					"value": [0, -0.5, 0]
+				},
+				"0.72": {
+					"interpolation": "catmullrom",
+					"value": [0, 1, 0]
 				},
 				"0.96": {
 					"interpolation": "catmullrom",
@@ -22,9 +26,13 @@
 					"interpolation": "catmullrom",
 					"value": [-15, 0, 0]
 				},
-				"0.32": {
+				"0.24": {
 					"interpolation": "catmullrom",
 					"value": [-5, 0, 0]
+				},
+				"0.72": {
+					"interpolation": "catmullrom",
+					"value": [-15, 0, 0]
 				},
 				"0.96": {
 					"interpolation": "catmullrom",
@@ -36,15 +44,15 @@
 			"rotation": {
 				"0": {
 					"interpolation": "catmullrom",
-					"value": [0, -22.5, 15]
+					"value": [0, -22.5, 30]
 				},
 				"0.48": {
 					"interpolation": "catmullrom",
-					"value": [0, -22.5, 35]
+					"value": [0, -22.5, 60]
 				},
 				"0.96": {
 					"interpolation": "catmullrom",
-					"value": [0, -22.5, 15]
+					"value": [0, -22.5, 30]
 				}
 			}
 		},
@@ -52,15 +60,15 @@
 			"rotation": {
 				"0": {
 					"interpolation": "catmullrom",
-					"value": [0, -22.5, 15]
+					"value": [0, -22.5, 30]
 				},
 				"0.48": {
 					"interpolation": "catmullrom",
-					"value": [0, -22.5, 40]
+					"value": [0, -22.5, 55]
 				},
 				"0.96": {
 					"interpolation": "catmullrom",
-					"value": [0, -22.5, 15]
+					"value": [0, -22.5, 30]
 				}
 			}
 		},
@@ -68,15 +76,15 @@
 			"rotation": {
 				"0": {
 					"interpolation": "catmullrom",
-					"value": [0, -22.5, 15]
+					"value": [0, -22.5, 30]
 				},
 				"0.48": {
 					"interpolation": "catmullrom",
-					"value": [0, -22.5, 45]
+					"value": [0, -22.5, 50]
 				},
 				"0.96": {
 					"interpolation": "catmullrom",
-					"value": [0, -22.5, 15]
+					"value": [0, -22.5, 30]
 				}
 			}
 		},
@@ -84,15 +92,15 @@
 			"rotation": {
 				"0": {
 					"interpolation": "catmullrom",
-					"value": [0, 22.5, -15]
+					"value": [0, 22.5, -30]
 				},
 				"0.48": {
 					"interpolation": "catmullrom",
-					"value": [0, 22.5, -35]
+					"value": [0, 22.5, -60]
 				},
 				"0.96": {
 					"interpolation": "catmullrom",
-					"value": [0, 22.5, -15]
+					"value": [0, 22.5, -30]
 				}
 			}
 		},
@@ -100,15 +108,15 @@
 			"rotation": {
 				"0": {
 					"interpolation": "catmullrom",
-					"value": [0, 22.5, -15]
+					"value": [0, 22.5, -30]
 				},
 				"0.48": {
 					"interpolation": "catmullrom",
-					"value": [0, 22.5, -40]
+					"value": [0, 22.5, -55]
 				},
 				"0.96": {
 					"interpolation": "catmullrom",
-					"value": [0, 22.5, -15]
+					"value": [0, 22.5, -30]
 				}
 			}
 		},
@@ -116,15 +124,15 @@
 			"rotation": {
 				"0": {
 					"interpolation": "catmullrom",
-					"value": [0, 22.5, -15]
+					"value": [0, 22.5, -30]
 				},
 				"0.48": {
 					"interpolation": "catmullrom",
-					"value": [0, 22.5, -45]
+					"value": [0, 22.5, -50]
 				},
 				"0.96": {
 					"interpolation": "catmullrom",
-					"value": [0, 22.5, -15]
+					"value": [0, 22.5, -30]
 				}
 			}
 		},

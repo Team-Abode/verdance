@@ -1,17 +1,29 @@
 package com.teamabode.verdance.common.util;
 
 import com.teamabode.verdance.common.block.SilkCocoonBlock;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import com.teamabode.verdance.common.entity.silkworm.Silkworm;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Optional;
 
-public class SilkwormUtils {
+// Utils for the Silk Moth and Silkworm
+public class SilkUtils {
+
+    public static Optional<BlockPos> calculateLandingTarget(SilkMoth entity) {
+        Vec3 pos = LandRandomPos.getPos(entity, 6, 3);
+        if (pos == null) {
+            return Optional.empty();
+        }
+        return Optional.of(BlockPos.containing(pos));
+    }
 
     public static void transformIntoCocoon(ServerLevel level, Silkworm entity, BlockPos pos, Direction direction) {
         BlockState state = VerdanceBlocks.SILK_COCOON.defaultBlockState().setValue(SilkCocoonBlock.FACING, direction);

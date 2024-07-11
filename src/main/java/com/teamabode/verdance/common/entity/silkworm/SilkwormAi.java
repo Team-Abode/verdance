@@ -3,8 +3,8 @@ package com.teamabode.verdance.common.entity.silkworm;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
-import com.teamabode.verdance.common.entity.silkworm.behavior.SearchForCocoon;
-import com.teamabode.verdance.common.entity.silkworm.behavior.TurnIntoCocoon;
+import com.teamabode.verdance.common.entity.silkworm.behavior.SearchForCocoonTask;
+import com.teamabode.verdance.common.entity.silkworm.behavior.TurnIntoCocoonTask;
 import com.teamabode.verdance.core.tag.VerdanceItemTags;
 import com.teamabode.verdance.core.registry.VerdanceActivities;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
@@ -74,11 +74,11 @@ public class SilkwormAi {
     private static void addCocoonActivities(Brain<Silkworm> brain) {
         brain.addActivityWithConditions(VerdanceActivities.COCOON, ImmutableList.of(
                 Pair.of(1, new RunOne<>(ImmutableList.of(
-                        Pair.of(new SearchForCocoon(), 3),
+                        Pair.of(new SearchForCocoonTask(), 3),
                         Pair.of(RandomStroll.stroll(1.0f), 2),
                         Pair.of(new DoNothing(30, 60), 1)
                 ))),
-                Pair.of(2, new TurnIntoCocoon())
+                Pair.of(2, new TurnIntoCocoonTask())
         ), Set.of(Pair.of(VerdanceMemoryModuleTypes.WANTS_TO_COCOON, MemoryStatus.VALUE_PRESENT)));
     }
 

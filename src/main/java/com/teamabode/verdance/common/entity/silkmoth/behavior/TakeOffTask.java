@@ -9,9 +9,9 @@ import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
-public class TakeOff extends Behavior<SilkMoth> {
+public class TakeOffTask extends Behavior<SilkMoth> {
 
-    public TakeOff() {
+    public TakeOffTask() {
         super(ImmutableMap.of(
                 MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryStatus.VALUE_PRESENT,
                 VerdanceMemoryModuleTypes.IS_FLYING, MemoryStatus.VALUE_ABSENT

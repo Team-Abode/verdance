@@ -80,18 +80,21 @@ public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
 
 	public void setupAnim(SilkMoth entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
-		this.setupBones();
+		this.setupBones(entity);
 		this.animate(entity.idleAnimationState, VerdanceAnimations.SILK_MOTH_IDLE, ageInTicks);
 		
 		if (entity.onGround() && !entity.isFlying()) {
 			this.animateWalk(VerdanceAnimations.SILK_MOTH_WALK, limbSwing, limbSwingAmount, 2.0f, 2.5f);
 		}
 		this.animate(entity.flyAnimationState, VerdanceAnimations.SILK_MOTH_FLY, ageInTicks);
-		this.applyHeadRotation(netHeadYaw, headPitch);
+		this.applyHeadRotation(entity, netHeadYaw, headPitch);
 	}
 
-	public void setupBones() {
+	public void setupBones(SilkMoth entity) {
 		this.body.y = 17.75f;
+
+
+		this.body.xRot = (float) Mth.lerp(0.0d, Math.toRadians(entity.getBodyPitch() * 30.0f), entity.getBodyLerp());
 
 		this.rightAntenna.zRot = (float) Math.toRadians(-22.5f);
 		this.leftAntenna.zRot = (float) Math.toRadians(22.5f);
@@ -110,12 +113,12 @@ public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
 		this.leftWing.zRot = (float) Math.toRadians(-45.0f);
 	}
 
-	private void applyHeadRotation(float netHeadYaw, float headPitch) {
+	private void applyHeadRotation(SilkMoth entity, float netHeadYaw, float headPitch) {
 		netHeadYaw = Mth.clamp(netHeadYaw, -30.0F, 30.0F);
 		headPitch = Mth.clamp(headPitch, -25.0F, 45.0F);
 
-		this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
-		this.head.xRot = headPitch * Mth.DEG_TO_RAD;
+		this.head.yRot = (float) Math.toRadians(netHeadYaw);
+		this.head.xRot = (float) (Math.toRadians(headPitch) - Mth.lerp(0.0d, Math.toRadians(entity.getBodyPitch() * 15.0f), entity.getBodyLerp()));
 	}
 
 	public ModelPart root() {

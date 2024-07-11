@@ -14,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Map;
 
-public class AerialStroll extends ImprovedOneShot<SilkMoth> {
+public class AerialStrollTask extends ImprovedOneShot<SilkMoth> {
 
     public void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements) {
         requirements.put(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT);

@@ -41,7 +41,8 @@ public class SilkMothAi {
             MemoryModuleType.BREED_TARGET,
             MemoryModuleType.NEAREST_LIVING_ENTITIES,
             MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
-            VerdanceMemoryModuleTypes.IS_FLYING
+            VerdanceMemoryModuleTypes.IS_FLYING,
+            VerdanceMemoryModuleTypes.WANTS_TO_LAND
     );
 
     public static final List<SensorType<? extends Sensor<? super SilkMoth>>> SENSORS = ImmutableList.of(
@@ -64,10 +65,11 @@ public class SilkMothAi {
     private static void addCoreActivities(Brain<SilkMoth> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new Swim(1.0f),
+                new TakeOffTask(),
+                //new LandTask(),
                 new AnimalPanic<>(1.5f),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
-                new TakeOff(), // TODO: let's try shifting the priority of this up a bit.
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
         ));
     }
@@ -77,15 +79,16 @@ public class SilkMothAi {
                 Pair.of(0, new AnimalMakeLove(VerdanceEntityTypes.SILK_MOTH)),
                 Pair.of(1, new FollowTemptation(livingEntity -> 1.5f)),
                 Pair.of(2, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
-                Pair.of(3, addIdleBehaviors())
+                Pair.of(2, new StartLandingTask()),
+                Pair.of(4, addMovementTasks())
         ));
     }
 
     private static void addLayEggsActivities(Brain<SilkMoth> brain) {
         brain.addActivityWithConditions(VerdanceActivities.LAY_EGGS, ImmutableList.of(
-                Pair.of(0, new SearchForLeaves()),
-                Pair.of(1, TryLayEggs.create()),
-                Pair.of(2, addIdleBehaviors())
+                Pair.of(0, new SearchForLeavesTask()),
+                Pair.of(1, LayEggsTask.create()),
+                Pair.of(2, addMovementTasks())
         ), ImmutableSet.of(Pair.of(MemoryModuleType.IS_PREGNANT, MemoryStatus.VALUE_PRESENT)));
     }
 
@@ -101,10 +104,10 @@ public class SilkMothAi {
         return Ingredient.of(ItemTags.FLOWERS); // TODO: Add silk_moth_food tag
     }
 
-    private static RunOne<SilkMoth> addIdleBehaviors() {
+    private static RunOne<SilkMoth> addMovementTasks() {
         return new RunOne<>(ImmutableList.of(
-                Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new AerialStroll()), 2),
-                Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new LandOnGround()), 3),
+                Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new AerialStrollTask()), 2),
+                //Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new StartLandingTask()), 2),
                 Pair.of(BehaviorBuilder.triggerIf(Predicate.not(SilkMoth::isFlying), RandomStroll.stroll(1.0f)), 2),
                 Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 3), 2),
                 Pair.of(new DoNothing(30,  60), 1)
