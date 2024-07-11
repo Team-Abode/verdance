@@ -1,0 +1,6 @@
+{
+  "angry_texture": "verdance:entity/wolf/wolf/wolf_golden_angry",
+  "biomes": "#verdance:has_golden_wolf",
+  "tame_texture": "verdance:entity/wolf/wolf/wolf_golden_tame",
+  "wild_texture": "verdance:entity/wolf/wolf/wolf_golden"
+}

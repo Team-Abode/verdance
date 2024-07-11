@@ -1,0 +1,8 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "jukebox_song.verdance.range"
+  },
+  "length_in_seconds": 87.0,
+  "sound_event": "verdance:music_disc.range"
+}

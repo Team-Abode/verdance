@@ -27,6 +27,7 @@ public class Verdance implements ModInitializer {
     public static final String MOD_ID = "verdance";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+    @Override
     public void onInitialize() {
         VerdanceEntityTypes.register();
         VerdanceBlocks.register();

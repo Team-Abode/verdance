@@ -20,7 +20,7 @@ public class VerdanceSoundEvents {
     public static final SoundEvent ENTITY_SILKWORM_HURT = register("entity.silkworm.hurt");
     public static final SoundEvent ENTITY_SILKWORM_DEATH = register("entity.silkworm.death");
 
-    public static final SoundEvent MUSIC_DISC_RANGE = register("music_disc.range");
+    public static final Holder.Reference<SoundEvent> MUSIC_DISC_RANGE = registerHolder("music_disc.range");
 
     /*
         TODO:
@@ -35,5 +35,9 @@ public class VerdanceSoundEvents {
 
     private static SoundEvent register(String name) {
         return Registry.register(BuiltInRegistries.SOUND_EVENT, Verdance.id(name), SoundEvent.createVariableRangeEvent(Verdance.id(name)));
+    }
+
+    private static Holder.Reference<SoundEvent> registerHolder(String name) {
+        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, Verdance.id(name), SoundEvent.createVariableRangeEvent(Verdance.id(name)));
     }
 }
