@@ -15,6 +15,9 @@ public class VerdanceMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.contains("SugarCaneBlock")) {
             return VerdanceConfig.INSTANCE.canBonemealSugarCane.get();
         }
+        if (mixinClassName.contains("SporeBlossomBlock")) {
+            return VerdanceConfig.INSTANCE.canBonemealSporeBlossom.get();
+        }
         return true;
     }
 

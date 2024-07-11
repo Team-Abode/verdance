@@ -8,6 +8,7 @@ public class VerdanceConfig extends Config {
     public static final VerdanceConfig INSTANCE = new VerdanceConfig();
 
     public final BooleanProperty canBonemealSugarCane;
+    public final BooleanProperty canBonemealSporeBlossom;
     public final IntProperty mulberryForestWeight;
     public final IntProperty shrublandsWeight;
 
@@ -15,10 +16,11 @@ public class VerdanceConfig extends Config {
         super("verdance");
 
         this.canBonemealSugarCane = new BooleanProperty("can_bonemeal_sugar_cane", true);
+        this.canBonemealSporeBlossom = new BooleanProperty("can_bonemeal_spore_blossom", true);
         this.mulberryForestWeight = new IntProperty("mulberry_forest_weight", 4);
         this.shrublandsWeight = new IntProperty("shrublands_weight", 15);
 
-        this.defineCategory("general", this.canBonemealSugarCane);
+        this.defineCategory("general", this.canBonemealSugarCane, this.canBonemealSporeBlossom);
         this.defineCategory("biomes", this.mulberryForestWeight, this.shrublandsWeight);
     }
 }
