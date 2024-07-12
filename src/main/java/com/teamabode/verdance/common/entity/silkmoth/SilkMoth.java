@@ -47,7 +47,6 @@ public class SilkMoth extends Animal implements FlyingAnimal {
     public final AnimationState flyAnimationState = new AnimationState();
 
     private int idleCooldown = 100;
-    private double bodyLerp = 0.0d;
     private double bodyPitch = 0.0d;
 
     public SilkMoth(EntityType<? extends Animal> entityType, Level level) {
@@ -94,31 +93,13 @@ public class SilkMoth extends Animal implements FlyingAnimal {
 
         this.bodyPitch = -yDelta * 10;
 
-        if (yDelta > 0.0d || yDelta < 0.0) {
-            this.bodyLerp = Math.clamp(this.bodyLerp + 0.025d, 0.0d, 1.0d);
-        }
-        else {
-            this.bodyLerp = Math.clamp(this.bodyLerp - 0.025d, 0.0d, 1.0d);
-        }
-        /*
-        if (yDelta == 0.0d) {
-            this.bodyLerp += 0.25f;
+        if(!this.isFlying()) this.bodyPitch = 0;
 
-            this.bodyPitch = Mth.lerp(this.bodyPitch, 0.0d, bodyLerp);
-        }
-        if (yDelta < 0.0d) {
-            this.bodyPitch = Math.clamp(this.bodyPitch + 0.05d, 0.0d, 1.0d);
-        }
-        */
         this.flyAnimationState.animateWhen(this.isFlying(), this.tickCount);
     }
 
     public double getBodyPitch() {
         return this.bodyPitch;
-    }
-
-    public double getBodyLerp() {
-        return this.bodyLerp;
     }
 
     @Override

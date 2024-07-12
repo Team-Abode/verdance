@@ -32,6 +32,9 @@ public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
 	private final ModelPart leftWing;
 	private final ModelPart rightWing;
 
+	private float lastTickAge;
+	private float lastXRot;
+
 	public SilkMothModel(ModelPart root) {
 		this.root = root;
 		this.body = this.root.getChild("body");
@@ -79,8 +82,11 @@ public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
 	}
 
 	public void setupAnim(SilkMoth entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		float deltaTicks = ageInTicks - lastTickAge;
+		lastTickAge = ageInTicks;
+
 		this.root().getAllParts().forEach(ModelPart::resetPose);
-		this.setupBones(entity);
+		this.setupBones(entity, ageInTicks, deltaTicks);
 		this.animate(entity.idleAnimationState, VerdanceAnimations.SILK_MOTH_IDLE, ageInTicks);
 		
 		if (entity.onGround() && !entity.isFlying()) {
@@ -90,11 +96,17 @@ public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
 		this.applyHeadRotation(entity, netHeadYaw, headPitch);
 	}
 
-	public void setupBones(SilkMoth entity) {
+	private float expDecay(float a, float b, float decay, float dt) {
+		return b + (a - b) * (float)Math.exp(-decay * dt);
+	}
+
+	public void setupBones(SilkMoth entity, float age, float deltaTicks) {
 		this.body.y = 17.75f;
 
+		float targetXRot = (float)Math.toRadians(entity.getBodyPitch()) * 45;
 
-		this.body.xRot = (float) Mth.lerp(0.0d, Math.toRadians(entity.getBodyPitch() * 30.0f), entity.getBodyLerp());
+		this.lastXRot = expDecay(this.lastXRot, targetXRot, 8f, deltaTicks / 20f);
+		this.body.xRot = this.lastXRot;
 
 		this.rightAntenna.zRot = (float) Math.toRadians(-22.5f);
 		this.leftAntenna.zRot = (float) Math.toRadians(22.5f);
@@ -118,7 +130,7 @@ public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
 		headPitch = Mth.clamp(headPitch, -25.0F, 45.0F);
 
 		this.head.yRot = (float) Math.toRadians(netHeadYaw);
-		this.head.xRot = (float) (Math.toRadians(headPitch) - Mth.lerp(0.0d, Math.toRadians(entity.getBodyPitch() * 15.0f), entity.getBodyLerp()));
+		this.head.xRot = (float) (Math.toRadians(headPitch) - Math.toRadians(entity.getBodyPitch() * 15.0f));
 	}
 
 	public ModelPart root() {
