@@ -42,10 +42,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Sketch
-	modApi "com.github.Team-Abode:sketch:${rootProject.scribe_version}"
-
-	// Terrablender
-	modApi "com.github.glitchfiend:TerraBlender-fabric:${rootProject.minecraft_version}-${rootProject.terrablender_version}"
+	modApi "com.github.Team-Abode:sketch:${rootProject.sketch_version}"
 
 	/*
 	// Farmer's Delight
