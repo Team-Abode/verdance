@@ -15,9 +15,9 @@ public class VerdanceWolfVariants {
         var biomes = context.lookup(Registries.BIOME);
 
         context.register(GOLDEN, new WolfVariant(
-                Verdance.id("entity/wolf/wolf/wolf_golden"),
-                Verdance.id("entity/wolf/wolf/wolf_golden_tame"),
-                Verdance.id("entity/wolf/wolf/wolf_golden_angry"),
+                Verdance.id("entity/wolf/wolf_golden"),
+                Verdance.id("entity/wolf/wolf_golden_tame"),
+                Verdance.id("entity/wolf/wolf_golden_angry"),
                 biomes.getOrThrow(VerdanceBiomeTags.HAS_GOLDEN_WOLF)
         ));
     }
