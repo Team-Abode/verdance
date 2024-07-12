@@ -97,6 +97,12 @@
   "spawners": {
     "ambient": [
       {
+        "type": "verdance:silk_moth",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
         "type": "minecraft:bat",
         "maxCount": 8,
         "minCount": 8,
@@ -122,12 +128,6 @@
         "maxCount": 4,
         "minCount": 4,
         "weight": 1
-      },
-      {
-        "type": "verdance:silk_moth",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 4
       }
     ],
     "misc": [],

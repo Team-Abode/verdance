@@ -3,9 +3,11 @@ package com.teamabode.verdance;
 import com.teamabode.sketch.core.api.misc.BlockEntityExtender;
 import com.teamabode.verdance.common.util.CreativeCategoryUtils;
 import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
+import com.teamabode.verdance.core.key.VerdanceBiomes;
 import com.teamabode.verdance.core.tag.VerdanceBiomeTags;
 import com.teamabode.verdance.core.key.VerdancePlacedFeatures;
 import com.teamabode.verdance.core.registry.*;
+import com.terraformersmc.biolith.api.biome.BiomePlacement;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -17,6 +19,7 @@ import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -45,6 +48,7 @@ public class Verdance implements ModInitializer {
         registerBiomeModifications();
         registerTrades();
         registerItemGroupEvents();
+        registerBiomePlacements();
     }
 
     public static void registerBlockEntityAdditions() {
@@ -194,6 +198,10 @@ public class Verdance implements ModInitializer {
                     VerdanceItems.SILKWORM_SPAWN_EGG
             );
         });
+    }
+
+    public static void registerBiomePlacements() {
+        BiomePlacement.replaceOverworld(Biomes.CHERRY_GROVE, VerdanceBiomes.MULBERRY_FOREST, 0.25d);
     }
 
     public static ResourceLocation id(String name) {

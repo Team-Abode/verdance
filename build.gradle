@@ -8,28 +8,11 @@ group = project.maven_group
 
 repositories {
 	maven {
-		name = "Forge Maven"
-		url = 'https://maven.minecraftforge.net/'
-	}
-	maven {
 		url = 'https://jitpack.io'
 	}
 	maven {
-		url "https://cursemaven.com"
-		content {
-			includeGroup "curse.maven"
-		}
-	}
-	exclusiveContent {
-		forRepository {
-			maven {
-				name = "Modrinth"
-				url = "https://api.modrinth.com/maven"
-			}
-		}
-		filter {
-			includeGroup "maven.modrinth"
-		}
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com/'
 	}
 }
 
@@ -41,19 +24,9 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Sketch
+	// Dependencies
 	modApi "com.github.Team-Abode:sketch:${rootProject.sketch_version}"
-
-	/*
-	// Farmer's Delight
-	modImplementation "maven.modrinth:farmers-delight-fabric:${project.farmersdelight_version}"
-	// Every Compat
-	modRuntimeOnly "maven.modrinth:every-compat:${rootProject.everycompat_version}"
-	// Moonlight
-	modRuntimeOnly "maven.modrinth:moonlight:${rootProject.moonlight_version}"
-	// Twigs
-	modRuntimeOnly "maven.modrinth:twigs:${rootProject.twigs_version}"
-	*/
+	modApi "com.terraformersmc:biolith-fabric:${project.biolith_version}"
 }
 
 base {

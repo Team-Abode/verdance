@@ -12,6 +12,7 @@ import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.CherryFoliagePl
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class VerdanceConfiguredFeatures {
                         new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                                 .add(Blocks.LILY_OF_THE_VALLEY.defaultBlockState(), 1)
                                 .add(Blocks.OXEYE_DAISY.defaultBlockState(), 2).build())
-                ))
+                ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.AIR)))
         ));
         FeatureUtils.register(context, MULBERRY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 SimpleStateProvider.simple(VerdanceBlocks.MULBERRY_LOG),
