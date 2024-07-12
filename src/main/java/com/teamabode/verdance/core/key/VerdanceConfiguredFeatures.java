@@ -1,23 +1,19 @@
 package com.teamabode.verdance.core.key;
 
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.common.worldgen.feature.MulberryTrunkPlacer;
+import com.teamabode.verdance.common.worldgen.MulberryTrunkPlacer;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
-import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.random.SimpleWeightedRandomList;
-import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -26,7 +22,8 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.CherryFoliagePl
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
-import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
+
+import java.util.List;
 
 public class VerdanceConfiguredFeatures {
 
@@ -59,17 +56,10 @@ public class VerdanceConfiguredFeatures {
                 new CherryFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(4), 0.33333333F, 0.25f, 0.16666667f, 0.33333334f),
                 new TwoLayersFeatureSize(1, 0, 2)
         ).build());
-        FeatureUtils.register(context, PATCH_CANTALOUPE, Feature.RANDOM_PATCH, new RandomPatchConfiguration(
-                96,
-                8,
-                3,
-                PlacementUtils.inlinePlaced(
-                        Feature.SIMPLE_BLOCK,
-                        new SimpleBlockConfiguration(BlockStateProvider.simple(VerdanceBlocks.CANTALOUPE)),
-                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
-                                BlockPredicate.matchesBlocks(Blocks.AIR),
-                                BlockPredicate.matchesTag(VerdanceBlockTags.SHRUB_MAY_PLACE_ON)
-                )))
+        FeatureUtils.register(context, PATCH_CANTALOUPE, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(
+                Feature.SIMPLE_BLOCK,
+                new SimpleBlockConfiguration(BlockStateProvider.simple(VerdanceBlocks.CANTALOUPE)),
+                List.of(Blocks.GRASS_BLOCK)
         ));
     }
 

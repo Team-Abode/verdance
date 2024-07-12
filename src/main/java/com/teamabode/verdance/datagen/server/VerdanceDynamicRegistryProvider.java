@@ -18,7 +18,6 @@ public class VerdanceDynamicRegistryProvider extends FabricDynamicRegistryProvid
 
     @Override
     protected void configure(HolderLookup.Provider registries, Entries entries) {
-        this.addAll(Registries.JUKEBOX_SONG, registries, entries);
         this.addAll(Registries.WOLF_VARIANT, registries, entries);
         this.addAll(SketchRegistries.BOAT_TYPE, registries, entries);
         this.addAll(Registries.CONFIGURED_FEATURE, registries, entries);

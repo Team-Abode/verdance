@@ -34,17 +34,9 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
 
     public void generate() {
         mulberry();
-        shrub();
         stucco();
         cantaloupe();
         add(VerdanceBlocks.SILKWORM_EGGS, this::createSilkTouchOnlyTable);
-    }
-
-    private void shrub() {
-        this.add(VerdanceBlocks.SHRUB, block -> {
-            var lootItem = LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f)));
-            return createShearsDispatchTable(block, this.applyExplosionDecay(block, lootItem));
-        });
     }
 
     private void mulberry() {

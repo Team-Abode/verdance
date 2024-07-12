@@ -20,8 +20,6 @@ public class VerdanceSoundEvents {
     public static final SoundEvent ENTITY_SILKWORM_HURT = register("entity.silkworm.hurt");
     public static final SoundEvent ENTITY_SILKWORM_DEATH = register("entity.silkworm.death");
 
-    public static final Holder.Reference<SoundEvent> MUSIC_DISC_RANGE = registerHolder("music_disc.range");
-
     /*
         TODO:
         - BLOCK_SILK_COCOON_PLACE "block.silk_cocoon.place"

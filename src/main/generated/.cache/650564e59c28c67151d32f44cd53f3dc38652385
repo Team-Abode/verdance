@@ -1,4 +1,4 @@
-// 1.21	2024-07-11T18:47:42.8817061	Verdance/Tags for minecraft:item
+// 1.21	2024-07-11T20:55:17.338929	Verdance/Tags for minecraft:item
 67f7394923e52e601b30297dcbb1812215a4ffed data\minecraft\tags\item\chicken_food.json
 740fa2d483b1840073090e5b698d69c70c68856f data\minecraft\tags\item\leaves.json
 bca2d89b2ad2ab2d8ba4b7777579a6f54a16a93f data\minecraft\tags\item\stairs.json
@@ -8,7 +8,6 @@ bca2d89b2ad2ab2d8ba4b7777579a6f54a16a93f data\minecraft\tags\item\stairs.json
 1b9e2711354794571be4360a6c0683cf8c22d06c data\minecraft\tags\item\slabs.json
 a51638bfcc9129be60e2165ce43571bf2594ed66 data\c\tags\item\foods.json
 8129a1ef2408f1bde88d5ea7e21d4fe7d59786c7 data\minecraft\tags\item\hanging_signs.json
-d7d1f9959bc7fca783cdfe30e616677e05e1c526 data\c\tags\item\music_discs.json
 0498119d7a84aa4f58b89b1b597bcb59b8d13cfb data\minecraft\tags\item\wooden_stairs.json
 b3073e2c273d68774f25b513558fed9d9116c935 data\minecraft\tags\item\saplings.json
 236626952d19df32e45caaaf4419eeea0cc18e70 data\minecraft\tags\item\wooden_fences.json

@@ -30,10 +30,6 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         super(output, registryLookup);
     }
 
-    private static void rangeDisc(RecipeOutput exporter) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, VerdanceItems.MUSIC_DISC_RANGE).requires(VerdanceItems.DISC_FRAGMENT_RANGE, 4).unlockedBy("has_fragment", has(VerdanceItems.DISC_FRAGMENT_RANGE)).save(exporter);
-    }
-
     private static void stucco(RecipeOutput output, BlockFamily family, Item dye) {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, family.getBaseBlock(), 8).requires(dye).requires(Items.CLAY, 4).requires(Ingredient.of(ItemTags.SAND), 4).group("stucco").unlockedBy(getHasName(Items.CLAY), has(Items.CLAY)).unlockedBy("has_sand", has(ItemTags.SAND)).save(output);
 
@@ -126,7 +122,6 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
 
         cantaloupe(exporter);
         hangingSign(exporter, VerdanceItems.MULBERRY_HANGING_SIGN, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
-        rangeDisc(exporter);
         stucco(exporter, VerdanceBlockFamilies.WHITE_STUCCO, Items.WHITE_DYE);
         stucco(exporter, VerdanceBlockFamilies.LIGHT_GRAY_STUCCO, Items.LIGHT_GRAY_DYE);
         stucco(exporter, VerdanceBlockFamilies.GRAY_STUCCO, Items.GRAY_DYE);

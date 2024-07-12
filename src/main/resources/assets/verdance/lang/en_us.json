@@ -1,6 +1,5 @@
 {
   "biome.verdance.mulberry_forest": "Mulberry Forest",
-  "biome.verdance.shrublands": "Shrublands",
 
   "block.verdance.attached_cantaloupe_stem": "Attached Cantaloupe Stem",
   "block.verdance.black_cushion": "Black Cushion",
@@ -55,7 +54,6 @@
   "block.verdance.red_stucco_stairs": "Red Stucco Stairs",
   "block.verdance.red_stucco_slab": "Red Stucco Slab",
   "block.verdance.red_stucco_wall": "Red Stucco Wall",
-  "block.verdance.shrub": "Shrub",
   "block.verdance.stripped_mulberry_log": "Stripped Mulberry Log",
   "block.verdance.stripped_mulberry_wood": "Stripped Mulberry Wood",
   "block.verdance.white_cushion": "White Cushion",
@@ -126,21 +124,13 @@
   "item.verdance.mulberry": "Mulberry",
   "item.verdance.mulberry_boat": "Mulberry Boat",
   "item.verdance.mulberry_chest_boat": "Mulberry Chest Boat",
-  "item.verdance.music_disc_range": "Music Disc",
-  "item.verdance.music_disc_range.desc": "Firch - Range",
-  "item.verdance.disc_fragment_range": "Disc Fragment",
-  "item.verdance.disc_fragment_range.desc": "Music Disc - Range",
   "item.verdance.silk_moth_spawn_egg": "Silk Moth Spawn Egg",
   "item.verdance.silkworm_spawn_egg": "Silkworm Spawn Egg",
 
   "entity.verdance.silk_moth": "Silk Moth",
   "entity.verdance.silkworm": "Silkworm",
 
-  "jukebox_song.verdance.range": "Firch - Range",
-
-  "verdance.tooltip.cantaloupe_juice": "Instant Fire Extinguish",
-
-  "subtitles.verdance.entity.silk_moth.idle": "Silk Moth squeaks",
+  "subtitles.verdance.entity.silk_moth.idle": "Silk Moth chirps",
   "subtitles.verdance.entity.silk_moth.hurt": "Silk Moth hurts",
   "subtitles.verdance.entity.silk_moth.death": "Silk Moth dies",
   "subtitles.verdance.entity.silkworm.hurt": "Silkworm hurts",

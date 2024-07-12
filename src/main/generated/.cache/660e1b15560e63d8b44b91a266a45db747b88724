@@ -1,4 +1,4 @@
-// 1.21	2024-07-11T18:47:42.8667079	Verdance/Tags for minecraft:block
+// 1.21	2024-07-11T20:55:17.3279311	Verdance/Tags for minecraft:block
 9b20fbd98b5e9333686763db62249b3a3c25be65 data\minecraft\tags\block\slabs.json
 82aeade700265a023adf13ac5e3866b479208176 data\verdance\tags\block\ghost_town_degradable.json
 236626952d19df32e45caaaf4419eeea0cc18e70 data\minecraft\tags\block\wooden_fences.json
@@ -25,6 +25,5 @@ c1040a9f2cc5d5d93cec266adab2819f7392a3a6 data\minecraft\tags\block\planks.json
 e45b16b80e20d2cb8f7660f7f4fa7c532c7231fb data\minecraft\tags\block\flower_pots.json
 a1829649f7cf448ddc4d69984c8635bc8ced7f79 data\minecraft\tags\block\wall_hanging_signs.json
 0498119d7a84aa4f58b89b1b597bcb59b8d13cfb data\minecraft\tags\block\wooden_stairs.json
-e4d28099b3557b120274c2ef7593e202019c4d65 data\verdance\tags\block\shrub_may_place_on.json
 2df86d7904966897f9c7af4006329f496eba85f2 data\minecraft\tags\block\wooden_doors.json
 93ed3cf0e644c77c2fa470356f27f2b95dea7417 data\minecraft\tags\block\stairs.json

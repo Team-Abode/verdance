@@ -6,7 +6,6 @@ import com.teamabode.verdance.common.item.CantaloupeJuiceItem;
 import com.teamabode.verdance.common.item.CantaloupeSliceItem;
 import com.teamabode.verdance.core.misc.VerdanceFoodProperties;
 import com.teamabode.verdance.core.key.VerdanceBoatTypes;
-import com.teamabode.verdance.core.key.VerdanceJukeboxSongs;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,9 +19,6 @@ public class VerdanceItems {
     public static final Item CANTALOUPE_SEEDS = register("cantaloupe_seeds", new ItemNameBlockItem(VerdanceBlocks.CANTALOUPE_STEM, new Item.Properties()));
 
     public static final Item MULBERRY = register("mulberry", new ItemNameBlockItem(VerdanceBlocks.MULBERRY_SAPLING, new Item.Properties().food(VerdanceFoodProperties.MULBERRY)));
-
-    public static final Item MUSIC_DISC_RANGE = register("music_disc_range", new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(VerdanceJukeboxSongs.RANGE)));
-    public static final Item DISC_FRAGMENT_RANGE = register("disc_fragment_range", new DiscFragmentItem(new Item.Properties()));
 
     public static final Item MULBERRY_SIGN = register("mulberry_sign", new SignItem(new Item.Properties().stacksTo(16), VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN));
     public static final Item MULBERRY_HANGING_SIGN = register("mulberry_hanging_sign", new HangingSignItem(VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN, new Item.Properties().stacksTo(16)));
@@ -45,6 +41,5 @@ public class VerdanceItems {
         CompostingChanceRegistry.INSTANCE.add(GRILLED_CANTALOUPE_SLICE, 0.65F);
         CompostingChanceRegistry.INSTANCE.add(MULBERRY, 0.30F);
         CompostingChanceRegistry.INSTANCE.add(VerdanceBlocks.MULBERRY_LEAVES, 0.30F);
-        CompostingChanceRegistry.INSTANCE.add(VerdanceBlocks.SHRUB, 0.65F);
     }
 }

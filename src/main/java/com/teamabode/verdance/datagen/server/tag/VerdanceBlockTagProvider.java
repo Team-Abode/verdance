@@ -18,7 +18,6 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
 
     protected void addTags(HolderLookup.Provider arg) {
-        shrubMayPlaceOn();
         walls();
         planks();
         stairs();
@@ -42,12 +41,6 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         ghostTownReplaceable();
         silkMothsSpawnableOn();
         replaceableBySugarCane();
-    }
-
-    private void shrubMayPlaceOn() {
-        this.getOrCreateTagBuilder(VerdanceBlockTags.SHRUB_MAY_PLACE_ON)
-                .forceAddTag(BlockTags.DIRT)
-                .forceAddTag(BlockTags.SAND);
     }
 
     private void mineablePickaxe() {

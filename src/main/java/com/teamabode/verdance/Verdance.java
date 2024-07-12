@@ -33,7 +33,6 @@ public class Verdance implements ModInitializer {
         VerdanceBlocks.register();
         VerdanceBlockEntityTypes.register();
         VerdanceItems.register();
-        VerdanceFeatures.register();
         VerdanceSoundEvents.register();
         VerdanceTrunkPlacerTypes.register();
         VerdanceActivities.register();
@@ -64,7 +63,6 @@ public class Verdance implements ModInitializer {
     public static void registerTrades() {
         TradeOfferHelper.registerWanderingTraderOffers(1, itemListings -> {
             itemListings.add(new VillagerTrades.ItemsForEmeralds(VerdanceItems.CANTALOUPE_SEEDS, 1, 1, 12, 1));
-            itemListings.add(new VillagerTrades.ItemsForEmeralds(VerdanceBlocks.SHRUB, 3, 1, 8, 1));
             itemListings.add(new VillagerTrades.ItemsForEmeralds(VerdanceItems.MULBERRY, 5, 1, 8, 1));
         });
     }
@@ -94,7 +92,6 @@ public class Verdance implements ModInitializer {
                     VerdanceItems.MULBERRY_BOAT,
                     VerdanceItems.MULBERRY_CHEST_BOAT
             );
-            entries.addAfter(Items.MUSIC_DISC_OTHERSIDE, VerdanceItems.MUSIC_DISC_RANGE);
         });
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> {
             entries.addAfter(
@@ -116,11 +113,7 @@ public class Verdance implements ModInitializer {
             entries.addAfter(Items.MELON_SEEDS, VerdanceItems.CANTALOUPE_SEEDS);
             entries.addAfter(Blocks.CHERRY_LEAVES, VerdanceBlocks.MULBERRY_LEAVES, VerdanceBlocks.FLOWERING_MULBERRY_LEAVES);
             entries.addAfter(Blocks.MANGROVE_PROPAGULE, VerdanceItems.MULBERRY);
-            entries.addAfter(Items.AZALEA, VerdanceBlocks.SHRUB);
             entries.addAfter(Items.FROGSPAWN, VerdanceBlocks.SILKWORM_EGGS);
-        });
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(entries -> {
-            entries.addAfter(Items.DISC_FRAGMENT_5, VerdanceItems.DISC_FRAGMENT_RANGE);
         });
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COLORED_BLOCKS).register(entries -> {
             entries.addAfter(

@@ -1,4 +1,4 @@
-// 1.21	2024-07-11T18:47:42.8677063	Verdance/Block Loot Tables
+// 1.21	2024-07-11T20:55:17.3289313	Verdance/Block Loot Tables
 120663b12212fa90d0d81f042aab532a14c900a4 data\verdance\loot_table\blocks\light_gray_stucco_wall.json
 d4249152a4e52c4f557cb6b7cbb290171cf135f1 data\verdance\loot_table\blocks\magenta_stucco.json
 a69290f72d1d69104ee17b7aa944cbf8ff296393 data\verdance\loot_table\blocks\lime_stucco_slab.json
@@ -72,7 +72,6 @@ e3c3b6d10a5fb34308ecdf8cefc0173ab6aa2b23 data\verdance\loot_table\blocks\mulberr
 d99880a43fdc411147bb1fadb2ba163a7cf8f505 data\verdance\loot_table\blocks\lime_stucco_stairs.json
 f7ba35ae7e64873325d379e02c6cea1ac2da61f9 data\verdance\loot_table\blocks\light_blue_stucco_stairs.json
 78cce290763ff9f9aeba997ca0cd7f92a536b50a data\verdance\loot_table\blocks\magenta_stucco_wall.json
-d6120a795297c63aa50e11f066375111a630babd data\verdance\loot_table\blocks\shrub.json
 85838c85bd3f083a2c0da4a27c81e43a53d5e417 data\verdance\loot_table\blocks\yellow_stucco_wall.json
 c4e69c8501641085c3c62ee80803d9c13c8f868d data\verdance\loot_table\blocks\pink_stucco_wall.json
 045eb8329ed3d43f9387d69e6eeb806e6b814bce data\verdance\loot_table\blocks\white_stucco_wall.json

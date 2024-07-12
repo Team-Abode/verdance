@@ -76,8 +76,6 @@ public class VerdanceBlocks {
             Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP).pushReaction(PushReaction.DESTROY))
     );
 
-    public static final Block SHRUB = register("shrub", new ShrubBlock(Properties.ofFullCopy(Blocks.AZALEA)));
-
     public static final Block WHITE_STUCCO = register("white_stucco", createStuccoBlock(DyeColor.WHITE));
     public static final Block WHITE_STUCCO_STAIRS = register("white_stucco_stairs", new StairBlock(WHITE_STUCCO.defaultBlockState(), Properties.ofFullCopy(WHITE_STUCCO)));
     public static final Block WHITE_STUCCO_SLAB = register("white_stucco_slab", new SlabBlock(Properties.ofFullCopy(WHITE_STUCCO)));

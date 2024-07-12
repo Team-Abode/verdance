@@ -24,8 +24,13 @@
                 "blocks": "minecraft:air"
               },
               {
-                "type": "minecraft:matching_block_tag",
-                "tag": "verdance:shrub_may_place_on"
+                "type": "minecraft:matching_blocks",
+                "blocks": "minecraft:grass_block",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ]
               }
             ]
           }
@@ -33,7 +38,7 @@
       ]
     },
     "tries": 96,
-    "xz_spread": 8,
+    "xz_spread": 7,
     "y_spread": 3
   }
 }
