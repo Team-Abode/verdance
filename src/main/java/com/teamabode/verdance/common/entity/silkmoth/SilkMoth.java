@@ -36,18 +36,24 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unchecked")
 public class SilkMoth extends Animal implements FlyingAnimal {
     public static final EntityDataAccessor<Boolean> FLYING = SynchedEntityData.defineId(SilkMoth.class, EntityDataSerializers.BOOLEAN);
-    //public static final EntityDataAccessor<Boolean> SLEEPING = SynchedEntityData.defineId(SilkMoth.class, EntityDataSerializers.BOOLEAN);
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState flyAnimationState = new AnimationState();
 
     private int idleCooldown = 100;
-    private double bodyPitch = 0.0d;
+
+    public float lastBodyPitch;
+    public float bodyPitch;
+    public float lastAgeInTicks;
+
+    public int lastSoarTicks;
+    public int soarTicks;
 
     public SilkMoth(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
@@ -89,17 +95,24 @@ public class SilkMoth extends Animal implements FlyingAnimal {
         if (this.idleCooldown > 0) {
             this.idleCooldown--;
         }
-        double yDelta = this.getDeltaMovement().y();
+        Vec3 deltaMovement = this.getDeltaMovement();
 
-        this.bodyPitch = -yDelta * 10;
+        if (this.isFlying()) {
+            this.bodyPitch = (float) (-deltaMovement.y * 10.0f);
+        }
+        else this.bodyPitch = 0.0f;
 
-        if(!this.isFlying()) this.bodyPitch = 0;
+        this.lastSoarTicks = this.soarTicks;
+        if (deltaMovement.horizontalDistance() > 0.05d) {
+            this.soarTicks = Mth.clamp(this.soarTicks + 1, 0, 5);
+        }
+        else this.soarTicks = Mth.clamp(this.soarTicks - 1, 0, 5);
 
         this.flyAnimationState.animateWhen(this.isFlying(), this.tickCount);
     }
 
-    public double getBodyPitch() {
-        return this.bodyPitch;
+    public float getSoarProgress(float deltaTicks) {
+        return Mth.lerp(deltaTicks, this.lastSoarTicks, this.soarTicks) / 5.0f;
     }
 
     @Override

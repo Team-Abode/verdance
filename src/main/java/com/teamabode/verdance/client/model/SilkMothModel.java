@@ -8,7 +8,6 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
@@ -31,9 +30,6 @@ public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
 
 	private final ModelPart leftWing;
 	private final ModelPart rightWing;
-
-	private float lastTickAge;
-	private float lastXRot;
 
 	public SilkMothModel(ModelPart root) {
 		this.root = root;
@@ -82,55 +78,74 @@ public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
 	}
 
 	public void setupAnim(SilkMoth entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float deltaTicks = ageInTicks - lastTickAge;
-		lastTickAge = ageInTicks;
+		float deltaTicks = ageInTicks - entity.lastAgeInTicks;
+		entity.lastAgeInTicks = ageInTicks;
 
 		this.root().getAllParts().forEach(ModelPart::resetPose);
-		this.setupBones(entity, ageInTicks, deltaTicks);
+		this.setupBones(entity, deltaTicks);
 		this.animate(entity.idleAnimationState, VerdanceAnimations.SILK_MOTH_IDLE, ageInTicks);
 		
 		if (entity.onGround() && !entity.isFlying()) {
 			this.animateWalk(VerdanceAnimations.SILK_MOTH_WALK, limbSwing, limbSwingAmount, 2.0f, 2.5f);
 		}
 		this.animate(entity.flyAnimationState, VerdanceAnimations.SILK_MOTH_FLY, ageInTicks);
-		this.applyHeadRotation(entity, netHeadYaw, headPitch);
+		this.animateBones(entity, ageInTicks, deltaTicks, netHeadYaw, headPitch);
 	}
 
 	private float expDecay(float a, float b, float decay, float dt) {
 		return b + (a - b) * (float)Math.exp(-decay * dt);
 	}
 
-	public void setupBones(SilkMoth entity, float age, float deltaTicks) {
+	public void setupBones(SilkMoth entity, float deltaTicks) {
 		this.body.y = 17.75f;
 
-		float targetXRot = (float)Math.toRadians(entity.getBodyPitch()) * 45;
+		this.rightAntenna.zRot = -22.5f * Mth.DEG_TO_RAD;
+		this.leftAntenna.zRot = 22.5f * Mth.DEG_TO_RAD;
 
-		this.lastXRot = expDecay(this.lastXRot, targetXRot, 8f, deltaTicks / 20f);
-		this.body.xRot = this.lastXRot;
-
-		this.rightAntenna.zRot = (float) Math.toRadians(-22.5f);
-		this.leftAntenna.zRot = (float) Math.toRadians(22.5f);
-
-		this.rightLegFront.yRot = (float) Math.toRadians(-22.5f);
-		this.rightLegFront.zRot = (float) Math.toRadians(-22.5f);
-		this.rightLegMid.zRot = (float) Math.toRadians(-22.5f);
-		this.rightLegBack.yRot = (float) Math.toRadians(22.5f);
-		this.rightLegBack.zRot = (float) Math.toRadians(-22.5f);
-		this.leftLegFront.yRot = (float) Math.toRadians(22.5f);
-		this.leftLegFront.zRot = (float) Math.toRadians(22.5f);
-		this.leftLegMid.zRot = (float) Math.toRadians(22.5f);
-		this.leftLegBack.yRot = (float) Math.toRadians(-22.5f);
-		this.leftLegBack.zRot = (float) Math.toRadians(22.5f);
-		this.rightWing.zRot = (float) Math.toRadians(45.0f);
-		this.leftWing.zRot = (float) Math.toRadians(-45.0f);
+		this.rightLegFront.yRot = -22.5f * Mth.DEG_TO_RAD;
+		this.rightLegFront.zRot = -22.5f * Mth.DEG_TO_RAD;
+		this.rightLegMid.zRot = -22.5f * Mth.DEG_TO_RAD;
+		this.rightLegBack.yRot = 22.5f * Mth.DEG_TO_RAD;
+		this.rightLegBack.zRot = -22.5f * Mth.DEG_TO_RAD;
+		this.leftLegFront.yRot = 22.5f * Mth.DEG_TO_RAD;
+		this.leftLegFront.zRot = 22.5f * Mth.DEG_TO_RAD;
+		this.leftLegMid.zRot = 22.5f * Mth.DEG_TO_RAD;
+		this.leftLegBack.yRot = -22.5f * Mth.DEG_TO_RAD;
+		this.leftLegBack.zRot = 22.5f * Mth.DEG_TO_RAD;
+		this.rightWing.zRot = 45.0f * Mth.DEG_TO_RAD;
+		this.leftWing.zRot = -45.0f * Mth.DEG_TO_RAD;
 	}
 
-	private void applyHeadRotation(SilkMoth entity, float netHeadYaw, float headPitch) {
+	private void animateBones(SilkMoth entity, float ageInTicks, float deltaTicks, float netHeadYaw, float headPitch) {
 		netHeadYaw = Mth.clamp(netHeadYaw, -30.0F, 30.0F);
 		headPitch = Mth.clamp(headPitch, -25.0F, 45.0F);
 
-		this.head.yRot = (float) Math.toRadians(netHeadYaw);
-		this.head.xRot = (float) (Math.toRadians(headPitch) - Math.toRadians(entity.getBodyPitch() * 15.0f));
+		float targetXRot =  Mth.clamp(entity.bodyPitch * 45.0f, -45.0f, 45.0f) * Mth.DEG_TO_RAD;
+		float soarProgress = entity.getSoarProgress(ageInTicks - entity.tickCount);
+
+		entity.lastBodyPitch = expDecay(entity.lastBodyPitch, targetXRot, 8f, deltaTicks / 20f);
+
+		this.body.xRot = entity.lastBodyPitch;
+		this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
+		this.head.xRot = (headPitch * Mth.DEG_TO_RAD) - entity.lastBodyPitch;
+
+		this.leftLegFront.zRot -= (soarProgress * 15.0f) * Mth.DEG_TO_RAD;
+		this.leftLegFront.yRot -= (soarProgress * 30.0f) * Mth.DEG_TO_RAD;
+
+		this.leftLegMid.zRot -= (soarProgress * 15.0f) * Mth.DEG_TO_RAD;
+		this.leftLegMid.yRot -= (soarProgress * 30.0f) * Mth.DEG_TO_RAD;
+
+		this.leftLegBack.zRot -= (soarProgress * 15.0f) * Mth.DEG_TO_RAD;
+		this.leftLegBack.yRot -= (soarProgress * 30.0f) * Mth.DEG_TO_RAD;
+
+		this.rightLegFront.zRot += (soarProgress * 15.0f) * Mth.DEG_TO_RAD;
+		this.rightLegFront.yRot += (soarProgress * 30.0f) * Mth.DEG_TO_RAD;
+
+		this.rightLegMid.zRot += (soarProgress * 15.0f) * Mth.DEG_TO_RAD;
+		this.rightLegMid.yRot += (soarProgress * 30.0f) * Mth.DEG_TO_RAD;
+
+		this.rightLegBack.zRot += (soarProgress * 15.0f) * Mth.DEG_TO_RAD;
+		this.rightLegBack.yRot += (soarProgress * 30.0f) * Mth.DEG_TO_RAD;
 	}
 
 	public ModelPart root() {
