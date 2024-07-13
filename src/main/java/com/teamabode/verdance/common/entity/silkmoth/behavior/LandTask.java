@@ -10,7 +10,6 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
 import java.util.Map;
 
-// TODO: Not working properly.
 public class LandTask extends ImprovedOneShot<SilkMoth> {
     @Override
     public void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements) {
@@ -21,7 +20,7 @@ public class LandTask extends ImprovedOneShot<SilkMoth> {
     @Override
     public void run(ServerLevel level, SilkMoth entity, long gameTime) {
         if (entity.onGround()) {
-            Verdance.LOGGER.info("Completed LandTask");
+            Verdance.LOGGER.info("Running LandTask");
             entity.land();
         }
     }

@@ -15,7 +15,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.TimeUtil;
 import net.minecraft.util.Unit;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
@@ -182,12 +184,16 @@ public class SilkMoth extends Animal implements FlyingAnimal {
     public void takeOff() {
         this.setFlying(true);
         this.getBrain().setMemory(VerdanceMemoryModuleTypes.IS_FLYING, Unit.INSTANCE);
+
+        long landingTime = this.level().getGameTime() + TimeUtil.rangeOfSeconds(30, 60).sample(random);
+        this.getBrain().setMemory(VerdanceMemoryModuleTypes.LANDING_TIME, landingTime);
     }
 
     public void land() {
         this.setFlying(false);
         this.getBrain().eraseMemory(VerdanceMemoryModuleTypes.IS_FLYING);
         this.getBrain().eraseMemory(VerdanceMemoryModuleTypes.WANTS_TO_LAND);
+        this.getBrain().eraseMemory(VerdanceMemoryModuleTypes.LANDING_TIME);
     }
 
     public void setFlying(boolean flying) {

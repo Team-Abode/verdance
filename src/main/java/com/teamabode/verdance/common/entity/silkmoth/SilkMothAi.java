@@ -42,6 +42,7 @@ public class SilkMothAi {
             MemoryModuleType.NEAREST_LIVING_ENTITIES,
             MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
             VerdanceMemoryModuleTypes.IS_FLYING,
+            VerdanceMemoryModuleTypes.LANDING_TIME,
             VerdanceMemoryModuleTypes.WANTS_TO_LAND
     );
 
@@ -66,8 +67,8 @@ public class SilkMothAi {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new Swim(1.0f),
                 new TakeOffTask(),
-                //new LandTask(),
-                new AnimalPanic<>(1.5f),
+                new LandTask(),
+                new AnimalPanic<>(2.5f),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
@@ -79,7 +80,7 @@ public class SilkMothAi {
                 Pair.of(0, new AnimalMakeLove(VerdanceEntityTypes.SILK_MOTH)),
                 Pair.of(1, new FollowTemptation(livingEntity -> 1.5f)),
                 Pair.of(2, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
-                Pair.of(2, new StartLandingTask()),
+                Pair.of(2, new GoTowardsLandingTask()),
                 Pair.of(4, addMovementTasks())
         ));
     }
@@ -101,13 +102,13 @@ public class SilkMothAi {
     }
 
     public static Ingredient getTemptations() {
-        return Ingredient.of(ItemTags.FLOWERS); // TODO: Add silk_moth_food tag
+        return Ingredient.of(ItemTags.FLOWERS); // TODO: Add SILK_MOTH_FOOD tag
     }
 
     private static RunOne<SilkMoth> addMovementTasks() {
         return new RunOne<>(ImmutableList.of(
                 Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new AerialStrollTask()), 2),
-                //Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new StartLandingTask()), 2),
+                Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new GoTowardsLandingTask()), 2),
                 Pair.of(BehaviorBuilder.triggerIf(Predicate.not(SilkMoth::isFlying), RandomStroll.stroll(1.0f)), 2),
                 Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 3), 2),
                 Pair.of(new DoNothing(30,  60), 1)
