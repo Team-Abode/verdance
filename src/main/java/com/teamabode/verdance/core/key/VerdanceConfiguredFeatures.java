@@ -32,7 +32,6 @@ public class VerdanceConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_MULBERRY_FOREST = createKey("flower_mulberry_forest");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MULBERRY = createKey("mulberry");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SHRUB_PATCH_BONEMEAL = createKey("shrub_patch_bonemeal");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CANTALOUPE = createKey("patch_cantaloupe");
 
     public static void register(BootstrapContext<ConfiguredFeature<?, ?>> context) {
@@ -51,7 +50,7 @@ public class VerdanceConfiguredFeatures {
                 new MulberryTrunkPlacer(7, 2, 0),
                 new WeightedStateProvider(
                         SimpleWeightedRandomList.<BlockState>builder()
-                                .add(VerdanceBlocks.MULBERRY_LEAVES.defaultBlockState(), 8)
+                                .add(VerdanceBlocks.MULBERRY_LEAVES.defaultBlockState(), 14)
                                 .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES.defaultBlockState(), 1)
                                 .build()
                 ),
