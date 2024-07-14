@@ -10,6 +10,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -84,18 +85,13 @@ public class SilkCocoonBlockEntity extends BlockEntity {
 
     public void dropString(Level level, RandomSource random, BlockPos origin) {
         for (int i = 0; i < Mth.randomBetweenInclusive(random, 1, 2); i++) {
-            BlockState state = level.getBlockState(origin);
-            Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
-
-
             ItemEntity itemEntity = new ItemEntity(
                     level,
                     origin.getX() + 0.5d,
                     origin.getY() - 0.5d,
                     origin.getZ() + 0.5d,
-                    Items.STRING.getDefaultInstance()
+                    new ItemStack(Items.STRING)
             );
-
             level.addFreshEntity(itemEntity);
         }
     }
