@@ -24,9 +24,6 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import org.joml.Quaternionf;
 
-/*
-    TODO: The Silk Cocoon should wobble instead.
- */
 public class SilkCocoonRenderer implements BlockEntityRenderer<SilkCocoonBlockEntity> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Verdance.id("silk_cocoon"), "main");
     public static final Material TEXTURE_LOCATION = new Material(InventoryMenu.BLOCK_ATLAS, Verdance.id("entity/silk_cocoon"));
