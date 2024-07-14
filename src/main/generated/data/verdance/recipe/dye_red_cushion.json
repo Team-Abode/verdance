@@ -1,0 +1,61 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "cushion",
+  "ingredients": [
+    {
+      "item": "minecraft:red_dye"
+    },
+    [
+      {
+        "item": "verdance:black_cushion"
+      },
+      {
+        "item": "verdance:blue_cushion"
+      },
+      {
+        "item": "verdance:brown_cushion"
+      },
+      {
+        "item": "verdance:cyan_cushion"
+      },
+      {
+        "item": "verdance:gray_cushion"
+      },
+      {
+        "item": "verdance:green_cushion"
+      },
+      {
+        "item": "verdance:light_blue_cushion"
+      },
+      {
+        "item": "verdance:light_gray_cushion"
+      },
+      {
+        "item": "verdance:lime_cushion"
+      },
+      {
+        "item": "verdance:magenta_cushion"
+      },
+      {
+        "item": "verdance:orange_cushion"
+      },
+      {
+        "item": "verdance:pink_cushion"
+      },
+      {
+        "item": "verdance:purple_cushion"
+      },
+      {
+        "item": "verdance:yellow_cushion"
+      },
+      {
+        "item": "verdance:white_cushion"
+      }
+    ]
+  ],
+  "result": {
+    "count": 1,
+    "id": "verdance:red_cushion"
+  }
+}

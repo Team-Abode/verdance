@@ -40,12 +40,23 @@ public class VerdanceModelProvider extends FabricModelProvider {
         generator.createStems(VerdanceBlocks.CANTALOUPE_STEM, VerdanceBlocks.ATTACHED_CANTALOUPE_STEM);
         generator.createTrivialBlock(VerdanceBlocks.MULBERRY_CRATE, TexturedModel.CUBE_TOP_BOTTOM);
 
-        for (DyeColor colour : DyeColor.values()) {
-            this.createCushion(colour, VerdanceBlocks.getCushion(colour), generator);
-        }
+        this.createCushion(VerdanceBlocks.WHITE_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.LIGHT_GRAY_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.GRAY_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.BLACK_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.BROWN_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.RED_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.ORANGE_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.YELLOW_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.LIME_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.GREEN_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.CYAN_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.LIGHT_BLUE_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.BLUE_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.PURPLE_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.MAGENTA_CUSHION, generator);
+        this.createCushion(VerdanceBlocks.PINK_CUSHION, generator);
     }
-
-
 
     public void generateItemModels(ItemModelGenerators generator) {
         generator.generateFlatItem(VerdanceItems.MULBERRY, ModelTemplates.FLAT_ITEM);
@@ -58,8 +69,8 @@ public class VerdanceModelProvider extends FabricModelProvider {
         generator.generateFlatItem(VerdanceItems.MULBERRY_CHEST_BOAT, ModelTemplates.FLAT_ITEM);
     }
 
-    public final void createCushion(DyeColor dyeColor, Block block, BlockModelGenerators blockModelGenerators) {
-        TextureMapping textureMapping = VerdanceTextureMapping.cushionTextureMappings(dyeColor);
+    public final void createCushion(Block block, BlockModelGenerators blockModelGenerators) {
+        TextureMapping textureMapping = VerdanceTextureMapping.cushionTextureMappings(block);
         ResourceLocation resourceLocation = VerdanceModelTemplates.CUSHION.create(block, textureMapping, blockModelGenerators.modelOutput);
         blockModelGenerators.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, resourceLocation));
     }

@@ -22,6 +22,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class VerdanceRecipeProvider extends FabricRecipeProvider {
@@ -139,22 +140,36 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         stucco(exporter, VerdanceBlockFamilies.MAGENTA_STUCCO, Items.MAGENTA_DYE);
         stucco(exporter, VerdanceBlockFamilies.PINK_STUCCO, Items.PINK_DYE);
 
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.WHITE), Blocks.WHITE_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.LIGHT_GRAY), Blocks.LIGHT_GRAY_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.GRAY), Blocks.GRAY_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.BLACK), Blocks.BLACK_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.BROWN), Blocks.BROWN_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.RED), Blocks.RED_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.ORANGE), Blocks.ORANGE_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.YELLOW), Blocks.YELLOW_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.LIME), Blocks.LIME_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.GREEN), Blocks.GREEN_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.CYAN), Blocks.CYAN_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.LIGHT_BLUE), Blocks.LIGHT_BLUE_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.BLUE), Blocks.BLUE_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.PURPLE), Blocks.PURPLE_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.MAGENTA), Blocks.MAGENTA_WOOL);
-        cushion(exporter, VerdanceBlocks.getCushion(DyeColor.PINK), Blocks.PINK_WOOL);
+        cushion(exporter, VerdanceBlocks.WHITE_CUSHION, Blocks.WHITE_WOOL);
+        cushion(exporter, VerdanceBlocks.LIGHT_GRAY_CUSHION, Blocks.LIGHT_GRAY_WOOL);
+        cushion(exporter, VerdanceBlocks.GRAY_CUSHION, Blocks.GRAY_WOOL);
+        cushion(exporter, VerdanceBlocks.BLACK_CUSHION, Blocks.BLACK_WOOL);
+        cushion(exporter, VerdanceBlocks.BROWN_CUSHION, Blocks.BROWN_WOOL);
+        cushion(exporter, VerdanceBlocks.RED_CUSHION, Blocks.RED_WOOL);
+        cushion(exporter, VerdanceBlocks.ORANGE_CUSHION, Blocks.ORANGE_WOOL);
+        cushion(exporter, VerdanceBlocks.YELLOW_CUSHION, Blocks.YELLOW_WOOL);
+        cushion(exporter, VerdanceBlocks.LIME_CUSHION, Blocks.LIME_WOOL);
+        cushion(exporter, VerdanceBlocks.GREEN_CUSHION, Blocks.GREEN_WOOL);
+        cushion(exporter, VerdanceBlocks.CYAN_CUSHION, Blocks.CYAN_WOOL);
+        cushion(exporter, VerdanceBlocks.LIGHT_BLUE_CUSHION, Blocks.LIGHT_BLUE_WOOL);
+        cushion(exporter, VerdanceBlocks.BLUE_CUSHION, Blocks.BLUE_WOOL);
+        cushion(exporter, VerdanceBlocks.PURPLE_CUSHION, Blocks.PURPLE_WOOL);
+        cushion(exporter, VerdanceBlocks.MAGENTA_CUSHION, Blocks.MAGENTA_WOOL);
+        cushion(exporter, VerdanceBlocks.PINK_CUSHION, Blocks.PINK_WOOL);
+
+        List<Item> dyes = List.of(
+                Items.BLACK_DYE, Items.BLUE_DYE, Items.BROWN_DYE, Items.CYAN_DYE,
+                Items.GRAY_DYE, Items.GREEN_DYE, Items.LIGHT_BLUE_DYE, Items.LIGHT_GRAY_DYE,
+                Items.LIME_DYE, Items.MAGENTA_DYE, Items.ORANGE_DYE, Items.PINK_DYE,
+                Items.PURPLE_DYE, Items.RED_DYE, Items.YELLOW_DYE, Items.WHITE_DYE
+        );
+        List<Item> cushions = List.of(
+                VerdanceBlocks.BLACK_CUSHION.asItem(), VerdanceBlocks.BLUE_CUSHION.asItem(), VerdanceBlocks.BROWN_CUSHION.asItem(), VerdanceBlocks.CYAN_CUSHION.asItem(),
+                VerdanceBlocks.GRAY_CUSHION.asItem(), VerdanceBlocks.GREEN_CUSHION.asItem(), VerdanceBlocks.LIGHT_BLUE_CUSHION.asItem(), VerdanceBlocks.LIGHT_GRAY_CUSHION.asItem(),
+                VerdanceBlocks.LIME_CUSHION.asItem(), VerdanceBlocks.MAGENTA_CUSHION.asItem(), VerdanceBlocks.ORANGE_CUSHION.asItem(), VerdanceBlocks.PINK_CUSHION.asItem(),
+                VerdanceBlocks.PURPLE_CUSHION.asItem(), VerdanceBlocks.RED_CUSHION.asItem(), VerdanceBlocks.YELLOW_CUSHION.asItem(), VerdanceBlocks.WHITE_CUSHION.asItem()
+        );
+        colorBlockWithDye(exporter, dyes, cushions, "cushion");
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.MAGENTA_DYE, 2).requires(Blocks.SPORE_BLOSSOM).group(getItemName(Items.MAGENTA_DYE)).unlockedBy(getHasName(Blocks.SPORE_BLOSSOM), has(Blocks.SPORE_BLOSSOM)).save(exporter, Verdance.id(getConversionRecipeName(Items.MAGENTA_DYE, Blocks.SPORE_BLOSSOM)));
 

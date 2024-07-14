@@ -6,20 +6,21 @@ import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.Block;
 
 public class VerdanceTextureMapping {
 
-    public static TextureMapping cushionTextureMappings(DyeColor dyeColor) {
-        return (new TextureMapping()).put(TextureSlot.SIDE, getCushionSideTexture(dyeColor)).put(TextureSlot.TOP, getCushionTexture(dyeColor));
+    public static TextureMapping cushionTextureMappings(Block block) {
+        return (new TextureMapping()).put(TextureSlot.SIDE, getCushionSideTexture(block)).put(TextureSlot.TOP, getCushionTexture(block));
     }
 
-    public static ResourceLocation getCushionTexture(DyeColor colours) {
-        ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(VerdanceBlocks.getCushion(colours));
+    public static ResourceLocation getCushionTexture(Block cushion) {
+        ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(cushion);
         return resourceLocation.withPrefix("block/");
     }
 
-    public static ResourceLocation getCushionSideTexture(DyeColor colours) {
-        ResourceLocation resourceLocation = ResourceLocation.parse(BuiltInRegistries.BLOCK.getKey(VerdanceBlocks.getCushion(colours)) + "_side");
+    public static ResourceLocation getCushionSideTexture(Block cushion) {
+        ResourceLocation resourceLocation = ResourceLocation.parse(BuiltInRegistries.BLOCK.getKey(cushion) + "_side");
         return resourceLocation.withPrefix("block/");
     }
 }

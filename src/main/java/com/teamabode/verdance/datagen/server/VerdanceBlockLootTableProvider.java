@@ -65,10 +65,22 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     }
 
     private void cushions() {
-        for (DyeColor color : DyeColor.values()) {
-            Block cushionBlock = VerdanceBlocks.getCushion(color);
-            dropSelf(cushionBlock);
-        }
+        dropSelf(VerdanceBlocks.WHITE_CUSHION);
+        dropSelf(VerdanceBlocks.LIGHT_GRAY_CUSHION);
+        dropSelf(VerdanceBlocks.GRAY_CUSHION);
+        dropSelf(VerdanceBlocks.BLACK_CUSHION);
+        dropSelf(VerdanceBlocks.BROWN_CUSHION);
+        dropSelf(VerdanceBlocks.RED_CUSHION);
+        dropSelf(VerdanceBlocks.ORANGE_CUSHION);
+        dropSelf(VerdanceBlocks.YELLOW_CUSHION);
+        dropSelf(VerdanceBlocks.LIME_CUSHION);
+        dropSelf(VerdanceBlocks.GREEN_CUSHION);
+        dropSelf(VerdanceBlocks.CYAN_CUSHION);
+        dropSelf(VerdanceBlocks.LIGHT_BLUE_CUSHION);
+        dropSelf(VerdanceBlocks.BLUE_CUSHION);
+        dropSelf(VerdanceBlocks.PURPLE_CUSHION);
+        dropSelf(VerdanceBlocks.MAGENTA_CUSHION);
+        dropSelf(VerdanceBlocks.PINK_CUSHION);
     }
 
     private LootTable.Builder createMulberryLeaves(Block leafBlock) {

@@ -4,7 +4,7 @@ import net.minecraft.world.item.DyeColor;
 
 import java.util.ArrayList;
 
-public class CreativeCategoryUtils {
+public class ColorUtils {
     public static final ArrayList<DyeColor> COLORS = createColors();
 
     public static ArrayList<DyeColor> createColors() {

@@ -1,7 +1,7 @@
 package com.teamabode.verdance;
 
 import com.teamabode.sketch.core.api.misc.BlockEntityExtender;
-import com.teamabode.verdance.common.util.CreativeCategoryUtils;
+import com.teamabode.verdance.common.util.ColorUtils;
 import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
 import com.teamabode.verdance.core.registry.VerdanceBiomes;
 import com.teamabode.verdance.core.tag.VerdanceBiomeTags;
@@ -103,9 +103,25 @@ public class Verdance implements ModInitializer {
                     VerdanceItems.MULBERRY_SIGN,
                     VerdanceItems.MULBERRY_HANGING_SIGN
             );
-            for (DyeColor colours : CreativeCategoryUtils.COLORS) {
-                entries.addAfter(Items.PINK_BED, VerdanceBlocks.getCushion(colours));
-            }
+            entries.addAfter(
+                    Items.PINK_BED,
+                    VerdanceBlocks.WHITE_CUSHION,
+                    VerdanceBlocks.LIGHT_GRAY_CUSHION,
+                    VerdanceBlocks.GRAY_CUSHION,
+                    VerdanceBlocks.BLACK_CUSHION,
+                    VerdanceBlocks.BROWN_CUSHION,
+                    VerdanceBlocks.RED_CUSHION,
+                    VerdanceBlocks.ORANGE_CUSHION,
+                    VerdanceBlocks.YELLOW_CUSHION,
+                    VerdanceBlocks.LIME_CUSHION,
+                    VerdanceBlocks.GREEN_CUSHION,
+                    VerdanceBlocks.CYAN_CUSHION,
+                    VerdanceBlocks.LIGHT_BLUE_CUSHION,
+                    VerdanceBlocks.BLUE_CUSHION,
+                    VerdanceBlocks.PURPLE_CUSHION,
+                    VerdanceBlocks.MAGENTA_CUSHION,
+                    VerdanceBlocks.PINK_CUSHION
+            );
         });
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(entries -> {
             entries.addAfter(Items.GLOW_BERRIES, VerdanceItems.MULBERRY);
@@ -187,9 +203,25 @@ public class Verdance implements ModInitializer {
                     VerdanceBlocks.PINK_STUCCO_SLAB,
                     VerdanceBlocks.PINK_STUCCO_WALL
             );
-            for (DyeColor colours : CreativeCategoryUtils.COLORS) {
-                entries.addAfter(Items.PINK_BED, VerdanceBlocks.getCushion(colours));
-            }
+            entries.addAfter(
+                    Items.PINK_BED,
+                    VerdanceBlocks.WHITE_CUSHION,
+                    VerdanceBlocks.LIGHT_GRAY_CUSHION,
+                    VerdanceBlocks.GRAY_CUSHION,
+                    VerdanceBlocks.BLACK_CUSHION,
+                    VerdanceBlocks.BROWN_CUSHION,
+                    VerdanceBlocks.RED_CUSHION,
+                    VerdanceBlocks.ORANGE_CUSHION,
+                    VerdanceBlocks.YELLOW_CUSHION,
+                    VerdanceBlocks.LIME_CUSHION,
+                    VerdanceBlocks.GREEN_CUSHION,
+                    VerdanceBlocks.CYAN_CUSHION,
+                    VerdanceBlocks.LIGHT_BLUE_CUSHION,
+                    VerdanceBlocks.BLUE_CUSHION,
+                    VerdanceBlocks.PURPLE_CUSHION,
+                    VerdanceBlocks.MAGENTA_CUSHION,
+                    VerdanceBlocks.PINK_CUSHION
+            );
         });
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.SPAWN_EGGS).register(entries -> {
             entries.addAfter(

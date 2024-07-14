@@ -122,12 +122,23 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     private void mineableAxe() {
         this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
                 .add(VerdanceBlocks.CANTALOUPE)
+                .add(VerdanceBlocks.WHITE_CUSHION)
+                .add(VerdanceBlocks.LIGHT_GRAY_CUSHION)
+                .add(VerdanceBlocks.GRAY_CUSHION)
+                .add(VerdanceBlocks.BLACK_CUSHION)
+                .add(VerdanceBlocks.BROWN_CUSHION)
+                .add(VerdanceBlocks.RED_CUSHION)
+                .add(VerdanceBlocks.ORANGE_CUSHION)
+                .add(VerdanceBlocks.YELLOW_CUSHION)
+                .add(VerdanceBlocks.LIME_CUSHION)
+                .add(VerdanceBlocks.GREEN_CUSHION)
+                .add(VerdanceBlocks.CYAN_CUSHION)
+                .add(VerdanceBlocks.LIGHT_BLUE_CUSHION)
+                .add(VerdanceBlocks.BLUE_CUSHION)
+                .add(VerdanceBlocks.PURPLE_CUSHION)
+                .add(VerdanceBlocks.MAGENTA_CUSHION)
+                .add(VerdanceBlocks.PINK_CUSHION)
                 .setReplace(false);
-        for (DyeColor colour : DyeColor.values()) {
-            this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
-                    .setReplace(false)
-                    .add(VerdanceBlocks.getCushion(colour));
-        }
     }
 
     private void walls() {
