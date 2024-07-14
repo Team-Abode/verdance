@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.BlockFamily;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -60,6 +61,13 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         dropSelf(VerdanceBlocks.MULBERRY_SIGN);
         dropSelf(VerdanceBlocks.MULBERRY_HANGING_SIGN);
         add(VerdanceBlocks.SILK_COCOON, this.createSingleItemTable(Items.STRING, UniformGenerator.between(5.0f, 6.0f)));
+    }
+
+    private void cushions() {
+        for (DyeColor color : DyeColor.values()) {
+            Block cushionBlock = VerdanceBlocks.getCushion(color);
+            dropSelf(cushionBlock);
+        }
     }
 
     private LootTable.Builder createMulberryLeaves(Block leafBlock) {

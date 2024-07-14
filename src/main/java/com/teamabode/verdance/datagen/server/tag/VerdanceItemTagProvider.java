@@ -101,8 +101,8 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
     private void foods() {
         this.getOrCreateTagBuilder(ConventionalItemTags.FOODS).add(VerdanceItems.GRILLED_CANTALOUPE_SLICE).setReplace(false);
-        this.getOrCreateTagBuilder(ConventionalItemTags.FRUITS_FOODS).add(VerdanceItems.CANTALOUPE_SLICE).setReplace(false);
-        this.getOrCreateTagBuilder(ConventionalItemTags.BERRIES_FOODS).add(VerdanceItems.MULBERRY).setReplace(false);
+        this.getOrCreateTagBuilder(ConventionalItemTags.FRUIT_FOODS).add(VerdanceItems.CANTALOUPE_SLICE).setReplace(false);
+        this.getOrCreateTagBuilder(ConventionalItemTags.BERRY_FOODS).add(VerdanceItems.MULBERRY).setReplace(false);
         this.getOrCreateTagBuilder(ItemTags.CHICKEN_FOOD).add(VerdanceItems.CANTALOUPE_SEEDS).setReplace(false);
         this.getOrCreateTagBuilder(ItemTags.PARROT_FOOD).add(VerdanceItems.CANTALOUPE_SEEDS).setReplace(false);
     }
