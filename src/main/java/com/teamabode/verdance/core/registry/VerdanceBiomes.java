@@ -1,12 +1,10 @@
-package com.teamabode.verdance.core.key;
+package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.data.worldgen.biome.OverworldBiomes;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.Musics;

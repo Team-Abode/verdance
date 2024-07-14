@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.key;
+package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.core.tag.VerdanceBiomeTags;

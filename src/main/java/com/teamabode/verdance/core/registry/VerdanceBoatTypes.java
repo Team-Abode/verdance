@@ -1,10 +1,8 @@
-package com.teamabode.verdance.core.key;
+package com.teamabode.verdance.core.registry;
 
 import com.teamabode.sketch.common.entity.boat.SketchBoatType;
 import com.teamabode.sketch.core.registry.SketchRegistries;
 import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.core.registry.VerdanceItems;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;

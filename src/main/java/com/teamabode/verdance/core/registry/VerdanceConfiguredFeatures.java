@@ -1,8 +1,7 @@
-package com.teamabode.verdance.core.key;
+package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.worldgen.MulberryTrunkPlacer;
-import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;

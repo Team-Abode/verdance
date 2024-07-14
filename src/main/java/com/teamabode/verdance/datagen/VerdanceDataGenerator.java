@@ -1,7 +1,7 @@
 package com.teamabode.verdance.datagen;
 
 import com.teamabode.sketch.core.registry.SketchRegistries;
-import com.teamabode.verdance.core.key.*;
+import com.teamabode.verdance.core.registry.*;
 import com.teamabode.verdance.datagen.client.VerdanceModelProvider;
 import com.teamabode.verdance.datagen.server.VerdanceBlockLootTableProvider;
 import com.teamabode.verdance.datagen.server.VerdanceDynamicRegistryProvider;

@@ -5,7 +5,6 @@ import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.item.CantaloupeJuiceItem;
 import com.teamabode.verdance.common.item.CantaloupeSliceItem;
 import com.teamabode.verdance.core.misc.VerdanceFoodProperties;
-import com.teamabode.verdance.core.key.VerdanceBoatTypes;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

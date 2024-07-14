@@ -1,4 +1,4 @@
-package com.teamabode.verdance.core.key;
+package com.teamabode.verdance.core.misc;
 
 import com.teamabode.verdance.Verdance;
 import net.minecraft.core.registries.Registries;

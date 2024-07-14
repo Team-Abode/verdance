@@ -1,6 +1,6 @@
 package com.teamabode.verdance.datagen.server.tag;
 
-import com.teamabode.verdance.core.key.VerdanceBiomes;
+import com.teamabode.verdance.core.registry.VerdanceBiomes;
 import com.teamabode.verdance.core.tag.VerdanceBiomeTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
