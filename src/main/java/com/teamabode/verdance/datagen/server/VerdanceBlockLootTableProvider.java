@@ -37,6 +37,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         mulberry();
         stucco();
         cantaloupe();
+        cushions();
         add(VerdanceBlocks.SILKWORM_EGGS, this::createSilkTouchOnlyTable);
     }
 

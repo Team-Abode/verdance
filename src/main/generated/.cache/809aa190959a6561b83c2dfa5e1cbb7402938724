@@ -1,4 +1,4 @@
-// 1.21	2024-07-13T22:52:03.7419243	Verdance/Model Definitions
+// 1.21	2024-07-13T23:26:17.4471302	Verdance/Model Definitions
 858a75cb3224eb3ef24f01dd104fcb50d04573fd assets\verdance\models\block\light_blue_stucco_wall_post.json
 9b75e9fa989690a7dca466fa77949389eb6f6660 assets\verdance\models\item\white_stucco_stairs.json
 cef76207cc459e043209c99e4d2cdbb5e463bc12 assets\verdance\models\block\pink_stucco.json
@@ -428,9 +428,9 @@ dd53bfa504dc4dae096debb15562c1d5e54336d5 assets\verdance\models\block\orange_stu
 499826655c86db87e6a3b5e3331ce452e4c405b5 assets\verdance\blockstates\black_cushion.json
 601fb18b2fa472bc38c11bcbe3181c7b6a65a195 assets\verdance\models\item\gray_stucco_slab.json
 322f68a452da6d61903bd30f30fee5863e6a5ae7 assets\verdance\blockstates\blue_stucco_wall.json
-14c7f89fcb34c6acf452affa59661d62d48657ab assets\verdance\blockstates\brown_stucco_stairs.json
-8bb6df298944ac41c170ec3f88c478bee85f2567 assets\verdance\models\block\blue_stucco_slab_top.json
 c26ab3585969949e382a4bb77111e4bc1c00faad assets\verdance\models\item\magenta_stucco_stairs.json
+8bb6df298944ac41c170ec3f88c478bee85f2567 assets\verdance\models\block\blue_stucco_slab_top.json
+14c7f89fcb34c6acf452affa59661d62d48657ab assets\verdance\blockstates\brown_stucco_stairs.json
 55e22790c8b09e6970d5349eb26ae7fbd6c985f8 assets\verdance\models\block\orange_stucco_wall_post.json
 20416462a1b81e597af5bdd34793414eb519cea4 assets\verdance\models\block\orange_stucco_wall_side.json
 b7681185a32f24b537dbf9fcb348bf3ad53a32be assets\verdance\models\block\mulberry_button.json
