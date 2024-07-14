@@ -1,4 +1,4 @@
-// 1.21	2024-07-13T23:26:17.4521331	Verdance/Tags for minecraft:item
+// 1.21	2024-07-13T23:39:13.0503529	Verdance/Tags for minecraft:item
 67f7394923e52e601b30297dcbb1812215a4ffed data\minecraft\tags\item\chicken_food.json
 740fa2d483b1840073090e5b698d69c70c68856f data\minecraft\tags\item\leaves.json
 bca2d89b2ad2ab2d8ba4b7777579a6f54a16a93f data\minecraft\tags\item\stairs.json
@@ -14,9 +14,10 @@ b3073e2c273d68774f25b513558fed9d9116c935 data\minecraft\tags\item\saplings.json
 236626952d19df32e45caaaf4419eeea0cc18e70 data\minecraft\tags\item\wooden_fences.json
 5b0e925bd9766291f3a1197c2a1ac2907d442131 data\minecraft\tags\item\signs.json
 c3c9577944851dd3f88c01672531fa859749cc87 data\verdance\tags\item\mulberry_logs.json
-6c87441cb513761e5c480f15c0b33069fc34133d data\verdance\tags\item\silkworm_food.json
+6ec27df2ad93c393c01eb26c63d40d34eb855c2e data\verdance\tags\item\silkworm_food.json
 4ad70cef605aeecb2852d06bd9aa7f26ba03883c data\minecraft\tags\item\wooden_pressure_plates.json
 7d78a0cedd1d2ed962d271f687137f0b052cec22 data\minecraft\tags\item\logs_that_burn.json
+a72c613d8786fc7756573ffec9c22f7ed2973d9e data\verdance\tags\item\silk_moth_food.json
 b0fdea2dfb77856d3ed792d544970a6cc4ac6c2d data\minecraft\tags\item\walls.json
 2dffbd05e950b8805a77a32038117d7184b00aea data\minecraft\tags\item\wooden_buttons.json
 ee09a732336e0be35a6bdbe8543f8d02e82a550b data\minecraft\tags\item\wooden_slabs.json

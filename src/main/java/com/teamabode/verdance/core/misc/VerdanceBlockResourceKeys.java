@@ -5,7 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 
-public class VerdanceBlockReferences {
+public class VerdanceBlockResourceKeys {
 
     public static final ResourceKey<Block> CANTALOUPE = createKey("cantaloupe");
     public static final ResourceKey<Block> CANTALOUPE_STEM = createKey("cantaloupe_stem");

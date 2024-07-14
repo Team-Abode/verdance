@@ -5,7 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 
-public class VerdanceItemReferences {
+public class VerdanceItemResourceKeys {
 
     public static final ResourceKey<Item> CANTALOUPE_SEEDS = createKey("cantaloupe_seeds");
 

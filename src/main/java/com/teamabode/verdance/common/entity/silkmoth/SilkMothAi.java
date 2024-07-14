@@ -8,6 +8,7 @@ import com.teamabode.verdance.core.registry.VerdanceActivities;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import com.teamabode.verdance.core.registry.VerdanceSensorTypes;
+import com.teamabode.verdance.core.tag.VerdanceItemTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
@@ -102,7 +103,7 @@ public class SilkMothAi {
     }
 
     public static Ingredient getTemptations() {
-        return Ingredient.of(ItemTags.FLOWERS); // TODO: Add SILK_MOTH_FOOD tag
+        return Ingredient.of(VerdanceItemTags.SILK_MOTH_FOOD);
     }
 
     private static RunOne<SilkMoth> addMovementTasks() {

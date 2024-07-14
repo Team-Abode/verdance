@@ -9,8 +9,8 @@ import com.teamabode.verdance.core.misc.VerdanceBlockSetTypes;
 import com.teamabode.verdance.core.misc.VerdanceSoundTypes;
 import com.teamabode.verdance.core.misc.VerdanceTreeGrowers;
 import com.teamabode.verdance.core.misc.VerdanceWoodTypes;
-import com.teamabode.verdance.core.misc.VerdanceBlockReferences;
-import com.teamabode.verdance.core.misc.VerdanceItemReferences;
+import com.teamabode.verdance.core.misc.VerdanceBlockResourceKeys;
+import com.teamabode.verdance.core.misc.VerdanceItemResourceKeys;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Direction;
@@ -64,15 +64,15 @@ public class VerdanceBlocks {
 
     public static final Block CANTALOUPE = register("cantaloupe", new Block(Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(1.0F).sound(SoundType.WOOD)));
     public static final Block ATTACHED_CANTALOUPE_STEM = registerNoItem("attached_cantaloupe_stem", new AttachedStemBlock(
-            VerdanceBlockReferences.CANTALOUPE_STEM,
-            VerdanceBlockReferences.CANTALOUPE,
-            VerdanceItemReferences.CANTALOUPE_SEEDS,
+            VerdanceBlockResourceKeys.CANTALOUPE_STEM,
+            VerdanceBlockResourceKeys.CANTALOUPE,
+            VerdanceItemResourceKeys.CANTALOUPE_SEEDS,
             Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP).pushReaction(PushReaction.DESTROY))
     );
     public static final Block CANTALOUPE_STEM = registerNoItem("cantaloupe_stem", new StemBlock(
-            VerdanceBlockReferences.CANTALOUPE,
-            VerdanceBlockReferences.ATTACHED_CANTALOUPE_STEM,
-            VerdanceItemReferences.CANTALOUPE_SEEDS,
+            VerdanceBlockResourceKeys.CANTALOUPE,
+            VerdanceBlockResourceKeys.ATTACHED_CANTALOUPE_STEM,
+            VerdanceItemResourceKeys.CANTALOUPE_SEEDS,
             Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.HARD_CROP).pushReaction(PushReaction.DESTROY))
     );
 

@@ -7,7 +7,7 @@ import net.minecraft.world.item.Item;
 
 public class VerdanceItemTags {
     public static final TagKey<Item> MULBERRY_LOGS = create("mulberry_logs");
-    // TODO: SILK_MOTH_FOOD tag convention
+    public static final TagKey<Item> SILK_MOTH_FOOD = create("silk_moth_food");
     public static final TagKey<Item> SILKWORM_FOOD = create("silkworm_food");
 
     private static TagKey<Item> create(String name) {

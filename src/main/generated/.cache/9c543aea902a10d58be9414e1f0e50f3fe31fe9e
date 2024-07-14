@@ -1,4 +1,4 @@
-// 1.21	2024-07-13T23:26:17.439131	Verdance/Block Loot Tables
+// 1.21	2024-07-13T23:39:13.0383542	Verdance/Block Loot Tables
 341d07d9a95b2b6f8f76426d1f0633d8b1e4e3ca data\verdance\loot_table\blocks\mulberry_button.json
 12ab651f10202117f12ff97718d8b0fd94d438e3 data\verdance\loot_table\blocks\black_stucco_wall.json
 d9fcfb265cf8db591499483d06f6aa8c3c7e1ed3 data\verdance\loot_table\blocks\black_stucco.json
@@ -42,8 +42,8 @@ b36e3aba58afb7d403bebadf2b738d9ca33d8af8 data\verdance\loot_table\blocks\purple_
 f2f15eeae4a550458d82337ca0b79112da11afdd data\verdance\loot_table\blocks\yellow_cushion.json
 5755749d31c8ce070531413a38afb35b00a62c14 data\verdance\loot_table\blocks\mulberry_log.json
 22f60bddf95f39fa3b38ff76d15bbfdc2b32c50a data\verdance\loot_table\blocks\brown_cushion.json
-f7ba35ae7e64873325d379e02c6cea1ac2da61f9 data\verdance\loot_table\blocks\light_blue_stucco_stairs.json
 a9aa204606f93bd77385ade59de30a80fcc9388f data\verdance\loot_table\blocks\blue_cushion.json
+f7ba35ae7e64873325d379e02c6cea1ac2da61f9 data\verdance\loot_table\blocks\light_blue_stucco_stairs.json
 851e24e2492cd014f7e40085de7482fbbde7e4d3 data\verdance\loot_table\blocks\magenta_cushion.json
 78cce290763ff9f9aeba997ca0cd7f92a536b50a data\verdance\loot_table\blocks\magenta_stucco_wall.json
 0bacf9bb0b774500cf6025dbb97822e18a0900fd data\verdance\loot_table\blocks\silk_cocoon.json
@@ -72,8 +72,8 @@ e861676ccd97ad654faec0ab305c62b45a4cf50f data\verdance\loot_table\blocks\yellow_
 68268b1ec042a37da0aeb7d1058edbcdc16eb6d5 data\verdance\loot_table\blocks\gray_stucco_stairs.json
 98025125e258e993ea64bfd011bb9c83efc402ad data\verdance\loot_table\blocks\pink_stucco_slab.json
 cdab83260e20d5850e5450b7ff3dca85bdf3b081 data\verdance\loot_table\blocks\brown_stucco.json
-07f1f83d5b8253a98c7aa1aa8bfc59684ffe1413 data\verdance\loot_table\blocks\pink_stucco.json
 53bf634af774ce9fdf1f6f91168a5e55a7c7e7ef data\verdance\loot_table\blocks\pink_cushion.json
+07f1f83d5b8253a98c7aa1aa8bfc59684ffe1413 data\verdance\loot_table\blocks\pink_stucco.json
 055585a7d7e7fafbbad9e2f222c39138a8061e8a data\verdance\loot_table\blocks\green_stucco_slab.json
 6c7ffe7a5d93df94a6be359fdc1ab35f724413dc data\verdance\loot_table\blocks\purple_stucco_stairs.json
 6aedc3fe47ad2aa90ad2ab47b96df2bf36a9cbb3 data\verdance\loot_table\blocks\gray_stucco_wall.json
@@ -100,6 +100,6 @@ c4e69c8501641085c3c62ee80803d9c13c8f868d data\verdance\loot_table\blocks\pink_st
 ae0de37e370bc24bfaa7b50b0c74bc483de8c5c9 data\verdance\loot_table\blocks\mulberry_door.json
 c88bdd5b76c380aa429c03f19a64ef90a8d29f3e data\verdance\loot_table\blocks\gray_cushion.json
 bac56b8bfc5bc84e9c8e1e88e5df74210b57893c data\verdance\loot_table\blocks\cyan_stucco_stairs.json
-c38ef730ab85a0f637ee92bcceb96dae613b7226 data\verdance\loot_table\blocks\light_blue_stucco.json
 5b48956afc2ef4395557d1c84efb3dd1381d9a19 data\verdance\loot_table\blocks\cyan_cushion.json
+c38ef730ab85a0f637ee92bcceb96dae613b7226 data\verdance\loot_table\blocks\light_blue_stucco.json
 e5aa952b8a09baf8609fd061637c71669b6e9ba5 data\verdance\loot_table\blocks\mulberry_sign.json

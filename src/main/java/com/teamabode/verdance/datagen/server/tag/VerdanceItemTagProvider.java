@@ -19,6 +19,8 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
     protected void addTags(HolderLookup.Provider arg) {
         // TODO add conventional item tags for dyed stucco (blocks & items)
+
+        silkMothFood();
         silkwormFood();
         planks();
         stairs();
@@ -38,8 +40,16 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
         leaves();
     }
 
+    private void silkMothFood() {
+        this.getOrCreateTagBuilder(VerdanceItemTags.SILK_MOTH_FOOD)
+                .forceAddTag(ItemTags.FLOWERS);
+    }
+
     private void silkwormFood() {
-        this.getOrCreateTagBuilder(VerdanceItemTags.SILKWORM_FOOD).add(VerdanceItems.MULBERRY).add(VerdanceBlocks.MULBERRY_LEAVES.asItem()).add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES.asItem()).setReplace(false);
+        this.getOrCreateTagBuilder(VerdanceItemTags.SILKWORM_FOOD)
+                .add(VerdanceItems.MULBERRY)
+                .forceAddTag(ItemTags.LEAVES)
+                .setReplace(false);
     }
 
     private void planks() {
