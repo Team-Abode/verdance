@@ -233,7 +233,7 @@ public class Verdance implements ModInitializer {
     }
 
     public static void registerBiomePlacements() {
-        BiomePlacement.replaceOverworld(Biomes.CHERRY_GROVE, VerdanceBiomes.MULBERRY_FOREST, 0.25d);
+        BiomePlacement.replaceOverworld(Biomes.CHERRY_GROVE, VerdanceBiomes.MULBERRY_FOREST, VerdanceConfig.INSTANCE.mulberryForestProportion.get());
     }
 
     public static ResourceLocation id(String name) {
