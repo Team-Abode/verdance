@@ -1,5 +1,6 @@
 package com.teamabode.verdance.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.teamabode.verdance.common.entity.CushionEntity;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import net.minecraft.core.BlockPos;
@@ -28,10 +29,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class CushionBlock extends Block {
-
+    public static final MapCodec<CushionBlock> CODEC = simpleCodec(CushionBlock::new);
     private static final VoxelShape CUSHION_SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 10.0, 16.0);
-
-
     private static final BooleanProperty OCCUPIED = BlockStateProperties.OCCUPIED;
 
     public CushionBlock(Properties properties) {
@@ -120,5 +119,10 @@ public class CushionBlock extends Block {
     @Override
     public VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return CUSHION_SHAPE;
+    }
+
+    @Override
+    protected MapCodec<? extends Block> codec() {
+        return CODEC;
     }
 }
