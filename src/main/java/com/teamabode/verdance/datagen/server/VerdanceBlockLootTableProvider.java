@@ -62,6 +62,8 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         dropSelf(VerdanceBlocks.MULBERRY_SIGN);
         dropSelf(VerdanceBlocks.MULBERRY_HANGING_SIGN);
         add(VerdanceBlocks.SILK_COCOON, this.createSingleItemTable(Items.STRING, UniformGenerator.between(5.0f, 6.0f)));
+        dropSelf(VerdanceBlocks.VIOLET);
+        dropPottedContents(VerdanceBlocks.POTTED_VIOLET);
     }
 
     private void cushions() {

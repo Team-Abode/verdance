@@ -41,6 +41,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         ghostTownReplaceable();
         silkMothsSpawnableOn();
         replaceableBySugarCane();
+        smallFlowers();
     }
 
     private void mineablePickaxe() {
@@ -317,5 +318,9 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         this.getOrCreateTagBuilder(VerdanceBlockTags.REPLACEABLE_BY_SUGAR_CANE).setReplace(false)
                 .forceAddTag(BlockTags.REPLACEABLE)
                 .add(Blocks.SUGAR_CANE);
+    }
+
+    private void smallFlowers() {
+        this.getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS).add(VerdanceBlocks.VIOLET);
     }
 }

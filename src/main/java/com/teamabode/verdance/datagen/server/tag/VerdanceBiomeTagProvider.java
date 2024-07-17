@@ -26,10 +26,16 @@ public class VerdanceBiomeTagProvider extends FabricTagProvider<Biome> {
                 .add(VerdanceBiomes.MULBERRY_FOREST);
         this.getOrCreateTagBuilder(BiomeTags.IS_OVERWORLD)
                 .add(VerdanceBiomes.MULBERRY_FOREST);
-
         this.getOrCreateTagBuilder(VerdanceBiomeTags.HAS_CANTALOUPE)
                 .add(Biomes.SAVANNA);
         this.getOrCreateTagBuilder(VerdanceBiomeTags.HAS_GOLDEN_WOLF)
                 .add(VerdanceBiomes.MULBERRY_FOREST);
+        this.getOrCreateTagBuilder(VerdanceBiomeTags.HAS_VIOLET)
+                .add(Biomes.TAIGA)
+                .add(Biomes.OLD_GROWTH_BIRCH_FOREST)
+                .add(Biomes.OLD_GROWTH_PINE_TAIGA)
+                .add(Biomes.OLD_GROWTH_SPRUCE_TAIGA)
+                .add(Biomes.WINDSWEPT_HILLS)
+                .add(Biomes.WINDSWEPT_FOREST);
     }
 }

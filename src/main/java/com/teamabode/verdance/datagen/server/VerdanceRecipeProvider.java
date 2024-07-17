@@ -171,6 +171,8 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         );
         colorBlockWithDye(exporter, dyes, cushions, "cushion");
 
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PURPLE_DYE, 1).requires(VerdanceBlocks.VIOLET).group(getItemName(Items.PURPLE_DYE)).unlockedBy(getHasName(VerdanceBlocks.VIOLET), has(VerdanceBlocks.VIOLET)).save(exporter, Verdance.id(getConversionRecipeName(Items.PURPLE_DYE, VerdanceBlocks.VIOLET)));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.MAGENTA_DYE, 2).requires(Blocks.SPORE_BLOSSOM).group(getItemName(Items.MAGENTA_DYE)).unlockedBy(getHasName(Blocks.SPORE_BLOSSOM), has(Blocks.SPORE_BLOSSOM)).save(exporter, Verdance.id(getConversionRecipeName(Items.MAGENTA_DYE, Blocks.SPORE_BLOSSOM)));
 
         farmersDelightCompat(this, exporter);

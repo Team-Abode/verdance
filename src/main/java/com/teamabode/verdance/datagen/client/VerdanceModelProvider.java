@@ -13,7 +13,6 @@ import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 
 public class VerdanceModelProvider extends FabricModelProvider {
@@ -34,11 +33,13 @@ public class VerdanceModelProvider extends FabricModelProvider {
         generator.woodProvider(VerdanceBlocks.STRIPPED_MULBERRY_LOG).logWithHorizontal(VerdanceBlocks.STRIPPED_MULBERRY_LOG).wood(VerdanceBlocks.STRIPPED_MULBERRY_WOOD);
         generator.createTrivialBlock(VerdanceBlocks.MULBERRY_LEAVES, TexturedModel.LEAVES);
         generator.createCrossBlock(VerdanceBlocks.MULBERRY_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        generator.createPlant(VerdanceBlocks.VIOLET, VerdanceBlocks.POTTED_VIOLET, BlockModelGenerators.TintState.NOT_TINTED);
         this.createPottedMulberry(generator, VerdanceBlocks.MULBERRY_SAPLING, VerdanceBlocks.POTTED_MULBERRY_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
         generator.createHangingSign(VerdanceBlocks.STRIPPED_MULBERRY_LOG, VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
         generator.createTrivialBlock(VerdanceBlocks.CANTALOUPE, TexturedModel.COLUMN);
         generator.createStems(VerdanceBlocks.CANTALOUPE_STEM, VerdanceBlocks.ATTACHED_CANTALOUPE_STEM);
         generator.createTrivialBlock(VerdanceBlocks.MULBERRY_CRATE, TexturedModel.CUBE_TOP_BOTTOM);
+
 
         this.createCushion(VerdanceBlocks.WHITE_CUSHION, generator);
         this.createCushion(VerdanceBlocks.LIGHT_GRAY_CUSHION, generator);

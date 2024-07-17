@@ -16,8 +16,8 @@ public class VerdancePlacedFeatures {
     public static final ResourceKey<PlacedFeature> FLOWER_MULBERRY_FOREST = createKey("flower_mulberry_forest");
     public static final ResourceKey<PlacedFeature> MULBERRY = createKey("mulberry");
     public static final ResourceKey<PlacedFeature> MULBERRY_CHECKED = createKey("mulberry_checked");
-
     public static final ResourceKey<PlacedFeature> PATCH_CANTALOUPE = createKey("patch_cantaloupe");
+    public static final ResourceKey<PlacedFeature> FLOWER_VIOLET = createKey("flower_violet");
 
     public static void register(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -49,6 +49,12 @@ public class VerdancePlacedFeatures {
                 RarityFilter.onAverageOnceEvery(400),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
+                BiomeFilter.biome()
+        ));
+        PlacementUtils.register(context, FLOWER_VIOLET, configuredFeatures.getOrThrow(VerdanceConfiguredFeatures.FLOWER_VIOLET), List.of(
+                RarityFilter.onAverageOnceEvery(8),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome()
         ));
     }
