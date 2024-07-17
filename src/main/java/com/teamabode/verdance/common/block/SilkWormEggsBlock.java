@@ -30,7 +30,7 @@ public class SilkWormEggsBlock extends Block {
 
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         if (level.getBlockState(pos.below()).is(BlockTags.LEAVES)) {
-            if (!level.isClientSide()) level.levelEvent(2005, pos, 0);
+            level.levelEvent(2012, pos, 15);
             level.scheduleTick(pos, this, this.getHatchDelay(level.getRandom()));
         }
     }
