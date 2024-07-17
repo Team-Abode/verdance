@@ -1,7 +1,8 @@
-// 1.21	2024-07-14T15:38:31.2174877	Verdance/Tags for minecraft:block
+// 1.21	2024-07-16T21:00:28.1781168	Verdance/Tags for minecraft:block
 9b20fbd98b5e9333686763db62249b3a3c25be65 data\minecraft\tags\block\slabs.json
 82aeade700265a023adf13ac5e3866b479208176 data\verdance\tags\block\ghost_town_degradable.json
 236626952d19df32e45caaaf4419eeea0cc18e70 data\minecraft\tags\block\wooden_fences.json
+1279a25bdf9d46398795bea7711d6f41e49a2c1d data\minecraft\tags\block\small_flowers.json
 676d5d6104998f1c013e2418880dd19dd765009c data\minecraft\tags\block\fence_gates.json
 ee09a732336e0be35a6bdbe8543f8d02e82a550b data\minecraft\tags\block\wooden_slabs.json
 9e3e5028625fc0cdb9b5b5f9ff1b075a7c578ea4 data\minecraft\tags\block\mineable\pickaxe.json

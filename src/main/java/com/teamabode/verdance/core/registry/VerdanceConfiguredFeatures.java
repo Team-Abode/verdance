@@ -30,8 +30,8 @@ public class VerdanceConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_MULBERRY_FOREST = createKey("flower_mulberry_forest");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MULBERRY = createKey("mulberry");
-
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CANTALOUPE = createKey("patch_cantaloupe");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_VIOLET = createKey("flower_violet");
 
     public static void register(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         FeatureUtils.register(context, FLOWER_MULBERRY_FOREST, Feature.FLOWER, new RandomPatchConfiguration(
@@ -60,6 +60,15 @@ public class VerdanceConfiguredFeatures {
                 Feature.SIMPLE_BLOCK,
                 new SimpleBlockConfiguration(BlockStateProvider.simple(VerdanceBlocks.CANTALOUPE)),
                 List.of(Blocks.GRASS_BLOCK)
+        ));
+        FeatureUtils.register(context, FLOWER_VIOLET, Feature.FLOWER, new RandomPatchConfiguration(
+                64,
+                6,
+                2,
+                PlacementUtils.onlyWhenEmpty(
+                        Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(SimpleStateProvider.simple(VerdanceBlocks.VIOLET))
+                )
         ));
     }
 

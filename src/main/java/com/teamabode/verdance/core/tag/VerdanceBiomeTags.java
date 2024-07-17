@@ -9,6 +9,7 @@ public class VerdanceBiomeTags {
 
     public static final TagKey<Biome> HAS_CANTALOUPE = create("has_cantaloupe");
     public static final TagKey<Biome> HAS_GOLDEN_WOLF = create("has_golden_wolf");
+    public static final TagKey<Biome> HAS_VIOLET = create("has_violet");
 
     private static TagKey<Biome> create(String name) {
         return TagKey.create(Registries.BIOME, Verdance.id(name));

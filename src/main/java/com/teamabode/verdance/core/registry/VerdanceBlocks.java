@@ -15,12 +15,14 @@ import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockBehaviour.OffsetType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
@@ -169,6 +171,9 @@ public class VerdanceBlocks {
 
     public static final Block SILKWORM_EGGS = register("silkworm_eggs", new SilkWormEggsBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.FROGSPAWN).instabreak().noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
     public static final Block SILK_COCOON = registerNoItem("silk_cocoon", new SilkCocoonBlock(Properties.of().strength(0.8F).sound(SoundType.WOOL)));
+
+    public static final Block VIOLET = register("violet", new FlowerBlock(MobEffects.REGENERATION, 8.0f, Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
+    public static final Block POTTED_VIOLET = register("potted_violet", new FlowerPotBlock(VIOLET, Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
 
     private static Block register(String name, Block block) {
         var registry = Registry.register(BuiltInRegistries.BLOCK, Verdance.id(name), block);

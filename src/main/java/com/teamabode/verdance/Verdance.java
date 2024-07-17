@@ -3,6 +3,7 @@ package com.teamabode.verdance;
 import com.teamabode.sketch.core.api.misc.BlockEntityExtender;
 import com.teamabode.verdance.common.util.ColorUtils;
 import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
+import com.teamabode.verdance.core.misc.VerdanceBiomeModifications;
 import com.teamabode.verdance.core.registry.VerdanceBiomes;
 import com.teamabode.verdance.core.tag.VerdanceBiomeTags;
 import com.teamabode.verdance.core.registry.VerdancePlacedFeatures;
@@ -11,9 +12,12 @@ import com.terraformersmc.biolith.api.biome.BiomePlacement;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.data.worldgen.features.VegetationFeatures;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -44,8 +48,9 @@ public class Verdance implements ModInitializer {
         if (FabricLoader.getInstance().isModLoaded("farmersdelight")) {
             VerdanceFD.register();
         }
+        VerdanceBiomeModifications.register();
+
         registerBlockEntityAdditions();
-        registerBiomeModifications();
         registerTrades();
         registerItemGroupEvents();
         registerBiomePlacements();
@@ -54,14 +59,6 @@ public class Verdance implements ModInitializer {
     public static void registerBlockEntityAdditions() {
         BlockEntityExtender.addValidBlocks(BlockEntityType.SIGN, VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN);
         BlockEntityExtender.addValidBlocks(BlockEntityType.HANGING_SIGN, VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
-    }
-
-    public static void registerBiomeModifications() {
-        BiomeModifications.addFeature(
-                BiomeSelectors.tag(VerdanceBiomeTags.HAS_CANTALOUPE),
-                GenerationStep.Decoration.VEGETAL_DECORATION,
-                VerdancePlacedFeatures.PATCH_CANTALOUPE
-        );
     }
 
     public static void registerTrades() {
@@ -134,6 +131,7 @@ public class Verdance implements ModInitializer {
             entries.addAfter(Blocks.CHERRY_LEAVES, VerdanceBlocks.MULBERRY_LEAVES, VerdanceBlocks.FLOWERING_MULBERRY_LEAVES);
             entries.addAfter(Blocks.MANGROVE_PROPAGULE, VerdanceItems.MULBERRY);
             entries.addAfter(Items.FROGSPAWN, VerdanceBlocks.SILKWORM_EGGS);
+            entries.addAfter(Items.CORNFLOWER, VerdanceBlocks.VIOLET);
         });
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COLORED_BLOCKS).register(entries -> {
             entries.addAfter(
