@@ -4,7 +4,6 @@ import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import com.teamabode.verdance.core.registry.VerdanceBlockEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
@@ -16,12 +15,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.phys.Vec3;
 
 /*
     It takes a Silk Moth 4800 ticks to emerge from a Silk Cocoon.
     The Silk Cocoon will begin to wobble and occasionally drop string at 3600 ticks.
-    While wobbling, the Silk Cocoon has a 1/4th chance to drop 1-2 string, but will drop 5-6 string on break or on emerge.
+    While wobbling, the Silk Cocoon has a 33% chance to drop 1-2 string, but will drop 5-6 string on break or on emerge.
  */
 public class SilkCocoonBlockEntity extends BlockEntity {
     private int ticks = 0;
@@ -77,7 +75,7 @@ public class SilkCocoonBlockEntity extends BlockEntity {
             this.wobbling = true;
         }
         RandomSource random = level.getRandom();
-        if (random.nextInt(3) == 0) {
+        if (random.nextInt(2) == 0) {
             this.dropString(level, random, this.getBlockPos());
         }
         // TODO: unique sound
