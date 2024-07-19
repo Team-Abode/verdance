@@ -1,5 +1,6 @@
 package com.teamabode.verdance.common.item;
 
+import com.teamabode.verdance.core.registry.VerdanceTriggerTypes;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,6 +25,9 @@ public class CantaloupeJuiceItem extends Item {
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
         if (user instanceof ServerPlayer serverPlayer) {
             CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
+            if (serverPlayer.isOnFire()) {
+                VerdanceTriggerTypes.EXTINGUISHED_WITH_CANTALOUPE_JUICE.trigger(serverPlayer);
+            }
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
         }
         if (!level.isClientSide()) {

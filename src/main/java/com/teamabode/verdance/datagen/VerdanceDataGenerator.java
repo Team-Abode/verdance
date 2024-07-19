@@ -3,6 +3,7 @@ package com.teamabode.verdance.datagen;
 import com.teamabode.sketch.core.registry.SketchRegistries;
 import com.teamabode.verdance.core.registry.*;
 import com.teamabode.verdance.datagen.client.VerdanceModelProvider;
+import com.teamabode.verdance.datagen.server.VerdanceAdvancementProvider;
 import com.teamabode.verdance.datagen.server.VerdanceBlockLootTableProvider;
 import com.teamabode.verdance.datagen.server.VerdanceDynamicRegistryProvider;
 import com.teamabode.verdance.datagen.server.tag.VerdanceBiomeTagProvider;
@@ -29,6 +30,7 @@ public class VerdanceDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(VerdanceBiomeTagProvider::new);
         pack.addProvider(VerdanceBlockLootTableProvider::new);
         pack.addProvider(VerdanceDynamicRegistryProvider::new);
+        pack.addProvider(VerdanceAdvancementProvider::new);
 
         // Client Data
         pack.addProvider(VerdanceModelProvider::new);

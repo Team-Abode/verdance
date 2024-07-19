@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "silk_touch_silkworm_eggs": {
+      "conditions": {
+        "item": {
+          "predicates": {
+            "minecraft:enchantments": [
+              {
+                "enchantments": "minecraft:silk_touch",
+                "levels": {
+                  "min": 1
+                }
+              }
+            ]
+          }
+        }
+      },
+      "trigger": "verdance:silkworm_eggs_destroyed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.verdance.husbandry.silk_touched.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "verdance:silkworm_eggs"
+    },
+    "title": {
+      "translate": "advancements.verdance.husbandry.silk_touched.title"
+    }
+  },
+  "requirements": [
+    [
+      "silk_touch_silkworm_eggs"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

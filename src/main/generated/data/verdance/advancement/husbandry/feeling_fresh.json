@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "extinguished_with_cantaloupe_juice": {
+      "trigger": "verdance:extinguished_with_cantaloupe_juice"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.verdance.husbandry.feeling_fresh.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "verdance:cantaloupe_juice"
+    },
+    "title": {
+      "translate": "advancements.verdance.husbandry.feeling_fresh.title"
+    }
+  },
+  "requirements": [
+    [
+      "extinguished_with_cantaloupe_juice"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
