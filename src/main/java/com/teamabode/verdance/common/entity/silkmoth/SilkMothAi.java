@@ -69,7 +69,7 @@ public class SilkMothAi {
                 new Swim(1.0f),
                 new TakeOffTask(),
                 new LandTask(),
-                new AnimalPanic<>(2.5f),
+                new AnimalPanic<>(1.5f),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
