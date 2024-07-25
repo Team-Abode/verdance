@@ -50,6 +50,7 @@ public class SilkCocoonBlockEntity extends BlockEntity {
             silkMoth.setYRot(state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot());
             silkMoth.takeOff();
 
+            level.playSound(null, pos, VerdanceSoundEvents.ENTITY_SILK_MOTH_EMERGE, SoundSource.NEUTRAL);
             level.addFreshEntity(silkMoth);
             level.destroyBlock(pos, true);
         }
@@ -85,16 +86,15 @@ public class SilkCocoonBlockEntity extends BlockEntity {
     }
 
     public void dropString(Level level, RandomSource random, BlockPos origin) {
-        for (int i = 0; i < Mth.randomBetweenInclusive(random, 1, 2); i++) {
-            ItemEntity itemEntity = new ItemEntity(
-                    level,
-                    origin.getX() + 0.5d,
-                    origin.getY() - 0.5d,
-                    origin.getZ() + 0.5d,
-                    new ItemStack(Items.STRING)
-            );
-            level.addFreshEntity(itemEntity);
-        }
+        int count = Mth.randomBetweenInclusive(random, 1, 2);
+        ItemEntity itemEntity = new ItemEntity(
+                level,
+                origin.getX() + 0.5d,
+                origin.getY() - 0.5d,
+                origin.getZ() + 0.5d,
+                new ItemStack(Items.STRING, count)
+        );
+        level.addFreshEntity(itemEntity);
     }
 
     public void setTicks(int ticks) {

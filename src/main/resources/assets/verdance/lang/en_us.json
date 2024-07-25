@@ -129,6 +129,8 @@
     "item.verdance.silkworm_spawn_egg": "Silkworm Spawn Egg",
 
     "subtitles.verdance.entity.silk_moth.death": "Silk Moth dies",
+    "subtitles.verdance.entity.silk_moth.eat": "Silk Moth eats",
+    "subtitles.verdance.entity.silk_moth.emerge": "Silk Moth emerges",
     "subtitles.verdance.entity.silk_moth.hurt": "Silk Moth hurts",
     "subtitles.verdance.entity.silk_moth.idle": "Silk Moth chirps",
     "subtitles.verdance.entity.silkworm.death": "Silkworm dies",

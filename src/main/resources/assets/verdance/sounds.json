@@ -110,6 +110,16 @@
         ],
         "subtitle": "subtitles.verdance.entity.silk_moth.idle"
     },
+    "entity.silk_moth.eat": {
+        "sounds": [],
+        "subtitle": "subtitles.verdance.entity.silk_moth.eat"
+    },
+    "entity.silk_moth.emerge": {
+        "sounds": [
+            "verdance:entity/silk_moth/emerge"
+        ],
+        "subtitle": "subtitles.verdance.entity.silk_moth.emerge"
+    },
     "entity.silk_moth.hurt": {
         "sounds": [
             "verdance:entity/silk_moth/hurt1",
