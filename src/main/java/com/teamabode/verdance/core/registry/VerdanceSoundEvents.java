@@ -15,17 +15,19 @@ public class VerdanceSoundEvents {
 
     public static final SoundEvent ENTITY_SILK_MOTH_IDLE = register("entity.silk_moth.idle");
     public static final SoundEvent ENTITY_SILK_MOTH_HURT = register("entity.silk_moth.hurt");
+    public static final SoundEvent ENTITY_SILK_MOTH_EAT = register("entity.silk_moth.eat");
+    public static final SoundEvent ENTITY_SILK_MOTH_EMERGE = register("entity.silk_moth.emerge");
     public static final SoundEvent ENTITY_SILK_MOTH_DEATH = register("entity.silk_moth.death");
 
     public static final SoundEvent ENTITY_SILKWORM_HURT = register("entity.silkworm.hurt");
     public static final SoundEvent ENTITY_SILKWORM_DEATH = register("entity.silkworm.death");
 
-    /*
-        TODO:
-        - BLOCK_SILK_COCOON_PLACE "block.silk_cocoon.place"
-        - BLOCK_SILK_COCOON_BREAK "block.silk_cocoon.break"
-        - ENTITY_SILK_MOTH_EAT "entity.silk_moth.eat"
-     */
+    public static final SoundEvent BLOCK_SILK_COCOON_BREAK = register("block.silk_cocoon.break");
+    public static final SoundEvent BLOCK_SILK_COCOON_FALL = register("block.silk_cocoon.fall");
+    public static final SoundEvent BLOCK_SILK_COCOON_HIT = register("block.silk_cocoon.hit");
+    public static final SoundEvent BLOCK_SILK_COCOON_PLACE = register("block.silk_cocoon.place");
+    public static final SoundEvent BLOCK_SILK_COCOON_STEP = register("block.silk_cocoon.step");
+    public static final SoundEvent BLOCK_SILK_COCOON_WOBBLE = register("block.silk_cocoon.wobble");
 
     public static void register() {
 

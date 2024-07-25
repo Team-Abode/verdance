@@ -170,7 +170,7 @@ public class VerdanceBlocks {
     public static final Block PINK_STUCCO_WALL = register("pink_stucco_wall", new WallBlock(Properties.ofFullCopy(PINK_STUCCO)));
 
     public static final Block SILKWORM_EGGS = register("silkworm_eggs", new SilkWormEggsBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.FROGSPAWN).instabreak().noOcclusion().noCollission().pushReaction(PushReaction.DESTROY)));
-    public static final Block SILK_COCOON = registerNoItem("silk_cocoon", new SilkCocoonBlock(Properties.of().strength(0.8F).sound(SoundType.WOOL)));
+    public static final Block SILK_COCOON = registerNoItem("silk_cocoon", new SilkCocoonBlock(Properties.of().strength(0.8F).sound(VerdanceSoundTypes.SILK_COCOON)));
 
     public static final Block VIOLET = register("violet", new FlowerBlock(MobEffects.REGENERATION, 8.0f, Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
     public static final Block POTTED_VIOLET = register("potted_violet", new FlowerPotBlock(VIOLET, Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));

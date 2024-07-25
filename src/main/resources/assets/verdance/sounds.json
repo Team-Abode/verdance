@@ -1,4 +1,56 @@
 {
+    "block.silk_cocoon.break": {
+        "sounds": [
+            "verdance:block/silk_cocoon/break1",
+            "verdance:block/silk_cocoon/break2",
+            "verdance:block/silk_cocoon/break3",
+            "verdance:block/silk_cocoon/break4"
+        ],
+        "subtitle": "subtitles.block.generic.break"
+    },
+    "block.silk_cocoon.fall": {
+        "sounds": [
+            "verdance:block/silk_cocoon/step1",
+            "verdance:block/silk_cocoon/step2",
+            "verdance:block/silk_cocoon/step3",
+            "verdance:block/silk_cocoon/step4"
+        ]
+    },
+    "block.silk_cocoon.hit": {
+        "sounds": [
+            "verdance:block/silk_cocoon/step1",
+            "verdance:block/silk_cocoon/step2",
+            "verdance:block/silk_cocoon/step3",
+            "verdance:block/silk_cocoon/step4"
+        ],
+        "subtitle": "subtitles.block.generic.hit"
+    },
+    "block.silk_cocoon.place": {
+        "sounds": [
+            "verdance:block/silk_cocoon/break1",
+            "verdance:block/silk_cocoon/break2",
+            "verdance:block/silk_cocoon/break3",
+            "verdance:block/silk_cocoon/break4"
+        ],
+        "subtitle": "subtitles.block.generic.place"
+    },
+    "block.silk_cocoon.step": {
+        "sounds": [
+            "verdance:block/silk_cocoon/step1",
+            "verdance:block/silk_cocoon/step2",
+            "verdance:block/silk_cocoon/step3",
+            "verdance:block/silk_cocoon/step4"
+        ],
+        "subtitle": "subtitles.block.generic.footsteps"
+    },
+    "block.silk_cocoon.wobble": {
+        "sounds": [
+            "verdance:block/silk_cocoon/wobble1",
+            "verdance:block/silk_cocoon/wobble2",
+            "verdance:block/silk_cocoon/wobble3"
+        ],
+        "subtitle": "subtitles.block.generic.footsteps"
+    },
     "block.stucco.break": {
         "sounds": [
             "verdance:block/stucco/break1",

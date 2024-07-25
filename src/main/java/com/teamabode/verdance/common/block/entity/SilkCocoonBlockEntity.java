@@ -3,9 +3,11 @@ package com.teamabode.verdance.common.block.entity;
 import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import com.teamabode.verdance.core.registry.VerdanceBlockEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
+import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -51,7 +53,7 @@ public class SilkCocoonBlockEntity extends BlockEntity {
             level.addFreshEntity(silkMoth);
             level.destroyBlock(pos, true);
         }
-        else if (ticks >= 3600 && ticks % 200 == 0) {
+        else if (ticks >= 4400 && ticks % 100 == 0 || ticks >= 3600 && ticks % 200 == 0) {
             cocoon.wobble(level);
         }
         cocoon.setTicks(ticks + 1);
@@ -74,11 +76,12 @@ public class SilkCocoonBlockEntity extends BlockEntity {
         else {
             this.wobbling = true;
         }
+        BlockPos pos = this.getBlockPos();
         RandomSource random = level.getRandom();
         if (random.nextInt(2) == 0) {
-            this.dropString(level, random, this.getBlockPos());
+            this.dropString(level, random, pos);
         }
-        // TODO: unique sound
+        level.playSound(null, pos, VerdanceSoundEvents.BLOCK_SILK_COCOON_WOBBLE, SoundSource.BLOCKS);
     }
 
     public void dropString(Level level, RandomSource random, BlockPos origin) {
