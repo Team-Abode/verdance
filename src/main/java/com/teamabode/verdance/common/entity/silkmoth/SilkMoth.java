@@ -4,6 +4,7 @@ import com.mojang.serialization.Dynamic;
 import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
+import com.teamabode.verdance.core.tag.VerdanceItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -12,11 +13,14 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.util.Unit;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
@@ -31,6 +35,7 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -180,6 +185,18 @@ public class SilkMoth extends Animal implements FlyingAnimal {
         }
     }
 
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
+        ItemStack stack = player.getItemInHand(interactionHand);
+        Level level = this.level();
+        boolean isFood = this.isFood(stack);
+        InteractionResult interactionResult = super.mobInteract(player, interactionHand);
+        if (interactionResult.consumesAction() && isFood) {
+            level.playSound(null, this, this.getEatingSound(stack), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(level.random, 0.8F, 1.2F));
+        }
+        return interactionResult;
+    }
+
     public void takeOff() {
         this.setFlying(true);
         this.getBrain().setMemory(VerdanceMemoryModuleTypes.IS_FLYING, Unit.INSTANCE);
@@ -211,7 +228,7 @@ public class SilkMoth extends Animal implements FlyingAnimal {
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return stack.is(ItemTags.FLOWERS);
+        return stack.is(VerdanceItemTags.SILK_MOTH_FOOD);
     }
 
     @Override
@@ -224,6 +241,11 @@ public class SilkMoth extends Animal implements FlyingAnimal {
     @Override
     protected SoundEvent getAmbientSound() {
         return VerdanceSoundEvents.ENTITY_SILK_MOTH_IDLE;
+    }
+
+    @Override
+    public SoundEvent getEatingSound(ItemStack itemStack) {
+        return VerdanceSoundEvents.ENTITY_SILK_MOTH_EAT;
     }
 
     @Nullable

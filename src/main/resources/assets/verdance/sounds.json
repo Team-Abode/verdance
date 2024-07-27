@@ -111,7 +111,11 @@
         "subtitle": "subtitles.verdance.entity.silk_moth.idle"
     },
     "entity.silk_moth.eat": {
-        "sounds": [],
+        "sounds": [
+            "verdance:entity/silk_moth/eat1",
+            "verdance:entity/silk_moth/eat2",
+            "verdance:entity/silk_moth/eat3"
+        ],
         "subtitle": "subtitles.verdance.entity.silk_moth.eat"
     },
     "entity.silk_moth.emerge": {
