@@ -1,5 +1,5 @@
 {
   "values": [
-    "minecraft:savanna"
+    "#minecraft:is_savanna"
   ]
 }
