@@ -1,6 +1,5 @@
 package com.teamabode.verdance;
 
-import com.teamabode.sketch.core.api.misc.BlockEntityExtender;
 import com.teamabode.verdance.core.integration.farmersdelight.VerdanceFD;
 import com.teamabode.verdance.core.misc.VerdanceBiomeModifications;
 import com.teamabode.verdance.core.registry.VerdanceBiomes;
@@ -41,13 +40,13 @@ public class Verdance implements ModInitializer {
         }
         VerdanceBiomeModifications.register();
 
-        registerBlockEntityAdditions();
+        registerBlockEntitySupportedBlock();
         registerTrades();
         registerItemGroupEvents();
         registerBiomePlacements();
     }
 
-    public static void registerBlockEntityAdditions() {
+    public static void registerBlockEntitySupportedBlock() {
         BlockEntityType.SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_SIGN);
         BlockEntityType.SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_WALL_SIGN);
         BlockEntityType.HANGING_SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_HANGING_SIGN);
