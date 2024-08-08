@@ -20,7 +20,6 @@ public class LandTask extends ImprovedOneShot<SilkMoth> {
     @Override
     public void run(ServerLevel level, SilkMoth entity, long gameTime) {
         if (entity.onGround()) {
-            Verdance.LOGGER.info("Running LandTask");
             entity.land();
         }
     }

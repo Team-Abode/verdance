@@ -26,6 +26,5 @@ public class TakeOffTask extends ImprovedOneShot<SilkMoth> {
     @Override
     public void run(ServerLevel level, SilkMoth entity, long gameTime) {
         entity.takeOff();
-        Verdance.LOGGER.info("Running TakeOffTask");
     }
 }

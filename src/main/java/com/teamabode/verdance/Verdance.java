@@ -48,8 +48,10 @@ public class Verdance implements ModInitializer {
     }
 
     public static void registerBlockEntityAdditions() {
-        BlockEntityExtender.addValidBlocks(BlockEntityType.SIGN, VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN);
-        BlockEntityExtender.addValidBlocks(BlockEntityType.HANGING_SIGN, VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
+        BlockEntityType.SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_SIGN);
+        BlockEntityType.SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_WALL_SIGN);
+        BlockEntityType.HANGING_SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_HANGING_SIGN);
+        BlockEntityType.HANGING_SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
     }
 
     public static void registerTrades() {
