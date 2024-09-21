@@ -4,19 +4,18 @@ import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Blocks;
-
+import net.minecraft.block.Blocks;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.BlockTags;
 import java.util.concurrent.CompletableFuture;
 
 public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
-    public VerdanceBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public VerdanceBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
 
-    protected void addTags(HolderLookup.Provider arg) {
+    protected void configure(RegistryWrapper.WrapperLookup arg) {
         walls();
         planks();
         stairs();
@@ -50,7 +49,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
 
     private void mineablePickaxe() {
-        this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
+        this.getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(VerdanceBlocks.WHITE_STUCCO)
                 .add(VerdanceBlocks.WHITE_STUCCO_STAIRS)
                 .add(VerdanceBlocks.WHITE_STUCCO_SLAB)
@@ -119,14 +118,14 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
 
     private void mineableHoe() {
-        this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_HOE)
+        this.getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
                 .add(VerdanceBlocks.MULBERRY_LEAVES)
                 .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES)
                 .setReplace(false);
     }
 
     private void mineableAxe() {
-        this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
+        this.getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
                 .add(VerdanceBlocks.CANTALOUPE)
                 .add(VerdanceBlocks.WHITE_CUSHION)
                 .add(VerdanceBlocks.LIGHT_GRAY_CUSHION)

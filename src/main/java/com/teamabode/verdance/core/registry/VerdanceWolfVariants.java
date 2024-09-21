@@ -2,17 +2,18 @@ package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.core.tag.VerdanceBiomeTags;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.animal.WolfVariant;
+import net.minecraft.entity.passive.WolfVariant;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryEntryLookup;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 
 public class VerdanceWolfVariants {
 
-    public static final ResourceKey<WolfVariant> GOLDEN = createKey("golden");
+    public static final RegistryKey<WolfVariant> GOLDEN = createKey("golden");
 
-    public static void register(BootstrapContext<WolfVariant> context) {
-        var biomes = context.lookup(Registries.BIOME);
+    public static void register(Registerable<WolfVariant> context) {
+        var biomes = context.getRegistryLookup(RegistryKeys.BIOME);
 
         context.register(GOLDEN, new WolfVariant(
                 Verdance.id("entity/wolf/wolf_golden"),
@@ -22,7 +23,7 @@ public class VerdanceWolfVariants {
         ));
     }
 
-    private static ResourceKey<WolfVariant> createKey(String name) {
-        return ResourceKey.create(Registries.WOLF_VARIANT, Verdance.id(name));
+    private static RegistryKey<WolfVariant> createKey(String name) {
+        return RegistryKey.of(RegistryKeys.WOLF_VARIANT, Verdance.id(name));
     }
 }

@@ -3,36 +3,35 @@ package com.teamabode.verdance.datagen.server;
 import com.teamabode.sketch.core.registry.SketchRegistries;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
 import java.util.concurrent.CompletableFuture;
 
 public class VerdanceDynamicRegistryProvider extends FabricDynamicRegistryProvider {
 
-    public VerdanceDynamicRegistryProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public VerdanceDynamicRegistryProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
-    protected void configure(HolderLookup.Provider registries, Entries entries) {
-        this.addAll(Registries.WOLF_VARIANT, registries, entries);
-        this.addAll(Registries.JUKEBOX_SONG, registries, entries);
-        this.addAll(Registries.TRIM_PATTERN, registries, entries);
+    protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries) {
+        this.addAll(RegistryKeys.WOLF_VARIANT, registries, entries);
+        this.addAll(RegistryKeys.JUKEBOX_SONG, registries, entries);
+        this.addAll(RegistryKeys.TRIM_PATTERN, registries, entries);
         this.addAll(SketchRegistries.BOAT_TYPE, registries, entries);
-        this.addAll(Registries.CONFIGURED_FEATURE, registries, entries);
-        this.addAll(Registries.PLACED_FEATURE, registries, entries);
-        this.addAll(Registries.BIOME, registries, entries);
-        this.addAll(Registries.PROCESSOR_LIST, registries, entries);
-        this.addAll(Registries.TEMPLATE_POOL, registries, entries);
-        this.addAll(Registries.STRUCTURE, registries, entries);
-        this.addAll(Registries.STRUCTURE_SET, registries, entries);
+        this.addAll(RegistryKeys.CONFIGURED_FEATURE, registries, entries);
+        this.addAll(RegistryKeys.PLACED_FEATURE, registries, entries);
+        this.addAll(RegistryKeys.BIOME, registries, entries);
+        this.addAll(RegistryKeys.PROCESSOR_LIST, registries, entries);
+        this.addAll(RegistryKeys.TEMPLATE_POOL, registries, entries);
+        this.addAll(RegistryKeys.STRUCTURE, registries, entries);
+        this.addAll(RegistryKeys.STRUCTURE_SET, registries, entries);
     }
 
-    private <T> void addAll(ResourceKey<Registry<T>> registry, HolderLookup.Provider registries, Entries entries) {
-        entries.addAll(registries.lookupOrThrow(registry));
+    private <T> void addAll(RegistryKey<Registry<T>> registry, RegistryWrapper.WrapperLookup registries, Entries entries) {
+        entries.addAll(registries.getWrapperOrThrow(registry));
     }
 
     @Override

@@ -1,40 +1,39 @@
 package com.teamabode.verdance.common.entity;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.state.property.Properties;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 public class CushionEntity extends Entity {
 
-
-    public CushionEntity(EntityType<?> entityType, Level level) {
+    public CushionEntity(EntityType<?> entityType, World level) {
         super(entityType, level);
-        this.noPhysics = true;
+        this.noClip = true;
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-
-    }
-
-    @Override
-    protected void readAdditionalSaveData(CompoundTag compoundTag) {
+    protected void initDataTracker(DataTracker.Builder builder) {
 
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag compoundTag) {
+    protected void readCustomDataFromNbt(NbtCompound compoundTag) {
 
     }
 
-    public @NotNull PushReaction getPistonPushReaction() {
-        return PushReaction.IGNORE;
+    @Override
+    protected void writeCustomDataToNbt(NbtCompound compoundTag) {
+
+    }
+
+    public @NotNull PistonBehavior getPistonBehavior() {
+        return PistonBehavior.IGNORE;
     }
 
     protected boolean canAddPassenger(Entity entity) {
@@ -48,10 +47,10 @@ public class CushionEntity extends Entity {
     @Override
     protected void removePassenger(Entity entity) {
         super.removePassenger(entity);
-        if (!this.isRemoved() && !entity.level().isClientSide) {
-            BlockState blockState = entity.getInBlockState();
-            entity.absMoveTo(entity.getX(), entity.getY() + 0.6D, entity.getZ());
-            this.level().setBlockAndUpdate(entity.blockPosition(), blockState.setValue(BlockStateProperties.OCCUPIED, false));
+        if (!this.isRemoved() && !entity.getWorld().isClient) {
+            BlockState blockState = entity.getBlockStateAtPos();
+            entity.updatePosition(entity.getX(), entity.getY() + 0.6D, entity.getZ());
+            this.getWorld().setBlockState(entity.getBlockPos(), blockState.with(Properties.OCCUPIED, false));
             this.discard();
         }
     }

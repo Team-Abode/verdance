@@ -1,30 +1,28 @@
 package com.teamabode.verdance.common.entity.silkmoth.behavior;
 
-import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
-import com.teamabode.verdance.common.util.ImprovedOneShot;
+import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.memory.MemoryStatus;
-
 import java.util.Map;
+import net.minecraft.entity.ai.brain.MemoryModuleState;
+import net.minecraft.entity.ai.brain.MemoryModuleType;
+import net.minecraft.server.world.ServerWorld;
 
-public class TakeOffTask extends ImprovedOneShot<SilkMoth> {
+public class TakeOffTask extends ImprovedSingleTickTask<SilkMoth> {
 
     @Override
-    public void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements) {
-        requirements.put(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryStatus.VALUE_PRESENT);
-        requirements.put(VerdanceMemoryModuleTypes.IS_FLYING, MemoryStatus.VALUE_ABSENT);
+    public void requires(Map<MemoryModuleType<?>, MemoryModuleState> requirements) {
+        requirements.put(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleState.VALUE_PRESENT);
+        requirements.put(VerdanceMemoryModuleTypes.IS_FLYING, MemoryModuleState.VALUE_ABSENT);
     }
 
     @Override
-    public boolean canRun(ServerLevel level, SilkMoth entity, long gameTime) {
-        return entity.onGround();
+    public boolean canRun(ServerWorld level, SilkMoth entity, long gameTime) {
+        return entity.isOnGround();
     }
 
     @Override
-    public void run(ServerLevel level, SilkMoth entity, long gameTime) {
+    public void run(ServerWorld level, SilkMoth entity, long gameTime) {
         entity.takeOff();
     }
 }

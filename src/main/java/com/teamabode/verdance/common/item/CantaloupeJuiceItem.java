@@ -1,79 +1,83 @@
 package com.teamabode.verdance.common.item;
 
-import com.teamabode.verdance.core.registry.VerdanceTriggerTypes;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.Level;
+import com.teamabode.verdance.core.registry.VerdanceCriteria;
+import net.minecraft.advancement.criterion.Criteria;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
+import net.minecraft.item.Items;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.UseAction;
+import net.minecraft.world.World;
 
 public class CantaloupeJuiceItem extends Item {
 
-    public CantaloupeJuiceItem(Properties properties) {
+    public CantaloupeJuiceItem(net.minecraft.item.Item.Settings properties) {
         super(properties);
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
-        super.finishUsingItem(stack, level, user);
+    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
+        super.finishUsing(stack, world, user);
 
-        if (user instanceof ServerPlayer serverPlayer) {
-            CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
+        if (user instanceof ServerPlayerEntity serverPlayer) {
+            Criteria.CONSUME_ITEM.trigger(serverPlayer, stack);
             if (serverPlayer.isOnFire()) {
-                VerdanceTriggerTypes.EXTINGUISHED_WITH_CANTALOUPE_JUICE.trigger(serverPlayer);
+                VerdanceCriteria.EXTINGUISHED_WITH_CANTALOUPE_JUICE.trigger(serverPlayer);
             }
-            serverPlayer.awardStat(Stats.ITEM_USED.get(this));
+            serverPlayer.incrementStat(Stats.USED.getOrCreateStat(this));
         }
-        if (!level.isClientSide()) {
-            level.playSound(null, user.blockPosition(), SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.25f, 1.0f);
-            CantaloupeSliceItem.addCoolingParticles((ServerLevel) level, user);
-            user.extinguishFire();
+        if (!world.isClient()) {
+            world.playSound(null, user.getBlockPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.25f, 1.0f);
+            CantaloupeSliceItem.addCoolingParticles((ServerWorld) world, user);
+            user.extinguishWithSound();
         }
-        if (user instanceof Player player && !player.getAbilities().instabuild) {
-            stack.shrink(1);
+        if (user instanceof PlayerEntity player && !player.getAbilities().creativeMode) {
+            stack.decrement(1);
         }
         if (stack.isEmpty()) {
             return new ItemStack(Items.GLASS_BOTTLE);
         }
-        if (user instanceof Player player && !player.getAbilities().instabuild) {
+        if (user instanceof PlayerEntity player && !player.getAbilities().creativeMode) {
             ItemStack itemStack = new ItemStack(Items.GLASS_BOTTLE);
-            if (!player.getInventory().add(itemStack)) {
-                player.drop(itemStack, false);
+            if (!player.getInventory().insertStack(itemStack)) {
+                player.dropItem(itemStack, false);
             }
         }
         return stack;
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        return ItemUtils.startUsingInstantly(level, player, usedHand);
+    public TypedActionResult<ItemStack> use(World level, PlayerEntity player, Hand usedHand) {
+        return ItemUsage.consumeHeldItem(level, player, usedHand);
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.DRINK;
+    public UseAction getUseAction(ItemStack stack) {
+        return UseAction.DRINK;
     }
 
     @Override
-    public SoundEvent getEatingSound() {
-        return SoundEvents.GENERIC_DRINK;
+    public SoundEvent getEatSound() {
+        return SoundEvents.ENTITY_GENERIC_DRINK;
     }
 
     @Override
-    public SoundEvent getDrinkingSound() {
-        return SoundEvents.GENERIC_DRINK;
+    public SoundEvent getDrinkSound() {
+        return SoundEvents.ENTITY_GENERIC_DRINK;
     }
 
     @Override
-    public int getUseDuration(ItemStack itemStack, LivingEntity livingEntity) {
+    public int getMaxUseTime(ItemStack itemStack, LivingEntity livingEntity) {
         return 40;
     }
 }

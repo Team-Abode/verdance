@@ -2,63 +2,69 @@ package com.teamabode.verdance.core.registry;
 
 import com.google.common.collect.Lists;
 import com.teamabode.verdance.Verdance;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.structure.templatesystem.*;
-import net.minecraft.world.level.levelgen.structure.templatesystem.rule.blockentity.AppendLoot;
-
+import net.minecraft.block.Blocks;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.structure.processor.CappedStructureProcessor;
+import net.minecraft.structure.processor.RuleStructureProcessor;
+import net.minecraft.structure.processor.StructureProcessor;
+import net.minecraft.structure.processor.StructureProcessorList;
+import net.minecraft.structure.processor.StructureProcessorRule;
+import net.minecraft.structure.rule.AlwaysTruePosRuleTest;
+import net.minecraft.structure.rule.AlwaysTrueRuleTest;
+import net.minecraft.structure.rule.BlockMatchRuleTest;
+import net.minecraft.structure.rule.blockentity.AppendLootRuleBlockEntityModifier;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VerdanceProcessorLists {
-    public static final ResourceKey<StructureProcessorList> TOWN_RUINS_ARCHAEOLOGY = createKey("town_ruins_archaeology");
-    public static final ResourceKey<StructureProcessorList> TOWN_RUINS_SMALL_ARCHAEOLOGY = createKey("town_ruins_small_archaeology");
-    public static final ResourceKey<StructureProcessorList> TOWN_RUINS_ROAD_ARCHAEOLOGY = createKey("town_ruins_road_archaeology");
+    public static final RegistryKey<StructureProcessorList> TOWN_RUINS_ARCHAEOLOGY = createKey("town_ruins_archaeology");
+    public static final RegistryKey<StructureProcessorList> TOWN_RUINS_SMALL_ARCHAEOLOGY = createKey("town_ruins_small_archaeology");
+    public static final RegistryKey<StructureProcessorList> TOWN_RUINS_ROAD_ARCHAEOLOGY = createKey("town_ruins_road_archaeology");
 
-    public static void register(BootstrapContext<StructureProcessorList> context) {
+    public static void register(Registerable<StructureProcessorList> context) {
         registerArchaeology(context, TOWN_RUINS_ARCHAEOLOGY, 6, 3);
         registerArchaeology(context, TOWN_RUINS_SMALL_ARCHAEOLOGY, 3, 1);
         registerArchaeology(context, TOWN_RUINS_ROAD_ARCHAEOLOGY, 3, 0);
     }
 
-    private static void registerArchaeology(BootstrapContext<StructureProcessorList> context, ResourceKey<StructureProcessorList> key, int commonAmount, int rareAmount) {
+    private static void registerArchaeology(Registerable<StructureProcessorList> context, RegistryKey<StructureProcessorList> key, int commonAmount, int rareAmount) {
         ArrayList<StructureProcessor> processors = Lists.newArrayList();
 
         // Common
-        processors.add(new CappedProcessor(
-                new RuleProcessor(List.of(new ProcessorRule(
-                        new BlockMatchTest(Blocks.SAND),
-                        AlwaysTrueTest.INSTANCE,
-                        PosAlwaysTrueTest.INSTANCE,
-                        Blocks.SUSPICIOUS_SAND.defaultBlockState(),
-                        new AppendLoot(VerdanceLootTables.ARCHAEOLOGY_TOWN_RUINS_COMMON)
+        processors.add(new CappedStructureProcessor(
+                new RuleStructureProcessor(List.of(new StructureProcessorRule(
+                        new BlockMatchRuleTest(Blocks.SAND),
+                        AlwaysTrueRuleTest.INSTANCE,
+                        AlwaysTruePosRuleTest.INSTANCE,
+                        Blocks.SUSPICIOUS_SAND.getDefaultState(),
+                        new AppendLootRuleBlockEntityModifier(VerdanceLootTables.ARCHAEOLOGY_TOWN_RUINS_COMMON)
                 ))),
-                ConstantInt.of(commonAmount)
+                ConstantIntProvider.create(commonAmount)
         ));
         // Rare
         if (rareAmount > 0) {
-            processors.add(new CappedProcessor(
-                    new RuleProcessor(List.of(new ProcessorRule(
-                            new BlockMatchTest(Blocks.SAND),
-                            AlwaysTrueTest.INSTANCE,
-                            PosAlwaysTrueTest.INSTANCE,
-                            Blocks.SUSPICIOUS_SAND.defaultBlockState(),
-                            new AppendLoot(VerdanceLootTables.ARCHAEOLOGY_TOWN_RUINS_TREASURE)
+            processors.add(new CappedStructureProcessor(
+                    new RuleStructureProcessor(List.of(new StructureProcessorRule(
+                            new BlockMatchRuleTest(Blocks.SAND),
+                            AlwaysTrueRuleTest.INSTANCE,
+                            AlwaysTruePosRuleTest.INSTANCE,
+                            Blocks.SUSPICIOUS_SAND.getDefaultState(),
+                            new AppendLootRuleBlockEntityModifier(VerdanceLootTables.ARCHAEOLOGY_TOWN_RUINS_TREASURE)
                     ))),
-                    ConstantInt.of(rareAmount)
+                    ConstantIntProvider.create(rareAmount)
             ));
         }
         register(context, key, processors);
     }
 
-    private static void register(BootstrapContext<StructureProcessorList> context, ResourceKey<StructureProcessorList> key, List<StructureProcessor> processors) {
+    private static void register(Registerable<StructureProcessorList> context, RegistryKey<StructureProcessorList> key, List<StructureProcessor> processors) {
         context.register(key, new StructureProcessorList(processors));
     }
 
-    private static ResourceKey<StructureProcessorList> createKey(String name) {
-        return ResourceKey.create(Registries.PROCESSOR_LIST, Verdance.id(name));
+    private static RegistryKey<StructureProcessorList> createKey(String name) {
+        return RegistryKey.of(RegistryKeys.PROCESSOR_LIST, Verdance.id(name));
     }
 }

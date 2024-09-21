@@ -2,59 +2,58 @@ package com.teamabode.verdance.common.block;
 
 import com.mojang.serialization.MapCodec;
 import com.teamabode.verdance.core.tag.VerdanceBlockTags;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-
 import java.util.Optional;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Fertilizable;
+import net.minecraft.block.PlantBlock;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
-public class ShrubBlock extends BushBlock implements BonemealableBlock {
-    public static final MapCodec<ShrubBlock> CODEC = simpleCodec(ShrubBlock::new);
-    public static final VoxelShape SHAPE = Block.box(0.0d, 0.0d, 0.0d, 16.0d, 14.0d, 16.0d);
+public class ShrubBlock extends PlantBlock implements Fertilizable {
+    public static final MapCodec<ShrubBlock> CODEC = createCodec(ShrubBlock::new);
+    public static final VoxelShape SHAPE = Block.createCuboidShape(0.0d, 0.0d, 0.0d, 16.0d, 14.0d, 16.0d);
 
-    public ShrubBlock(Properties properties) {
+    public ShrubBlock(Settings properties) {
         super(properties);
     }
 
     @Override
-    protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+    protected VoxelShape getOutlineShape(BlockState blockState, BlockView blockGetter, BlockPos blockPos, ShapeContext collisionContext) {
         return SHAPE;
     }
 
     @Override
-    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.is(VerdanceBlockTags.SHRUB_MAY_PLACE_ON);
+    protected boolean canPlantOnTop(BlockState state, BlockView level, BlockPos pos) {
+        return state.isIn(VerdanceBlockTags.SHRUB_MAY_PLACE_ON);
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+    public boolean isFertilizable(WorldView level, BlockPos pos, BlockState state) {
         return true;
     }
 
     @Override
-    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+    public boolean canGrow(World level, Random random, BlockPos pos, BlockState state) {
         return true;
     }
 
     @Override
-    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        Optional<Block> finalBlock = BuiltInRegistries.BLOCK.getRandomElementOf(VerdanceBlockTags.FLOWERING_SHRUBS, random).map(Holder::value);
-        finalBlock.ifPresent(block -> level.setBlock(pos, block.defaultBlockState(), 2));
+    public void grow(ServerWorld level, Random random, BlockPos pos, BlockState state) {
+        Optional<Block> finalBlock = Registries.BLOCK.getRandomEntry(VerdanceBlockTags.FLOWERING_SHRUBS, random).map(RegistryEntry::value);
+        finalBlock.ifPresent(block -> level.setBlockState(pos, block.getDefaultState(), 2));
     }
 
     @Override
-    protected MapCodec<? extends ShrubBlock> codec() {
+    protected MapCodec<? extends ShrubBlock> getCodec() {
         return CODEC;
     }
 }

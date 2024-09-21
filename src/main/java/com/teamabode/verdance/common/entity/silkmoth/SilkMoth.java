@@ -5,49 +5,52 @@ import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
 import com.teamabode.verdance.core.tag.VerdanceItemTags;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
-import net.minecraft.util.TimeUtil;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.AnimationState;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Flutterer;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.brain.Brain;
+import net.minecraft.entity.ai.brain.MemoryModuleType;
+import net.minecraft.entity.ai.control.FlightMoveControl;
+import net.minecraft.entity.ai.control.MoveControl;
+import net.minecraft.entity.ai.pathing.BirdNavigation;
+import net.minecraft.entity.ai.pathing.EntityNavigation;
+import net.minecraft.entity.ai.pathing.MobNavigation;
+import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TimeHelper;
 import net.minecraft.util.Unit;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.Brain;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.control.MoveControl;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
-import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.FlyingAnimal;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.PathType;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unchecked")
-public class SilkMoth extends Animal implements FlyingAnimal {
-    public static final EntityDataAccessor<Boolean> FLYING = SynchedEntityData.defineId(SilkMoth.class, EntityDataSerializers.BOOLEAN);
+public class SilkMoth extends AnimalEntity implements Flutterer {
+    public static final TrackedData<Boolean> FLYING = DataTracker.registerData(SilkMoth.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState flyAnimationState = new AnimationState();
@@ -56,28 +59,28 @@ public class SilkMoth extends Animal implements FlyingAnimal {
 
     public float lastBodyPitch;
     public float bodyPitch;
-    public float lastAgeInTicks;
+    public float lastAnimationProgress;
 
     public int lastSoarTicks;
     public int soarTicks;
 
-    public SilkMoth(EntityType<? extends Animal> entityType, Level level) {
-        super(entityType, level);
+    public SilkMoth(EntityType<? extends AnimalEntity> entityType, World world) {
+        super(entityType, world);
 
         this.moveControl = new MoveControl(this);
-        this.setPathfindingMalus(PathType.DAMAGE_FIRE, 10.0f);
-        this.setPathfindingMalus(PathType.WATER, 5.0f);
-        this.setPathfindingMalus(PathType.DANGER_POWDER_SNOW, 10.0f);
+        this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, 10.0f);
+        this.setPathfindingPenalty(PathNodeType.WATER, 5.0f);
+        this.setPathfindingPenalty(PathNodeType.DANGER_POWDER_SNOW, 10.0f);
     }
 
     @Override
-    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return SilkMothAi.createBrain(this.brainProvider().makeBrain(dynamic));
+    protected Brain<?> deserializeBrain(Dynamic<?> dynamic) {
+        return SilkMothBrain.createBrain(this.createBrainProfile().deserialize(dynamic));
     }
 
     @Override
-    protected Brain.Provider<SilkMoth> brainProvider() {
-        return Brain.provider(SilkMothAi.MEMORY_MODULES, SilkMothAi.SENSORS);
+    protected Brain.Profile<SilkMoth> createBrainProfile() {
+        return Brain.createProfile(SilkMothBrain.MEMORY_MODULES, SilkMothBrain.SENSORS);
     }
 
     @Override
@@ -88,7 +91,7 @@ public class SilkMoth extends Animal implements FlyingAnimal {
     @Override
     public void tick() {
         super.tick();
-        if (this.level().isClientSide()) {
+        if (this.getWorld().isClient()) {
             this.setupAnimations();
         }
     }
@@ -96,89 +99,89 @@ public class SilkMoth extends Animal implements FlyingAnimal {
     private void setupAnimations() {
         if (this.idleCooldown <= 0) {
             this.idleCooldown = this.random.nextInt(100) + 80;
-            this.idleAnimationState.start(this.tickCount);
+            this.idleAnimationState.start(this.age);
         }
         if (this.idleCooldown > 0) {
             this.idleCooldown--;
         }
-        Vec3 deltaMovement = this.getDeltaMovement();
+        Vec3d deltaMovement = this.getVelocity();
 
-        if (this.isFlying()) {
+        if (this.isInAir()) {
             this.bodyPitch = (float) (-deltaMovement.y * 10.0f);
         }
         else this.bodyPitch = 0.0f;
 
         this.lastSoarTicks = this.soarTicks;
-        if (deltaMovement.horizontalDistance() > 0.05d) {
-            this.soarTicks = Mth.clamp(this.soarTicks + 1, 0, 5);
+        if (deltaMovement.horizontalLength() > 0.05d) {
+            this.soarTicks = MathHelper.clamp(this.soarTicks + 1, 0, 5);
         }
-        else this.soarTicks = Mth.clamp(this.soarTicks - 1, 0, 5);
+        else this.soarTicks = MathHelper.clamp(this.soarTicks - 1, 0, 5);
 
-        this.flyAnimationState.animateWhen(this.isFlying(), this.tickCount);
+        this.flyAnimationState.setRunning(this.isInAir(), this.age);
     }
 
     public float getSoarProgress(float deltaTicks) {
-        return Mth.lerp(deltaTicks, this.lastSoarTicks, this.soarTicks) / 5.0f;
+        return MathHelper.lerp(deltaTicks, this.lastSoarTicks, this.soarTicks) / 5.0f;
     }
 
     @Override
-    protected void customServerAiStep() {
-        this.getBrain().tick((ServerLevel) this.level(), this);
-        SilkMothAi.updateActivity(this);
-        super.customServerAiStep();
+    protected void mobTick() {
+        this.getBrain().tick((ServerWorld) this.getWorld(), this);
+        SilkMothBrain.updateActivity(this);
+        super.mobTick();
     }
 
     @Override
-    protected int calculateFallDamage(float fallDistance, float damageMultiplier) {
-        return this.isFlying() ? 0 : super.calculateFallDamage(fallDistance, 0.5f);
+    protected int computeFallDamage(float fallDistance, float damageMultiplier) {
+        return this.isInAir() ? 0 : super.computeFallDamage(fallDistance, 0.5f);
     }
 
     @Override
-    protected PathNavigation createNavigation(Level level) {
-        GroundPathNavigation navigation = new GroundPathNavigation(this, level);
-        navigation.setCanFloat(true);
-        navigation.setCanOpenDoors(false);
-        navigation.setCanPassDoors(false);
+    protected EntityNavigation createNavigation(World world) {
+        MobNavigation navigation = new MobNavigation(this, world);
+        navigation.setCanSwim(true);
+        navigation.setCanPathThroughDoors(false);
+        navigation.setCanEnterOpenDoors(false);
         return navigation;
     }
 
-    private PathNavigation createFlightNavigation(Level level) {
-        FlyingPathNavigation navigation = new FlyingPathNavigation(this, level);
-        navigation.setCanOpenDoors(false);
-        navigation.setCanFloat(true);
-        navigation.setCanPassDoors(false);
+    private EntityNavigation createFlightNavigation(World world) {
+        BirdNavigation navigation = new BirdNavigation(this, world);
+        navigation.setCanPathThroughDoors(false);
+        navigation.setCanSwim(true);
+        navigation.setCanEnterOpenDoors(false);
         return navigation;
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(FLYING, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(FLYING, false);
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putBoolean("Flying", this.isFlying());
+    public void writeCustomDataToNbt(NbtCompound compound) {
+        super.writeCustomDataToNbt(compound);
+        compound.putBoolean("Flying", this.isInAir());
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
+    public void readCustomDataFromNbt(NbtCompound compound) {
+        super.readCustomDataFromNbt(compound);
         this.setFlying(compound.getBoolean("Flying"));
     }
 
     @Override
-    public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
-        super.onSyncedDataUpdated(key);
+    public void onTrackedDataSet(TrackedData<?> key) {
+        super.onTrackedDataSet(key);
         if (FLYING.equals(key)) {
-            if (this.isFlying()) {
-                this.moveControl = new FlyingMoveControl(this, 20, true);
-                this.navigation = this.createFlightNavigation(this.level());
+            if (this.isInAir()) {
+                this.moveControl = new FlightMoveControl(this, 20, true);
+                this.navigation = this.createFlightNavigation(this.getWorld());
             }
             else {
                 this.moveControl = new MoveControl(this);
-                this.navigation = this.createNavigation(this.level());
+                this.navigation = this.createNavigation(this.getWorld());
                 this.setNoGravity(false);
                 this.setOnGround(true);
             }
@@ -186,55 +189,55 @@ public class SilkMoth extends Animal implements FlyingAnimal {
     }
 
     @Override
-    public InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
-        ItemStack stack = player.getItemInHand(interactionHand);
-        Level level = this.level();
-        boolean isFood = this.isFood(stack);
-        InteractionResult interactionResult = super.mobInteract(player, interactionHand);
-        if (interactionResult.consumesAction() && isFood) {
-            level.playSound(null, this, this.getEatingSound(stack), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(level.random, 0.8F, 1.2F));
+    public ActionResult interactMob(PlayerEntity player, Hand interactionHand) {
+        ItemStack stack = player.getStackInHand(interactionHand);
+        World world = this.getWorld();
+        boolean isFood = this.isBreedingItem(stack);
+        ActionResult interactionResult = super.interactMob(player, interactionHand);
+        if (interactionResult.isAccepted() && isFood) {
+            world.playSoundFromEntity(null, this, this.getEatSound(stack), SoundCategory.NEUTRAL, 1.0F, MathHelper.nextBetween(world.random, 0.8F, 1.2F));
         }
         return interactionResult;
     }
 
     public void takeOff() {
         this.setFlying(true);
-        this.getBrain().setMemory(VerdanceMemoryModuleTypes.IS_FLYING, Unit.INSTANCE);
+        this.getBrain().remember(VerdanceMemoryModuleTypes.IS_FLYING, Unit.INSTANCE);
 
-        long landingTime = this.level().getGameTime() + TimeUtil.rangeOfSeconds(30, 60).sample(random);
-        this.getBrain().setMemory(VerdanceMemoryModuleTypes.LANDING_TIME, landingTime);
+        long landingTime = this.getWorld().getTime() + TimeHelper.betweenSeconds(30, 60).get(random);
+        this.getBrain().remember(VerdanceMemoryModuleTypes.LANDING_TIME, landingTime);
     }
 
     public void land() {
         this.setFlying(false);
-        this.getBrain().eraseMemory(VerdanceMemoryModuleTypes.IS_FLYING);
-        this.getBrain().eraseMemory(VerdanceMemoryModuleTypes.WANTS_TO_LAND);
-        this.getBrain().eraseMemory(VerdanceMemoryModuleTypes.LANDING_TIME);
+        this.getBrain().forget(VerdanceMemoryModuleTypes.IS_FLYING);
+        this.getBrain().forget(VerdanceMemoryModuleTypes.WANTS_TO_LAND);
+        this.getBrain().forget(VerdanceMemoryModuleTypes.LANDING_TIME);
     }
 
     public void setFlying(boolean flying) {
-        this.entityData.set(FLYING, flying);
+        this.dataTracker.set(FLYING, flying);
     }
 
     @Override
-    public boolean isFlying() {
-        return this.entityData.get(FLYING);
+    public boolean isInAir() {
+        return this.dataTracker.get(FLYING);
     }
 
     @Override
-    public float getWalkTargetValue(BlockPos pos, LevelReader level) {
-        return -level.getPathfindingCostFromLightLevels(pos);
+    public float getPathfindingFavor(BlockPos pos, WorldView world) {
+        return -world.getPhototaxisFavor(pos);
     }
 
     @Override
-    public boolean isFood(ItemStack stack) {
-        return stack.is(VerdanceItemTags.SILK_MOTH_FOOD);
+    public boolean isBreedingItem(ItemStack stack) {
+        return stack.isIn(VerdanceItemTags.SILK_MOTH_FOOD);
     }
 
     @Override
-    public void spawnChildFromBreeding(ServerLevel level, Animal mate) {
-        this.finalizeSpawnChildFromBreeding(level, mate, null);
-        this.getBrain().setMemory(MemoryModuleType.IS_PREGNANT, Unit.INSTANCE);
+    public void breed(ServerWorld world, AnimalEntity mate) {
+        this.breed(world, mate, null);
+        this.getBrain().remember(MemoryModuleType.IS_PREGNANT, Unit.INSTANCE);
     }
 
     @Nullable
@@ -244,7 +247,7 @@ public class SilkMoth extends Animal implements FlyingAnimal {
     }
 
     @Override
-    public SoundEvent getEatingSound(ItemStack itemStack) {
+    public SoundEvent getEatSound(ItemStack itemStack) {
         return VerdanceSoundEvents.ENTITY_SILK_MOTH_EAT;
     }
 
@@ -262,27 +265,27 @@ public class SilkMoth extends Animal implements FlyingAnimal {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        if (!this.isFlying()) {
-            this.playSound(SoundEvents.SILVERFISH_STEP, 0.1F, 1.0F);
+        if (!this.isInAir()) {
+            this.playSound(SoundEvents.ENTITY_SILVERFISH_STEP, 0.1F, 1.0F);
         }
     }
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity otherParent) {
         return null;
     }
 
-    public static boolean checkSilkMothSpawnRules(EntityType<? extends Animal> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return level.getBlockState(pos.below()).is(VerdanceBlockTags.SILK_MOTHS_SPAWNABLE_ON) && Monster.isDarkEnoughToSpawn(level, pos, random);
+    public static boolean checkSilkMothSpawnRules(EntityType<? extends AnimalEntity> type, ServerWorldAccess world, SpawnReason spawnType, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isIn(VerdanceBlockTags.SILK_MOTHS_SPAWNABLE_ON) && HostileEntity.isSpawnDark(world, pos, random);
     }
 
-    public static AttributeSupplier.Builder createSilkMothAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 10.0f)
-                .add(Attributes.FLYING_SPEED, 0.5d)
-                .add(Attributes.MOVEMENT_SPEED, 0.2d)
-                .add(Attributes.FOLLOW_RANGE, 48.0)
-                .add(Attributes.STEP_HEIGHT, 1.25f);
+    public static DefaultAttributeContainer.Builder createSilkMothAttributes() {
+        return MobEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0f)
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5d)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2d)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0)
+                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.25f);
     }
 }

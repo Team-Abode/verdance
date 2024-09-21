@@ -1,9 +1,9 @@
 package com.teamabode.verdance.core.tag;
 
 import com.teamabode.verdance.Verdance;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.block.Block;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 
 public class VerdanceBlockTags {
     public static final TagKey<Block> MULBERRY_LOGS = create("mulberry_logs");
@@ -14,6 +14,6 @@ public class VerdanceBlockTags {
     public static final TagKey<Block> SHRUB_MAY_PLACE_ON = create("shrub_may_place_on");
 
     private static TagKey<Block> create(String name) {
-        return TagKey.create(Registries.BLOCK, Verdance.id(name));
+        return TagKey.of(RegistryKeys.BLOCK, Verdance.id(name));
     }
 }

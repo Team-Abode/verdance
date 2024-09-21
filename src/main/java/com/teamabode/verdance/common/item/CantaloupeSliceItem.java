@@ -1,53 +1,49 @@
 package com.teamabode.verdance.common.item;
 
-import com.teamabode.verdance.Verdance;
-import com.teamabode.verdance.core.registry.VerdanceItems;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.advancement.criterion.Criteria;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
+import net.minecraft.util.annotation.MethodsReturnNonnullByDefault;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 @MethodsReturnNonnullByDefault
 public class CantaloupeSliceItem extends Item {
 
-    public CantaloupeSliceItem(Properties properties) {
+    public CantaloupeSliceItem(net.minecraft.item.Item.Settings properties) {
         super(properties);
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
-        if (user instanceof ServerPlayer serverPlayer) {
-            CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
-            serverPlayer.awardStat(Stats.ITEM_USED.get(this));
+    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
+        if (user instanceof ServerPlayerEntity serverPlayer) {
+            Criteria.CONSUME_ITEM.trigger(serverPlayer, stack);
+            serverPlayer.incrementStat(Stats.USED.getOrCreateStat(this));
         }
-        if (!level.isClientSide()) {
-            int fireTicks = user.getRemainingFireTicks();
+        if (!world.isClient()) {
+            int fireTicks = user.getFireTicks();
 
             if (fireTicks > 0) {
-                level.playSound(null, user.blockPosition(), SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.25f, 1.0f);
-                addCoolingParticles((ServerLevel) level, user);
-                user.setRemainingFireTicks(Math.max(0, fireTicks - 60));
+                world.playSound(null, user.getBlockPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.25f, 1.0f);
+                addCoolingParticles((ServerWorld) world, user);
+                user.setFireTicks(Math.max(0, fireTicks - 60));
             }
         }
-        return user.eat(level, stack);
+        return user.tryEatFood(world, stack);
     }
 
-    public static void addCoolingParticles(ServerLevel level, LivingEntity user) {
-        AABB box = user.getBoundingBox();
-        Vec3 center = box.getCenter();
+    public static void addCoolingParticles(ServerWorld level, LivingEntity user) {
+        Box box = user.getBoundingBox();
+        Vec3d center = box.getCenter();
 
-        level.sendParticles(ParticleTypes.SNOWFLAKE, center.x, center.y, center.z, 15, 0.5f, box.getYsize() / 2, 0.5f, 0.0d);
+        level.spawnParticles(ParticleTypes.SNOWFLAKE, center.x, center.y, center.z, 15, 0.5f, box.getLengthY() / 2, 0.5f, 0.0d);
     }
 }

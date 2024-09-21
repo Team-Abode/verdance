@@ -6,18 +6,17 @@ import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.tags.ItemTags;
-
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.ItemTags;
 import java.util.concurrent.CompletableFuture;
 
 public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
-    public VerdanceItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
+    public VerdanceItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture) {
         super(output, completableFuture);
     }
 
-    protected void addTags(HolderLookup.Provider arg) {
+    protected void configure(RegistryWrapper.WrapperLookup arg) {
         silkMothFood();
         silkwormFood();
         planks();

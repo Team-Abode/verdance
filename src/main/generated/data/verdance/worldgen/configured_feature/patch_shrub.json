@@ -33,7 +33,15 @@
                 }
               }
             },
-            "placement": []
+            "placement": [
+              {
+                "type": "minecraft:block_predicate_filter",
+                "predicate": {
+                  "type": "minecraft:matching_blocks",
+                  "blocks": "minecraft:air"
+                }
+              }
+            ]
           },
           "feature_true": {
             "feature": {
@@ -47,7 +55,15 @@
                 }
               }
             },
-            "placement": []
+            "placement": [
+              {
+                "type": "minecraft:block_predicate_filter",
+                "predicate": {
+                  "type": "minecraft:matching_blocks",
+                  "blocks": "minecraft:air"
+                }
+              }
+            ]
           }
         }
       },

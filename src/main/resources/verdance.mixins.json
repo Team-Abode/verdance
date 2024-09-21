@@ -5,7 +5,7 @@
     "compatibilityLevel": "JAVA_21",
     "mixins": [
         "general.DecoratedPotPatternsMixin",
-        "general.LightningBoltMixin",
+        "general.LightningEntityMixin",
         "general.SporeBlossomBlockMixin",
         "general.SugarCaneBlockMixin"
     ],

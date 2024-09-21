@@ -1,24 +1,23 @@
 package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.entity.DecoratedPotPattern;
-
 import java.util.Map;
+import net.minecraft.block.DecoratedPotPattern;
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 
 public class VerdanceDecoratedPotPatterns {
-    public static final ResourceKey<DecoratedPotPattern> ABODE = createKey("abode");
-    public static final ResourceKey<DecoratedPotPattern> FRILLS = createKey("frills");
-    public static final ResourceKey<DecoratedPotPattern> PITCH = createKey("pitch");
-    public static final ResourceKey<DecoratedPotPattern> PRICKLE = createKey("prickle");
-    public static final ResourceKey<DecoratedPotPattern> SPIRIT = createKey("spirit");
-    public static final ResourceKey<DecoratedPotPattern> TRAP = createKey("trap");
+    public static final RegistryKey<DecoratedPotPattern> ABODE = createKey("abode");
+    public static final RegistryKey<DecoratedPotPattern> FRILLS = createKey("frills");
+    public static final RegistryKey<DecoratedPotPattern> PITCH = createKey("pitch");
+    public static final RegistryKey<DecoratedPotPattern> PRICKLE = createKey("prickle");
+    public static final RegistryKey<DecoratedPotPattern> SPIRIT = createKey("spirit");
+    public static final RegistryKey<DecoratedPotPattern> TRAP = createKey("trap");
 
-    public static final Map<Item, ResourceKey<DecoratedPotPattern>> SHERD_TO_PATTERN = Map.of(
+    public static final Map<Item, RegistryKey<DecoratedPotPattern>> SHERD_TO_PATTERN = Map.of(
             VerdanceItems.ABODE_POTTERY_SHERD, ABODE,
             VerdanceItems.FRILLS_POTTERY_SHERD, FRILLS,
             VerdanceItems.PITCH_POTTERY_SHERD, PITCH,
@@ -36,11 +35,11 @@ public class VerdanceDecoratedPotPatterns {
         register(TRAP, "trap_pottery_pattern");
     }
 
-    private static ResourceKey<DecoratedPotPattern> createKey(String name) {
-        return ResourceKey.create(Registries.DECORATED_POT_PATTERN, Verdance.id(name));
+    private static RegistryKey<DecoratedPotPattern> createKey(String name) {
+        return RegistryKey.of(RegistryKeys.DECORATED_POT_PATTERN, Verdance.id(name));
     }
 
-    private static DecoratedPotPattern register(ResourceKey<DecoratedPotPattern> key, String assetId) {
-        return Registry.register(BuiltInRegistries.DECORATED_POT_PATTERN, key, new DecoratedPotPattern(Verdance.id(assetId)));
+    private static DecoratedPotPattern register(RegistryKey<DecoratedPotPattern> key, String assetId) {
+        return Registry.register(Registries.DECORATED_POT_PATTERN, key, new DecoratedPotPattern(Verdance.id(assetId)));
     }
 }

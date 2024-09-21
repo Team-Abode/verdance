@@ -3,18 +3,18 @@ package com.teamabode.verdance.client.renderer;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.client.model.SilkMothModel;
 import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.RenderLayerParent;
-import net.minecraft.client.renderer.entity.layers.EyesLayer;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.feature.EyesFeatureRenderer;
+import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 
-public class SilkMothEyesLayer extends EyesLayer<SilkMoth, SilkMothModel> {
-    private static final RenderType EYES = RenderType.eyes(Verdance.id("textures/entity/silk_moth/eyes.png"));
+public class SilkMothEyesLayer extends EyesFeatureRenderer<SilkMoth, SilkMothModel> {
+    private static final RenderLayer EYES = RenderLayer.getEyes(Verdance.id("textures/entity/silk_moth/eyes.png"));
 
-    public SilkMothEyesLayer(RenderLayerParent<SilkMoth, SilkMothModel> renderLayerParent) {
+    public SilkMothEyesLayer(FeatureRendererContext<SilkMoth, SilkMothModel> renderLayerParent) {
         super(renderLayerParent);
     }
 
-    public RenderType renderType() {
+    public RenderLayer getEyesTexture() {
         return EYES;
     }
 }

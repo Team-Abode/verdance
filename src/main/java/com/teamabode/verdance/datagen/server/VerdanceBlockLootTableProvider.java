@@ -5,30 +5,28 @@ import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.data.BlockFamily;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.loot.IntRange;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
-import net.minecraft.world.level.storage.loot.functions.LimitCount;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-
+import net.minecraft.block.Block;
+import net.minecraft.data.family.BlockFamily;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.Items;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.condition.TableBonusLootCondition;
+import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.ApplyBonusLootFunction;
+import net.minecraft.loot.function.LimitCountLootFunction;
+import net.minecraft.loot.function.SetCountLootFunction;
+import net.minecraft.loot.operator.BoundedIntUnaryOperator;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
 import java.util.concurrent.CompletableFuture;
 
 public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider {
     private static final float[] NORMAL_LEAVES_STICK_CHANCES = {0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
 
-    public VerdanceBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public VerdanceBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
         super(dataOutput, registryLookup);
     }
 
@@ -38,82 +36,82 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         cantaloupe();
         cushions();
         shrubs();
-        add(VerdanceBlocks.SILKWORM_EGGS, this::createSilkTouchOnlyTable);
+        addDrop(VerdanceBlocks.SILKWORM_EGGS, this::dropsWithSilkTouch);
     }
 
     private void mulberry() {
-        dropSelf(VerdanceBlocks.MULBERRY_LOG);
-        dropSelf(VerdanceBlocks.MULBERRY_WOOD);
-        dropSelf(VerdanceBlocks.STRIPPED_MULBERRY_LOG);
-        dropSelf(VerdanceBlocks.STRIPPED_MULBERRY_WOOD);
-        dropSelf(VerdanceBlocks.MULBERRY_PLANKS);
-        dropSelf(VerdanceBlocks.MULBERRY_STAIRS);
-        add(VerdanceBlocks.MULBERRY_SLAB, this::createSlabItemTable);
-        dropSelf(VerdanceBlocks.MULBERRY_FENCE);
-        dropSelf(VerdanceBlocks.MULBERRY_FENCE_GATE);
-        add(VerdanceBlocks.MULBERRY_DOOR, this::createDoorTable);
-        dropSelf(VerdanceBlocks.MULBERRY_TRAPDOOR);
-        dropSelf(VerdanceBlocks.MULBERRY_PRESSURE_PLATE);
-        dropSelf(VerdanceBlocks.MULBERRY_BUTTON);
-        add(VerdanceBlocks.MULBERRY_LEAVES, this::createMulberryLeaves);
-        add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES, this::createFloweringMulberryLeaves);
-        dropSelf(VerdanceBlocks.MULBERRY_SAPLING);
-        dropPottedContents(VerdanceBlocks.POTTED_MULBERRY_SAPLING);
-        dropSelf(VerdanceBlocks.MULBERRY_SIGN);
-        dropSelf(VerdanceBlocks.MULBERRY_HANGING_SIGN);
-        add(VerdanceBlocks.SILK_COCOON, this.createSingleItemTable(Items.STRING, UniformGenerator.between(5.0f, 6.0f)));
-        dropSelf(VerdanceBlocks.VIOLET);
-        dropPottedContents(VerdanceBlocks.POTTED_VIOLET);
+        addDrop(VerdanceBlocks.MULBERRY_LOG);
+        addDrop(VerdanceBlocks.MULBERRY_WOOD);
+        addDrop(VerdanceBlocks.STRIPPED_MULBERRY_LOG);
+        addDrop(VerdanceBlocks.STRIPPED_MULBERRY_WOOD);
+        addDrop(VerdanceBlocks.MULBERRY_PLANKS);
+        addDrop(VerdanceBlocks.MULBERRY_STAIRS);
+        addDrop(VerdanceBlocks.MULBERRY_SLAB, this::slabDrops);
+        addDrop(VerdanceBlocks.MULBERRY_FENCE);
+        addDrop(VerdanceBlocks.MULBERRY_FENCE_GATE);
+        addDrop(VerdanceBlocks.MULBERRY_DOOR, this::doorDrops);
+        addDrop(VerdanceBlocks.MULBERRY_TRAPDOOR);
+        addDrop(VerdanceBlocks.MULBERRY_PRESSURE_PLATE);
+        addDrop(VerdanceBlocks.MULBERRY_BUTTON);
+        addDrop(VerdanceBlocks.MULBERRY_LEAVES, this::createMulberryLeaves);
+        addDrop(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES, this::createFloweringMulberryLeaves);
+        addDrop(VerdanceBlocks.MULBERRY_SAPLING);
+        addPottedPlantDrops(VerdanceBlocks.POTTED_MULBERRY_SAPLING);
+        addDrop(VerdanceBlocks.MULBERRY_SIGN);
+        addDrop(VerdanceBlocks.MULBERRY_HANGING_SIGN);
+        addDrop(VerdanceBlocks.SILK_COCOON, this.drops(Items.STRING, UniformLootNumberProvider.create(5.0f, 6.0f)));
+        addDrop(VerdanceBlocks.VIOLET);
+        addPottedPlantDrops(VerdanceBlocks.POTTED_VIOLET);
     }
 
     private void cushions() {
-        dropSelf(VerdanceBlocks.WHITE_CUSHION);
-        dropSelf(VerdanceBlocks.LIGHT_GRAY_CUSHION);
-        dropSelf(VerdanceBlocks.GRAY_CUSHION);
-        dropSelf(VerdanceBlocks.BLACK_CUSHION);
-        dropSelf(VerdanceBlocks.BROWN_CUSHION);
-        dropSelf(VerdanceBlocks.RED_CUSHION);
-        dropSelf(VerdanceBlocks.ORANGE_CUSHION);
-        dropSelf(VerdanceBlocks.YELLOW_CUSHION);
-        dropSelf(VerdanceBlocks.LIME_CUSHION);
-        dropSelf(VerdanceBlocks.GREEN_CUSHION);
-        dropSelf(VerdanceBlocks.CYAN_CUSHION);
-        dropSelf(VerdanceBlocks.LIGHT_BLUE_CUSHION);
-        dropSelf(VerdanceBlocks.BLUE_CUSHION);
-        dropSelf(VerdanceBlocks.PURPLE_CUSHION);
-        dropSelf(VerdanceBlocks.MAGENTA_CUSHION);
-        dropSelf(VerdanceBlocks.PINK_CUSHION);
+        addDrop(VerdanceBlocks.WHITE_CUSHION);
+        addDrop(VerdanceBlocks.LIGHT_GRAY_CUSHION);
+        addDrop(VerdanceBlocks.GRAY_CUSHION);
+        addDrop(VerdanceBlocks.BLACK_CUSHION);
+        addDrop(VerdanceBlocks.BROWN_CUSHION);
+        addDrop(VerdanceBlocks.RED_CUSHION);
+        addDrop(VerdanceBlocks.ORANGE_CUSHION);
+        addDrop(VerdanceBlocks.YELLOW_CUSHION);
+        addDrop(VerdanceBlocks.LIME_CUSHION);
+        addDrop(VerdanceBlocks.GREEN_CUSHION);
+        addDrop(VerdanceBlocks.CYAN_CUSHION);
+        addDrop(VerdanceBlocks.LIGHT_BLUE_CUSHION);
+        addDrop(VerdanceBlocks.BLUE_CUSHION);
+        addDrop(VerdanceBlocks.PURPLE_CUSHION);
+        addDrop(VerdanceBlocks.MAGENTA_CUSHION);
+        addDrop(VerdanceBlocks.PINK_CUSHION);
     }
 
     private void shrubs() {
-        this.add(VerdanceBlocks.SHRUB, block -> createShearsDispatchTable(
-                block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+        this.addDrop(VerdanceBlocks.SHRUB, block -> dropsWithShears(
+                block, this.applyExplosionDecay(block, ItemEntry.builder(Items.STICK).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 2.0f))))
         ));
-        this.add(VerdanceBlocks.YELLOW_FLOWERING_SHRUB, block -> createShearsDispatchTable(
-                block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+        this.addDrop(VerdanceBlocks.YELLOW_FLOWERING_SHRUB, block -> dropsWithShears(
+                block, this.applyExplosionDecay(block, ItemEntry.builder(Items.STICK).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 2.0f))))
         ));
-        this.add(VerdanceBlocks.PINK_FLOWERING_SHRUB, block -> createShearsDispatchTable(
-                block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+        this.addDrop(VerdanceBlocks.PINK_FLOWERING_SHRUB, block -> dropsWithShears(
+                block, this.applyExplosionDecay(block, ItemEntry.builder(Items.STICK).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 2.0f))))
         ));
-        this.dropPottedContents(VerdanceBlocks.POTTED_SHRUB);
-        this.dropPottedContents(VerdanceBlocks.POTTED_YELLOW_FLOWERING_SHRUB);
-        this.dropPottedContents(VerdanceBlocks.POTTED_PINK_FLOWERING_SHRUB);
+        this.addPottedPlantDrops(VerdanceBlocks.POTTED_SHRUB);
+        this.addPottedPlantDrops(VerdanceBlocks.POTTED_YELLOW_FLOWERING_SHRUB);
+        this.addPottedPlantDrops(VerdanceBlocks.POTTED_PINK_FLOWERING_SHRUB);
     }
 
     private LootTable.Builder createMulberryLeaves(Block leafBlock) {
-        HolderLookup.RegistryLookup<Enchantment> registryLookup = registries.lookupOrThrow(Registries.ENCHANTMENT);
-        var lootItem = LootItem.lootTableItem(Items.STICK);
+        var enchantments = registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+        var lootItem = ItemEntry.builder(Items.STICK);
 
-        return createSilkTouchOrShearsDispatchTable(
+        return dropsWithSilkTouchOrShears(
                 leafBlock,
-                this.applyExplosionCondition(leafBlock, lootItem).when(BonusLevelTableCondition.bonusLevelFlatChance(registryLookup.getOrThrow(Enchantments.FORTUNE), NORMAL_LEAVES_STICK_CHANCES))
+                this.addSurvivesExplosionCondition(leafBlock, lootItem).conditionally(TableBonusLootCondition.builder(enchantments.getOrThrow(Enchantments.FORTUNE), NORMAL_LEAVES_STICK_CHANCES))
         );
     }
 
     private LootTable.Builder createFloweringMulberryLeaves(Block leafBlock) {
-        return createMulberryLeaves(leafBlock).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f))
-                .when(this.doesNotHaveShearsOrSilkTouch())
-                .add(this.applyExplosionCondition(leafBlock, LootItem.lootTableItem(VerdanceItems.MULBERRY).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 2.0f))))));
+        return createMulberryLeaves(leafBlock).pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0f))
+                .conditionally(this.createWithoutShearsOrSilkTouchCondition())
+                .with(this.addSurvivesExplosionCondition(leafBlock, ItemEntry.builder(VerdanceItems.MULBERRY).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f))))));
     }
 
     private void stucco() {
@@ -136,19 +134,19 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     }
 
     private void addStucco(BlockFamily stuccoFamily) {
-        dropSelf(stuccoFamily.getBaseBlock());
-        dropSelf(stuccoFamily.get(BlockFamily.Variant.STAIRS));
-        add(stuccoFamily.get(BlockFamily.Variant.SLAB), this::createSlabItemTable);
-        dropSelf(stuccoFamily.get(BlockFamily.Variant.WALL));
+        addDrop(stuccoFamily.getBaseBlock());
+        addDrop(stuccoFamily.getVariant(BlockFamily.Variant.STAIRS));
+        addDrop(stuccoFamily.getVariant(BlockFamily.Variant.SLAB), this::slabDrops);
+        addDrop(stuccoFamily.getVariant(BlockFamily.Variant.WALL));
     }
 
     private void cantaloupe() {
-        add(VerdanceBlocks.CANTALOUPE, block -> {
-            HolderLookup.RegistryLookup<Enchantment> registryLookup = registries.lookupOrThrow(Registries.ENCHANTMENT);
-            var lootItem = LootItem.lootTableItem(VerdanceItems.CANTALOUPE_SLICE).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 4.0f))).apply(ApplyBonusCount.addUniformBonusCount(registryLookup.getOrThrow(Enchantments.FORTUNE))).apply(LimitCount.limitCount(IntRange.upperBound(4)));
-            return createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, lootItem));
+        addDrop(VerdanceBlocks.CANTALOUPE, block -> {
+            var enchantments = registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+            var lootItem = ItemEntry.builder(VerdanceItems.CANTALOUPE_SLICE).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0f, 4.0f))).apply(ApplyBonusLootFunction.uniformBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.createMax(4)));
+            return dropsWithSilkTouch(block, this.applyExplosionDecay(block, lootItem));
         });
-        add(VerdanceBlocks.CANTALOUPE_STEM, block -> this.createStemDrops(block, VerdanceItems.CANTALOUPE_SEEDS));
-        add(VerdanceBlocks.ATTACHED_CANTALOUPE_STEM, block -> this.createAttachedStemDrops(block, VerdanceItems.CANTALOUPE_SEEDS));
+        addDrop(VerdanceBlocks.CANTALOUPE_STEM, block -> this.cropStemDrops(block, VerdanceItems.CANTALOUPE_SEEDS));
+        addDrop(VerdanceBlocks.ATTACHED_CANTALOUPE_STEM, block -> this.attachedCropStemDrops(block, VerdanceItems.CANTALOUPE_SEEDS));
     }
 }

@@ -1,0 +1,24 @@
+package com.teamabode.verdance.datagen.client.model;
+
+import net.minecraft.block.Block;
+import net.minecraft.data.client.TextureKey;
+import net.minecraft.data.client.TextureMap;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
+
+public class VerdanceTextureMaps {
+
+    public static TextureMap cushionTextureMappings(Block block) {
+        return (new TextureMap()).put(TextureKey.SIDE, getCushionSideTexture(block)).put(TextureKey.TOP, getCushionTexture(block));
+    }
+
+    public static Identifier getCushionTexture(Block cushion) {
+        Identifier resourceLocation = Registries.BLOCK.getId(cushion);
+        return resourceLocation.withPrefixedPath("block/");
+    }
+
+    public static Identifier getCushionSideTexture(Block cushion) {
+        Identifier resourceLocation = Identifier.of(Registries.BLOCK.getId(cushion) + "_side");
+        return resourceLocation.withPrefixedPath("block/");
+    }
+}

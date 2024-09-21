@@ -1,36 +1,35 @@
 package com.teamabode.verdance.common.entity.silkworm.behavior;
 
-import com.teamabode.verdance.common.util.ImprovedOneShot;
+import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
 import com.teamabode.verdance.common.entity.silkworm.Silkworm;
 import com.teamabode.verdance.common.util.SilkUtils;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.memory.MemoryStatus;
-
 import java.util.Map;
 import java.util.Optional;
+import net.minecraft.entity.ai.brain.MemoryModuleState;
+import net.minecraft.entity.ai.brain.MemoryModuleType;
+import net.minecraft.entity.ai.brain.task.LookTargetUtil;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 
-public class SearchForCocoonTask extends ImprovedOneShot<Silkworm> {
+public class SearchForCocoonTask extends ImprovedSingleTickTask<Silkworm> {
     private long lastExecution = 0L; // It should only try to attempt this task around every four seconds.
 
     @Override
-    public void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements) {
-        requirements.put(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT);
-        requirements.put(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED);
+    public void requires(Map<MemoryModuleType<?>, MemoryModuleState> requirements) {
+        requirements.put(MemoryModuleType.WALK_TARGET, MemoryModuleState.VALUE_ABSENT);
+        requirements.put(MemoryModuleType.LOOK_TARGET, MemoryModuleState.REGISTERED);
     }
 
     @Override
-    public void run(ServerLevel level, Silkworm entity, long gameTime) {
+    public void run(ServerWorld level, Silkworm entity, long gameTime) {
         if (gameTime > this.lastExecution) {
             this.lastExecution = gameTime + 80L;
             return;
         }
-        Optional<BlockPos> targetPos = SilkUtils.getTargetPos(level, entity.blockPosition());
+        Optional<BlockPos> targetPos = SilkUtils.getTargetPos(level, entity.getBlockPos());
 
         if (targetPos.isPresent()) {
-            BehaviorUtils.setWalkAndLookTargetMemories(entity, targetPos.get(), 2.0f, 0);
+            LookTargetUtil.walkTowards(entity, targetPos.get(), 2.0f, 0);
             return;
         }
         this.lastExecution = gameTime + 80L;

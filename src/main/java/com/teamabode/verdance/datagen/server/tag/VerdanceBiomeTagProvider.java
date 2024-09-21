@@ -5,22 +5,21 @@ import com.teamabode.verdance.core.tag.VerdanceBiomeTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
-
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import java.util.concurrent.CompletableFuture;
 
 public class VerdanceBiomeTagProvider extends FabricTagProvider<Biome> {
 
-    public VerdanceBiomeTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
-        super(output, Registries.BIOME, registriesFuture);
+    public VerdanceBiomeTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        super(output, RegistryKeys.BIOME, registriesFuture);
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider wrapperLookup) {
+    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         isForest();
         isMountain();
         isOverworld();
@@ -78,18 +77,18 @@ public class VerdanceBiomeTagProvider extends FabricTagProvider<Biome> {
     private void hasViolet() {
         this.getOrCreateTagBuilder(VerdanceBiomeTags.HAS_VIOLET)
                 .forceAddTag(BiomeTags.IS_TAIGA)
-                .add(Biomes.OLD_GROWTH_BIRCH_FOREST)
-                .add(Biomes.WINDSWEPT_HILLS)
-                .add(Biomes.WINDSWEPT_FOREST);
+                .add(BiomeKeys.OLD_GROWTH_BIRCH_FOREST)
+                .add(BiomeKeys.WINDSWEPT_HILLS)
+                .add(BiomeKeys.WINDSWEPT_FOREST);
     }
 
     private void hasStructure() {
-        this.getOrCreateTagBuilder(BiomeTags.HAS_TRIAL_CHAMBERS)
+        this.getOrCreateTagBuilder(BiomeTags.TRIAL_CHAMBERS_HAS_STRUCTURE)
                 .add(VerdanceBiomes.MULBERRY_FOREST)
                 .add(VerdanceBiomes.SHRUBLANDS)
                 .setReplace(false);
-        this.getOrCreateTagBuilder(BiomeTags.HAS_MINESHAFT).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
-        this.getOrCreateTagBuilder(BiomeTags.HAS_RUINED_PORTAL_STANDARD).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);
+        this.getOrCreateTagBuilder(BiomeTags.MINESHAFT_HAS_STRUCTURE).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
+        this.getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_STANDARD_HAS_STRUCTURE).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);
         this.getOrCreateTagBuilder(VerdanceBiomeTags.HAS_TOWN_RUINS)
                 .add(VerdanceBiomes.SHRUBLANDS)
                 .forceAddTag(ConventionalBiomeTags.IS_DESERT);

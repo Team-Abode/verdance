@@ -3,63 +3,66 @@ package com.teamabode.verdance.common.entity.silkworm;
 import com.mojang.serialization.Dynamic;
 import com.teamabode.verdance.core.tag.VerdanceItemTags;
 import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.Brain;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.brain.Brain;
+import net.minecraft.entity.ai.pathing.EntityNavigation;
+import net.minecraft.entity.ai.pathing.SpiderNavigation;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unchecked")
-public class Silkworm extends PathfinderMob {
-    private static final EntityDataAccessor<Boolean> CLIMBING = SynchedEntityData.defineId(Silkworm.class, EntityDataSerializers.BOOLEAN);
+public class Silkworm extends PathAwareEntity {
+    private static final TrackedData<Boolean> CLIMBING_WALL = DataTracker.registerData(Silkworm.class, TrackedDataHandlerRegistry.BOOLEAN);
     private int age = 0;
 
-    public Silkworm(EntityType<? extends PathfinderMob> entityType, Level level) {
+    public Silkworm(EntityType<? extends PathAwareEntity> entityType, World level) {
         super(entityType, level);
     }
 
     @Override
-    protected PathNavigation createNavigation(Level level) {
-        return new WallClimberNavigation(this, level);
+    protected EntityNavigation createNavigation(World level) {
+        return new SpiderNavigation(this, level);
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(CLIMBING, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(CLIMBING_WALL, false);
     }
 
     @Override
     public void tick() {
-        if (!this.level().isClientSide()) {
+        if (!this.getWorld().isClient()) {
             this.setClimbing(horizontalCollision);
         }
         super.tick();
     }
 
     @Override
-    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return SilkwormAi.createBrain(this.brainProvider().makeBrain(dynamic));
+    protected Brain<?> deserializeBrain(Dynamic<?> dynamic) {
+        return SilkwormBrain.createBrain(this.createBrainProfile().deserialize(dynamic));
     }
 
     @Override
-    protected Brain.Provider<Silkworm> brainProvider() {
-        return Brain.provider(SilkwormAi.MEMORY_MODULES, SilkwormAi.SENSORS);
+    protected Brain.Profile<Silkworm> createBrainProfile() {
+        return Brain.createProfile(SilkwormBrain.MEMORY_MODULES, SilkwormBrain.SENSORS);
     }
 
     @Override
@@ -68,61 +71,62 @@ public class Silkworm extends PathfinderMob {
     }
 
     @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
+    protected ActionResult interactMob(PlayerEntity player, Hand hand) {
+        ItemStack stack = player.getStackInHand(hand);
 
         if (this.isFood(stack)) {
-            if (!player.getAbilities().instabuild) {
-                stack.shrink(1);
+            if (!player.getAbilities().creativeMode) {
+                stack.decrement(1);
             }
-            this.ageUp(AgeableMob.getSpeedUpSecondsWhenFeeding(this.getTimeUntilAdult()));
-            this.level().addParticle(
+            this.ageUp(PassiveEntity.toGrowUpAge(this.getTimeUntilAdult()));
+            this.getWorld().addParticle(
                     ParticleTypes.HAPPY_VILLAGER,
-                    this.getRandomX(1.0),
-                    this.getRandomY() + 0.5,
-                    this.getRandomZ(1.0),
+                    this.getParticleX(1.0),
+                    this.getRandomBodyY() + 0.5,
+                    this.getParticleZ(1.0),
                     0.0,
                     0.0,
                     0.0
             );
-            return InteractionResult.sidedSuccess(this.level().isClientSide());
+            return ActionResult.success(this.getWorld().isClient());
         }
-        return super.mobInteract(player, hand);
+        return super.interactMob(player, hand);
     }
 
     @Override
-    public void aiStep() {
+    public void tickMovement() {
         this.setAge(this.age + 1);
-        super.aiStep();
+        super.tickMovement();
     }
 
     @Override
-    protected void customServerAiStep() {
-        this.getBrain().tick((ServerLevel) this.level(), this);
-        SilkwormAi.updateActivity(this);
-        super.customServerAiStep();
+    protected void mobTick() {
+        this.getBrain().tick((ServerWorld) this.getWorld(), this);
+        SilkwormBrain.updateActivity(this);
+        super.mobTick();
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
+    public void readCustomDataFromNbt(NbtCompound compound) {
+        super.readCustomDataFromNbt(compound);
         this.setClimbing(compound.getBoolean("Climbing"));
         this.setAge(compound.getInt("Age"));
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
+    public void writeCustomDataToNbt(NbtCompound compound) {
+        super.writeCustomDataToNbt(compound);
         compound.putBoolean("Climbing", this.isClimbing());
         compound.putInt("Age", this.getAge());
     }
 
-    public boolean isClimbing() {
-        return this.getEntityData().get(CLIMBING);
+
+    public boolean isClimbingWall() {
+        return dataTracker.get(CLIMBING_WALL);
     }
 
     public void setClimbing(boolean value) {
-        this.getEntityData().set(CLIMBING, value);
+        this.getDataTracker().set(CLIMBING_WALL, value);
     }
 
     public int getAge() {
@@ -142,8 +146,8 @@ public class Silkworm extends PathfinderMob {
     }
 
     @Override
-    protected int calculateFallDamage(float fallDistance, float damageMultiplier) {
-        return super.calculateFallDamage(fallDistance, damageMultiplier) - 10;
+    protected int computeFallDamage(float fallDistance, float damageMultiplier) {
+        return super.computeFallDamage(fallDistance, damageMultiplier) - 10;
     }
 
     @Nullable
@@ -159,23 +163,23 @@ public class Silkworm extends PathfinderMob {
     }
 
     @Override
-    public boolean onClimbable() {
-        return this.isClimbing();
+    public boolean isClimbing() {
+        return this.isClimbingWall();
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.is(VerdanceItemTags.SILKWORM_FOOD);
+        return stack.isIn(VerdanceItemTags.SILKWORM_FOOD);
     }
 
     @Override
-    public boolean shouldDropExperience() {
+    public boolean shouldDropXp() {
         return false;
     }
 
-    public static AttributeSupplier.Builder createSilkwormAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 5.0f)
-                .add(Attributes.MOVEMENT_SPEED, 0.1d)
-                .add(Attributes.FOLLOW_RANGE, 48.0);
+    public static DefaultAttributeContainer.Builder createSilkwormAttributes() {
+        return MobEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 5.0f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1d)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0);
     }
 }
