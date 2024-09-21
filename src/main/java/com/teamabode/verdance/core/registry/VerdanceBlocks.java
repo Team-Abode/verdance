@@ -570,7 +570,7 @@ public class VerdanceBlocks {
                     .offset(OffsetType.XZ)
                     .pistonBehavior(PistonBehavior.DESTROY))
     );
-    public static final Block POTTED_VIOLET = register(
+    public static final Block POTTED_VIOLET = registerWithoutItem(
             "potted_violet",
             Blocks.createFlowerPotBlock(VIOLET)
     );
@@ -585,7 +585,7 @@ public class VerdanceBlocks {
                     .offset(OffsetType.XZ)
                     .pistonBehavior(PistonBehavior.BLOCK))
     );
-    public static final Block POTTED_SHRUB = register(
+    public static final Block POTTED_SHRUB = registerWithoutItem(
             "potted_shrub",
             Blocks.createFlowerPotBlock(SHRUB)
     );
@@ -595,7 +595,7 @@ public class VerdanceBlocks {
                     VerdanceConfiguredFeatures.PATCH_YELLOW_FLOWERING_SHRUB_BONEMEAL,
                     Settings.copy(SHRUB))
     );
-    public static final Block POTTED_YELLOW_FLOWERING_SHRUB = register(
+    public static final Block POTTED_YELLOW_FLOWERING_SHRUB = registerWithoutItem(
             "potted_yellow_flowering_shrub",
             Blocks.createFlowerPotBlock(YELLOW_FLOWERING_SHRUB)
     );
@@ -605,7 +605,7 @@ public class VerdanceBlocks {
                     VerdanceConfiguredFeatures.PATCH_PINK_FLOWERING_SHRUB_BONEMEAL,
                     Settings.copy(SHRUB))
     );
-    public static final Block POTTED_PINK_FLOWERING_SHRUB = register(
+    public static final Block POTTED_PINK_FLOWERING_SHRUB = registerWithoutItem(
             "potted_pink_flowering_shrub",
             Blocks.createFlowerPotBlock(PINK_FLOWERING_SHRUB)
     );
