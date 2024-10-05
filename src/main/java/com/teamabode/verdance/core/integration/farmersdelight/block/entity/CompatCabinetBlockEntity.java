@@ -86,7 +86,7 @@ public class CompatCabinetBlockEntity extends LootableContainerBlockEntity {
     }
 
     protected Text getContainerName() {
-        return Text.translatable("farmersdelight.container_cabinet");
+        return Text.translatable("farmersdelight.container.cabinet");
     }
 
     protected ScreenHandler createScreenHandler(int id, PlayerInventory player) {
