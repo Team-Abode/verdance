@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 
 public class CantaloupeJuiceItem extends Item {
 
-    public CantaloupeJuiceItem(net.minecraft.item.Item.Settings properties) {
+    public CantaloupeJuiceItem(Item.Settings properties) {
         super(properties);
     }
 
@@ -36,13 +36,10 @@ public class CantaloupeJuiceItem extends Item {
             }
             serverPlayer.incrementStat(Stats.USED.getOrCreateStat(this));
         }
-        if (!world.isClient()) {
+        if (!world.isClient() && user.isOnFire()) {
             world.playSound(null, user.getBlockPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.25f, 1.0f);
             CantaloupeSliceItem.addCoolingParticles((ServerWorld) world, user);
-            user.extinguishWithSound();
-        }
-        if (user instanceof PlayerEntity player && !player.getAbilities().creativeMode) {
-            stack.decrement(1);
+            user.extinguish();
         }
         if (stack.isEmpty()) {
             return new ItemStack(Items.GLASS_BOTTLE);

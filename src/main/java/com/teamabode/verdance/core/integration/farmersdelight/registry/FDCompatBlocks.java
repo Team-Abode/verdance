@@ -1,6 +1,7 @@
 package com.teamabode.verdance.core.integration.farmersdelight.registry;
 
 import com.teamabode.verdance.Verdance;
+import com.teamabode.verdance.core.integration.farmersdelight.block.CompatCabinetBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -8,14 +9,12 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import vectorwing.farmersdelight.common.block.CabinetBlock;
-import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 public class FDCompatBlocks {
     // TODO: To prevent issues when trying to update MC versions, we could recreate our own cabinet
     public static final Block MULBERRY_CABINET = register(
             "mulberry_cabinet",
-            new CabinetBlock(AbstractBlock.Settings.copy(Blocks.BARREL))
+            new CompatCabinetBlock(AbstractBlock.Settings.copy(Blocks.BARREL))
     );
     public static final Block MULBERRY_CRATE = register(
             "mulberry_crate",
@@ -23,7 +22,7 @@ public class FDCompatBlocks {
     );
 
     public static void register() {
-        ModBlockEntityTypes.CABINET.get().addSupportedBlock(MULBERRY_CABINET);
+
     }
 
     // Registry Utils
