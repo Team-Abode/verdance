@@ -3,7 +3,7 @@ package com.teamabode.verdance.common.entity.silkmoth;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
-import com.teamabode.verdance.common.entity.silkmoth.behavior.*;
+import com.teamabode.verdance.common.entity.silkmoth.task.*;
 import com.teamabode.verdance.core.registry.VerdanceActivities;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
