@@ -1,4 +1,4 @@
-package com.teamabode.verdance.common.entity.silkworm.behavior;
+package com.teamabode.verdance.common.entity.silkworm.task;
 
 import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
 import com.teamabode.verdance.common.entity.silkworm.SilkwormEntity;

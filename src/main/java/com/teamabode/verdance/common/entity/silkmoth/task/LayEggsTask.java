@@ -1,4 +1,4 @@
-package com.teamabode.verdance.common.entity.silkmoth.behavior;
+package com.teamabode.verdance.common.entity.silkmoth.task;
 
 import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
