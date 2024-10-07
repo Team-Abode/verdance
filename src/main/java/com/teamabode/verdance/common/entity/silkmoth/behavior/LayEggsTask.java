@@ -1,6 +1,6 @@
 package com.teamabode.verdance.common.entity.silkmoth.behavior;
 
-import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
@@ -14,13 +14,13 @@ import net.minecraft.world.event.GameEvent;
 
 public class LayEggsTask {
 
-    public static Task<SilkMoth> create() {
+    public static Task<SilkMothEntity> create() {
         return TaskTriggerer.task(instance -> instance.group(
                 instance.queryMemoryValue(MemoryModuleType.IS_PREGNANT)
         ).apply(instance, (isPregnantMemory) -> LayEggsTask::tryStart));
     }
 
-    private static boolean tryStart(ServerWorld level, SilkMoth entity, long gameTime) {
+    private static boolean tryStart(ServerWorld level, SilkMothEntity entity, long gameTime) {
         BlockPos entityPos = entity.getBlockPos();
 
         BlockPos relativePos = entityPos.down();

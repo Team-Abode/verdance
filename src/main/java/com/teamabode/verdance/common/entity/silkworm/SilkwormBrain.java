@@ -44,14 +44,14 @@ public class SilkwormBrain {
             MemoryModuleType.VISIBLE_MOBS,
             VerdanceMemoryModuleTypes.WANTS_TO_COCOON
     );
-    public static final List<SensorType<? extends Sensor<? super Silkworm>>> SENSORS = ImmutableList.of(
+    public static final List<SensorType<? extends Sensor<? super SilkwormEntity>>> SENSORS = ImmutableList.of(
             VerdanceSensorTypes.SILKWORM_SPECIFIC_SENSOR,
             VerdanceSensorTypes.SILKWORM_TEMPTATIONS,
             SensorType.NEAREST_LIVING_ENTITIES,
             SensorType.HURT_BY
     );
 
-    public static Brain<Silkworm> createBrain(Brain<Silkworm> brain) {
+    public static Brain<SilkwormEntity> createBrain(Brain<SilkwormEntity> brain) {
         addCoreActivities(brain);
         addIdleActivities(brain);
         addCocoonActivities(brain);
@@ -61,7 +61,7 @@ public class SilkwormBrain {
         return brain;
     }
 
-    private static void addCoreActivities(Brain<Silkworm> brain) {
+    private static void addCoreActivities(Brain<SilkwormEntity> brain) {
         brain.setTaskList(Activity.CORE, 0, ImmutableList.of(
                 new StayAboveWaterTask(1.0f),
                 new FleeTask<>(1.5f),
@@ -71,14 +71,14 @@ public class SilkwormBrain {
         ));
     }
 
-    private static void addIdleActivities(Brain<Silkworm> brain) {
+    private static void addIdleActivities(Brain<SilkwormEntity> brain) {
         brain.setTaskList(Activity.IDLE, ImmutableList.of(
                 Pair.of(0, new TemptTask(livingEntity -> 1.0f)),
                 Pair.of(1, createStrollingBehaviors())
         ));
     }
 
-    private static void addCocoonActivities(Brain<Silkworm> brain) {
+    private static void addCocoonActivities(Brain<SilkwormEntity> brain) {
         brain.setTaskList(VerdanceActivities.COCOON, ImmutableList.of(
                 Pair.of(1, new RandomTask<>(ImmutableList.of(
                         Pair.of(new SearchForCocoonTask(), 3),
@@ -89,14 +89,14 @@ public class SilkwormBrain {
         ), Set.of(Pair.of(VerdanceMemoryModuleTypes.WANTS_TO_COCOON, MemoryModuleState.VALUE_PRESENT)));
     }
 
-    private static RandomTask<Silkworm> createStrollingBehaviors() {
+    private static RandomTask<SilkwormEntity> createStrollingBehaviors() {
         return new RandomTask<>(ImmutableList.of(
                 Pair.of(StrollTask.create(1.0f), 3),
                 Pair.of(new WaitTask(30, 60), 1)
         ));
     }
 
-    public static void updateActivity(Silkworm silkworm) {
+    public static void updateActivity(SilkwormEntity silkworm) {
         silkworm.getBrain().resetPossibleActivities(ImmutableList.of(
                 VerdanceActivities.COCOON,
                 Activity.IDLE

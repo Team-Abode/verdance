@@ -1,5 +1,6 @@
 package com.teamabode.verdance.common.entity;
 
+import com.teamabode.verdance.common.block.CushionBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.Entity;
@@ -7,8 +8,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class CushionEntity extends Entity {
 
@@ -32,6 +36,24 @@ public class CushionEntity extends Entity {
 
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+
+        List<Entity> passengers = this.getPassengerList();
+        World world = this.getWorld();
+
+        if (passengers.isEmpty() && !world.isClient()) {
+            BlockPos pos = this.getBlockPos();
+            BlockState state = world.getBlockState(pos);
+
+            if (state.contains(CushionBlock.OCCUPIED)) {
+                world.setBlockState(pos, state.with(Properties.OCCUPIED, false));
+            }
+            this.removeFromDimension();
+        }
+    }
+
     public @NotNull PistonBehavior getPistonBehavior() {
         return PistonBehavior.IGNORE;
     }
@@ -42,16 +64,5 @@ public class CushionEntity extends Entity {
 
     protected boolean couldAcceptPassenger() {
         return true;
-    }
-
-    @Override
-    protected void removePassenger(Entity entity) {
-        super.removePassenger(entity);
-        if (!this.isRemoved() && !entity.getWorld().isClient) {
-            BlockState blockState = entity.getBlockStateAtPos();
-            entity.updatePosition(entity.getX(), entity.getY() + 0.6D, entity.getZ());
-            this.getWorld().setBlockState(entity.getBlockPos(), blockState.with(Properties.OCCUPIED, false));
-            this.discard();
-        }
     }
 }

@@ -1,6 +1,6 @@
 package com.teamabode.verdance.common.entity.silkworm.behavior;
 
-import com.teamabode.verdance.common.entity.silkworm.Silkworm;
+import com.teamabode.verdance.common.entity.silkworm.SilkwormEntity;
 import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
 import com.teamabode.verdance.common.util.SilkUtils;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
@@ -13,7 +13,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
-public class TurnIntoCocoonTask extends ImprovedSingleTickTask<Silkworm> {
+public class TurnIntoCocoonTask extends ImprovedSingleTickTask<SilkwormEntity> {
 
     @Override
     public void requires(Map<MemoryModuleType<?>, MemoryModuleState> requirements) {
@@ -21,7 +21,7 @@ public class TurnIntoCocoonTask extends ImprovedSingleTickTask<Silkworm> {
     }
 
     @Override
-    public void run(ServerWorld level, Silkworm entity, long gameTime) {
+    public void run(ServerWorld level, SilkwormEntity entity, long gameTime) {
         if (!entity.getBlockStateAtPos().isIn(BlockTags.REPLACEABLE)) return;
 
         for (Direction dir : Direction.Type.HORIZONTAL) {

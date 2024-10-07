@@ -56,14 +56,14 @@ public class SilkMothBrain {
             VerdanceMemoryModuleTypes.WANTS_TO_LAND
     );
 
-    public static final List<SensorType<? extends Sensor<? super SilkMoth>>> SENSORS = ImmutableList.of(
+    public static final List<SensorType<? extends Sensor<? super SilkMothEntity>>> SENSORS = ImmutableList.of(
             VerdanceSensorTypes.SILK_MOTH_SPECIFIC_SENSOR,
             VerdanceSensorTypes.SILK_MOTH_TEMPTATIONS,
             SensorType.NEAREST_LIVING_ENTITIES,
             SensorType.HURT_BY
     );
 
-    public static Brain<SilkMoth> createBrain(Brain<SilkMoth> brain) {
+    public static Brain<SilkMothEntity> createBrain(Brain<SilkMothEntity> brain) {
         addCoreActivities(brain);
         addIdleActivities(brain);
         addLayEggsActivities(brain);
@@ -73,7 +73,7 @@ public class SilkMothBrain {
         return brain;
     }
 
-    private static void addCoreActivities(Brain<SilkMoth> brain) {
+    private static void addCoreActivities(Brain<SilkMothEntity> brain) {
         brain.setTaskList(Activity.CORE, 0, ImmutableList.of(
                 new StayAboveWaterTask(1.0f),
                 new TakeOffTask(),
@@ -85,7 +85,7 @@ public class SilkMothBrain {
         ));
     }
 
-    private static void addIdleActivities(Brain<SilkMoth> brain) {
+    private static void addIdleActivities(Brain<SilkMothEntity> brain) {
         brain.setTaskList(Activity.IDLE, ImmutableList.of(
                 Pair.of(0, new BreedTask(VerdanceEntityTypes.SILK_MOTH)),
                 Pair.of(1, new TemptTask(livingEntity -> 1.5f)),
@@ -95,7 +95,7 @@ public class SilkMothBrain {
         ));
     }
 
-    private static void addLayEggsActivities(Brain<SilkMoth> brain) {
+    private static void addLayEggsActivities(Brain<SilkMothEntity> brain) {
         brain.setTaskList(VerdanceActivities.LAY_EGGS, ImmutableList.of(
                 Pair.of(0, new SearchForLeavesTask()),
                 Pair.of(1, LayEggsTask.create()),
@@ -103,7 +103,7 @@ public class SilkMothBrain {
         ), ImmutableSet.of(Pair.of(MemoryModuleType.IS_PREGNANT, MemoryModuleState.VALUE_PRESENT)));
     }
 
-    public static void updateActivity(SilkMoth silkMoth) {
+    public static void updateActivity(SilkMothEntity silkMoth) {
         silkMoth.getBrain().resetPossibleActivities(ImmutableList.of(
                 VerdanceActivities.LAY_EGGS,
                 VerdanceActivities.SLEEP,
@@ -115,11 +115,11 @@ public class SilkMothBrain {
         return Ingredient.fromTag(VerdanceItemTags.SILK_MOTH_FOOD);
     }
 
-    private static RandomTask<SilkMoth> addMovementTasks() {
+    private static RandomTask<SilkMothEntity> addMovementTasks() {
         return new RandomTask<>(ImmutableList.of(
-                Pair.of(TaskTriggerer.runIf(SilkMoth::isInAir, new AerialStrollTask()), 2),
-                Pair.of(TaskTriggerer.runIf(SilkMoth::isInAir, new GoTowardsLandingTask()), 2),
-                Pair.of(TaskTriggerer.runIf(Predicate.not(SilkMoth::isInAir), StrollTask.create(1.0f)), 2),
+                Pair.of(TaskTriggerer.runIf(SilkMothEntity::isInAir, new AerialStrollTask()), 2),
+                Pair.of(TaskTriggerer.runIf(SilkMothEntity::isInAir, new GoTowardsLandingTask()), 2),
+                Pair.of(TaskTriggerer.runIf(Predicate.not(SilkMothEntity::isInAir), StrollTask.create(1.0f)), 2),
                 Pair.of(GoTowardsLookTargetTask.create(1.0f, 3), 2),
                 Pair.of(new WaitTask(30,  60), 1)
         ));

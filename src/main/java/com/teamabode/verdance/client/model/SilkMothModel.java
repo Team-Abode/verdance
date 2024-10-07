@@ -3,7 +3,7 @@ package com.teamabode.verdance.client.model;
 import com.teamabode.sketch.client.model.SketchAnimatableModel;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.client.VerdanceAnimations;
-import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
@@ -14,7 +14,7 @@ import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.math.MathHelper;
 
-public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
+public class SilkMothModel extends SketchAnimatableModel<SilkMothEntity> {
 	public static final EntityModelLayer LAYER = new EntityModelLayer(Verdance.id("silk_moth"), "main");
 
 	private final ModelPart root;
@@ -85,7 +85,7 @@ public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
 		return b + (a - b) * (float)Math.exp(-decay * dt);
 	}
 
-	public void setupBones(SilkMoth entity, float deltaTicks) {
+	public void setupBones(SilkMothEntity entity, float deltaTicks) {
 		this.body.pivotY = 17.75f;
 
 		this.rightAntenna.roll = -22.5f * MathHelper.RADIANS_PER_DEGREE;
@@ -106,7 +106,7 @@ public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
 	}
 
 	@Override
-	public void setAngles(SilkMoth entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+	public void setAngles(SilkMothEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 		float deltaTicks = animationProgress - entity.lastAnimationProgress;
 		entity.lastAnimationProgress = animationProgress;
 
@@ -121,7 +121,7 @@ public class SilkMothModel extends SketchAnimatableModel<SilkMoth> {
 		this.animateBones(entity, animationProgress, deltaTicks, headYaw, headPitch);
 	}
 
-	private void animateBones(SilkMoth entity, float animationProgress, float deltaTicks, float headYaw, float headPitch) {
+	private void animateBones(SilkMothEntity entity, float animationProgress, float deltaTicks, float headYaw, float headPitch) {
 		headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
 		headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);
 

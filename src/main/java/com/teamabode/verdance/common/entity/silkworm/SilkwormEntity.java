@@ -28,11 +28,11 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unchecked")
-public class Silkworm extends PathAwareEntity {
-    private static final TrackedData<Boolean> CLIMBING_WALL = DataTracker.registerData(Silkworm.class, TrackedDataHandlerRegistry.BOOLEAN);
+public class SilkwormEntity extends PathAwareEntity {
+    private static final TrackedData<Boolean> CLIMBING_WALL = DataTracker.registerData(SilkwormEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private int age = 0;
 
-    public Silkworm(EntityType<? extends PathAwareEntity> entityType, World level) {
+    public SilkwormEntity(EntityType<? extends PathAwareEntity> entityType, World level) {
         super(entityType, level);
     }
 
@@ -61,13 +61,13 @@ public class Silkworm extends PathAwareEntity {
     }
 
     @Override
-    protected Brain.Profile<Silkworm> createBrainProfile() {
+    protected Brain.Profile<SilkwormEntity> createBrainProfile() {
         return Brain.createProfile(SilkwormBrain.MEMORY_MODULES, SilkwormBrain.SENSORS);
     }
 
     @Override
-    public Brain<Silkworm> getBrain() {
-        return (Brain<Silkworm>) super.getBrain();
+    public Brain<SilkwormEntity> getBrain() {
+        return (Brain<SilkwormEntity>) super.getBrain();
     }
 
     @Override

@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 public class CushionBlock extends Block {
     public static final MapCodec<CushionBlock> CODEC = createCodec(CushionBlock::new);
     private static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 10.0, 16.0);
-    private static final BooleanProperty OCCUPIED = Properties.OCCUPIED;
+    public static final BooleanProperty OCCUPIED = Properties.OCCUPIED;
 
     public CushionBlock(Settings properties) {
         super(properties);
@@ -61,9 +61,11 @@ public class CushionBlock extends Block {
             level.setBlockState(blockPos, blockState.with(OCCUPIED, true));
             CushionEntity cushion = new CushionEntity(VerdanceEntityTypes.CUSHION, level);
             cushion.setPosition(blockPos.getX() + 0.5D, blockPos.getY() + 0.4D, blockPos.getZ() + 0.5D);
-            level.spawnEntity(cushion);
-            player.startRiding(cushion);
-            return ActionResult.SUCCESS;
+
+            if (level.spawnEntity(cushion)) {
+                player.startRiding(cushion);
+                return ActionResult.SUCCESS;
+            }
         }
         return ActionResult.FAIL;
     }
@@ -81,16 +83,17 @@ public class CushionBlock extends Block {
         super.onLandedUpon(level, blockState, blockPos, entity, f * 0.5F);
     }
 
+    @Override
     public void onEntityLand(BlockView blockGetter, Entity entity) {
         if (entity.bypassesLandingEffects()) {
             super.onEntityLand(blockGetter, entity);
         }
         else {
-            this.bounceUp(entity);
+            this.bounce(entity);
         }
     }
 
-    private void bounceUp(Entity entity) {
+    private void bounce(Entity entity) {
         Vec3d vec3 = entity.getVelocity();
         if (vec3.y < 0.0d) {
             double multiplier = entity instanceof LivingEntity ? 1.0d: 0.8d;

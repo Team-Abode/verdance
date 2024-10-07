@@ -2,12 +2,12 @@ package com.teamabode.verdance.client.renderer;
 
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.client.model.SilkMothModel;
-import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 
-public class SilkMothRenderer extends MobEntityRenderer<SilkMoth, SilkMothModel> {
+public class SilkMothRenderer extends MobEntityRenderer<SilkMothEntity, SilkMothModel> {
     private static final Identifier TEXTURE = Verdance.id("textures/entity/silk_moth/silk_moth.png");
 
     public SilkMothRenderer(EntityRendererFactory.Context context) {
@@ -16,7 +16,7 @@ public class SilkMothRenderer extends MobEntityRenderer<SilkMoth, SilkMothModel>
     }
 
     @Override
-    public Identifier getTexture(SilkMoth entity) {
+    public Identifier getTexture(SilkMothEntity entity) {
         return TEXTURE;
     }
 }

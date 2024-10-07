@@ -1,6 +1,6 @@
 package com.teamabode.verdance.common.block.entity;
 
-import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
 import com.teamabode.verdance.core.registry.VerdanceBlockEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
@@ -44,7 +44,7 @@ public class SilkCocoonBlockEntity extends BlockEntity {
             cocoon.wobbleTicks = 0;
         }
         if (ticks >= 4800) {
-            SilkMoth silkMoth = new SilkMoth(VerdanceEntityTypes.SILK_MOTH, level);
+            SilkMothEntity silkMoth = new SilkMothEntity(VerdanceEntityTypes.SILK_MOTH, level);
             silkMoth.setPosition(pos.toCenterPos());
             silkMoth.setHeadYaw(state.get(Properties.HORIZONTAL_FACING).asRotation());
             silkMoth.setYaw(state.get(Properties.HORIZONTAL_FACING).asRotation());

@@ -1,7 +1,7 @@
 package com.teamabode.verdance.common.entity.silkmoth.sensor;
 
 import com.google.common.collect.ImmutableSet;
-import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
@@ -12,11 +12,11 @@ import net.minecraft.util.Unit;
 import java.util.Optional;
 import java.util.Set;
 
-public class SilkMothSpecificSensor extends Sensor<SilkMoth> {
+public class SilkMothSpecificSensor extends Sensor<SilkMothEntity> {
 
     @Override
-    protected void sense(ServerWorld world, SilkMoth entity) {
-        Brain<SilkMoth> brain = entity.getBrain();
+    protected void sense(ServerWorld world, SilkMothEntity entity) {
+        Brain<SilkMothEntity> brain = entity.getBrain();
         Optional<Unit> isFlying = Optional.empty();
         Optional<Unit> wantsToLand = Optional.empty();
 

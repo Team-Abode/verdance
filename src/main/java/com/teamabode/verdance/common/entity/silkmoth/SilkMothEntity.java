@@ -49,8 +49,8 @@ import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unchecked")
-public class SilkMoth extends AnimalEntity implements Flutterer {
-    public static final TrackedData<Boolean> FLYING = DataTracker.registerData(SilkMoth.class, TrackedDataHandlerRegistry.BOOLEAN);
+public class SilkMothEntity extends AnimalEntity implements Flutterer {
+    public static final TrackedData<Boolean> FLYING = DataTracker.registerData(SilkMothEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState flyAnimationState = new AnimationState();
@@ -64,13 +64,15 @@ public class SilkMoth extends AnimalEntity implements Flutterer {
     public int lastSoarTicks;
     public int soarTicks;
 
-    public SilkMoth(EntityType<? extends AnimalEntity> entityType, World world) {
+    public SilkMothEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
 
         this.moveControl = new MoveControl(this);
-        this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, 10.0f);
-        this.setPathfindingPenalty(PathNodeType.WATER, 5.0f);
-        this.setPathfindingPenalty(PathNodeType.DANGER_POWDER_SNOW, 10.0f);
+        this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
+        this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
+        this.setPathfindingPenalty(PathNodeType.WATER_BORDER, 16.0F);
+        this.setPathfindingPenalty(PathNodeType.COCOA, -1.0F);
+        this.setPathfindingPenalty(PathNodeType.FENCE, -1.0F);
     }
 
     @Override
@@ -79,13 +81,13 @@ public class SilkMoth extends AnimalEntity implements Flutterer {
     }
 
     @Override
-    protected Brain.Profile<SilkMoth> createBrainProfile() {
+    protected Brain.Profile<SilkMothEntity> createBrainProfile() {
         return Brain.createProfile(SilkMothBrain.MEMORY_MODULES, SilkMothBrain.SENSORS);
     }
 
     @Override
-    public Brain<SilkMoth> getBrain() {
-        return (Brain<SilkMoth>) super.getBrain();
+    public Brain<SilkMothEntity> getBrain() {
+        return (Brain<SilkMothEntity>) super.getBrain();
     }
 
     @Override
@@ -104,15 +106,15 @@ public class SilkMoth extends AnimalEntity implements Flutterer {
         if (this.idleCooldown > 0) {
             this.idleCooldown--;
         }
-        Vec3d deltaMovement = this.getVelocity();
+        Vec3d velocity = this.getVelocity();
 
         if (this.isInAir()) {
-            this.bodyPitch = (float) (-deltaMovement.y * 10.0f);
+            this.bodyPitch = (float) (-velocity.y * 10.0f);
         }
         else this.bodyPitch = 0.0f;
 
         this.lastSoarTicks = this.soarTicks;
-        if (deltaMovement.horizontalLength() > 0.05d) {
+        if (velocity.horizontalLength() > 0.05d) {
             this.soarTicks = MathHelper.clamp(this.soarTicks + 1, 0, 5);
         }
         else this.soarTicks = MathHelper.clamp(this.soarTicks - 1, 0, 5);
