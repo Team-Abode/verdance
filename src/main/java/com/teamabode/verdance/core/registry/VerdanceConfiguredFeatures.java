@@ -2,6 +2,7 @@ package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.worldgen.MulberryTrunkPlacer;
+import com.teamabode.verdance.common.worldgen.SilkCocoonTreeDecorator;
 import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -41,6 +42,8 @@ public class VerdanceConfiguredFeatures {
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> FLOWER_MULBERRY_FOREST = createKey("flower_mulberry_forest");
     public static final RegistryKey<ConfiguredFeature<?, ?>> MULBERRY = createKey("mulberry");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> MULBERRY_WITH_SILK_COCOON = createKey("mulberry_with_silk_cocoon");
+
     public static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_CANTALOUPE = createKey("patch_cantaloupe");
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_SHRUB = createKey("patch_shrub");
@@ -73,6 +76,19 @@ public class VerdanceConfiguredFeatures {
                 new CherryFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0), ConstantIntProvider.create(4), 0.33333333F, 0.25f, 0.16666667f, 0.33333334f),
                 new TwoLayersFeatureSize(1, 0, 2)
         ).build());
+        ConfiguredFeatures.register(context, MULBERRY_WITH_SILK_COCOON, Feature.TREE, new TreeFeatureConfig.Builder(
+                SimpleBlockStateProvider.of(VerdanceBlocks.MULBERRY_LOG),
+                new MulberryTrunkPlacer(7, 2, 0),
+                new WeightedBlockStateProvider(
+                        DataPool.<BlockState>builder()
+                                .add(VerdanceBlocks.MULBERRY_LEAVES.getDefaultState(), 14)
+                                .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES.getDefaultState(), 1)
+                                .build()
+                ),
+                new CherryFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0), ConstantIntProvider.create(4), 0.33333333F, 0.25f, 0.16666667f, 0.33333334f),
+                new TwoLayersFeatureSize(1, 0, 2)
+        ).decorators(List.of(new SilkCocoonTreeDecorator(0.1f))).build());
+
         ConfiguredFeatures.register(context, PATCH_CANTALOUPE, Feature.RANDOM_PATCH, ConfiguredFeatures.createRandomPatchFeatureConfig(
                 Feature.SIMPLE_BLOCK,
                 new SimpleBlockFeatureConfig(BlockStateProvider.of(VerdanceBlocks.CANTALOUPE)),

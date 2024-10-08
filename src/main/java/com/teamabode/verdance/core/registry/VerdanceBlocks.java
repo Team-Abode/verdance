@@ -656,7 +656,7 @@ public class VerdanceBlocks {
                 .strength(0.2f)
                 .noCollision()
                 .burnable()
-                .pistonBehavior(PistonBehavior.IGNORE)
+                .pistonBehavior(PistonBehavior.DESTROY)
         );
     }
 }
