@@ -17,6 +17,10 @@ repositories {
 	maven {
 		url = "https://api.modrinth.com/maven"
 	}
+	// Terrablender
+	maven {
+		url = 'https://maven.minecraftforge.net/'
+	}
 }
 
 dependencies {
@@ -28,8 +32,8 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Dependencies
-	modApi "com.github.Team-Abode:sketch:${rootProject.sketch_version}"
-	modApi "com.terraformersmc:biolith-fabric:${project.biolith_version}"
+	modApi "com.terraformersmc:biolith:${project.biolith_version}"
+	modCompileOnlyApi "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
 
 	modCompileOnly "maven.modrinth:farmers-delight-refabricated:${rootProject.farmers_delight_version}"
 }

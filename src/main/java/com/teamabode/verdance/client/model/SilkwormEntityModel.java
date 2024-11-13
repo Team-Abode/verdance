@@ -1,6 +1,5 @@
 package com.teamabode.verdance.client.model;
 
-import com.teamabode.sketch.client.model.SketchAnimatableModel;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.client.VerdanceAnimations;
 import com.teamabode.verdance.common.entity.silkworm.SilkwormEntity;
@@ -12,12 +11,13 @@ import net.minecraft.client.model.ModelPartData;
 import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 
-public class SilkwormModel extends SketchAnimatableModel<SilkwormEntity> {
+public class SilkwormEntityModel extends SinglePartEntityModel<SilkwormEntity> {
 	public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(Verdance.id("silkworm"), "main");
 	private final ModelPart root;
 
-	public SilkwormModel(ModelPart root) {
+	public SilkwormEntityModel(ModelPart root) {
 		this.root = root.getChild("root");
 	}
 
@@ -38,7 +38,7 @@ public class SilkwormModel extends SketchAnimatableModel<SilkwormEntity> {
 	@Override
 	public void setAngles(SilkwormEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 		this.getPart().traverse().forEach(ModelPart::resetTransform);
-		this.animateWalk(VerdanceAnimations.SILKWORM_MOVE, limbAngle, limbDistance, 2.0f, 4.0f);
+		this.animateMovement(VerdanceAnimations.SILKWORM_MOVE, limbAngle, limbDistance, 2.0f, 4.0f);
 	}
 
 	public ModelPart getPart() {

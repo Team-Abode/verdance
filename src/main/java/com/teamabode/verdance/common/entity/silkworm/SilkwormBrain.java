@@ -15,15 +15,7 @@ import net.minecraft.entity.ai.brain.MemoryModuleState;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.sensor.Sensor;
 import net.minecraft.entity.ai.brain.sensor.SensorType;
-import net.minecraft.entity.ai.brain.task.FleeTask;
-import net.minecraft.entity.ai.brain.task.LookAroundTask;
-import net.minecraft.entity.ai.brain.task.MoveToTargetTask;
-import net.minecraft.entity.ai.brain.task.RandomTask;
-import net.minecraft.entity.ai.brain.task.StayAboveWaterTask;
-import net.minecraft.entity.ai.brain.task.StrollTask;
-import net.minecraft.entity.ai.brain.task.TemptTask;
-import net.minecraft.entity.ai.brain.task.TemptationCooldownTask;
-import net.minecraft.entity.ai.brain.task.WaitTask;
+import net.minecraft.entity.ai.brain.task.*;
 import net.minecraft.recipe.Ingredient;
 import java.util.List;
 import java.util.Set;
@@ -64,9 +56,9 @@ public class SilkwormBrain {
     private static void addCoreActivities(Brain<SilkwormEntity> brain) {
         brain.setTaskList(Activity.CORE, 0, ImmutableList.of(
                 new StayAboveWaterTask(1.0f),
-                new FleeTask<>(1.5f),
+                new FleeTask(1.5f),
                 new LookAroundTask(45, 90),
-                new MoveToTargetTask(),
+                new WanderAroundTask(),
                 new TemptationCooldownTask(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
         ));
     }

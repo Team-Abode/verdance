@@ -12,18 +12,17 @@ import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryWrapper;
-import java.util.concurrent.CompletableFuture;
+import net.minecraft.util.Identifier;
+
 import java.util.function.BiConsumer;
 
 public class VerdanceArchaeologyLootTableProvider extends SimpleFabricLootTableProvider {
-    public VerdanceArchaeologyLootTableProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
-        super(output, registryLookup, LootContextTypes.ARCHAEOLOGY);
+    public VerdanceArchaeologyLootTableProvider(FabricDataOutput output) {
+        super(output, LootContextTypes.ARCHAEOLOGY);
     }
 
     @Override
-    public void accept(BiConsumer<RegistryKey<LootTable>, LootTable.Builder> exporter) {
+    public void accept(BiConsumer<Identifier, LootTable.Builder> exporter) {
         ArchaeologyLootBuilder.create(VerdanceLootTables.ARCHAEOLOGY_TOWN_RUINS_COMMON)
                 .add(Items.CLAY, 2)
                 .add(Items.WHITE_DYE, 2)
@@ -50,7 +49,6 @@ public class VerdanceArchaeologyLootTableProvider extends SimpleFabricLootTableP
                 .add(Items.WHEAT_SEEDS)
                 .add(Items.WHEAT)
                 .add(VerdanceItems.CANTALOUPE_SEEDS)
-                .add(Items.ARMADILLO_SCUTE)
                 .add(Items.BUCKET)
                 .add(Items.LEAD)
                 .export(exporter);
@@ -71,16 +69,16 @@ public class VerdanceArchaeologyLootTableProvider extends SimpleFabricLootTableP
     }
 
     public static class ArchaeologyLootBuilder {
-        private final RegistryKey<LootTable> key;
+        private final Identifier key;
         private final LootPool.Builder pool = LootPool.builder();
 
-        private ArchaeologyLootBuilder(RegistryKey<LootTable> key) {
+        private ArchaeologyLootBuilder(Identifier key) {
             this.key = key;
             pool.rolls(ConstantLootNumberProvider.create(1.0f));
             pool.bonusRolls(ConstantLootNumberProvider.create(0.0f));
         }
 
-        public static ArchaeologyLootBuilder create(RegistryKey<LootTable> lootTable) {
+        public static ArchaeologyLootBuilder create(Identifier lootTable) {
             return new ArchaeologyLootBuilder(lootTable);
         }
 
@@ -94,11 +92,11 @@ public class VerdanceArchaeologyLootTableProvider extends SimpleFabricLootTableP
             return this;
         }
 
-        public void export(BiConsumer<RegistryKey<LootTable>, LootTable.Builder> exporter) {
+        public void export(BiConsumer<Identifier, LootTable.Builder> exporter) {
             LootTable.Builder lootTable = LootTable.builder();
             lootTable.pool(pool);
             lootTable.type(LootContextTypes.ARCHAEOLOGY);
-            lootTable.randomSequenceId(key.getValue());
+            lootTable.randomSequenceId(key);
             exporter.accept(key, lootTable);
         }
     }

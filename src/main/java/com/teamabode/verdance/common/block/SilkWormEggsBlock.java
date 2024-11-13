@@ -1,6 +1,5 @@
 package com.teamabode.verdance.common.block;
 
-import com.mojang.serialization.MapCodec;
 import com.teamabode.verdance.common.entity.silkworm.SilkwormEntity;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceCriteria;
@@ -25,7 +24,6 @@ import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 public class SilkWormEggsBlock extends Block {
-    public static final MapCodec<SilkWormEggsBlock> CODEC = createCodec(SilkWormEggsBlock::new);
     private static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 1.5, 16.0);
 
     public SilkWormEggsBlock(Settings properties) {
@@ -70,11 +68,6 @@ public class SilkWormEggsBlock extends Block {
         if (!level.isClient()) {
             VerdanceCriteria.SILKWORM_EGGS_DESTROYED.trigger((ServerPlayerEntity) player, stack);
         }
-    }
-
-    @Override
-    protected MapCodec<? extends Block> getCodec() {
-        return CODEC;
     }
 
     public int getHatchDelay(Random random) {

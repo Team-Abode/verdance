@@ -61,16 +61,16 @@ public class SilkCocoonBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void writeNbt(NbtCompound compound, RegistryWrapper.WrapperLookup provider) {
-        compound.putInt("ticks", this.getTicks());
+    protected void writeNbt(NbtCompound nbt) {
+        nbt.putInt("ticks", this.getTicks());
     }
 
     @Override
-    protected void readNbt(NbtCompound compound, RegistryWrapper.WrapperLookup provider) {
-        this.setTicks(compound.getInt("ticks"));
+    public void readNbt(NbtCompound nbt) {
+        this.setTicks(nbt.getInt("ticks"));
     }
 
-    public void wobble(World level) {
+    public void wobble(World world) {
         if (this.wobbling) {
             this.wobbleTicks = 0;
         }
@@ -78,23 +78,23 @@ public class SilkCocoonBlockEntity extends BlockEntity {
             this.wobbling = true;
         }
         BlockPos pos = this.getPos();
-        Random random = level.getRandom();
+        Random random = world.getRandom();
         if (random.nextInt(2) == 0) {
-            this.dropString(level, random, pos);
+            this.dropString(world, random, pos);
         }
-        level.playSound(null, pos, VerdanceSoundEvents.BLOCK_SILK_COCOON_WOBBLE, SoundCategory.BLOCKS);
+        world.playSound(null, pos, VerdanceSoundEvents.BLOCK_SILK_COCOON_WOBBLE, SoundCategory.BLOCKS);
     }
 
-    public void dropString(World level, Random random, BlockPos origin) {
+    public void dropString(World world, Random random, BlockPos origin) {
         int count = MathHelper.nextBetween(random, 1, 2);
         ItemEntity itemEntity = new ItemEntity(
-                level,
+                world,
                 origin.getX() + 0.5d,
                 origin.getY() - 0.5d,
                 origin.getZ() + 0.5d,
                 new ItemStack(Items.STRING, count)
         );
-        level.spawnEntity(itemEntity);
+        world.spawnEntity(itemEntity);
     }
 
     public void setTicks(int ticks) {

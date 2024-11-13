@@ -1,19 +1,15 @@
 package com.teamabode.verdance.common.worldgen;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabode.verdance.common.block.SilkCocoonBlock;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceTreeDecoratorTypes;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
@@ -23,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class SilkCocoonTreeDecorator extends TreeDecorator {
-    public static final MapCodec<SilkCocoonTreeDecorator> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+    public static final Codec<SilkCocoonTreeDecorator> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.floatRange(0.0f, 1.0f).fieldOf("probability").forGetter(SilkCocoonTreeDecorator::getProbability)
     ).apply(instance, SilkCocoonTreeDecorator::new));
 

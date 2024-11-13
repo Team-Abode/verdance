@@ -3,6 +3,7 @@ package com.teamabode.verdance.common.entity.silkworm;
 import com.mojang.serialization.Dynamic;
 import com.teamabode.verdance.core.tag.VerdanceItemTags;
 import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
+import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
@@ -42,9 +43,9 @@ public class SilkwormEntity extends PathAwareEntity {
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        super.initDataTracker(builder);
-        builder.add(CLIMBING_WALL, false);
+    protected void initDataTracker() {
+        super.initDataTracker();
+        dataTracker.startTracking(CLIMBING_WALL, false);
     }
 
     @Override
@@ -174,6 +175,11 @@ public class SilkwormEntity extends PathAwareEntity {
     @Override
     public boolean shouldDropXp() {
         return false;
+    }
+
+    @Override
+    public EntityGroup getGroup() {
+        return EntityGroup.ARTHROPOD;
     }
 
     public static DefaultAttributeContainer.Builder createSilkwormAttributes() {

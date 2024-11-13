@@ -40,7 +40,6 @@ public class SilkUtils {
         BlockState state = VerdanceBlocks.SILK_COCOON.getDefaultState().with(SilkCocoonBlock.FACING, direction);
         level.setBlockState(pos, state);
         entity.discard();
-        // TODO: Play a unique sound
     }
 
     public static Optional<BlockPos> getTargetPos(ServerWorld level, BlockPos origin) {

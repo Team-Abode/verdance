@@ -8,7 +8,6 @@ import net.minecraft.world.biome.Biome;
 public class VerdanceBiomeTags {
 
     public static final TagKey<Biome> HAS_CANTALOUPE = create("has_cantaloupe");
-    public static final TagKey<Biome> HAS_GOLDEN_WOLF = create("has_golden_wolf");
     public static final TagKey<Biome> HAS_VIOLET = create("has_violet");
     public static final TagKey<Biome> HAS_TOWN_RUINS = create("has_structure/town_ruins");
 

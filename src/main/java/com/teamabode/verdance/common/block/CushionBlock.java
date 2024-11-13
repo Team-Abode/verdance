@@ -3,6 +3,7 @@ package com.teamabode.verdance.common.block;
 import com.mojang.serialization.MapCodec;
 import com.teamabode.verdance.common.entity.CushionEntity;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
+import net.minecraft.util.Hand;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -26,7 +27,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class CushionBlock extends Block {
-    public static final MapCodec<CushionBlock> CODEC = createCodec(CushionBlock::new);
     private static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 10.0, 16.0);
     public static final BooleanProperty OCCUPIED = Properties.OCCUPIED;
 
@@ -40,29 +40,29 @@ public class CushionBlock extends Block {
     }
 
     @Override
-    protected boolean hasComparatorOutput(BlockState blockState) {
+    public boolean hasComparatorOutput(BlockState blockState) {
         return true;
     }
 
     @Override
-    protected int getComparatorOutput(BlockState state, World level, BlockPos pos) {
+    public int getComparatorOutput(BlockState state, World level, BlockPos pos) {
         return state.get(OCCUPIED) ? 15 : 0;
     }
 
     @Override
-    protected ActionResult onUse(BlockState blockState, World level, BlockPos blockPos, PlayerEntity player, BlockHitResult blockHitResult) {
-        if (level.isClient()) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (world.isClient()) {
             return ActionResult.CONSUME;
         }
         if (!player.isSneaking()) {
-            if (blockState.get(OCCUPIED)) {
+            if (state.get(OCCUPIED)) {
                 return ActionResult.FAIL;
             }
-            level.setBlockState(blockPos, blockState.with(OCCUPIED, true));
-            CushionEntity cushion = new CushionEntity(VerdanceEntityTypes.CUSHION, level);
-            cushion.setPosition(blockPos.getX() + 0.5D, blockPos.getY() + 0.4D, blockPos.getZ() + 0.5D);
+            world.setBlockState(pos, state.with(OCCUPIED, true));
+            CushionEntity cushion = new CushionEntity(VerdanceEntityTypes.CUSHION, world);
+            cushion.setPosition(pos.getX() + 0.5D, pos.getY() + 0.4D, pos.getZ() + 0.5D);
 
-            if (level.spawnEntity(cushion)) {
+            if (world.spawnEntity(cushion)) {
                 player.startRiding(cushion);
                 return ActionResult.SUCCESS;
             }
@@ -71,7 +71,7 @@ public class CushionBlock extends Block {
     }
 
     @Override
-    protected void onStateReplaced(BlockState blockState, World level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+    public void onStateReplaced(BlockState blockState, World level, BlockPos blockPos, BlockState blockState2, boolean bl) {
         List<CushionEntity> entities = level.getNonSpectatingEntities(CushionEntity.class, new Box(blockPos));
         for (CushionEntity cushionEntity : entities) {
             cushionEntity.remove(Entity.RemovalReason.DISCARDED);
@@ -102,7 +102,7 @@ public class CushionBlock extends Block {
     }
 
     @Override
-    protected boolean canPathfindThrough(BlockState blockState, NavigationType pathComputationType) {
+    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return false;
     }
 
@@ -114,10 +114,5 @@ public class CushionBlock extends Block {
     @Override
     public VoxelShape getOutlineShape(@NotNull BlockState state, @NotNull BlockView world, @NotNull BlockPos pos, @NotNull ShapeContext context) {
         return SHAPE;
-    }
-
-    @Override
-    protected MapCodec<? extends Block> getCodec() {
-        return CODEC;
     }
 }

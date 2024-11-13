@@ -17,13 +17,12 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin(SugarCaneBlock.class)
 public class SugarCaneBlockMixin implements Fertilizable {
 
-
     @Override
-    public boolean isFertilizable(WorldView level, BlockPos pos, BlockState state) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         SugarCaneBlock $this = SugarCaneBlock.class.cast(this);
 
         BlockPos abovePos = pos.up();
-        return level.getBlockState(abovePos).isAir() || getCaneHeight($this, level, pos) < 3;
+        return world.getBlockState(abovePos).isAir() || getCaneHeight($this, world, pos) < 3;
     }
 
     @Override

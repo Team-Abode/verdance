@@ -1,6 +1,5 @@
 package com.teamabode.verdance.common.block;
 
-import com.mojang.serialization.MapCodec;
 import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import java.util.Optional;
 import net.minecraft.block.Block;
@@ -19,7 +18,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
 public class ShrubBlock extends PlantBlock implements Fertilizable {
-    public static final MapCodec<ShrubBlock> CODEC = createCodec(ShrubBlock::new);
     public static final VoxelShape SHAPE = Block.createCuboidShape(0.0d, 0.0d, 0.0d, 16.0d, 14.0d, 16.0d);
 
     public ShrubBlock(Settings properties) {
@@ -27,7 +25,7 @@ public class ShrubBlock extends PlantBlock implements Fertilizable {
     }
 
     @Override
-    protected VoxelShape getOutlineShape(BlockState blockState, BlockView blockGetter, BlockPos blockPos, ShapeContext collisionContext) {
+    public VoxelShape getOutlineShape(BlockState blockState, BlockView blockGetter, BlockPos blockPos, ShapeContext collisionContext) {
         return SHAPE;
     }
 
@@ -37,7 +35,7 @@ public class ShrubBlock extends PlantBlock implements Fertilizable {
     }
 
     @Override
-    public boolean isFertilizable(WorldView level, BlockPos pos, BlockState state) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         return true;
     }
 
@@ -48,12 +46,7 @@ public class ShrubBlock extends PlantBlock implements Fertilizable {
 
     @Override
     public void grow(ServerWorld level, Random random, BlockPos pos, BlockState state) {
-        Optional<Block> finalBlock = Registries.BLOCK.getRandomEntry(VerdanceBlockTags.FLOWERING_SHRUBS, random).map(RegistryEntry::value);
+        Optional<Block> finalBlock = Registries.BLOCK.getEntryList(VerdanceBlockTags.FLOWERING_SHRUBS).flatMap(entries -> entries.getRandom(random)).map(RegistryEntry::value);
         finalBlock.ifPresent(block -> level.setBlockState(pos, block.getDefaultState(), 2));
-    }
-
-    @Override
-    protected MapCodec<? extends ShrubBlock> getCodec() {
-        return CODEC;
     }
 }

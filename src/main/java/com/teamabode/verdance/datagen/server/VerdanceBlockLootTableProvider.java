@@ -19,7 +19,6 @@ import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.operator.BoundedIntUnaryOperator;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import java.util.concurrent.CompletableFuture;
 
@@ -27,7 +26,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     private static final float[] NORMAL_LEAVES_STICK_CHANCES = {0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
 
     public VerdanceBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
-        super(dataOutput, registryLookup);
+        super(dataOutput);
     }
 
     public void generate() {
@@ -36,7 +35,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
         cantaloupe();
         cushions();
         shrubs();
-        addDrop(VerdanceBlocks.SILKWORM_EGGS, this::dropsWithSilkTouch);
+        addDropWithSilkTouch(VerdanceBlocks.SILKWORM_EGGS);
     }
 
     private void mulberry() {
@@ -99,18 +98,17 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     }
 
     private LootTable.Builder createMulberryLeaves(Block leafBlock) {
-        var enchantments = registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
         var lootItem = ItemEntry.builder(Items.STICK);
 
         return dropsWithSilkTouchOrShears(
                 leafBlock,
-                this.addSurvivesExplosionCondition(leafBlock, lootItem).conditionally(TableBonusLootCondition.builder(enchantments.getOrThrow(Enchantments.FORTUNE), NORMAL_LEAVES_STICK_CHANCES))
+                this.addSurvivesExplosionCondition(leafBlock, lootItem).conditionally(TableBonusLootCondition.builder(Enchantments.FORTUNE, NORMAL_LEAVES_STICK_CHANCES))
         );
     }
 
     private LootTable.Builder createFloweringMulberryLeaves(Block leafBlock) {
         return createMulberryLeaves(leafBlock).pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0f))
-                .conditionally(this.createWithoutShearsOrSilkTouchCondition())
+                .conditionally(WITHOUT_SILK_TOUCH_NOR_SHEARS)
                 .with(this.addSurvivesExplosionCondition(leafBlock, ItemEntry.builder(VerdanceItems.MULBERRY).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f))))));
     }
 
@@ -142,8 +140,7 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
 
     private void cantaloupe() {
         addDrop(VerdanceBlocks.CANTALOUPE, block -> {
-            var enchantments = registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
-            var lootItem = ItemEntry.builder(VerdanceItems.CANTALOUPE_SLICE).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0f, 4.0f))).apply(ApplyBonusLootFunction.uniformBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.createMax(4)));
+            var lootItem = ItemEntry.builder(VerdanceItems.CANTALOUPE_SLICE).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0f, 4.0f))).apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE)).apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.createMax(4)));
             return dropsWithSilkTouch(block, this.applyExplosionDecay(block, lootItem));
         });
         addDrop(VerdanceBlocks.CANTALOUPE_STEM, block -> this.cropStemDrops(block, VerdanceItems.CANTALOUPE_SEEDS));

@@ -37,13 +37,13 @@ public class CantaloupeSliceItem extends Item {
                 user.setFireTicks(Math.max(0, fireTicks - 60));
             }
         }
-        return user.tryEatFood(world, stack);
+        return user.eatFood(world, stack);
     }
 
     public static void addCoolingParticles(ServerWorld level, LivingEntity user) {
         Box box = user.getBoundingBox();
         Vec3d center = box.getCenter();
 
-        level.spawnParticles(ParticleTypes.SNOWFLAKE, center.x, center.y, center.z, 15, 0.5f, box.getLengthY() / 2, 0.5f, 0.0d);
+        level.spawnParticles(ParticleTypes.SNOWFLAKE, center.x, center.y, center.z, 15, 0.5f, box.getYLength() / 2, 0.5f, 0.0d);
     }
 }

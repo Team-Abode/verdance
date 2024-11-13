@@ -1,6 +1,6 @@
 package com.teamabode.verdance.common.worldgen;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabode.verdance.core.registry.VerdanceTrunkPlacerTypes;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import net.minecraft.world.gen.trunk.TrunkPlacer;
 import net.minecraft.world.gen.trunk.TrunkPlacerType;
 
 public class MulberryTrunkPlacer extends TrunkPlacer {
-    public static final MapCodec<MulberryTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
+    public static final Codec<MulberryTrunkPlacer> CODEC = RecordCodecBuilder.create(instance ->
             MulberryTrunkPlacer.fillTrunkPlacerFields(instance)
             .apply(instance, MulberryTrunkPlacer::new)
     );

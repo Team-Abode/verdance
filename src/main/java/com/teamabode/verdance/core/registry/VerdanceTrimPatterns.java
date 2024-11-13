@@ -16,8 +16,7 @@ public class VerdanceTrimPatterns {
         context.register(COMMUNITY, new ArmorTrimPattern(
                 Verdance.id("community"),
                 Registries.ITEM.getEntry(VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE),
-                Text.translatable("trim_pattern.verdance.community"),
-                false
+                Text.translatable("trim_pattern.verdance.community")
         ));
     }
 

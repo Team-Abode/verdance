@@ -1,5 +1,6 @@
 package com.teamabode.verdance;
 
+/*
 import com.teamabode.sketch.core.api.config.BooleanProperty;
 import com.teamabode.sketch.core.api.config.Config;
 import com.teamabode.sketch.core.api.config.FloatProperty;
@@ -17,3 +18,4 @@ public class VerdanceConfig extends Config {
         this.defineCategory("biome_proportions", MULBERRY_FOREST_PROPORTION, SHRUBLANDS_PROPORTION);
     }
 }
+*/

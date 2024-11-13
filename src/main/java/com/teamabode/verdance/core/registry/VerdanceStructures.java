@@ -17,6 +17,8 @@ import net.minecraft.world.gen.structure.JigsawStructure;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.Structure.Config;
 
+import java.util.Map;
+
 public class VerdanceStructures {
     public static final RegistryKey<Structure> TOWN_RUINS = createKey("town_ruins");
 
@@ -28,10 +30,7 @@ public class VerdanceStructures {
         var centersPool = templatePools.getOrThrow(VerdanceTemplatePools.TOWN_RUINS_TOWN_CENTERS);
 
         context.register(TOWN_RUINS, new JigsawStructure(
-                new Config.Builder(hasTownRuins)
-                        .step(GenerationStep.Feature.UNDERGROUND_STRUCTURES)
-                        .terrainAdaptation(StructureTerrainAdaptation.BURY)
-                        .build(),
+                new Structure.Config(hasTownRuins, Map.of(), GenerationStep.Feature.UNDERGROUND_STRUCTURES, StructureTerrainAdaptation.BURY),
                 centersPool,
                 4,
                 ConstantHeightProvider.create(YOffset.fixed(-15)),

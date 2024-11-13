@@ -14,10 +14,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -26,7 +23,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class CompatCabinetBlock extends BlockWithEntity {
-    public static final MapCodec<CompatCabinetBlock> CODEC = createCodec(CompatCabinetBlock::new);
     public static final DirectionProperty FACING;
     public static final BooleanProperty OPEN;
 
@@ -35,13 +31,9 @@ public class CompatCabinetBlock extends BlockWithEntity {
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH).with(OPEN, false));
     }
 
-    protected MapCodec<? extends BlockWithEntity> getCodec() {
-        return CODEC;
-    }
-
-    public ActionResult onUse(BlockState state, World level, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (!level.isClient) {
-            BlockEntity tile = level.getBlockEntity(pos);
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (!world.isClient) {
+            BlockEntity tile = world.getBlockEntity(pos);
             if (tile instanceof CompatCabinetBlockEntity cabinet) {
                 player.openHandledScreen(cabinet);
             }

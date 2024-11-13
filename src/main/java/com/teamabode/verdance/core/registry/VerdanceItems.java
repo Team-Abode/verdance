@@ -1,18 +1,11 @@
 package com.teamabode.verdance.core.registry;
 
-import com.teamabode.sketch.common.item.SketchBoatItem;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.item.CantaloupeJuiceItem;
 import com.teamabode.verdance.core.misc.VerdanceFoodComponents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.minecraft.item.AliasedBlockItem;
-import net.minecraft.item.DiscFragmentItem;
-import net.minecraft.item.HangingSignItem;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
-import net.minecraft.item.SignItem;
-import net.minecraft.item.SmithingTemplateItem;
-import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Rarity;
@@ -55,6 +48,8 @@ public class VerdanceItems {
             new HangingSignItem(VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN, new Settings()
                     .maxCount(16))
     );
+    /*
+    TODO: boat
     public static final Item MULBERRY_BOAT = register(
             "mulberry_boat", new SketchBoatItem(
                     new Settings().maxCount(1),
@@ -68,12 +63,10 @@ public class VerdanceItems {
                     VerdanceBoatTypes.MULBERRY,
                     true)
     );
+    */
     public static final Item MUSIC_DISC_RANGE = register(
             "music_disc_range",
-            new Settings()
-                    .maxCount(1)
-                    .rarity(Rarity.RARE)
-                    .jukeboxPlayable(VerdanceJukeboxSongs.RANGE)
+            new MusicDiscItem(1, VerdanceSoundEvents.MUSIC_DISC_RANGE, new Settings().rarity(Rarity.RARE).maxCount(1), 87)
     );
     public static final Item DISC_FRAGMENT_RANGE = register(
             "disc_fragment_range",

@@ -1,6 +1,6 @@
 package com.teamabode.verdance.core.registry;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.worldgen.SilkCocoonTreeDecorator;
 import net.minecraft.registry.Registries;
@@ -16,7 +16,7 @@ public class VerdanceTreeDecoratorTypes {
 
     }
 
-    private static <P extends TreeDecorator>TreeDecoratorType<P> register(String name, MapCodec<P> decorator) {
+    private static <P extends TreeDecorator>TreeDecoratorType<P> register(String name, Codec<P> decorator) {
         return Registry.register(Registries.TREE_DECORATOR_TYPE, Verdance.id(name), new TreeDecoratorType<>(decorator));
     }
 }

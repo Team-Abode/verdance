@@ -18,7 +18,7 @@ public class VerdanceTextureMaps {
     }
 
     public static Identifier getCushionSideTexture(Block cushion) {
-        Identifier resourceLocation = Identifier.of(Registries.BLOCK.getId(cushion) + "_side");
+        Identifier resourceLocation = Registries.BLOCK.getId(cushion).withPath(path -> path + "_side");
         return resourceLocation.withPrefixedPath("block/");
     }
 }

@@ -1,12 +1,10 @@
 package com.teamabode.verdance.datagen;
 
-import com.teamabode.sketch.core.registry.SketchRegistries;
 import com.teamabode.verdance.core.registry.*;
 import com.teamabode.verdance.datagen.client.VerdanceModelProvider;
 import com.teamabode.verdance.datagen.server.*;
 import com.teamabode.verdance.datagen.server.tag.VerdanceBiomeTagProvider;
 import com.teamabode.verdance.datagen.server.tag.VerdanceBlockTagProvider;
-import com.teamabode.verdance.datagen.server.tag.VerdanceEntityTypeTagProvider;
 import com.teamabode.verdance.datagen.server.tag.VerdanceItemTagProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -23,7 +21,6 @@ public class VerdanceDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(VerdanceRecipeProvider::new);
         pack.addProvider(VerdanceBlockTagProvider::new);
         pack.addProvider(VerdanceItemTagProvider::new);
-        pack.addProvider(VerdanceEntityTypeTagProvider::new);
         pack.addProvider(VerdanceBiomeTagProvider::new);
         pack.addProvider(VerdanceArchaeologyLootTableProvider::new);
         pack.addProvider(VerdanceBlockLootTableProvider::new);
@@ -36,10 +33,7 @@ public class VerdanceDataGenerator implements DataGeneratorEntrypoint {
 
     @Override
     public void buildRegistry(RegistryBuilder registryBuilder) {
-        registryBuilder.addRegistry(RegistryKeys.WOLF_VARIANT, VerdanceWolfVariants::register);
-        registryBuilder.addRegistry(RegistryKeys.JUKEBOX_SONG, VerdanceJukeboxSongs::register);
         registryBuilder.addRegistry(RegistryKeys.TRIM_PATTERN, VerdanceTrimPatterns::register);
-        registryBuilder.addRegistry(SketchRegistries.BOAT_TYPE, VerdanceBoatTypes::register);
         registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, VerdanceConfiguredFeatures::register);
         registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, VerdancePlacedFeatures::register);
         registryBuilder.addRegistry(RegistryKeys.BIOME, VerdanceBiomes::register);

@@ -6,32 +6,12 @@ import com.teamabode.verdance.core.misc.VerdanceBlockSetTypes;
 import com.teamabode.verdance.core.misc.VerdanceBlockSoundGroups;
 import com.teamabode.verdance.core.misc.VerdanceSaplingGenerators;
 import com.teamabode.verdance.core.misc.VerdanceWoodTypes;
-import com.teamabode.verdance.core.misc.VerdanceBlockRegistryKeys;
-import com.teamabode.verdance.core.misc.VerdanceItemRegistryKeys;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.OffsetType;
 import net.minecraft.block.AbstractBlock.Settings;
-import net.minecraft.block.AttachedStemBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.FlowerBlock;
-import net.minecraft.block.HangingSignBlock;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.SaplingBlock;
-import net.minecraft.block.SignBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.StemBlock;
-import net.minecraft.block.TrapdoorBlock;
-import net.minecraft.block.WallBlock;
-import net.minecraft.block.WallHangingSignBlock;
-import net.minecraft.block.WallSignBlock;
-import net.minecraft.block.enums.NoteBlockInstrument;
+import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
@@ -63,7 +43,7 @@ public class VerdanceBlocks {
             Settings.create()
                 .mapColor(MapColor.TERRACOTTA_YELLOW)
                 .strength(2.0F, 3.0F)
-                .instrument(NoteBlockInstrument.BASS)
+                .instrument(Instrument.BASS)
                 .sounds(BlockSoundGroup.WOOD)
                 .burnable()
     );
@@ -76,7 +56,7 @@ public class VerdanceBlocks {
             new SlabBlock(Settings.create()
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
                     .strength(2.0F, 3.0F)
-                    .instrument(NoteBlockInstrument.BASS)
+                    .instrument(Instrument.BASS)
                     .sounds(BlockSoundGroup.WOOD)
                     .burnable())
     );
@@ -85,49 +65,49 @@ public class VerdanceBlocks {
             new FenceBlock(Settings.create()
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
                     .strength(2.0F, 3.0F)
-                    .instrument(NoteBlockInstrument.BASS)
+                    .instrument(Instrument.BASS)
                     .sounds(BlockSoundGroup.WOOD)
                     .burnable())
     );
     public static final Block MULBERRY_FENCE_GATE = register(
             "mulberry_fence_gate",
-            new FenceGateBlock(VerdanceWoodTypes.MULBERRY, Settings.create()
+            new FenceGateBlock(Settings.create()
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
                     .solid()
                     .strength(2.0F, 3.0F)
-                    .instrument(NoteBlockInstrument.BASS)
-                    .burnable())
+                    .instrument(Instrument.BASS)
+                    .burnable(), VerdanceWoodTypes.MULBERRY)
     );
     public static final Block MULBERRY_DOOR = register(
             "mulberry_door",
-            new DoorBlock(VerdanceBlockSetTypes.MULBERRY, Settings.create()
+            new DoorBlock(Settings.create()
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
                     .strength(3.0F)
-                    .instrument(NoteBlockInstrument.BASS)
+                    .instrument(Instrument.BASS)
                     .nonOpaque()
                     .pistonBehavior(PistonBehavior.DESTROY)
-                    .burnable())
+                    .burnable(), VerdanceBlockSetTypes.MULBERRY)
     );
     public static final Block MULBERRY_TRAPDOOR = register(
             "mulberry_trapdoor",
-            new TrapdoorBlock(VerdanceBlockSetTypes.MULBERRY, Settings.create()
+            new TrapdoorBlock(Settings.create()
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
                     .strength(3.0F)
-                    .instrument(NoteBlockInstrument.BASS)
+                    .instrument(Instrument.BASS)
                     .allowsSpawning(Blocks::never)
                     .nonOpaque()
-                    .burnable())
+                    .burnable(), VerdanceBlockSetTypes.MULBERRY)
     );
     public static final Block MULBERRY_PRESSURE_PLATE = register(
             "mulberry_pressure_plate",
-            new PressurePlateBlock(VerdanceBlockSetTypes.MULBERRY, Settings.create()
+            new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, Settings.create()
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
                     .solid()
                     .strength(0.5f)
-                    .instrument(NoteBlockInstrument.BASS)
+                    .instrument(Instrument.BASS)
                     .noCollision()
                     .pistonBehavior(PistonBehavior.DESTROY)
-                    .burnable())
+                    .burnable(), VerdanceBlockSetTypes.MULBERRY)
     );
     public static final Block MULBERRY_BUTTON = register(
             "mulberry_button",
@@ -135,45 +115,45 @@ public class VerdanceBlocks {
     );
     public static final Block MULBERRY_SIGN = registerWithoutItem(
             "mulberry_sign",
-            new SignBlock(VerdanceWoodTypes.MULBERRY, Settings.create()
+            new SignBlock(Settings.create()
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
                     .solid()
-                    .instrument(NoteBlockInstrument.BASS)
+                    .instrument(Instrument.BASS)
                     .noCollision()
                     .strength(1.0F)
-                    .burnable())
+                    .burnable(), VerdanceWoodTypes.MULBERRY)
     );
     public static final Block MULBERRY_WALL_SIGN = registerWithoutItem(
             "mulberry_wall_sign",
-            new WallSignBlock(VerdanceWoodTypes.MULBERRY, Settings.create()
+            new WallSignBlock(Settings.create()
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
                     .solid()
-                    .instrument(NoteBlockInstrument.BASS)
+                    .instrument(Instrument.BASS)
                     .noCollision()
                     .strength(1.0F)
                     .dropsLike(MULBERRY_SIGN)
-                    .burnable())
+                    .burnable(), VerdanceWoodTypes.MULBERRY)
     );
     public static final Block MULBERRY_HANGING_SIGN = registerWithoutItem(
             "mulberry_hanging_sign",
-            new HangingSignBlock(VerdanceWoodTypes.MULBERRY, Settings.create()
+            new HangingSignBlock(Settings.create()
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
                     .solid()
-                    .instrument(NoteBlockInstrument.BASS)
+                    .instrument(Instrument.BASS)
                     .noCollision()
                     .strength(1.0F)
-                    .burnable())
+                    .burnable(), VerdanceWoodTypes.MULBERRY)
     );
     public static final Block MULBERRY_WALL_HANGING_SIGN = registerWithoutItem(
             "mulberry_wall_hanging_sign",
-            new WallHangingSignBlock(VerdanceWoodTypes.MULBERRY, Settings.create()
+            new WallHangingSignBlock(Settings.create()
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
                     .solid()
-                    .instrument(NoteBlockInstrument.BASS)
+                    .instrument(Instrument.BASS)
                     .noCollision()
                     .strength(1.0F)
                     .dropsLike(MULBERRY_HANGING_SIGN)
-                    .burnable())
+                    .burnable(), VerdanceWoodTypes.MULBERRY)
     );
     public static final Block MULBERRY_LEAVES = register(
             "mulberry_leaves", Blocks.createLeavesBlock(BlockSoundGroup.GRASS)
@@ -197,7 +177,7 @@ public class VerdanceBlocks {
     );
     public static final Block CANTALOUPE = register(
             "cantaloupe",
-            new Block(Settings.create()
+            new CantaloupeBlock(Settings.create()
                     .mapColor(MapColor.LIME)
                     .strength(1.0F)
                     .sounds(BlockSoundGroup.WOOD))
@@ -205,22 +185,20 @@ public class VerdanceBlocks {
     public static final Block ATTACHED_CANTALOUPE_STEM = registerWithoutItem(
             "attached_cantaloupe_stem",
             new AttachedStemBlock(
-                    VerdanceBlockRegistryKeys.CANTALOUPE_STEM,
-                    VerdanceBlockRegistryKeys.CANTALOUPE,
-                    VerdanceItemRegistryKeys.CANTALOUPE_SEEDS,
-                    Settings.create()
-                            .noCollision()
-                            .ticksRandomly()
-                            .breakInstantly()
-                            .sounds(BlockSoundGroup.STEM)
-                            .pistonBehavior(PistonBehavior.DESTROY))
+                (GourdBlock) CANTALOUPE,
+                () -> VerdanceItems.CANTALOUPE_SEEDS,
+                Settings.create()
+                        .noCollision()
+                        .ticksRandomly()
+                        .breakInstantly()
+                        .sounds(BlockSoundGroup.STEM)
+                        .pistonBehavior(PistonBehavior.DESTROY))
     );
     public static final Block CANTALOUPE_STEM = registerWithoutItem(
             "cantaloupe_stem",
             new StemBlock(
-                VerdanceBlockRegistryKeys.CANTALOUPE,
-                VerdanceBlockRegistryKeys.ATTACHED_CANTALOUPE_STEM,
-                VerdanceItemRegistryKeys.CANTALOUPE_SEEDS,
+                (GourdBlock) CANTALOUPE,
+                () -> VerdanceItems.CANTALOUPE_SEEDS,
                 Settings.create()
                         .noCollision()
                         .ticksRandomly()
@@ -562,7 +540,7 @@ public class VerdanceBlocks {
                     .sounds(VerdanceBlockSoundGroups.SILK_COCOON))
     );
     public static final Block VIOLET = register(
-            "violet", new FlowerBlock(StatusEffects.REGENERATION, 8.0f, Settings.create()
+            "violet", new FlowerBlock(StatusEffects.REGENERATION, 8, Settings.create()
                     .mapColor(MapColor.DARK_GREEN)
                     .noCollision()
                     .breakInstantly()
@@ -645,7 +623,7 @@ public class VerdanceBlocks {
                 .mapColor(color)
                 .sounds(VerdanceBlockSoundGroups.STUCCO)
                 .requiresTool()
-                .instrument(NoteBlockInstrument.BASEDRUM)
+                .instrument(Instrument.BASEDRUM)
                 .strength(1.5F, 5.5F)
         );
     }

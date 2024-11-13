@@ -11,31 +11,25 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.family.BlockFamily;
 import net.minecraft.data.family.BlockFamily.Variant;
-import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.RecipeProvider;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class VerdanceRecipeProvider extends FabricRecipeProvider {
 
-    public VerdanceRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
-        super(output, registryLookup);
+    public VerdanceRecipeProvider(FabricDataOutput output) {
+        super(output);
     }
 
-    private static void stucco(RecipeExporter output, BlockFamily family, Item dye) {
+    private static void stucco(Consumer<RecipeJsonProvider> output, BlockFamily family, Item dye) {
         ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, family.getBaseBlock(), 8).input(dye).input(Items.CLAY, 4).input(Ingredient.fromTag(ItemTags.SAND), 4).group("stucco").criterion(hasItem(Items.CLAY), conditionsFromItem(Items.CLAY)).criterion("has_sand", conditionsFromTag(ItemTags.SAND)).offerTo(output);
 
         offerStonecuttingRecipe(output, RecipeCategory.BUILDING_BLOCKS, family.getVariant(Variant.STAIRS), family.getBaseBlock());
@@ -43,7 +37,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         offerStonecuttingRecipe(output, RecipeCategory.BUILDING_BLOCKS, family.getVariant(Variant.WALL), family.getBaseBlock());
     }
 
-    private static void cantaloupe(RecipeExporter exporter) {
+    private static void cantaloupe(Consumer<RecipeJsonProvider> exporter) {
         offer2x2CompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, VerdanceBlocks.CANTALOUPE, VerdanceItems.CANTALOUPE_SLICE);
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, VerdanceItems.CANTALOUPE_SEEDS)
@@ -96,15 +90,15 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         );
     }
 
-    public static void offerStonecuttingRecipe(RecipeExporter exporter, RecipeCategory category, ItemConvertible result, ItemConvertible material) {
+    public static void offerStonecuttingRecipe(Consumer<RecipeJsonProvider> exporter, RecipeCategory category, ItemConvertible result, ItemConvertible material) {
         offerStonecuttingRecipe(exporter, category, result, material, 1);
     }
 
-    public static void offerStonecuttingRecipe(RecipeExporter exporter, RecipeCategory category, ItemConvertible result, ItemConvertible material, int resultCount) {
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(material), category, result, resultCount).criterion(RecipeProvider.hasItem(material), RecipeProvider.conditionsFromItem(material)).offerTo(exporter, Verdance.id(convertBetween(result, material) + "_stonecutting"));
+    public static void offerStonecuttingRecipe(Consumer<RecipeJsonProvider> exporter, RecipeCategory category, ItemConvertible result, ItemConvertible material, int resultCount) {
+        SingleItemRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(material), category, result, resultCount).criterion(RecipeProvider.hasItem(material), RecipeProvider.conditionsFromItem(material)).offerTo(exporter, Verdance.id(convertBetween(result, material) + "_stonecutting"));
     }
 
-    private static void cushion(RecipeExporter exporter, ItemConvertible cushion, ItemConvertible wool) {
+    private static void cushion(Consumer<RecipeJsonProvider> exporter, ItemConvertible cushion, ItemConvertible wool) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, cushion, 2)
                 .criterion(hasItem(wool), conditionsFromItem(wool))
                 .input('W', wool)
@@ -114,7 +108,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
                 .offerTo(exporter, Verdance.id(getItemPath(cushion)));
     }
 
-    private static void dyeFromFlower(RecipeExporter exporter, Item dye, Block flower, int count) {
+    private static void dyeFromFlower(Consumer<RecipeJsonProvider> exporter, Item dye, Block flower, int count) {
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, dye, count)
                 .input(flower)
                 .criterion(hasItem(flower), conditionsFromItem(flower))
@@ -122,8 +116,15 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
                 .offerTo(exporter, Verdance.id(convertBetween(dye, flower)));
     }
 
-    public void generate(RecipeExporter exporter) {
-        VerdanceBlockFamilies.getAllFamilies().filter(BlockFamily::shouldGenerateRecipes).forEach(family -> RecipeProvider.generateFamily(exporter, family, FeatureSet.of(FeatureFlags.VANILLA)));
+    @Override
+    public void generate(Consumer<RecipeJsonProvider> exporter) {
+        VerdanceBlockFamilies.getAllFamilies()
+                .filter(family -> family.shouldGenerateRecipes(FeatureSet.of(FeatureFlags.VANILLA)))
+                .forEach(family -> RecipeProvider.generateFamily(exporter, family));
+
+        //offerBoatRecipe(exporter, VerdanceItems.MULBERRY_BOAT, VerdanceBlocks.MULBERRY_PLANKS);
+        //offerChestBoatRecipe(exporter, VerdanceItems.MULBERRY_CHEST_BOAT, VerdanceBlocks.MULBERRY_PLANKS);
+
         offerBarkBlockRecipe(exporter, VerdanceBlocks.MULBERRY_WOOD, VerdanceBlocks.MULBERRY_LOG);
         offerBarkBlockRecipe(exporter, VerdanceBlocks.STRIPPED_MULBERRY_WOOD, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
         offerPlanksRecipe2(exporter, VerdanceBlocks.MULBERRY_PLANKS, VerdanceItemTags.MULBERRY_LOGS, 4);

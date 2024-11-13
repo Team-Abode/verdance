@@ -3,7 +3,6 @@ package com.teamabode.verdance.core.registry;
 import com.teamabode.verdance.Verdance;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 
 public class VerdanceSoundEvents {
@@ -29,15 +28,11 @@ public class VerdanceSoundEvents {
     public static final SoundEvent BLOCK_SILK_COCOON_STEP = register("block.silk_cocoon.step");
     public static final SoundEvent BLOCK_SILK_COCOON_WOBBLE = register("block.silk_cocoon.wobble");
 
-    public static final RegistryEntry<SoundEvent> MUSIC_DISC_RANGE = registerHolder("music_disc.range");
+    public static final SoundEvent MUSIC_DISC_RANGE = register("music_disc.range");
 
     public static void register() {}
 
     private static SoundEvent register(String name) {
         return Registry.register(Registries.SOUND_EVENT, Verdance.id(name), SoundEvent.of(Verdance.id(name)));
-    }
-
-    private static RegistryEntry.Reference<SoundEvent> registerHolder(String name) {
-        return Registry.registerReference(Registries.SOUND_EVENT, Verdance.id(name), SoundEvent.of(Verdance.id(name)));
     }
 }

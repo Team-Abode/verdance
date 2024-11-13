@@ -4,7 +4,7 @@ import com.teamabode.verdance.core.registry.VerdanceBiomes;
 import com.teamabode.verdance.core.tag.VerdanceBiomeTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BiomeTags;
@@ -27,7 +27,6 @@ public class VerdanceBiomeTagProvider extends FabricTagProvider<Biome> {
         spawnsWarmVariantFrogs();
         strongholdBiasedTo();
         hasCantaloupe();
-        hasGoldenWolf();
         hasViolet();
         hasStructure();
         conventionalTags();
@@ -69,11 +68,6 @@ public class VerdanceBiomeTagProvider extends FabricTagProvider<Biome> {
                 .add(VerdanceBiomes.SHRUBLANDS);
     }
 
-    private void hasGoldenWolf() {
-        this.getOrCreateTagBuilder(VerdanceBiomeTags.HAS_GOLDEN_WOLF)
-                .add(VerdanceBiomes.MULBERRY_FOREST);
-    }
-
     private void hasViolet() {
         this.getOrCreateTagBuilder(VerdanceBiomeTags.HAS_VIOLET)
                 .forceAddTag(BiomeTags.IS_TAIGA)
@@ -83,19 +77,15 @@ public class VerdanceBiomeTagProvider extends FabricTagProvider<Biome> {
     }
 
     private void hasStructure() {
-        this.getOrCreateTagBuilder(BiomeTags.TRIAL_CHAMBERS_HAS_STRUCTURE)
-                .add(VerdanceBiomes.MULBERRY_FOREST)
-                .add(VerdanceBiomes.SHRUBLANDS)
-                .setReplace(false);
         this.getOrCreateTagBuilder(BiomeTags.MINESHAFT_HAS_STRUCTURE).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
         this.getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_STANDARD_HAS_STRUCTURE).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);
         this.getOrCreateTagBuilder(VerdanceBiomeTags.HAS_TOWN_RUINS)
                 .add(VerdanceBiomes.SHRUBLANDS)
-                .forceAddTag(ConventionalBiomeTags.IS_DESERT);
+                .forceAddTag(ConventionalBiomeTags.DESERT);
     }
 
     private void conventionalTags() {
-        this.getOrCreateTagBuilder(ConventionalBiomeTags.IS_HOT_OVERWORLD).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
-        this.getOrCreateTagBuilder(ConventionalBiomeTags.IS_VEGETATION_DENSE).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
+        this.getOrCreateTagBuilder(ConventionalBiomeTags.CLIMATE_HOT).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
+        this.getOrCreateTagBuilder(ConventionalBiomeTags.VEGETATION_DENSE).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
     }
 }

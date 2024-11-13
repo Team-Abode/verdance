@@ -12,7 +12,6 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundCategory;
@@ -22,7 +21,6 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.UnknownNullability;
 
 public class CompatCabinetBlockEntity extends LootableContainerBlockEntity {
     private DefaultedList<ItemStack> contents;
@@ -56,33 +54,37 @@ public class CompatCabinetBlockEntity extends LootableContainerBlockEntity {
         };
     }
 
-    public void writeNbt(NbtCompound compound, RegistryWrapper.WrapperLookup registries) {
-        super.writeNbt(compound, registries);
-        if (!this.writeLootTable(compound)) {
-            Inventories.writeNbt(compound, this.contents, registries);
-        }
+    @Override
+    protected void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
 
+        if (!this.serializeLootTable(nbt)) {
+            Inventories.writeNbt(nbt, this.contents);
+        }
     }
 
-    public void readNbt(NbtCompound compound, RegistryWrapper.WrapperLookup registries) {
-        super.readNbt(compound, registries);
-        this.contents = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        if (!this.readLootTable(compound)) {
-            Inventories.readNbt(compound, this.contents, registries);
-        }
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
 
+        this.contents = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
+        if (this.deserializeLootTable(nbt)) {
+            Inventories.readNbt(nbt, this.contents);
+        }
     }
 
     public int size() {
         return 27;
     }
 
-    protected DefaultedList<ItemStack> getHeldStacks() {
+    @Override
+    protected DefaultedList<ItemStack> getInvStackList() {
         return this.contents;
     }
 
-    protected void setHeldStacks(DefaultedList<ItemStack> itemsIn) {
-        this.contents = itemsIn;
+    @Override
+    protected void setInvStackList(DefaultedList<ItemStack> list) {
+        this.contents = list;
     }
 
     protected Text getContainerName() {
@@ -128,12 +130,5 @@ public class CompatCabinetBlockEntity extends LootableContainerBlockEntity {
             double z = (double)this.pos.getZ() + 0.5 + (double)cabinetFacingVector.getZ() / 2.0;
             this.world.playSound(null, x, y, z, sound, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
         }
-    }
-
-    public @UnknownNullability NbtCompound serializeNBT(RegistryWrapper.WrapperLookup provider) {
-        return new NbtCompound();
-    }
-
-    public void deserializeNBT(RegistryWrapper.WrapperLookup provider, NbtCompound compoundTag) {
     }
 }

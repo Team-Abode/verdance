@@ -68,8 +68,9 @@ public class VerdanceModelProvider extends FabricModelProvider {
         generator.register(VerdanceItems.GRILLED_CANTALOUPE_SLICE, Models.GENERATED);
         generator.register(VerdanceItems.CANTALOUPE_JUICE, Models.GENERATED);
 
-        generator.register(VerdanceItems.MULBERRY_BOAT, Models.GENERATED);
-        generator.register(VerdanceItems.MULBERRY_CHEST_BOAT, Models.GENERATED);
+        // TODO: boat
+        //generator.register(VerdanceItems.MULBERRY_BOAT, Models.GENERATED);
+        //generator.register(VerdanceItems.MULBERRY_CHEST_BOAT, Models.GENERATED);
 
         generator.register(VerdanceItems.ABODE_POTTERY_SHERD, Models.GENERATED);
         generator.register(VerdanceItems.FRILLS_POTTERY_SHERD, Models.GENERATED);

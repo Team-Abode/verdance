@@ -1,6 +1,5 @@
 package com.teamabode.verdance.common.block;
 
-import com.mojang.serialization.MapCodec;
 import com.teamabode.verdance.common.block.entity.SilkCocoonBlockEntity;
 import com.teamabode.verdance.core.registry.VerdanceBlockEntityTypes;
 import org.jetbrains.annotations.Nullable;
@@ -28,7 +27,6 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
 public class SilkCocoonBlock extends BlockWithEntity {
-    public static final MapCodec<SilkCocoonBlock> CODEC = createCodec(SilkCocoonBlock::new);
     public static final Map<Direction, VoxelShape> SHAPE_BY_DIR = Map.of(
             Direction.NORTH, Block.createCuboidShape(3.0d, 0.0d, 0.0d, 13.0d, 12.0d, 10.0d),
             Direction.EAST, Block.createCuboidShape(6.0d, 0.0d, 3.0d, 16.0d, 12.0d, 13.0d),
@@ -48,12 +46,7 @@ public class SilkCocoonBlock extends BlockWithEntity {
     }
 
     @Override
-    protected MapCodec<SilkCocoonBlock> getCodec() {
-        return CODEC;
-    }
-
-    @Override
-    protected VoxelShape getOutlineShape(BlockState state, BlockView blockGetter, BlockPos pos, ShapeContext context) {
+    public VoxelShape getOutlineShape(BlockState state, BlockView blockGetter, BlockPos pos, ShapeContext context) {
         Direction facing = state.get(FACING);
         return SHAPE_BY_DIR.get(facing);
     }
@@ -76,12 +69,12 @@ public class SilkCocoonBlock extends BlockWithEntity {
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess level, BlockPos pos, BlockPos neighborPos) {
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess level, BlockPos pos, BlockPos neighborPos) {
         return direction == state.get(FACING) && !state.canPlaceAt(level, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, level, pos, neighborPos);
     }
 
     @Override
-    protected boolean canPlaceAt(BlockState state, WorldView level, BlockPos pos) {
+    public boolean canPlaceAt(BlockState state, WorldView level, BlockPos pos) {
         Direction dir = state.get(FACING);
         BlockState relativeState = level.getBlockState(pos.offset(dir));
 
@@ -89,7 +82,7 @@ public class SilkCocoonBlock extends BlockWithEntity {
     }
 
     @Override
-    protected BlockRenderType getRenderType(BlockState blockState) {
+    public BlockRenderType getRenderType(BlockState blockState) {
         return BlockRenderType.MODEL;
     }
 
@@ -101,7 +94,7 @@ public class SilkCocoonBlock extends BlockWithEntity {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return validateTicker(blockEntityType, VerdanceBlockEntityTypes.SILK_COCOON, SilkCocoonBlockEntity::tick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState blockState, BlockEntityType<T> type) {
+        return world.isClient() ? null : checkType(type, VerdanceBlockEntityTypes.SILK_COCOON, SilkCocoonBlockEntity::tick);
     }
 }

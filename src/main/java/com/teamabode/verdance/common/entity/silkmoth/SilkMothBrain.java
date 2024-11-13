@@ -16,19 +16,7 @@ import net.minecraft.entity.ai.brain.MemoryModuleState;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.sensor.Sensor;
 import net.minecraft.entity.ai.brain.sensor.SensorType;
-import net.minecraft.entity.ai.brain.task.BreedTask;
-import net.minecraft.entity.ai.brain.task.FleeTask;
-import net.minecraft.entity.ai.brain.task.GoTowardsLookTargetTask;
-import net.minecraft.entity.ai.brain.task.LookAroundTask;
-import net.minecraft.entity.ai.brain.task.LookAtMobWithIntervalTask;
-import net.minecraft.entity.ai.brain.task.MoveToTargetTask;
-import net.minecraft.entity.ai.brain.task.RandomTask;
-import net.minecraft.entity.ai.brain.task.StayAboveWaterTask;
-import net.minecraft.entity.ai.brain.task.StrollTask;
-import net.minecraft.entity.ai.brain.task.TaskTriggerer;
-import net.minecraft.entity.ai.brain.task.TemptTask;
-import net.minecraft.entity.ai.brain.task.TemptationCooldownTask;
-import net.minecraft.entity.ai.brain.task.WaitTask;
+import net.minecraft.entity.ai.brain.task.*;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import java.util.List;
@@ -78,16 +66,16 @@ public class SilkMothBrain {
                 new StayAboveWaterTask(1.0f),
                 new TakeOffTask(),
                 new LandTask(),
-                new FleeTask<>(1.5f),
+                new FleeTask(1.5f),
                 new LookAroundTask(45, 90),
-                new MoveToTargetTask(),
+                new WanderAroundTask(),
                 new TemptationCooldownTask(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
         ));
     }
 
     private static void addIdleActivities(Brain<SilkMothEntity> brain) {
         brain.setTaskList(Activity.IDLE, ImmutableList.of(
-                Pair.of(0, new BreedTask(VerdanceEntityTypes.SILK_MOTH)),
+                Pair.of(0, new BreedTask(VerdanceEntityTypes.SILK_MOTH, 1.0f)),
                 Pair.of(1, new TemptTask(livingEntity -> 1.5f)),
                 Pair.of(2, LookAtMobWithIntervalTask.follow(EntityType.PLAYER, 6.0f, UniformIntProvider.create(30, 60))),
                 Pair.of(2, new GoTowardsLandingTask()),

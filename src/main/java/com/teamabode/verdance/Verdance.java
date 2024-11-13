@@ -68,10 +68,11 @@ public class Verdance implements ModInitializer {
     }
 
     public static void registerBlockEntitySupportedBlock() {
-        BlockEntityType.SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_SIGN);
-        BlockEntityType.SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_WALL_SIGN);
-        BlockEntityType.HANGING_SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_HANGING_SIGN);
-        BlockEntityType.HANGING_SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
+        // TODO: block entity mixin to add these
+        //BlockEntityType.SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_SIGN);
+        //BlockEntityType.SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_WALL_SIGN);
+        //BlockEntityType.HANGING_SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_HANGING_SIGN);
+        //BlockEntityType.HANGING_SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
     }
 
     public static void registerTrades() {
@@ -84,7 +85,7 @@ public class Verdance implements ModInitializer {
             itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.PINK_FLOWERING_SHRUB, 1, 1, 12, 1));
         });
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, itemListings -> {
-            itemListings.add(new TradeOffers.BuyItemFactory(VerdanceBlocks.CANTALOUPE, 6, 12, 10));
+            itemListings.add(new TradeOffers.BuyForOneEmeraldFactory(VerdanceBlocks.CANTALOUPE, 6, 12, 10));
         });
     }
 
@@ -108,11 +109,13 @@ public class Verdance implements ModInitializer {
             );
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
+            /* TODO: boat
             entries.addAfter(
                     Items.CHERRY_CHEST_BOAT,
                     VerdanceItems.MULBERRY_BOAT,
                     VerdanceItems.MULBERRY_CHEST_BOAT
             );
+            */
             entries.addBefore(Items.MUSIC_DISC_5, VerdanceItems.MUSIC_DISC_RANGE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
@@ -248,7 +251,7 @@ public class Verdance implements ModInitializer {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.addBefore(Items.DISC_FRAGMENT_5, VerdanceItems.DISC_FRAGMENT_RANGE);
             entries.addBefore(Items.ANGLER_POTTERY_SHERD, VerdanceItems.ABODE_POTTERY_SHERD);
-            entries.addAfter(Items.FLOW_POTTERY_SHERD, VerdanceItems.FRILLS_POTTERY_SHERD);
+            entries.addAfter(Items.FRIEND_POTTERY_SHERD, VerdanceItems.FRILLS_POTTERY_SHERD);
             entries.addBefore(Items.PLENTY_POTTERY_SHERD, VerdanceItems.PITCH_POTTERY_SHERD);
             entries.addBefore(Items.PRIZE_POTTERY_SHERD, VerdanceItems.PRICKLE_POTTERY_SHERD);
             entries.addAfter(Items.SNORT_POTTERY_SHERD, VerdanceItems.SPIRIT_POTTERY_SHERD, VerdanceItems.TRAP_POTTERY_SHERD);
@@ -264,17 +267,18 @@ public class Verdance implements ModInitializer {
     }
 
     public static void registerBiomePlacements() {
-        BiomePlacement.replaceOverworld(BiomeKeys.CHERRY_GROVE, VerdanceBiomes.MULBERRY_FOREST, VerdanceConfig.MULBERRY_FOREST_PROPORTION.get());
-        BiomePlacement.replaceOverworld(BiomeKeys.SPARSE_JUNGLE, VerdanceBiomes.SHRUBLANDS, VerdanceConfig.SHRUBLANDS_PROPORTION.get());
+        // TODO: placeholder values until we have a config
+        BiomePlacement.replaceOverworld(BiomeKeys.CHERRY_GROVE, VerdanceBiomes.MULBERRY_FOREST, 0.1f /*VerdanceConfig.MULBERRY_FOREST_PROPORTION.get()*/);
+        BiomePlacement.replaceOverworld(BiomeKeys.SPARSE_JUNGLE, VerdanceBiomes.SHRUBLANDS, 0.1f /*VerdanceConfig.SHRUBLANDS_PROPORTION.get()*/);
     }
 
     public static void registerSurfaceRules() {
-        SurfaceGeneration.addOverworldSurfaceRules(Identifier.ofVanilla("rules/overworld"), MaterialRules.sequence(
+        SurfaceGeneration.addOverworldSurfaceRules(new Identifier("minecraft", "rules/overworld"), MaterialRules.sequence(
                 VerdanceSurfaceRules.shrublands()
         ));
     }
 
     public static Identifier id(String name) {
-        return Identifier.of(MOD_ID, name);
+        return new Identifier(MOD_ID, name);
     }
 }

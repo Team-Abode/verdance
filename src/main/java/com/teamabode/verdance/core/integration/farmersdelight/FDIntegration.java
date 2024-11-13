@@ -16,7 +16,7 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 public class FDIntegration {
     private static final RegistryKey<ItemGroup> TAB_FARMERS_DELIGHT = RegistryKey.of(
             RegistryKeys.ITEM_GROUP,
-            Identifier.of("farmersdelight:farmersdelight")
+            new Identifier("farmersdelight", "farmersdelight")
     );
 
     public static void register(ModContainer container) {

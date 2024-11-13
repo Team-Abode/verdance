@@ -74,7 +74,7 @@ public class CantaloupeJuiceItem extends Item {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack itemStack, LivingEntity livingEntity) {
+    public int getMaxUseTime(ItemStack stack) {
         return 40;
     }
 }

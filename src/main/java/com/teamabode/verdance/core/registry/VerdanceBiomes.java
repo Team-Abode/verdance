@@ -1,6 +1,7 @@
 package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
+import net.minecraft.client.sound.MusicType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
@@ -8,7 +9,6 @@ import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BiomeMoodSound;
-import net.minecraft.sound.MusicType;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
@@ -89,7 +89,6 @@ public class VerdanceBiomes {
         SpawnSettings.Builder spawnSettings = new SpawnSettings.Builder();
         BiomeEffects.Builder specialEffects = new BiomeEffects.Builder();
 
-        spawnSettings.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.ARMADILLO, 6, 1, 2));
         DefaultBiomeFeatures.addBatsAndMonsters(spawnSettings);
 
         // Global Overworld generation

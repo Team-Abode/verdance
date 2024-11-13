@@ -6,10 +6,7 @@ import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
 import com.teamabode.verdance.core.tag.VerdanceItemTags;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.AnimationState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Flutterer;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.control.FlightMoveControl;
@@ -67,6 +64,7 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
     public SilkMothEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
 
+        this.setStepHeight(1.25f);
         this.moveControl = new MoveControl(this);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
@@ -156,9 +154,9 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        super.initDataTracker(builder);
-        builder.add(FLYING, false);
+    protected void initDataTracker() {
+        super.initDataTracker();
+        dataTracker.startTracking(FLYING, false);
     }
 
     @Override
@@ -266,6 +264,16 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
     }
 
     @Override
+    protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
+        return 0.35f;
+    }
+
+    @Override
+    public EntityGroup getGroup() {
+        return EntityGroup.ARTHROPOD;
+    }
+
+    @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         if (!this.isInAir()) {
             this.playSound(SoundEvents.ENTITY_SILVERFISH_STEP, 0.1F, 1.0F);
@@ -287,7 +295,6 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0f)
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5d)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2d)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0)
-                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.25f);
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0);
     }
 }

@@ -2,7 +2,6 @@ package com.teamabode.verdance.core.mixin.general;
 
 
 import com.teamabode.verdance.core.registry.VerdanceDecoratedPotPatterns;
-import net.minecraft.block.DecoratedPotPattern;
 import net.minecraft.block.DecoratedPotPatterns;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKey;
@@ -15,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class DecoratedPotPatternsMixin {
 
     @Inject(method = "fromSherd", at = @At("HEAD"), cancellable = true)
-    private static void verdance$fromSherd(Item item, CallbackInfoReturnable<RegistryKey<DecoratedPotPattern>> cir) {
+    private static void verdance$fromSherd(Item item, CallbackInfoReturnable<RegistryKey<String>> cir) {
         if (VerdanceDecoratedPotPatterns.SHERD_TO_PATTERN.containsKey(item)) {
             cir.setReturnValue(VerdanceDecoratedPotPatterns.SHERD_TO_PATTERN.get(item));
         }

@@ -5,7 +5,7 @@ import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import java.util.concurrent.CompletableFuture;
@@ -105,16 +105,19 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
     }
 
     private void boats() {
-        this.getOrCreateTagBuilder(ItemTags.BOATS).add(VerdanceItems.MULBERRY_BOAT).setReplace(false);
-        this.getOrCreateTagBuilder(ItemTags.CHEST_BOATS).add(VerdanceItems.MULBERRY_CHEST_BOAT).setReplace(false);
+        // TODO: boat
+        //this.getOrCreateTagBuilder(ItemTags.BOATS).add(VerdanceItems.MULBERRY_BOAT).setReplace(false);
+        //this.getOrCreateTagBuilder(ItemTags.CHEST_BOATS).add(VerdanceItems.MULBERRY_CHEST_BOAT).setReplace(false);
     }
 
     private void foods() {
         this.getOrCreateTagBuilder(ConventionalItemTags.FOODS).add(VerdanceItems.GRILLED_CANTALOUPE_SLICE).setReplace(false);
-        this.getOrCreateTagBuilder(ConventionalItemTags.FRUIT_FOODS).add(VerdanceItems.CANTALOUPE_SLICE).setReplace(false);
-        this.getOrCreateTagBuilder(ConventionalItemTags.BERRY_FOODS).add(VerdanceItems.MULBERRY).setReplace(false);
-        this.getOrCreateTagBuilder(ItemTags.CHICKEN_FOOD).add(VerdanceItems.CANTALOUPE_SEEDS).setReplace(false);
-        this.getOrCreateTagBuilder(ItemTags.PARROT_FOOD).add(VerdanceItems.CANTALOUPE_SEEDS).setReplace(false);
+
+        /*
+            TODO: Make cantaloupe seeds a food for chickens and parrots
+         */
+        //this.getOrCreateTagBuilder(ItemTags.CHICKEN_FOOD).add(VerdanceItems.CANTALOUPE_SEEDS).setReplace(false);
+        //this.getOrCreateTagBuilder(ItemTags.PARROT_FOOD).add(VerdanceItems.CANTALOUPE_SEEDS).setReplace(false);
     }
 
     private void decoratedPotSherds() {

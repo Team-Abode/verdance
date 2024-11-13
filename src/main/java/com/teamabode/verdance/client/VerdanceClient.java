@@ -1,7 +1,7 @@
 package com.teamabode.verdance.client;
 
-import com.teamabode.verdance.client.model.SilkMothModel;
-import com.teamabode.verdance.client.model.SilkwormModel;
+import com.teamabode.verdance.client.model.SilkMothEntityModel;
+import com.teamabode.verdance.client.model.SilkwormEntityModel;
 import com.teamabode.verdance.client.renderer.SilkCocoonRenderer;
 import com.teamabode.verdance.client.renderer.SilkMothRenderer;
 import com.teamabode.verdance.client.renderer.SilkwormRenderer;
@@ -16,11 +16,11 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.world.BiomeColors;
+import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
 import net.minecraft.item.BlockItem;
-import net.minecraft.world.biome.FoliageColors;
 
 public class VerdanceClient implements ClientModInitializer {
 
@@ -32,8 +32,8 @@ public class VerdanceClient implements ClientModInitializer {
     }
 
     private static void registerModelLayers() {
-        EntityModelLayerRegistry.registerModelLayer(SilkMothModel.LAYER, SilkMothModel::createBodyLayer);
-        EntityModelLayerRegistry.registerModelLayer(SilkwormModel.LAYER_LOCATION, SilkwormModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(SilkMothEntityModel.LAYER, SilkMothEntityModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(SilkwormEntityModel.LAYER_LOCATION, SilkwormEntityModel::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(SilkCocoonRenderer.LAYER_LOCATION, SilkCocoonRenderer::createBodyLayer);
     }
 

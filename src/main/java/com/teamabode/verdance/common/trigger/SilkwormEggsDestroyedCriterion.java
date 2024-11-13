@@ -1,45 +1,62 @@
 package com.teamabode.verdance.common.trigger;
 
+import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.core.registry.VerdanceCriteria;
 import java.util.Optional;
 import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterion;
+import net.minecraft.advancement.criterion.AbstractCriterionConditions;
 import net.minecraft.item.ItemStack;
+import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
+import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.entity.LootContextPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 
-public class SilkwormEggsDestroyedCriterion extends AbstractCriterion<SilkwormEggsDestroyedCriterion.TriggerInstance> {
-
-    @Override
-    public Codec<TriggerInstance> getConditionsCodec() {
-        return TriggerInstance.CODEC;
-    }
+public class SilkwormEggsDestroyedCriterion extends AbstractCriterion<SilkwormEggsDestroyedCriterion.Conditions> {
+    public static final Identifier ID = Verdance.id("silkworm_eggs_destroyed");
 
     public void trigger(ServerPlayerEntity player, ItemStack stack) {
-        this.trigger(player, triggerInstance -> triggerInstance.matches(stack));
+        this.trigger(player, conditions -> conditions.test(stack));
     }
 
-    public record TriggerInstance(Optional<LootContextPredicate> player, Optional<ItemPredicate> item) implements AbstractCriterion.Conditions {
-        public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player),
-                ItemPredicate.CODEC.optionalFieldOf("item").forGetter(TriggerInstance::item)
-        ).apply(instance, TriggerInstance::new));
+    @Override
+    protected Conditions conditionsFromJson(JsonObject obj, LootContextPredicate playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
+        ItemPredicate predicate = ItemPredicate.fromJson(obj.get("item"));
+        return new Conditions(playerPredicate, predicate);
+    }
 
-        public boolean matches(ItemStack stack) {
-            return this.item.isEmpty() || this.item.get().test(stack);
+    @Override
+    public Identifier getId() {
+        return ID;
+    }
+
+    public static class Conditions extends AbstractCriterionConditions {
+        private final ItemPredicate item;
+
+        public Conditions(LootContextPredicate player, ItemPredicate item) {
+            super(SilkwormEggsDestroyedCriterion.ID, player);
+            this.item = item;
         }
 
-        public static AdvancementCriterion<TriggerInstance> createCriterion(ItemPredicate.Builder builder) {
-            return VerdanceCriteria.SILKWORM_EGGS_DESTROYED.create(new TriggerInstance(Optional.empty(), Optional.of(builder.build())));
+        public static Conditions create(ItemPredicate item) {
+            return new Conditions(LootContextPredicate.EMPTY, item);
+        }
+
+        public boolean test(ItemStack stack) {
+            return item.test(stack);
         }
 
         @Override
-        public Optional<LootContextPredicate> player() {
-            return this.player;
+        public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
+            JsonObject obj = super.toJson(predicateSerializer);
+            obj.add("item", item.toJson());
+            return obj;
         }
     }
 }
