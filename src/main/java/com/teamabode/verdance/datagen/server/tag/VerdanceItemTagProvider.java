@@ -33,6 +33,7 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
         logs();
         boats();
         foods();
+        musicDiscs();
         decoratedPotSherds();
         trimTemplates();
         saplings();
@@ -111,12 +112,10 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
     private void foods() {
         this.getOrCreateTagBuilder(ConventionalItemTags.FOODS).add(VerdanceItems.GRILLED_CANTALOUPE_SLICE).setReplace(false);
+    }
 
-        /*
-            TODO: Make cantaloupe seeds a food for chickens and parrots
-         */
-        //this.getOrCreateTagBuilder(ItemTags.CHICKEN_FOOD).add(VerdanceItems.CANTALOUPE_SEEDS).setReplace(false);
-        //this.getOrCreateTagBuilder(ItemTags.PARROT_FOOD).add(VerdanceItems.CANTALOUPE_SEEDS).setReplace(false);
+    private void musicDiscs() {
+        this.getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(VerdanceItems.MUSIC_DISC_RANGE);
     }
 
     private void decoratedPotSherds() {
