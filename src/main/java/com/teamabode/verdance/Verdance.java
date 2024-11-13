@@ -1,5 +1,7 @@
 package com.teamabode.verdance;
 
+import com.teamabode.scribe.common.entity.boat.ScribeBoatDispenseItemBehavior;
+import com.teamabode.scribe.core.api.misc.BlockEntityAdditions;
 import com.teamabode.verdance.core.integration.CompatUtils;
 import com.teamabode.verdance.core.integration.farmersdelight.FDIntegration;
 import com.teamabode.verdance.core.integration.guarding.GuardingIntegration;
@@ -15,7 +17,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.dispenser.BoatDispenserBehavior;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
@@ -49,7 +50,9 @@ public class Verdance implements ModInitializer {
         VerdanceMemoryModuleTypes.register();
         VerdanceCriteria.init();
         VerdanceBiomeModifications.register();
+        VerdanceConfig.load();
         registerDispenserBehaviors();
+        registerBlockEntityAdditions();
         registerTrades();
         registerItemGroupEvents();
         registerBiomePlacements();
@@ -70,8 +73,13 @@ public class Verdance implements ModInitializer {
     }
 
     public static void registerDispenserBehaviors() {
-        DispenserBlock.registerBehavior(VerdanceItems.MULBERRY_BOAT, new BoatDispenserBehavior(VerdanceBoatTypes.MULBERRY, false));
-        DispenserBlock.registerBehavior(VerdanceItems.MULBERRY_CHEST_BOAT, new BoatDispenserBehavior(VerdanceBoatTypes.MULBERRY, true));
+        DispenserBlock.registerBehavior(VerdanceItems.MULBERRY_BOAT, new ScribeBoatDispenseItemBehavior(VerdanceBoatTypes.MULBERRY, false));
+        DispenserBlock.registerBehavior(VerdanceItems.MULBERRY_CHEST_BOAT, new ScribeBoatDispenseItemBehavior(VerdanceBoatTypes.MULBERRY, true));
+    }
+
+    public static void registerBlockEntityAdditions() {
+        BlockEntityAdditions.appendBlocks(BlockEntityType.SIGN, VerdanceBlocks.MULBERRY_SIGN, VerdanceBlocks.MULBERRY_WALL_SIGN);
+        BlockEntityAdditions.appendBlocks(BlockEntityType.HANGING_SIGN, VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
     }
 
     public static void registerTrades() {
@@ -264,9 +272,8 @@ public class Verdance implements ModInitializer {
     }
 
     public static void registerBiomePlacements() {
-        // TODO: placeholder values until we have a config
-        BiomePlacement.replaceOverworld(BiomeKeys.CHERRY_GROVE, VerdanceBiomes.MULBERRY_FOREST, 0.1f /*VerdanceConfig.MULBERRY_FOREST_PROPORTION.get()*/);
-        BiomePlacement.replaceOverworld(BiomeKeys.SPARSE_JUNGLE, VerdanceBiomes.SHRUBLANDS, 0.1f /*VerdanceConfig.SHRUBLANDS_PROPORTION.get()*/);
+        BiomePlacement.replaceOverworld(BiomeKeys.CHERRY_GROVE, VerdanceBiomes.MULBERRY_FOREST, VerdanceConfig.INSTANCE.getGroup("biome_proportions").getFloatProperty("mulberry_forest"));
+        BiomePlacement.replaceOverworld(BiomeKeys.SPARSE_JUNGLE, VerdanceBiomes.SHRUBLANDS, VerdanceConfig.INSTANCE.getGroup("biome_proportions").getFloatProperty("shrublands"));
     }
 
     public static void registerSurfaceRules() {

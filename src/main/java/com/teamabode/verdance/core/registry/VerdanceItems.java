@@ -1,5 +1,6 @@
 package com.teamabode.verdance.core.registry;
 
+import com.teamabode.scribe.common.item.ScribeBoatItem;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.item.CantaloupeJuiceItem;
 import com.teamabode.verdance.core.misc.VerdanceFoodComponents;
@@ -49,16 +50,16 @@ public class VerdanceItems {
                     .maxCount(16))
     );
     public static final Item MULBERRY_BOAT = register(
-            "mulberry_boat", new BoatItem(
-                    false,
+            "mulberry_boat", new ScribeBoatItem(
+                    new Settings().maxCount(1),
                     VerdanceBoatTypes.MULBERRY,
-                    new Settings().maxCount(1))
+                    false)
     );
     public static final Item MULBERRY_CHEST_BOAT = register(
-            "mulberry_chest_boat", new BoatItem(
-                    true,
+            "mulberry_chest_boat", new ScribeBoatItem(
+                    new Settings().maxCount(1),
                     VerdanceBoatTypes.MULBERRY,
-                    new Settings().maxCount(1))
+                    true)
     );
     public static final Item MUSIC_DISC_RANGE = register(
             "music_disc_range",

@@ -1,5 +1,6 @@
 package com.teamabode.verdance.core.mixin.general;
 
+import com.teamabode.verdance.VerdanceConfig;
 import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,6 +20,10 @@ public class SugarCaneBlockMixin implements Fertilizable {
 
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+        if (VerdanceConfig.INSTANCE.getGroup("general").getBooleanProperty("can_bonemeal_sugar_cane")) {
+            return false;
+        }
+
         SugarCaneBlock $this = SugarCaneBlock.class.cast(this);
 
         BlockPos abovePos = pos.up();

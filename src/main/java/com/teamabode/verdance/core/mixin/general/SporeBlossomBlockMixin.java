@@ -1,5 +1,6 @@
 package com.teamabode.verdance.core.mixin.general;
 
+import com.teamabode.verdance.VerdanceConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
@@ -20,6 +21,9 @@ public class SporeBlossomBlockMixin extends Block implements Fertilizable {
 
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+        if (VerdanceConfig.INSTANCE.getGroup("general").getBooleanProperty("can_bonemeal_spore_blossom")) {
+            return false;
+        }
         return true;
     }
 
