@@ -21,11 +21,5 @@
     "requirements": [["has_the_recipe", "has_mulberry_trapdoor"]],
     "rewards": {
         "recipes": ["verdance:mulberry_cabinet"]
-    },
-    "fabric:load_conditions": [
-        {
-            "condition": "fabric:any_mods_loaded",
-            "values": ["farmersdelight"]
-        }
-    ]
+    }
 }

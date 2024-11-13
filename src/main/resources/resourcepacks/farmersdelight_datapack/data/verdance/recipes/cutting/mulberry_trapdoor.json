@@ -7,14 +7,11 @@
     ],
     "result": [
         {
-            "item": {
-                "count": 1,
-                "id": "verdance:mulberry_planks"
-            }
+            "item": "verdance:mulberry_planks"
         }
     ],
     "tool": {
-        "fabric:type": "farmersdelight:item_ability",
+        "fabric:type": "farmersdelight:tool_action",
         "action": "axe_dig"
     }
 }

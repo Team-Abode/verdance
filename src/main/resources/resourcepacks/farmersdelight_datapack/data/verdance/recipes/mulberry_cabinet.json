@@ -12,6 +12,6 @@
     "pattern": ["___", "D D", "___"],
     "result": {
         "count": 1,
-        "id": "verdance:mulberry_cabinet"
+        "item": "verdance:mulberry_cabinet"
     }
 }
