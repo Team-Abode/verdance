@@ -4,6 +4,9 @@
     "package": "com.teamabode.verdance.core.mixin",
     "compatibilityLevel": "JAVA_21",
     "mixins": [
+        "entity.BoatEntityMixin",
+        "entity.ChestBoatEntityMixin",
+        "general.BlockEntityTypeMixin",
         "general.DecoratedPotPatternsMixin",
         "general.LightningEntityMixin",
         "general.SporeBlossomBlockMixin",

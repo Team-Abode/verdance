@@ -105,9 +105,8 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
     }
 
     private void boats() {
-        // TODO: boat
-        //this.getOrCreateTagBuilder(ItemTags.BOATS).add(VerdanceItems.MULBERRY_BOAT).setReplace(false);
-        //this.getOrCreateTagBuilder(ItemTags.CHEST_BOATS).add(VerdanceItems.MULBERRY_CHEST_BOAT).setReplace(false);
+        this.getOrCreateTagBuilder(ItemTags.BOATS).add(VerdanceItems.MULBERRY_BOAT).setReplace(false);
+        this.getOrCreateTagBuilder(ItemTags.CHEST_BOATS).add(VerdanceItems.MULBERRY_CHEST_BOAT).setReplace(false);
     }
 
     private void foods() {

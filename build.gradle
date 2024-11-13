@@ -31,10 +31,17 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Dependencies
+	// Biolith
 	modApi "com.terraformersmc:biolith:${project.biolith_version}"
+
+	// Terrablender
 	modCompileOnlyApi "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
 
+	// Fabric ASM
+	modImplementation "com.github.Chocohead:Fabric-ASM:${fabric_asm_version}"
+	include "com.github.Chocohead:Fabric-ASM:${fabric_asm_version}"
+
+	// Farmer's Delight Refabricated
 	modCompileOnly "maven.modrinth:farmers-delight-refabricated:${rootProject.farmers_delight_version}"
 }
 

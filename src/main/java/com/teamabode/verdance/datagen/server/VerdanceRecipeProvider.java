@@ -122,8 +122,8 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
                 .filter(family -> family.shouldGenerateRecipes(FeatureSet.of(FeatureFlags.VANILLA)))
                 .forEach(family -> RecipeProvider.generateFamily(exporter, family));
 
-        //offerBoatRecipe(exporter, VerdanceItems.MULBERRY_BOAT, VerdanceBlocks.MULBERRY_PLANKS);
-        //offerChestBoatRecipe(exporter, VerdanceItems.MULBERRY_CHEST_BOAT, VerdanceBlocks.MULBERRY_PLANKS);
+        offerBoatRecipe(exporter, VerdanceItems.MULBERRY_BOAT, VerdanceBlocks.MULBERRY_PLANKS);
+        offerChestBoatRecipe(exporter, VerdanceItems.MULBERRY_CHEST_BOAT, VerdanceBlocks.MULBERRY_PLANKS);
 
         offerBarkBlockRecipe(exporter, VerdanceBlocks.MULBERRY_WOOD, VerdanceBlocks.MULBERRY_LOG);
         offerBarkBlockRecipe(exporter, VerdanceBlocks.STRIPPED_MULBERRY_WOOD, VerdanceBlocks.STRIPPED_MULBERRY_LOG);

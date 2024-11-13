@@ -47,7 +47,6 @@ public class Verdance implements ModInitializer {
         VerdanceMemoryModuleTypes.register();
         VerdanceCriteria.init();
         VerdanceBiomeModifications.register();
-        registerBlockEntitySupportedBlock();
         registerTrades();
         registerItemGroupEvents();
         registerBiomePlacements();
@@ -65,14 +64,6 @@ public class Verdance implements ModInitializer {
         if (CompatUtils.isModLoaded("guarding")) {
             GuardingIntegration.register(container.get());
         }
-    }
-
-    public static void registerBlockEntitySupportedBlock() {
-        // TODO: block entity mixin to add these
-        //BlockEntityType.SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_SIGN);
-        //BlockEntityType.SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_WALL_SIGN);
-        //BlockEntityType.HANGING_SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_HANGING_SIGN);
-        //BlockEntityType.HANGING_SIGN.addSupportedBlock(VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
     }
 
     public static void registerTrades() {
@@ -109,13 +100,11 @@ public class Verdance implements ModInitializer {
             );
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
-            /* TODO: boat
             entries.addAfter(
                     Items.CHERRY_CHEST_BOAT,
                     VerdanceItems.MULBERRY_BOAT,
                     VerdanceItems.MULBERRY_CHEST_BOAT
             );
-            */
             entries.addBefore(Items.MUSIC_DISC_5, VerdanceItems.MUSIC_DISC_RANGE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {

@@ -48,22 +48,18 @@ public class VerdanceItems {
             new HangingSignItem(VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN, new Settings()
                     .maxCount(16))
     );
-    /*
-    TODO: boat
     public static final Item MULBERRY_BOAT = register(
-            "mulberry_boat", new SketchBoatItem(
-                    new Settings().maxCount(1),
+            "mulberry_boat", new BoatItem(
+                    false,
                     VerdanceBoatTypes.MULBERRY,
-                    false)
+                    new Settings().maxCount(1))
     );
     public static final Item MULBERRY_CHEST_BOAT = register(
-            "mulberry_chest_boat",
-            new SketchBoatItem(
-                    new Settings().maxCount(1),
+            "mulberry_chest_boat", new BoatItem(
+                    true,
                     VerdanceBoatTypes.MULBERRY,
-                    true)
+                    new Settings().maxCount(1))
     );
-    */
     public static final Item MUSIC_DISC_RANGE = register(
             "music_disc_range",
             new MusicDiscItem(1, VerdanceSoundEvents.MUSIC_DISC_RANGE, new Settings().rarity(Rarity.RARE).maxCount(1), 87)
