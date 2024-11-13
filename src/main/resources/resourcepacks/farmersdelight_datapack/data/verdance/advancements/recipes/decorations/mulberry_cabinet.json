@@ -5,7 +5,7 @@
             "conditions": {
                 "items": [
                     {
-                        "items": "verdance:mulberry_trapdoor"
+                        "items": ["verdance:mulberry_trapdoor"]
                     }
                 ]
             },
