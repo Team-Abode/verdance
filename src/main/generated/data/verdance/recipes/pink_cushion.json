@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "W": {
+      "item": "minecraft:pink_wool"
+    }
+  },
+  "pattern": [
+    "WW",
+    "##"
+  ],
+  "result": {
+    "count": 2,
+    "item": "verdance:pink_cushion"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "verdance:cantaloupe_slice"
+    },
+    {
+      "item": "verdance:cantaloupe_slice"
+    },
+    {
+      "item": "verdance:cantaloupe_slice"
+    },
+    {
+      "item": "verdance:cantaloupe_slice"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ],
+  "result": {
+    "item": "verdance:cantaloupe_juice"
+  }
+}

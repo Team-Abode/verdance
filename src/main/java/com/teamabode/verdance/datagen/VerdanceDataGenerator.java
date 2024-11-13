@@ -25,7 +25,6 @@ public class VerdanceDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(VerdanceArchaeologyLootTableProvider::new);
         pack.addProvider(VerdanceBlockLootTableProvider::new);
         pack.addProvider(VerdanceDynamicRegistryProvider::new);
-        pack.addProvider(VerdanceAdvancementProvider::new);
 
         // Client Data
         pack.addProvider(VerdanceModelProvider::new);

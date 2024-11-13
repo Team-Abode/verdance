@@ -1,6 +1,7 @@
 {
+  "replace": false,
   "values": [
     "verdance:shrublands",
-    "#c:is_desert"
+    "#c:desert"
   ]
 }

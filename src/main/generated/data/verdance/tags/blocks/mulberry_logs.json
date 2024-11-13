@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "verdance:mulberry_log",
+    "verdance:mulberry_wood",
+    "verdance:stripped_mulberry_log",
+    "verdance:stripped_mulberry_wood"
+  ]
+}

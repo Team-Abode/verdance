@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "verdance:gray_stucco"
+  },
+  "result": "verdance:gray_stucco_stairs"
+}

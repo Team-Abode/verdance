@@ -1,0 +1,27 @@
+{
+    "display": {
+        "icon": {
+            "item": "verdance:silk_cocoon"
+        },
+        "title": {
+            "translate": "advancements.verdance.husbandry.feeling_fresh.title"
+        },
+        "description": {
+            "translate": "advancements.verdance.husbandry.feeling_fresh.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:husbandry/root",
+    "criteria": {
+        "extinguished_with_cantaloupe_juice": {
+            "trigger": "verdance:extinguished_with_cantaloupe_juice"
+        }
+    },
+    "requirements": [
+        ["extinguished_with_cantaloupe_juice"]
+    ],
+    "sends_telemetry_event": false
+}

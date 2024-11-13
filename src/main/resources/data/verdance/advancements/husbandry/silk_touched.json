@@ -1,0 +1,37 @@
+{
+    "display": {
+        "icon": {
+            "item": "verdance:silk_cocoon"
+        },
+        "title": {
+            "translate": "advancements.verdance.husbandry.silk_touched.title"
+        },
+        "description": {
+            "translate": "advancements.verdance.husbandry.silk_touched.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:husbandry/root",
+    "criteria": {
+        "silk_touch_silkworm_eggs": {
+            "trigger": "verdance:silkworm_eggs_destroyed",
+            "item": {
+                "enchantments": [
+                    {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                            "min": 1
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        ["silk_touch_silkworm_eggs"]
+    ],
+    "sends_telemetry_event": false
+}

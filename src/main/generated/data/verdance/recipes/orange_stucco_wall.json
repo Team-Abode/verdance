@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "stucco_wall",
+  "key": {
+    "#": {
+      "item": "verdance:orange_stucco"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "verdance:orange_stucco_wall"
+  },
+  "show_notification": true
+}

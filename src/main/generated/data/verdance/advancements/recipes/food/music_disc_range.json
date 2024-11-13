@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_disc_fragment_range": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "verdance:disc_fragment_range"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "verdance:music_disc_range"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_disc_fragment_range",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "verdance:music_disc_range"
+    ]
+  },
+  "sends_telemetry_event": false
+}

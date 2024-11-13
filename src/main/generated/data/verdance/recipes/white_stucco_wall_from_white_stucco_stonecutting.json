@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "verdance:white_stucco"
+  },
+  "result": "verdance:white_stucco_wall"
+}

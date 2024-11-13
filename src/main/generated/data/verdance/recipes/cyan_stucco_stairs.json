@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "stucco_stairs",
+  "key": {
+    "#": {
+      "item": "verdance:cyan_stucco"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "verdance:cyan_stucco_stairs"
+  },
+  "show_notification": true
+}
