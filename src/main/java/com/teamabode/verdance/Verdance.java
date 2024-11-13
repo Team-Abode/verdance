@@ -14,6 +14,8 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.dispenser.BoatDispenserBehavior;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
@@ -47,6 +49,7 @@ public class Verdance implements ModInitializer {
         VerdanceMemoryModuleTypes.register();
         VerdanceCriteria.init();
         VerdanceBiomeModifications.register();
+        registerDispenserBehaviors();
         registerTrades();
         registerItemGroupEvents();
         registerBiomePlacements();
@@ -64,6 +67,11 @@ public class Verdance implements ModInitializer {
         if (CompatUtils.isModLoaded("guarding")) {
             GuardingIntegration.register(container.get());
         }
+    }
+
+    public static void registerDispenserBehaviors() {
+        DispenserBlock.registerBehavior(VerdanceItems.MULBERRY_BOAT, new BoatDispenserBehavior(VerdanceBoatTypes.MULBERRY, false));
+        DispenserBlock.registerBehavior(VerdanceItems.MULBERRY_CHEST_BOAT, new BoatDispenserBehavior(VerdanceBoatTypes.MULBERRY, true));
     }
 
     public static void registerTrades() {
