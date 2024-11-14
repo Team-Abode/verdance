@@ -4,4 +4,5 @@
 * Adjusted the loot tables for the Town Ruins.
 
 ## Fixes:
-* Fixed the Mulberry Boat and Mulberry Chest Boat being uncraftable.
+* Fixed the Mulberry Boat and Mulberry Boat with Chest being uncraftable.
+* Fixed the name of the Mulberry Boat with Chest being set as "Mulberry Chest Boat".
