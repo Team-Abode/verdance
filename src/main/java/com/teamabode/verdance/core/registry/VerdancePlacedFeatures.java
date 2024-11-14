@@ -28,6 +28,7 @@ public class VerdancePlacedFeatures {
     public static final RegistryKey<PlacedFeature> MULBERRY = createKey("mulberry");
     public static final RegistryKey<PlacedFeature> MULBERRY_CHECKED = createKey("mulberry_checked");
     public static final RegistryKey<PlacedFeature> PATCH_CANTALOUPE = createKey("patch_cantaloupe");
+    public static final RegistryKey<PlacedFeature> PILE_CANTALOUPE = createKey("pile_cantaloupe");
     public static final RegistryKey<PlacedFeature> PATCH_SHRUB = createKey("patch_shrub");
     public static final RegistryKey<PlacedFeature> SHRUBLANDS_BUSH = createKey("shrublands_bush");
     public static final RegistryKey<PlacedFeature> FLOWER_VIOLET = createKey("flower_violet");
@@ -35,6 +36,7 @@ public class VerdancePlacedFeatures {
     public static void register(Registerable<PlacedFeature> context) {
         var configuredFeatures = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
 
+        // Mulberry Forest
         PlacedFeatures.register(context, FLOWER_MULBERRY_FOREST, configuredFeatures.getOrThrow(VerdanceConfiguredFeatures.FLOWER_MULBERRY_FOREST), List.of(
                 NoiseThresholdCountPlacementModifier.of(-0.25d, 1, 5),
                 SquarePlacementModifier.of(),
@@ -58,12 +60,15 @@ public class VerdancePlacedFeatures {
                 )),
                 BiomePlacementModifier.of()
         ));
+
+        // Cantaloupe
         PlacedFeatures.register(context, PATCH_CANTALOUPE, configuredFeatures.getOrThrow(VerdanceConfiguredFeatures.PATCH_CANTALOUPE), List.of(
                 RarityFilterPlacementModifier.of(400),
                 SquarePlacementModifier.of(),
                 HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING),
                 BiomePlacementModifier.of()
         ));
+        PlacedFeatures.register(context, PILE_CANTALOUPE, configuredFeatures.getOrThrow(VerdanceConfiguredFeatures.PILE_CANTALOUPE));
 
         // Shrublands
         PlacedFeatures.register(context, PATCH_SHRUB, configuredFeatures.getOrThrow(VerdanceConfiguredFeatures.PATCH_SHRUB), List.of(
