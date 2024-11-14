@@ -1,7 +1,7 @@
 package com.teamabode.verdance.core.misc;
 
 import com.teamabode.verdance.core.registry.VerdanceItems;
-import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LootPoolEntry;
@@ -15,14 +15,14 @@ public class VerdanceLootTableEvents {
             .build();
 
     public static void register() {
-        LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
-            if (key.equals(LootTables.ABANDONED_MINESHAFT_CHEST)) {
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (id.equals(LootTables.ABANDONED_MINESHAFT_CHEST)) {
                 tableBuilder.modifyPools(builder -> builder.with(CANTALOUPE_SEEDS));
             }
-            if (key.equals(LootTables.SIMPLE_DUNGEON_CHEST)) {
+            if (id.equals(LootTables.SIMPLE_DUNGEON_CHEST)) {
                 tableBuilder.modifyPools(builder -> builder.with(CANTALOUPE_SEEDS));
             }
-            if (key.equals(LootTables.WOODLAND_MANSION_CHEST)) {
+            if (id.equals(LootTables.WOODLAND_MANSION_CHEST)) {
                 tableBuilder.modifyPools(builder -> builder.with(CANTALOUPE_SEEDS));
             }
         });
