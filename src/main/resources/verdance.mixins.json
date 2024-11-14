@@ -1,17 +1,19 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "com.teamabode.verdance.core.mixin",
-    "compatibilityLevel": "JAVA_17",
-    "mixins": [
-        "accessor.StructurePoolAccessor",
-        "general.DecoratedPotPatternsMixin",
-        "general.LightningEntityMixin",
-        "general.SporeBlossomBlockMixin",
-        "general.SugarCaneBlockMixin"
-    ],
-    "client": [],
-    "injectors": {
-        "defaultRequire": 1
+	"required": true,
+	"minVersion": "0.8",
+	"package": "com.teamabode.verdance.core.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"accessor.StructurePoolAccessor",
+		"general.ChickenEntityMixin",
+		"general.DecoratedPotPatternsMixin",
+		"general.LightningEntityMixin",
+		"general.ParrotEntityMixin",
+		"general.SporeBlossomBlockMixin",
+		"general.SugarCaneBlockMixin"
+	],
+	"client": [],
+	"injectors": {
+		"defaultRequire": 1
 	}
 }
