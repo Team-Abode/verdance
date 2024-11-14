@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "verdance:silk_cocoon"
+            "item": "verdance:silkworm_eggs"
         },
         "title": {
             "translate": "advancements.verdance.husbandry.silk_touched.title"

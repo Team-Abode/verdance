@@ -277,7 +277,7 @@ public class Verdance implements ModInitializer {
     }
 
     public static void registerSurfaceRules() {
-        SurfaceGeneration.addOverworldSurfaceRules(new Identifier("minecraft", "rules/overworld"), MaterialRules.sequence(
+        SurfaceGeneration.addOverworldSurfaceRules(Verdance.id( "rules/overworld"), MaterialRules.sequence(
                 VerdanceSurfaceRules.shrublands()
         ));
     }
