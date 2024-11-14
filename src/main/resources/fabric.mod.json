@@ -24,9 +24,6 @@
         ],
         "fabric-datagen": [
             "com.teamabode.verdance.datagen.VerdanceDataGenerator"
-        ],
-        "mm:early_risers": [
-            "com.teamabode.verdance.VerdanceEarlyRiser"
         ]
     },
     "mixins": [
