@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "minecraft:green_dye"
+            "items": "#c:dyes/green"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:dye_green_cushion"
+        "recipe": "verdance:dye_green_cushion"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:dye_green_cushion"
+      "verdance:dye_green_cushion"
     ]
   }
 }

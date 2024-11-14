@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "minecraft:light_blue_dye"
+            "items": "#c:dyes/light_blue"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:dye_light_blue_cushion"
+        "recipe": "verdance:dye_light_blue_cushion"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:dye_light_blue_cushion"
+      "verdance:dye_light_blue_cushion"
     ]
   }
 }
