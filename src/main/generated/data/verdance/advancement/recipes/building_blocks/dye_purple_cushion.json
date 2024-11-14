@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "minecraft:purple_dye"
+            "items": "#c:dyes/purple"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:dye_purple_cushion"
+        "recipe": "verdance:dye_purple_cushion"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:dye_purple_cushion"
+      "verdance:dye_purple_cushion"
     ]
   }
 }

@@ -4,7 +4,7 @@
   "group": "stucco",
   "ingredients": [
     {
-      "item": "minecraft:light_blue_dye"
+      "tag": "c:dyes/light_blue"
     },
     {
       "item": "minecraft:clay"

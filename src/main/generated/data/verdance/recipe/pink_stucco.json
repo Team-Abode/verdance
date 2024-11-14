@@ -4,7 +4,7 @@
   "group": "stucco",
   "ingredients": [
     {
-      "item": "minecraft:pink_dye"
+      "tag": "c:dyes/pink"
     },
     {
       "item": "minecraft:clay"

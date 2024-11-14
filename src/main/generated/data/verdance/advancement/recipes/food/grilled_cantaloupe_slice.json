@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "verdance:grilled_cantaloupe"
+        "recipe": "verdance:grilled_cantaloupe_slice"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "verdance:grilled_cantaloupe"
+      "verdance:grilled_cantaloupe_slice"
     ]
   }
 }
