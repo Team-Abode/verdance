@@ -11,7 +11,7 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 public class VerdanceLootTableEvents {
     private static final LootPoolEntry CANTALOUPE_SEEDS = ItemEntry.builder(VerdanceItems.CANTALOUPE_SEEDS)
             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0f, 4.0f)))
-            .weight(10)
+            .weight(5)
             .build();
 
     public static void register() {
