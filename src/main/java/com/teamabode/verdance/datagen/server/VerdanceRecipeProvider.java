@@ -128,6 +128,9 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         offerBarkBlockRecipe(exporter, VerdanceBlocks.STRIPPED_MULBERRY_WOOD, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
         offerPlanksRecipe2(exporter, VerdanceBlocks.MULBERRY_PLANKS, VerdanceItemTags.MULBERRY_LOGS, 4);
 
+        offerBoatRecipe(exporter, VerdanceItems.MULBERRY_BOAT, VerdanceBlocks.MULBERRY_PLANKS);
+        offerChestBoatRecipe(exporter, VerdanceItems.MULBERRY_CHEST_BOAT, VerdanceItems.MULBERRY_BOAT);
+
         cantaloupe(exporter);
         offerHangingSignRecipe(exporter, VerdanceItems.MULBERRY_HANGING_SIGN, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
         stucco(exporter, VerdanceBlockFamilies.WHITE_STUCCO, Items.WHITE_DYE);
