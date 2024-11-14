@@ -160,10 +160,11 @@ public class Verdance implements ModInitializer {
             entries.addAfter(Items.HONEY_BOTTLE, VerdanceItems.CANTALOUPE_JUICE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
+            entries.addAfter(Blocks.CHERRY_LOG, VerdanceBlocks.MULBERRY_LOG);
             entries.addAfter(Items.MELON, VerdanceBlocks.CANTALOUPE);
             entries.addAfter(Items.MELON_SEEDS, VerdanceItems.CANTALOUPE_SEEDS);
             entries.addAfter(Blocks.CHERRY_LEAVES, VerdanceBlocks.MULBERRY_LEAVES, VerdanceBlocks.FLOWERING_MULBERRY_LEAVES);
-            entries.addAfter(Blocks.MANGROVE_PROPAGULE, VerdanceItems.MULBERRY);
+            entries.addAfter(Blocks.CHERRY_SAPLING, VerdanceItems.MULBERRY);
             entries.addAfter(Items.FROGSPAWN, VerdanceBlocks.SILKWORM_EGGS);
             entries.addAfter(Items.CORNFLOWER, VerdanceBlocks.VIOLET);
 
@@ -261,7 +262,7 @@ public class Verdance implements ModInitializer {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.addBefore(Items.DISC_FRAGMENT_5, VerdanceItems.DISC_FRAGMENT_RANGE);
             entries.addBefore(Items.ANGLER_POTTERY_SHERD, VerdanceItems.ABODE_POTTERY_SHERD);
-            entries.addAfter(Items.FLOW_POTTERY_SHERD, VerdanceItems.FRILLS_POTTERY_SHERD);
+            entries.addAfter(Items.FRIEND_POTTERY_SHERD, VerdanceItems.FRILLS_POTTERY_SHERD);
             entries.addBefore(Items.PLENTY_POTTERY_SHERD, VerdanceItems.PITCH_POTTERY_SHERD);
             entries.addBefore(Items.PRIZE_POTTERY_SHERD, VerdanceItems.PRICKLE_POTTERY_SHERD);
             entries.addAfter(Items.SNORT_POTTERY_SHERD, VerdanceItems.SPIRIT_POTTERY_SHERD, VerdanceItems.TRAP_POTTERY_SHERD);
