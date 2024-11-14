@@ -268,7 +268,7 @@ public class Verdance implements ModInitializer {
             entries.addAfter(Items.HOST_ARMOR_TRIM_SMITHING_TEMPLATE, VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> {
-            entries.addAfter(
+            entries.addBefore(
                     Items.SILVERFISH_SPAWN_EGG,
                     VerdanceItems.SILK_MOTH_SPAWN_EGG,
                     VerdanceItems.SILKWORM_SPAWN_EGG
