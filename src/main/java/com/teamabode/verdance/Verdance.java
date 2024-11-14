@@ -6,6 +6,7 @@ import com.teamabode.verdance.core.integration.CompatUtils;
 import com.teamabode.verdance.core.integration.farmersdelight.FDIntegration;
 import com.teamabode.verdance.core.integration.guarding.GuardingIntegration;
 import com.teamabode.verdance.core.misc.VerdanceBiomeModifications;
+import com.teamabode.verdance.core.misc.VerdanceLootTableEvents;
 import com.teamabode.verdance.core.misc.VerdanceStructurePoolModifiers;
 import com.teamabode.verdance.core.misc.VerdanceSurfaceRules;
 import com.teamabode.verdance.core.registry.*;
@@ -52,6 +53,7 @@ public class Verdance implements ModInitializer {
         VerdanceCriteria.init();
         VerdanceBiomeModifications.register();
         VerdanceStructurePoolModifiers.register();
+        VerdanceLootTableEvents.register();
         VerdanceConfig.load();
         registerDispenserBehaviors();
         registerBlockEntityAdditions();

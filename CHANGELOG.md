@@ -1,6 +1,7 @@
 ## Tweaks:
-* Mulberry Saplings with adjacent small flowers now have a small chance to have a Silk Cocoon when grown.
-* Cushions now break when pushed by a piston.
+* Cantaloupe Seeds can now be found in Monster Rooms, Abandoned Mineshafts, and Woodland Mansions
+* Cantaloupe piles can be found in Desert Villages, to contrast with Savanna Villages containing Melon piles.
+* 
 
 ## Fixes:
-* Fixed a rare server crash when a Cushion entity remained in the world, but the block was destroyed.
+* Fixed the Mulberry Boat and Mulberry Chest Boat being uncraftable.
