@@ -13,11 +13,11 @@ import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 
-public class SilkwormModel extends SketchAnimatableModel<SilkwormEntity> {
+public class SilkwormEntityModel extends SketchAnimatableModel<SilkwormEntity> {
 	public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(Verdance.id("silkworm"), "main");
 	private final ModelPart root;
 
-	public SilkwormModel(ModelPart root) {
+	public SilkwormEntityModel(ModelPart root) {
 		this.root = root.getChild("root");
 	}
 

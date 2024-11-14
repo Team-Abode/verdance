@@ -9,5 +9,4 @@ public class VerdanceAnimations {
     public static final Identifier SILK_MOTH_FLY = Verdance.id("silk_moth/fly");
 
     public static final Identifier SILKWORM_MOVE = Verdance.id("silkworm/move");
-
 }

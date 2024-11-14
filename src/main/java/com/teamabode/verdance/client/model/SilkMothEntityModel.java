@@ -14,7 +14,7 @@ import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.math.MathHelper;
 
-public class SilkMothModel extends SketchAnimatableModel<SilkMothEntity> {
+public class SilkMothEntityModel extends SketchAnimatableModel<SilkMothEntity> {
 	public static final EntityModelLayer LAYER = new EntityModelLayer(Verdance.id("silk_moth"), "main");
 
 	private final ModelPart root;
@@ -35,7 +35,7 @@ public class SilkMothModel extends SketchAnimatableModel<SilkMothEntity> {
 	private final ModelPart leftWing;
 	private final ModelPart rightWing;
 
-	public SilkMothModel(ModelPart root) {
+	public SilkMothEntityModel(ModelPart root) {
 		this.root = root;
 		this.body = this.root.getChild("body");
 		this.head = body.getChild("head");

@@ -1,10 +1,10 @@
 package com.teamabode.verdance.client;
 
-import com.teamabode.verdance.client.model.SilkMothModel;
-import com.teamabode.verdance.client.model.SilkwormModel;
-import com.teamabode.verdance.client.renderer.SilkCocoonRenderer;
-import com.teamabode.verdance.client.renderer.SilkMothRenderer;
-import com.teamabode.verdance.client.renderer.SilkwormRenderer;
+import com.teamabode.verdance.client.model.SilkMothEntityModel;
+import com.teamabode.verdance.client.model.SilkwormEntityModel;
+import com.teamabode.verdance.client.renderer.SilkCocoonBlockEntityRenderer;
+import com.teamabode.verdance.client.renderer.SilkMothEntityRenderer;
+import com.teamabode.verdance.client.renderer.SilkwormEntityRenderer;
 import com.teamabode.verdance.core.registry.VerdanceBlockEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
@@ -32,16 +32,16 @@ public class VerdanceClient implements ClientModInitializer {
     }
 
     private static void registerModelLayers() {
-        EntityModelLayerRegistry.registerModelLayer(SilkMothModel.LAYER, SilkMothModel::createBodyLayer);
-        EntityModelLayerRegistry.registerModelLayer(SilkwormModel.LAYER_LOCATION, SilkwormModel::createBodyLayer);
-        EntityModelLayerRegistry.registerModelLayer(SilkCocoonRenderer.LAYER_LOCATION, SilkCocoonRenderer::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(SilkMothEntityModel.LAYER, SilkMothEntityModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(SilkwormEntityModel.LAYER_LOCATION, SilkwormEntityModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(SilkCocoonBlockEntityRenderer.LAYER_LOCATION, SilkCocoonBlockEntityRenderer::createBodyLayer);
     }
 
     private static void registerRenderers() {
-        EntityRendererRegistry.register(VerdanceEntityTypes.SILK_MOTH, SilkMothRenderer::new);
-        EntityRendererRegistry.register(VerdanceEntityTypes.SILKWORM, SilkwormRenderer::new);
+        EntityRendererRegistry.register(VerdanceEntityTypes.SILK_MOTH, SilkMothEntityRenderer::new);
+        EntityRendererRegistry.register(VerdanceEntityTypes.SILKWORM, SilkwormEntityRenderer::new);
         EntityRendererRegistry.register(VerdanceEntityTypes.CUSHION, EmptyEntityRenderer::new);
-        BlockEntityRendererFactories.register(VerdanceBlockEntityTypes.SILK_COCOON, SilkCocoonRenderer::new);
+        BlockEntityRendererFactories.register(VerdanceBlockEntityTypes.SILK_COCOON, SilkCocoonBlockEntityRenderer::new);
     }
 
     private static void setRenderTypes() {

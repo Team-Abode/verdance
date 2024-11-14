@@ -24,13 +24,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import org.joml.Quaternionf;
 
-public class SilkCocoonRenderer implements BlockEntityRenderer<SilkCocoonBlockEntity> {
+public class SilkCocoonBlockEntityRenderer implements BlockEntityRenderer<SilkCocoonBlockEntity> {
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(Verdance.id("silk_cocoon"), "main");
     public static final SpriteIdentifier TEXTURE_LOCATION = new SpriteIdentifier(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, Verdance.id("entity/silk_cocoon"));
 
     private final ModelPart cocoon;
 
-    public SilkCocoonRenderer(BlockEntityRendererFactory.Context context) {
+    public SilkCocoonBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
         ModelPart root = context.getLayerModelPart(LAYER_LOCATION);
         this.cocoon = root.getChild("cocoon");
     }
