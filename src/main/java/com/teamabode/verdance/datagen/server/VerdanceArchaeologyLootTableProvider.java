@@ -51,13 +51,13 @@ public class VerdanceArchaeologyLootTableProvider extends SimpleFabricLootTableP
                 .add(VerdanceItems.CANTALOUPE_SEEDS)
                 .add(Items.BUCKET)
                 .add(Items.LEAD)
+                .add(VerdanceItems.DISC_FRAGMENT_RANGE)
                 .export(exporter);
 
         ArchaeologyLootBuilder.create(VerdanceLootTables.ARCHAEOLOGY_TOWN_RUINS_TREASURE)
-                .add(VerdanceItems.DISC_FRAGMENT_RANGE, 2)
-                .add(Items.EMERALD, 2)
-                .add(Items.COAL, 2)
-                .add(Items.GOLD_INGOT, 2)
+                .add(Items.EMERALD, 3)
+                .add(Items.COAL, 3)
+                .add(Items.GOLD_INGOT, 3)
                 .add(VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE)
                 .add(VerdanceItems.ABODE_POTTERY_SHERD)
                 .add(VerdanceItems.FRILLS_POTTERY_SHERD)

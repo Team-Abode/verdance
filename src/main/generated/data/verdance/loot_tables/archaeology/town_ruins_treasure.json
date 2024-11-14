@@ -6,23 +6,18 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "verdance:disc_fragment_range",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:emerald",
-          "weight": 2
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:coal",
-          "weight": 2
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:gold_ingot",
-          "weight": 2
+          "weight": 3
         },
         {
           "type": "minecraft:item",
