@@ -6,6 +6,7 @@ import com.teamabode.verdance.core.integration.CompatUtils;
 import com.teamabode.verdance.core.integration.farmersdelight.FDIntegration;
 import com.teamabode.verdance.core.integration.guarding.GuardingIntegration;
 import com.teamabode.verdance.core.misc.VerdanceBiomeModifications;
+import com.teamabode.verdance.core.misc.VerdanceStructurePoolModifiers;
 import com.teamabode.verdance.core.misc.VerdanceSurfaceRules;
 import com.teamabode.verdance.core.registry.*;
 import com.terraformersmc.biolith.api.biome.BiomePlacement;
@@ -50,6 +51,7 @@ public class Verdance implements ModInitializer {
         VerdanceMemoryModuleTypes.register();
         VerdanceCriteria.init();
         VerdanceBiomeModifications.register();
+        VerdanceStructurePoolModifiers.register();
         VerdanceConfig.load();
         registerDispenserBehaviors();
         registerBlockEntityAdditions();

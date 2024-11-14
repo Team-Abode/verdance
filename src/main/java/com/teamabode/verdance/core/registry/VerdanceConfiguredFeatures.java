@@ -18,23 +18,12 @@ import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.intprovider.WeightedListIntProvider;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.ConfiguredFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.PlacedFeatures;
-import net.minecraft.world.gen.feature.RandomBooleanFeatureConfig;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
-import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.AcaciaFoliagePlacer;
 import net.minecraft.world.gen.foliage.CherryFoliagePlacer;
 import net.minecraft.world.gen.placementmodifier.BlockFilterPlacementModifier;
-import net.minecraft.world.gen.stateprovider.BlockStateProvider;
-import net.minecraft.world.gen.stateprovider.NoiseBlockStateProvider;
-import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
+import net.minecraft.world.gen.stateprovider.*;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import java.util.List;
 
@@ -45,6 +34,7 @@ public class VerdanceConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> MULBERRY_WITH_SILK_COCOON = createKey("mulberry_with_silk_cocoon");
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_CANTALOUPE = createKey("patch_cantaloupe");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> PILE_CANTALOUPE = createKey("pile_cantaloupe");
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> PATCH_SHRUB = createKey("patch_shrub");
     public static final RegistryKey<ConfiguredFeature<?, ?>> SHRUBLANDS_BUSH = createKey("shrublands_bush");
@@ -94,6 +84,10 @@ public class VerdanceConfiguredFeatures {
                 new SimpleBlockFeatureConfig(BlockStateProvider.of(VerdanceBlocks.CANTALOUPE)),
                 List.of(Blocks.GRASS_BLOCK)
         ));
+        ConfiguredFeatures.register(context, PILE_CANTALOUPE, Feature.BLOCK_PILE, new BlockPileFeatureConfig(
+                SimpleBlockStateProvider.of(VerdanceBlocks.CANTALOUPE)
+        ));
+
         patchShrub(context);
         ConfiguredFeatures.register(context, SHRUBLANDS_BUSH, Feature.TREE, new TreeFeatureConfig.Builder(
                 BlockStateProvider.of(Blocks.OAK_LOG),
