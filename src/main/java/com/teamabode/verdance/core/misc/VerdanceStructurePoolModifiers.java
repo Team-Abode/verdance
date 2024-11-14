@@ -19,8 +19,8 @@ public class VerdanceStructurePoolModifiers {
             var registryManager = server.getRegistryManager();
             var placedFeatures = registryManager.getWrapperOrThrow(RegistryKeys.PLACED_FEATURE);
 
-            modifyStructurePool(Identifier.ofVanilla("village/desert/decor"), registryManager, elements -> {
-                elements.put(StructurePoolElement.ofFeature(placedFeatures.getOrThrow(VerdancePlacedFeatures.PILE_CANTALOUPE)).apply(StructurePool.Projection.RIGID), 8);
+            modifyStructurePool(new Identifier("minecraft", "village/desert/decor"), registryManager, elements -> {
+                elements.put(StructurePoolElement.ofFeature(placedFeatures.getOrThrow(VerdancePlacedFeatures.PILE_CANTALOUPE)).apply(StructurePool.Projection.RIGID), 4);
             });
         });
     }
