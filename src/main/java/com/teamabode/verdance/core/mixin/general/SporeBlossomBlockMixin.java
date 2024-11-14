@@ -21,7 +21,7 @@ public class SporeBlossomBlockMixin extends Block implements Fertilizable {
 
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
-        if (VerdanceConfig.INSTANCE.getGroup("general").getBooleanProperty("can_bonemeal_spore_blossom")) {
+        if (!VerdanceConfig.INSTANCE.getGroup("general").getBooleanProperty("can_bonemeal_spore_blossom")) {
             return false;
         }
         return true;

@@ -20,7 +20,7 @@ public class SugarCaneBlockMixin implements Fertilizable {
 
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
-        if (VerdanceConfig.INSTANCE.getGroup("general").getBooleanProperty("can_bonemeal_sugar_cane")) {
+        if (!VerdanceConfig.INSTANCE.getGroup("general").getBooleanProperty("can_bonemeal_sugar_cane")) {
             return false;
         }
 
