@@ -159,10 +159,11 @@ public class Verdance implements ModInitializer {
             entries.addAfter(Items.HONEY_BOTTLE, VerdanceItems.CANTALOUPE_JUICE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
+            entries.addAfter(Blocks.CHERRY_LOG, VerdanceBlocks.MULBERRY_LOG);
             entries.addAfter(Items.MELON, VerdanceBlocks.CANTALOUPE);
             entries.addAfter(Items.MELON_SEEDS, VerdanceItems.CANTALOUPE_SEEDS);
             entries.addAfter(Blocks.CHERRY_LEAVES, VerdanceBlocks.MULBERRY_LEAVES, VerdanceBlocks.FLOWERING_MULBERRY_LEAVES);
-            entries.addAfter(Blocks.MANGROVE_PROPAGULE, VerdanceItems.MULBERRY);
+            entries.addAfter(Blocks.CHERRY_SAPLING, VerdanceItems.MULBERRY);
             entries.addAfter(Items.FROGSPAWN, VerdanceBlocks.SILKWORM_EGGS);
             entries.addAfter(Items.CORNFLOWER, VerdanceBlocks.VIOLET);
 
