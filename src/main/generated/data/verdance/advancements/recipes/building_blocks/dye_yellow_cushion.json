@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:yellow_dye"
-            ]
+            "tag": "c:yellow_dyes"
           }
         ]
       },
@@ -15,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:dye_yellow_cushion"
+        "recipe": "verdance:dye_yellow_cushion"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:dye_yellow_cushion"
+      "verdance:dye_yellow_cushion"
     ]
   },
   "sends_telemetry_event": false
