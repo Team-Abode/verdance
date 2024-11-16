@@ -9,12 +9,12 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 
 public class VerdanceDecoratedPotPatterns {
-    public static final RegistryKey<String> ABODE = createKey("abode");
-    public static final RegistryKey<String> FRILLS = createKey("frills");
-    public static final RegistryKey<String> PITCH = createKey("pitch");
-    public static final RegistryKey<String> PRICKLE = createKey("prickle");
-    public static final RegistryKey<String> SPIRIT = createKey("spirit");
-    public static final RegistryKey<String> TRAP = createKey("trap");
+    public static final RegistryKey<String> ABODE = createKey("abode_pottery_pattern");
+    public static final RegistryKey<String> FRILLS = createKey("frills_pottery_pattern");
+    public static final RegistryKey<String> PITCH = createKey("pitch_pottery_pattern");
+    public static final RegistryKey<String> PRICKLE = createKey("prickle_pottery_pattern");
+    public static final RegistryKey<String> SPIRIT = createKey("spirit_pottery_pattern");
+    public static final RegistryKey<String> TRAP = createKey("trap_pottery_pattern");
 
     public static final Map<Item, RegistryKey<String>> SHERD_TO_PATTERN = Map.of(
             VerdanceItems.ABODE_POTTERY_SHERD, ABODE,
