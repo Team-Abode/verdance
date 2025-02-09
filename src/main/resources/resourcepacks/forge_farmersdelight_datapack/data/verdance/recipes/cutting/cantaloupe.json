@@ -1,0 +1,17 @@
+{
+    "type": "farmersdelight:cutting",
+    "ingredients": [
+        {
+            "item": "verdance:cantaloupe"
+        }
+    ],
+    "result": [
+        {
+            "count": 4,
+            "item": "verdance:cantaloupe_slice"
+        }
+    ],
+    "tool": {
+        "tag": "forge:tools/knives"
+    }
+}

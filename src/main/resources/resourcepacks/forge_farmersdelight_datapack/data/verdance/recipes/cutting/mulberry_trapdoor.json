@@ -1,0 +1,17 @@
+{
+    "type": "farmersdelight:cutting",
+    "ingredients": [
+        {
+            "item": "verdance:mulberry_trapdoor"
+        }
+    ],
+    "result": [
+        {
+            "item": "verdance:mulberry_planks"
+        }
+    ],
+    "tool": {
+        "fabric:type": "farmersdelight:tool_action",
+        "action": "axe_dig"
+    }
+}

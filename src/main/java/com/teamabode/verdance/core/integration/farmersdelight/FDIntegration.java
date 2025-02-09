@@ -7,11 +7,10 @@ import com.teamabode.verdance.core.integration.farmersdelight.registry.FDCompatS
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class FDIntegration {
     private static final RegistryKey<ItemGroup> TAB_FARMERS_DELIGHT = RegistryKey.of(
@@ -25,10 +24,14 @@ public class FDIntegration {
         FDCompatSoundEvents.register();
 
         ItemGroupEvents.modifyEntriesEvent(TAB_FARMERS_DELIGHT).register(entries -> {
-            entries.addAfter(ModItems.ONION_CRATE.get(), FDCompatBlocks.MULBERRY_CRATE);
-            entries.addAfter(ModBlocks.CHERRY_CABINET.get(), FDCompatBlocks.MULBERRY_CABINET);
+            entries.addAfter(Registries.ITEM.get(new Identifier("farmersdelight", "onion_crate")), FDCompatBlocks.MULBERRY_CRATE);
+            entries.addAfter(Registries.ITEM.get(new Identifier("farmersdelight", "cherry_cabinet")), FDCompatBlocks.MULBERRY_CABINET);
         });
-        CompatUtils.registerBuiltinPack("farmersdelight_datapack", container);
+        if (CompatUtils.isModLoaded("connectormod")) {
+            CompatUtils.registerBuiltinPack("forge_farmersdelight_datapack", container);
+        } else {
+            CompatUtils.registerBuiltinPack("farmersdelight_datapack", container);
+        }
         CompatUtils.registerBuiltinPack("farmersdelight_resourcepack", container);
     }
 }

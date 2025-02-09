@@ -1,0 +1,17 @@
+{
+    "type": "farmersdelight:cutting",
+    "ingredients": [
+        {
+            "item": "verdance:violet"
+        }
+    ],
+    "result": [
+        {
+            "item": "minecraft:purple_dye",
+            "count": 2
+        }
+    ],
+    "tool": {
+        "tag": "forge:tools/knives"
+    }
+}
