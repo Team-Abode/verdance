@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_music_disc_range": {
+    "has_disc_fragment_range": {
       "conditions": {
         "items": [
           {
             "items": [
-              "verdance:music_disc_range"
+              "verdance:disc_fragment_range"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_music_disc_range",
+      "has_disc_fragment_range",
       "has_the_recipe"
     ]
   ],

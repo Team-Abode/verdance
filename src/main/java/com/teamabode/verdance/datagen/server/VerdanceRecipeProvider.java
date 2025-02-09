@@ -80,7 +80,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
                 .criterion("has_sugar", conditionsFromItem(Items.SUGAR))
                 .criterion("has_glass_bottle", conditionsFromItem(Items.GLASS_BOTTLE))
                 .offerTo(exporter, Verdance.id("cantaloupe_juice"));
-        offerCompactingRecipe(exporter, RecipeCategory.MISC, VerdanceItems.MUSIC_DISC_RANGE, VerdanceItems.MUSIC_DISC_RANGE);
+        offerCompactingRecipe(exporter, RecipeCategory.MISC, VerdanceItems.MUSIC_DISC_RANGE, VerdanceItems.DISC_FRAGMENT_RANGE);
 
         offerSmithingTemplateCopyingRecipe(exporter, VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE, VerdanceBlocks.WHITE_STUCCO);
         offerSmithingTrimRecipe(
