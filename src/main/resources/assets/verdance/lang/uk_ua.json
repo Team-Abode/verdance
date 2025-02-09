@@ -139,14 +139,13 @@
     "item.verdance.mulberry_boat": "Шовковичний човен",
     "item.verdance.mulberry_chest_boat": "Шовковичний човен зі скринею",
     "item.verdance.music_disc_range": "Платівка",
+    "item.verdance.music_disc_range.desc": "Firch - Range",
     "item.verdance.pitch_pottery_sherd": "Гончарний черепок «Нота»",
     "item.verdance.prickle_pottery_sherd": "Гончарний черепок «Колючки»",
     "item.verdance.silk_moth_spawn_egg": "Яйце виклику шовкопряда",
     "item.verdance.silkworm_spawn_egg": "Яйце виклику гусені шовкопряда",
     "item.verdance.spirit_pottery_sherd": "Гончарний черепок «Дух»",
     "item.verdance.trap_pottery_sherd": "Гончарний черепок «Пастка»",
-
-    "jukebox_song.verdance.range": "Firch — Range",
 
     "subtitles.verdance.entity.silk_moth.death": "Шовкопряд гине",
     "subtitles.verdance.entity.silk_moth.eat": "Шовкопряд їсть",

@@ -138,6 +138,7 @@
     "item.verdance.mulberry": "Dut",
     "item.verdance.mulberry_boat": "Dut Ağacı Tekne",
     "item.verdance.music_disc_range": "Müzik Diski",
+    "item.verdance.music_disc_range.desc": "Firch - Range",
     "item.verdance.pitch_pottery_sherd": "Alan Çömlek Parçası",
     "item.verdance.prickle_pottery_sherd": "Dikenli Çömlek Parçası",
     "item.verdance.mulberry_chest_boat": "Sandıklı Dut Ağacı Tekne",
@@ -145,8 +146,6 @@
     "item.verdance.silkworm_spawn_egg": "İpekböceği Çağırma Yumurtası",
     "item.verdance.spirit_pottery_sherd": "Ruh Çömlek Parçası",
     "item.verdance.trap_pottery_sherd": "Tuzak Çömlek Parçası",
-
-    "jukebox_song.verdance.range": "Firch - Range",
 
     "subtitles.verdance.entity.silk_moth.death": "İpek Güvesi öldü",
     "subtitles.verdance.entity.silk_moth.eat": "İpek Güvesi yiyor",

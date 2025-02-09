@@ -139,6 +139,7 @@
     "item.verdance.mulberry_boat": "Bote de morera",
     "item.verdance.mulberry_chest_boat": "Bote de morera con cofre",
     "item.verdance.music_disc_range": "Disco",
+    "item.verdance.music_disc_range.desc": "Firch - Range",
     "item.verdance.pitch_pottery_sherd": "Fragmento de cerámica de tono",
     "item.verdance.prickle_pottery_sherd": "Fragmento de cerámica de espina",
     "item.verdance.silk_moth_spawn_egg": "Generar polilla de seda",
@@ -146,7 +147,6 @@
     "item.verdance.spirit_pottery_sherd": "Fragmento de cerámica de espíritu",
     "item.verdance.trap_pottery_sherd": "Fragmento de cerámica de trampa",
 
-    "jukebox_song.verdance.range": "Firch - Range",
 
     "subtitles.verdance.entity.silk_moth.death": "Polilla de seda muerta",
     "subtitles.verdance.entity.silk_moth.eat": "Polilla de seda comiendo",

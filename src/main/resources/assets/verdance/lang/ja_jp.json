@@ -140,14 +140,13 @@
     "item.verdance.mulberry_boat": "クワのボート",
     "item.verdance.mulberry_chest_boat": "チェスト付きのクワのボート",
     "item.verdance.music_disc_range": "レコード",
+    "item.verdance.music_disc_range.desc": "Firch - Range",
     "item.verdance.pitch_pottery_sherd": "さえずりの壺の欠片",
     "item.verdance.prickle_pottery_sherd": "棘の壺の欠片",
     "item.verdance.silk_moth_spawn_egg": "クワコのスポーンエッグ",
     "item.verdance.silkworm_spawn_egg": "クワコの幼虫のスポーンエッグ",
     "item.verdance.spirit_pottery_sherd": "霊の壺の欠片",
     "item.verdance.trap_pottery_sherd": "罠の壺の欠片",
-
-    "jukebox_song.verdance.range": "Firch - Range",
 
     "subtitles.verdance.entity.silk_moth.death": "クワコが死ぬ",
     "subtitles.verdance.entity.silk_moth.eat": "クワコが食べる",

@@ -139,14 +139,13 @@
     "item.verdance.mulberry_boat": "Mulberry Boat",
     "item.verdance.mulberry_chest_boat": "Mulberry Boat with Chest",
     "item.verdance.music_disc_range": "Music Disc",
+    "item.verdance.music_disc_range.desc": "Firch - Range",
     "item.verdance.pitch_pottery_sherd": "Pitch Pottery Sherd",
     "item.verdance.prickle_pottery_sherd": "Prickle Pottery Sherd",
     "item.verdance.silk_moth_spawn_egg": "Silk Moth Spawn Egg",
     "item.verdance.silkworm_spawn_egg": "Silkworm Spawn Egg",
     "item.verdance.spirit_pottery_sherd": "Spirit Pottery Sherd",
     "item.verdance.trap_pottery_sherd": "Trap Pottery Sherd",
-
-    "jukebox_song.verdance.range": "Firch - Range",
 
     "subtitles.verdance.entity.silk_moth.death": "Silk Moth dies",
     "subtitles.verdance.entity.silk_moth.eat": "Silk Moth eats",
