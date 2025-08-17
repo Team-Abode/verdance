@@ -13,14 +13,14 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.client.render.entity.EmptyEntityRenderer;
-import net.minecraft.item.BlockItem;
-import net.minecraft.world.biome.FoliageColors;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.entity.NoopRenderer;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class VerdanceClient implements ClientModInitializer {
 
@@ -40,36 +40,36 @@ public class VerdanceClient implements ClientModInitializer {
     private static void registerRenderers() {
         EntityRendererRegistry.register(VerdanceEntityTypes.SILK_MOTH, SilkMothEntityRenderer::new);
         EntityRendererRegistry.register(VerdanceEntityTypes.SILKWORM, SilkwormEntityRenderer::new);
-        EntityRendererRegistry.register(VerdanceEntityTypes.CUSHION, EmptyEntityRenderer::new);
-        BlockEntityRendererFactories.register(VerdanceBlockEntityTypes.SILK_COCOON, SilkCocoonBlockEntityRenderer::new);
+        EntityRendererRegistry.register(VerdanceEntityTypes.CUSHION, NoopRenderer::new);
+        BlockEntityRenderers.register(VerdanceBlockEntityTypes.SILK_COCOON, SilkCocoonBlockEntityRenderer::new);
     }
 
     private static void setRenderTypes() {
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_LEAVES, RenderLayer.getCutoutMipped());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_SAPLING, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_MULBERRY_SAPLING, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.ATTACHED_CANTALOUPE_STEM, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.CANTALOUPE_STEM, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_DOOR, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_TRAPDOOR, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.SILKWORM_EGGS, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.SILK_COCOON, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.VIOLET, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_VIOLET, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.SHRUB, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_SHRUB, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.YELLOW_FLOWERING_SHRUB, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_YELLOW_FLOWERING_SHRUB, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.PINK_FLOWERING_SHRUB, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_PINK_FLOWERING_SHRUB, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_LEAVES, RenderType.cutoutMipped());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_SAPLING, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_MULBERRY_SAPLING, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.ATTACHED_CANTALOUPE_STEM, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.CANTALOUPE_STEM, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_DOOR, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_TRAPDOOR, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.SILKWORM_EGGS, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.SILK_COCOON, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.VIOLET, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_VIOLET, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.SHRUB, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_SHRUB, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.YELLOW_FLOWERING_SHRUB, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_YELLOW_FLOWERING_SHRUB, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.PINK_FLOWERING_SHRUB, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_PINK_FLOWERING_SHRUB, RenderType.cutout());
     }
 
     private static void addColorProviders() {
-        ColorProviderRegistry.BLOCK.register((state, tintGetter, pos, i) -> tintGetter != null && pos != null ? BiomeColors.getFoliageColor(tintGetter, pos) : FoliageColors.getDefaultColor(), VerdanceBlocks.MULBERRY_LEAVES, VerdanceBlocks.FLOWERING_MULBERRY_LEAVES);
+        ColorProviderRegistry.BLOCK.register((state, tintGetter, pos, i) -> tintGetter != null && pos != null ? BiomeColors.getAverageFoliageColor(tintGetter, pos) : FoliageColor.getDefaultColor(), VerdanceBlocks.MULBERRY_LEAVES, VerdanceBlocks.FLOWERING_MULBERRY_LEAVES);
         ColorProviderRegistry.ITEM.register((stack, i) -> {
-            BlockState state = ((BlockItem) stack.getItem()).getBlock().getDefaultState();
+            BlockState state = ((BlockItem) stack.getItem()).getBlock().defaultBlockState();
 
-            return MinecraftClient.getInstance().getBlockColors().getColor(state, null, null, i);
+            return Minecraft.getInstance().getBlockColors().getColor(state, null, null, i);
         }, VerdanceBlocks.MULBERRY_LEAVES, VerdanceBlocks.FLOWERING_MULBERRY_LEAVES);
     }
 }

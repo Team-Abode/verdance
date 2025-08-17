@@ -7,13 +7,13 @@ import com.teamabode.verdance.datagen.client.model.VerdanceModels;
 import com.teamabode.verdance.datagen.client.model.VerdanceTextureMaps;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.block.Block;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
-import net.minecraft.data.client.TextureMap;
-import net.minecraft.data.client.TexturedModel;
-import net.minecraft.util.Identifier;
+import net.minecraft.data.models.BlockModelGenerators;
+import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.data.models.model.TexturedModel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 
 public class VerdanceModelProvider extends FabricModelProvider {
 
@@ -21,27 +21,27 @@ public class VerdanceModelProvider extends FabricModelProvider {
         super(output);
     }
 
-    private void createPottedMulberry(BlockStateModelGenerator generator, Block mulberryBlock, Block pottedMulberryBlock, BlockStateModelGenerator.TintType tintState) {
-        TextureMap textureMapping = TextureMap.plant(mulberryBlock);
-        Identifier resourceLocation = tintState.getFlowerPotCrossModel().upload(pottedMulberryBlock, textureMapping, generator.modelCollector);
-        generator.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(pottedMulberryBlock, resourceLocation));
+    private void createPottedMulberry(BlockModelGenerators generator, Block mulberryBlock, Block pottedMulberryBlock, BlockModelGenerators.TintState tintState) {
+        TextureMapping textureMapping = TextureMapping.plant(mulberryBlock);
+        ResourceLocation resourceLocation = tintState.getCrossPot().create(pottedMulberryBlock, textureMapping, generator.modelOutput);
+        generator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pottedMulberryBlock, resourceLocation));
     }
 
-    public void generateBlockStateModels(BlockStateModelGenerator generator) {
-        VerdanceBlockFamilies.getAllFamilies().forEach(family -> generator.registerCubeAllModelTexturePool(family.getBaseBlock()).family(family));
-        generator.registerLog(VerdanceBlocks.MULBERRY_LOG).log(VerdanceBlocks.MULBERRY_LOG).wood(VerdanceBlocks.MULBERRY_WOOD);
-        generator.registerLog(VerdanceBlocks.STRIPPED_MULBERRY_LOG).log(VerdanceBlocks.STRIPPED_MULBERRY_LOG).wood(VerdanceBlocks.STRIPPED_MULBERRY_WOOD);
-        generator.registerSingleton(VerdanceBlocks.MULBERRY_LEAVES, TexturedModel.LEAVES);
-        generator.registerTintableCrossBlockState(VerdanceBlocks.MULBERRY_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerFlowerPotPlant(VerdanceBlocks.VIOLET, VerdanceBlocks.POTTED_VIOLET, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerFlowerPotPlant(VerdanceBlocks.SHRUB, VerdanceBlocks.POTTED_SHRUB, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerFlowerPotPlant(VerdanceBlocks.YELLOW_FLOWERING_SHRUB, VerdanceBlocks.POTTED_YELLOW_FLOWERING_SHRUB, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerFlowerPotPlant(VerdanceBlocks.PINK_FLOWERING_SHRUB, VerdanceBlocks.POTTED_PINK_FLOWERING_SHRUB, BlockStateModelGenerator.TintType.NOT_TINTED);
+    public void generateBlockStateModels(BlockModelGenerators generator) {
+        VerdanceBlockFamilies.getAllFamilies().forEach(family -> generator.family(family.getBaseBlock()).generateFor(family));
+        generator.woodProvider(VerdanceBlocks.MULBERRY_LOG).logWithHorizontal(VerdanceBlocks.MULBERRY_LOG).wood(VerdanceBlocks.MULBERRY_WOOD);
+        generator.woodProvider(VerdanceBlocks.STRIPPED_MULBERRY_LOG).logWithHorizontal(VerdanceBlocks.STRIPPED_MULBERRY_LOG).wood(VerdanceBlocks.STRIPPED_MULBERRY_WOOD);
+        generator.createTrivialBlock(VerdanceBlocks.MULBERRY_LEAVES, TexturedModel.LEAVES);
+        generator.createCrossBlock(VerdanceBlocks.MULBERRY_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        generator.createPlant(VerdanceBlocks.VIOLET, VerdanceBlocks.POTTED_VIOLET, BlockModelGenerators.TintState.NOT_TINTED);
+        generator.createPlant(VerdanceBlocks.SHRUB, VerdanceBlocks.POTTED_SHRUB, BlockModelGenerators.TintState.NOT_TINTED);
+        generator.createPlant(VerdanceBlocks.YELLOW_FLOWERING_SHRUB, VerdanceBlocks.POTTED_YELLOW_FLOWERING_SHRUB, BlockModelGenerators.TintState.NOT_TINTED);
+        generator.createPlant(VerdanceBlocks.PINK_FLOWERING_SHRUB, VerdanceBlocks.POTTED_PINK_FLOWERING_SHRUB, BlockModelGenerators.TintState.NOT_TINTED);
 
-        this.createPottedMulberry(generator, VerdanceBlocks.MULBERRY_SAPLING, VerdanceBlocks.POTTED_MULBERRY_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerHangingSign(VerdanceBlocks.STRIPPED_MULBERRY_LOG, VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
-        generator.registerSingleton(VerdanceBlocks.CANTALOUPE, TexturedModel.CUBE_COLUMN);
-        generator.registerGourd(VerdanceBlocks.CANTALOUPE_STEM, VerdanceBlocks.ATTACHED_CANTALOUPE_STEM);
+        this.createPottedMulberry(generator, VerdanceBlocks.MULBERRY_SAPLING, VerdanceBlocks.POTTED_MULBERRY_SAPLING, BlockModelGenerators.TintState.NOT_TINTED);
+        generator.createHangingSign(VerdanceBlocks.STRIPPED_MULBERRY_LOG, VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN);
+        generator.createTrivialBlock(VerdanceBlocks.CANTALOUPE, TexturedModel.COLUMN);
+        generator.createStems(VerdanceBlocks.CANTALOUPE_STEM, VerdanceBlocks.ATTACHED_CANTALOUPE_STEM);
 
         this.createCushion(VerdanceBlocks.WHITE_CUSHION, generator);
         this.createCushion(VerdanceBlocks.LIGHT_GRAY_CUSHION, generator);
@@ -61,31 +61,31 @@ public class VerdanceModelProvider extends FabricModelProvider {
         this.createCushion(VerdanceBlocks.PINK_CUSHION, generator);
     }
 
-    public void generateItemModels(ItemModelGenerator generator) {
-        generator.register(VerdanceItems.MULBERRY, Models.GENERATED);
+    public void generateItemModels(ItemModelGenerators generator) {
+        generator.generateFlatItem(VerdanceItems.MULBERRY, ModelTemplates.FLAT_ITEM);
 
-        generator.register(VerdanceItems.CANTALOUPE_SLICE, Models.GENERATED);
-        generator.register(VerdanceItems.GRILLED_CANTALOUPE_SLICE, Models.GENERATED);
-        generator.register(VerdanceItems.CANTALOUPE_JUICE, Models.GENERATED);
+        generator.generateFlatItem(VerdanceItems.CANTALOUPE_SLICE, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(VerdanceItems.GRILLED_CANTALOUPE_SLICE, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(VerdanceItems.CANTALOUPE_JUICE, ModelTemplates.FLAT_ITEM);
 
-        generator.register(VerdanceItems.MULBERRY_BOAT, Models.GENERATED);
-        generator.register(VerdanceItems.MULBERRY_CHEST_BOAT, Models.GENERATED);
+        generator.generateFlatItem(VerdanceItems.MULBERRY_BOAT, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(VerdanceItems.MULBERRY_CHEST_BOAT, ModelTemplates.FLAT_ITEM);
 
-        generator.register(VerdanceItems.ABODE_POTTERY_SHERD, Models.GENERATED);
-        generator.register(VerdanceItems.FRILLS_POTTERY_SHERD, Models.GENERATED);
-        generator.register(VerdanceItems.PITCH_POTTERY_SHERD, Models.GENERATED);
-        generator.register(VerdanceItems.PRICKLE_POTTERY_SHERD, Models.GENERATED);
-        generator.register(VerdanceItems.SPIRIT_POTTERY_SHERD, Models.GENERATED);
-        generator.register(VerdanceItems.TRAP_POTTERY_SHERD, Models.GENERATED);
-        generator.register(VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE, Models.GENERATED);
+        generator.generateFlatItem(VerdanceItems.ABODE_POTTERY_SHERD, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(VerdanceItems.FRILLS_POTTERY_SHERD, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(VerdanceItems.PITCH_POTTERY_SHERD, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(VerdanceItems.PRICKLE_POTTERY_SHERD, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(VerdanceItems.SPIRIT_POTTERY_SHERD, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(VerdanceItems.TRAP_POTTERY_SHERD, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE, ModelTemplates.FLAT_ITEM);
 
-        generator.register(VerdanceItems.MUSIC_DISC_RANGE, Models.GENERATED);
-        generator.register(VerdanceItems.DISC_FRAGMENT_RANGE, Models.GENERATED);
+        generator.generateFlatItem(VerdanceItems.MUSIC_DISC_RANGE, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(VerdanceItems.DISC_FRAGMENT_RANGE, ModelTemplates.FLAT_ITEM);
     }
 
-    public final void createCushion(Block block, BlockStateModelGenerator generator) {
-        TextureMap textureMapping = VerdanceTextureMaps.cushionTextureMappings(block);
-        Identifier resourceLocation = VerdanceModels.CUSHION.upload(block, textureMapping, generator.modelCollector);
-        generator.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, resourceLocation));
+    public final void createCushion(Block block, BlockModelGenerators generator) {
+        TextureMapping textureMapping = VerdanceTextureMaps.cushionTextureMappings(block);
+        ResourceLocation resourceLocation = VerdanceModels.CUSHION.create(block, textureMapping, generator.modelOutput);
+        generator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, resourceLocation));
     }
 }

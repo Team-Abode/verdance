@@ -2,12 +2,12 @@ package com.teamabode.verdance.common.worldgen;
 
 import com.teamabode.verdance.Verdance;
 import java.util.List;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class DecayPatchFeature extends Feature<DecayPatchConfiguration> {
     public DecayPatchFeature() {
@@ -15,15 +15,15 @@ public class DecayPatchFeature extends Feature<DecayPatchConfiguration> {
     }
 
     @Override
-    public boolean generate(FeatureContext<DecayPatchConfiguration> context) {
-        StructureWorldAccess level = context.getWorld();
-        Random random = context.getRandom();
-        BlockPos origin = context.getOrigin();
-        List<DecayPatchConfiguration.Distance> distances = context.getConfig().distances();
-        DecayPatchConfiguration.Patch patch = context.getConfig().patch();
+    public boolean place(FeaturePlaceContext<DecayPatchConfiguration> context) {
+        WorldGenLevel level = context.level();
+        RandomSource random = context.random();
+        BlockPos origin = context.origin();
+        List<DecayPatchConfiguration.Distance> distances = context.config().distances();
+        DecayPatchConfiguration.Patch patch = context.config().patch();
 
         int successCount = 0;
-        BlockPos.Mutable scanPos = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos scanPos = new BlockPos.MutableBlockPos();
         int horizontalSpread = patch.horizontalSpread() + 1;
         int verticalSpread = patch.verticalSpread() + 1;
 
@@ -32,14 +32,14 @@ public class DecayPatchFeature extends Feature<DecayPatchConfiguration> {
             int randomY = random.nextInt(verticalSpread) - random.nextInt(verticalSpread);
             int randomZ = random.nextInt(horizontalSpread) - random.nextInt(horizontalSpread);
 
-            scanPos.set(origin, randomX, randomY, randomZ);
-            int distance = scanPos.getManhattanDistance(origin);
+            scanPos.setWithOffset(origin, randomX, randomY, randomZ);
+            int distance = scanPos.distManhattan(origin);
 
             for (DecayPatchConfiguration.Distance settings : distances) {
                 if (distance >= settings.distance()) {
                     PlacedFeature feature = settings.feature().value();
 
-                    if (feature.generateUnregistered(level, context.getGenerator(), random, scanPos)) {
+                    if (feature.place(level, context.chunkGenerator(), random, scanPos)) {
                         successCount++;
                         break;
                     }

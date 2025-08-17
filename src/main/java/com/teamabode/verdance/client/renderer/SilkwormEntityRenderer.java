@@ -3,19 +3,19 @@ package com.teamabode.verdance.client.renderer;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.client.model.SilkwormEntityModel;
 import com.teamabode.verdance.common.entity.silkworm.SilkwormEntity;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
-public class SilkwormEntityRenderer extends MobEntityRenderer<SilkwormEntity, SilkwormEntityModel> {
-    public static final Identifier TEXTURE = Verdance.id("textures/entity/silkworm.png");
+public class SilkwormEntityRenderer extends MobRenderer<SilkwormEntity, SilkwormEntityModel> {
+    public static final ResourceLocation TEXTURE = Verdance.id("textures/entity/silkworm.png");
 
-    public SilkwormEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new SilkwormEntityModel(context.getPart(SilkwormEntityModel.LAYER_LOCATION)), 0.25f);
+    public SilkwormEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, new SilkwormEntityModel(context.bakeLayer(SilkwormEntityModel.LAYER_LOCATION)), 0.25f);
     }
 
     @Override
-    public Identifier getTexture(SilkwormEntity entity) {
+    public ResourceLocation getTexture(SilkwormEntity entity) {
         return TEXTURE;
     }
 }

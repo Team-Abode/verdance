@@ -1,17 +1,17 @@
 package com.teamabode.verdance.core.misc;
 
 import com.teamabode.verdance.Verdance;
-import net.minecraft.block.Block;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.Block;
 
 public class VerdanceBlockRegistryKeys {
 
-    public static final RegistryKey<Block> CANTALOUPE = createKey("cantaloupe");
-    public static final RegistryKey<Block> CANTALOUPE_STEM = createKey("cantaloupe_stem");
-    public static final RegistryKey<Block> ATTACHED_CANTALOUPE_STEM = createKey("attached_cantaloupe_stem");
+    public static final ResourceKey<Block> CANTALOUPE = createKey("cantaloupe");
+    public static final ResourceKey<Block> CANTALOUPE_STEM = createKey("cantaloupe_stem");
+    public static final ResourceKey<Block> ATTACHED_CANTALOUPE_STEM = createKey("attached_cantaloupe_stem");
 
-    private static RegistryKey<Block> createKey(String name) {
-        return RegistryKey.of(RegistryKeys.BLOCK, Verdance.id(name));
+    private static ResourceKey<Block> createKey(String name) {
+        return ResourceKey.create(Registries.BLOCK, Verdance.id(name));
     }
 }

@@ -5,25 +5,25 @@ import com.teamabode.verdance.core.registry.VerdanceItems;
 import com.teamabode.verdance.core.registry.VerdanceLootTables;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.Items;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.context.LootContextTypes;
-import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class VerdanceArchaeologyLootTableProvider extends SimpleFabricLootTableProvider {
-    public VerdanceArchaeologyLootTableProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
-        super(output, registryLookup, LootContextTypes.ARCHAEOLOGY);
+    public VerdanceArchaeologyLootTableProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        super(output, registryLookup, LootContextParamSets.ARCHAEOLOGY);
     }
 
     @Override
-    public void accept(BiConsumer<RegistryKey<LootTable>, LootTable.Builder> exporter) {
+    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> exporter) {
         ArchaeologyLootBuilder.create(VerdanceLootTables.ARCHAEOLOGY_TOWN_RUINS_COMMON)
                 .add(Items.CLAY, 2)
                 .add(Items.WHITE_DYE, 2)
@@ -71,34 +71,34 @@ public class VerdanceArchaeologyLootTableProvider extends SimpleFabricLootTableP
     }
 
     public static class ArchaeologyLootBuilder {
-        private final RegistryKey<LootTable> key;
-        private final LootPool.Builder pool = LootPool.builder();
+        private final ResourceKey<LootTable> key;
+        private final LootPool.Builder pool = LootPool.lootPool();
 
-        private ArchaeologyLootBuilder(RegistryKey<LootTable> key) {
+        private ArchaeologyLootBuilder(ResourceKey<LootTable> key) {
             this.key = key;
-            pool.rolls(ConstantLootNumberProvider.create(1.0f));
-            pool.bonusRolls(ConstantLootNumberProvider.create(0.0f));
+            pool.setRolls(ConstantValue.exactly(1.0f));
+            pool.setBonusRolls(ConstantValue.exactly(0.0f));
         }
 
-        public static ArchaeologyLootBuilder create(RegistryKey<LootTable> lootTable) {
+        public static ArchaeologyLootBuilder create(ResourceKey<LootTable> lootTable) {
             return new ArchaeologyLootBuilder(lootTable);
         }
 
-        public ArchaeologyLootBuilder add(ItemConvertible item) {
-            pool.with(ItemEntry.builder(item));
+        public ArchaeologyLootBuilder add(ItemLike item) {
+            pool.add(LootItem.lootTableItem(item));
             return this;
         }
 
-        public ArchaeologyLootBuilder add(ItemConvertible item, int weight) {
-            pool.with(ItemEntry.builder(item).weight(weight));
+        public ArchaeologyLootBuilder add(ItemLike item, int weight) {
+            pool.add(LootItem.lootTableItem(item).setWeight(weight));
             return this;
         }
 
-        public void export(BiConsumer<RegistryKey<LootTable>, LootTable.Builder> exporter) {
-            LootTable.Builder lootTable = LootTable.builder();
-            lootTable.pool(pool);
-            lootTable.type(LootContextTypes.ARCHAEOLOGY);
-            lootTable.randomSequenceId(key.getValue());
+        public void export(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> exporter) {
+            LootTable.Builder lootTable = LootTable.lootTable();
+            lootTable.withPool(pool);
+            lootTable.setParamSet(LootContextParamSets.ARCHAEOLOGY);
+            lootTable.setRandomSequence(key.location());
             exporter.accept(key, lootTable);
         }
     }

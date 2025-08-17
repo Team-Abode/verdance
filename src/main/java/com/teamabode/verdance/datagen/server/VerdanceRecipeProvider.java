@@ -8,90 +8,95 @@ import com.teamabode.verdance.core.tag.VerdanceItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.family.BlockFamily;
-import net.minecraft.data.family.BlockFamily.Variant;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.BlockFamily;
+import net.minecraft.data.BlockFamily.Variant;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.data.server.recipe.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.resource.featuretoggle.FeatureFlags;
-import net.minecraft.resource.featuretoggle.FeatureSet;
-
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class VerdanceRecipeProvider extends FabricRecipeProvider {
 
-    public VerdanceRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+    public VerdanceRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
     }
 
-    private static void stucco(RecipeExporter output, BlockFamily family, TagKey<Item> dye) {
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, family.getBaseBlock(), 8).input(dye).input(Items.CLAY, 4).input(Ingredient.fromTag(ItemTags.SAND), 4).group("stucco").criterion(hasItem(Items.CLAY), conditionsFromItem(Items.CLAY)).criterion("has_sand", conditionsFromTag(ItemTags.SAND)).offerTo(output);
+    private static void stucco(RecipeOutput output, BlockFamily family, TagKey<Item> dye) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, family.getBaseBlock(), 8).requires(dye).requires(Items.CLAY, 4).requires(Ingredient.of(ItemTags.SAND), 4).group("stucco").unlockedBy(getHasName(Items.CLAY), has(Items.CLAY)).unlockedBy("has_sand", has(ItemTags.SAND)).save(output);
 
-        offerStonecuttingRecipe(output, RecipeCategory.BUILDING_BLOCKS, family.getVariant(Variant.STAIRS), family.getBaseBlock());
-        offerStonecuttingRecipe(output, RecipeCategory.BUILDING_BLOCKS, family.getVariant(Variant.SLAB), family.getBaseBlock(), 2);
-        offerStonecuttingRecipe(output, RecipeCategory.MISC, family.getVariant(Variant.WALL), family.getBaseBlock());
+        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, family.get(Variant.STAIRS), family.getBaseBlock());
+        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, family.get(Variant.SLAB), family.getBaseBlock(), 2);
+        stonecutterResultFromBase(output, RecipeCategory.MISC, family.get(Variant.WALL), family.getBaseBlock());
     }
 
-    private static void cantaloupe(RecipeExporter exporter) {
-        offer2x2CompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, VerdanceBlocks.CANTALOUPE, VerdanceItems.CANTALOUPE_SLICE);
+    private static void cantaloupe(RecipeOutput exporter) {
+        twoByTwoPacker(exporter, RecipeCategory.BUILDING_BLOCKS, VerdanceBlocks.CANTALOUPE, VerdanceItems.CANTALOUPE_SLICE);
 
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, VerdanceItems.CANTALOUPE_SEEDS).input(VerdanceItems.CANTALOUPE_SLICE).criterion(hasItem(VerdanceItems.CANTALOUPE_SLICE), conditionsFromItem(VerdanceItems.CANTALOUPE_SLICE)).offerTo(exporter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, VerdanceItems.CANTALOUPE_SEEDS).requires(VerdanceItems.CANTALOUPE_SLICE).unlockedBy(getHasName(VerdanceItems.CANTALOUPE_SLICE), has(VerdanceItems.CANTALOUPE_SLICE)).save(exporter);
 
-        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(VerdanceItems.CANTALOUPE_SLICE), RecipeCategory.FOOD, VerdanceItems.GRILLED_CANTALOUPE_SLICE, 0.25f, 200).criterion("has_cantaloupe_slice", conditionsFromItem(VerdanceItems.CANTALOUPE_SLICE)).offerTo(exporter);
-        CookingRecipeJsonBuilder.createSmoking(Ingredient.ofItems(VerdanceItems.CANTALOUPE_SLICE), RecipeCategory.FOOD, VerdanceItems.GRILLED_CANTALOUPE_SLICE, 0.25f, 100).criterion("has_cantaloupe_slice", conditionsFromItem(VerdanceItems.CANTALOUPE_SLICE)).offerTo(exporter, Verdance.id("grilled_cantaloupe_slice_from_smoking"));
-        CookingRecipeJsonBuilder.createCampfireCooking(Ingredient.ofItems(VerdanceItems.CANTALOUPE_SLICE), RecipeCategory.FOOD, VerdanceItems.GRILLED_CANTALOUPE_SLICE, 0.25f, 600).criterion("has_cantaloupe_slice", conditionsFromItem(VerdanceItems.CANTALOUPE_SLICE)).offerTo(exporter, Verdance.id("grilled_cantaloupe_slice_from_campfire_cooking"));
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, VerdanceItems.CANTALOUPE_JUICE).input(VerdanceItems.CANTALOUPE_SLICE, 4).input(Items.SUGAR).input(Items.GLASS_BOTTLE).criterion("has_cantaloupe_slice", conditionsFromItem(VerdanceItems.CANTALOUPE_SLICE)).criterion("has_sugar", conditionsFromItem(Items.SUGAR)).criterion("has_glass_bottle", conditionsFromItem(Items.GLASS_BOTTLE)).offerTo(exporter);
-        offerCompactingRecipe(exporter, RecipeCategory.MISC, VerdanceItems.MUSIC_DISC_RANGE, VerdanceItems.DISC_FRAGMENT_RANGE);
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(VerdanceItems.CANTALOUPE_SLICE), RecipeCategory.FOOD, VerdanceItems.GRILLED_CANTALOUPE_SLICE, 0.25f, 200).unlockedBy("has_cantaloupe_slice", has(VerdanceItems.CANTALOUPE_SLICE)).save(exporter);
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(VerdanceItems.CANTALOUPE_SLICE), RecipeCategory.FOOD, VerdanceItems.GRILLED_CANTALOUPE_SLICE, 0.25f, 100).unlockedBy("has_cantaloupe_slice", has(VerdanceItems.CANTALOUPE_SLICE)).save(exporter, Verdance.id("grilled_cantaloupe_slice_from_smoking"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(VerdanceItems.CANTALOUPE_SLICE), RecipeCategory.FOOD, VerdanceItems.GRILLED_CANTALOUPE_SLICE, 0.25f, 600).unlockedBy("has_cantaloupe_slice", has(VerdanceItems.CANTALOUPE_SLICE)).save(exporter, Verdance.id("grilled_cantaloupe_slice_from_campfire_cooking"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, VerdanceItems.CANTALOUPE_JUICE).requires(VerdanceItems.CANTALOUPE_SLICE, 4).requires(Items.SUGAR).requires(Items.GLASS_BOTTLE).unlockedBy("has_cantaloupe_slice", has(VerdanceItems.CANTALOUPE_SLICE)).unlockedBy("has_sugar", has(Items.SUGAR)).unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE)).save(exporter);
+        threeByThreePacker(exporter, RecipeCategory.MISC, VerdanceItems.MUSIC_DISC_RANGE, VerdanceItems.DISC_FRAGMENT_RANGE);
 
-        offerSmithingTemplateCopyingRecipe(exporter, VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE, VerdanceBlocks.WHITE_STUCCO);
-        offerSmithingTrimRecipe(exporter, VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE, Verdance.id(getItemPath(VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE) + "_smithing_trim"));
+        copySmithingTemplate(exporter, VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE, VerdanceBlocks.WHITE_STUCCO);
+        trimSmithing(exporter, VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE, Verdance.id(getItemName(VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE) + "_smithing_trim"));
     }
 
-    private static void offerDyeableRecipes(RecipeExporter exporter, RecipeCategory category, List<TagKey<Item>> dyes, List<ItemConvertible> dyeables, String group) {
+    private static void offerDyeableRecipes(RecipeOutput exporter, RecipeCategory category, List<TagKey<Item>> dyes, List<ItemLike> dyeables, String group) {
         for (int i = 0; i < dyes.size(); ++i) {
             TagKey<Item> dye = dyes.get(i);
-            final ItemConvertible item = dyeables.get(i);
-            ShapelessRecipeJsonBuilder.create(category, item).input(dye).input(Ingredient.ofStacks(dyeables.stream().filter(dyeable -> !dyeable.equals(item)).map(ItemStack::new))).group(group).criterion("has_needed_dye", conditionsFromTag(dye)).offerTo(exporter, Verdance.id("dye_" + getItemPath(item)));
+            final ItemLike item = dyeables.get(i);
+            ShapelessRecipeBuilder.shapeless(category, item).requires(dye).requires(Ingredient.of(dyeables.stream().filter(dyeable -> !dyeable.equals(item)).map(ItemStack::new))).group(group).unlockedBy("has_needed_dye", has(dye)).save(exporter, Verdance.id("dye_" + getItemName(item)));
         }
     }
 
-    public static void offerStonecuttingRecipe(RecipeExporter exporter, RecipeCategory category, ItemConvertible result, ItemConvertible material) {
-        offerStonecuttingRecipe(exporter, category, result, material, 1);
+    public static void stonecutterResultFromBase(RecipeOutput exporter, RecipeCategory category, ItemLike result, ItemLike material) {
+        stonecutterResultFromBase(exporter, category, result, material, 1);
     }
 
-    public static void offerStonecuttingRecipe(RecipeExporter exporter, RecipeCategory category, ItemConvertible result, ItemConvertible material, int resultCount) {
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(material), category, result, resultCount).criterion(RecipeProvider.hasItem(material), RecipeProvider.conditionsFromItem(material)).offerTo(exporter, Verdance.id(convertBetween(result, material) + "_stonecutting"));
+    public static void stonecutterResultFromBase(RecipeOutput exporter, RecipeCategory category, ItemLike result, ItemLike material, int resultCount) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(material), category, result, resultCount).unlockedBy(RecipeProvider.getHasName(material), RecipeProvider.has(material)).save(exporter, Verdance.id(getConversionRecipeName(result, material) + "_stonecutting"));
     }
 
-    private static void cushion(RecipeExporter exporter, ItemConvertible cushion, ItemConvertible wool) {
-        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, cushion, 2).criterion(hasItem(wool), conditionsFromItem(wool)).input('W', wool).input('#', ItemTags.PLANKS).pattern("WW").pattern("##").group("cushion").offerTo(exporter);
+    private static void cushion(RecipeOutput exporter, ItemLike cushion, ItemLike wool) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, cushion, 2).unlockedBy(getHasName(wool), has(wool)).define('W', wool).define('#', ItemTags.PLANKS).pattern("WW").pattern("##").group("cushion").save(exporter);
     }
 
-    private static void dyeFromFlower(RecipeExporter exporter, Item dye, Block flower, int count) {
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, dye, count).input(flower).criterion(hasItem(flower), conditionsFromItem(flower)).group(getItemPath(dye)).offerTo(exporter, Verdance.id(convertBetween(dye, flower)));
+    private static void dyeFromFlower(RecipeOutput exporter, Item dye, Block flower, int count) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, dye, count).requires(flower).unlockedBy(getHasName(flower), has(flower)).group(getItemName(dye)).save(exporter, Verdance.id(getConversionRecipeName(dye, flower)));
     }
 
-    public void generate(RecipeExporter exporter) {
-        VerdanceBlockFamilies.getAllFamilies().filter(BlockFamily::shouldGenerateRecipes).forEach(family -> RecipeProvider.generateFamily(exporter, family, FeatureSet.of(FeatureFlags.VANILLA)));
-        offerBarkBlockRecipe(exporter, VerdanceBlocks.MULBERRY_WOOD, VerdanceBlocks.MULBERRY_LOG);
-        offerBarkBlockRecipe(exporter, VerdanceBlocks.STRIPPED_MULBERRY_WOOD, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
-        offerPlanksRecipe2(exporter, VerdanceBlocks.MULBERRY_PLANKS, VerdanceItemTags.MULBERRY_LOGS, 4);
+    public void buildRecipes(RecipeOutput exporter) {
+        VerdanceBlockFamilies.getAllFamilies().filter(BlockFamily::shouldGenerateRecipe).forEach(family -> RecipeProvider.generateRecipes(exporter, family, FeatureFlagSet.of(FeatureFlags.VANILLA)));
+        woodFromLogs(exporter, VerdanceBlocks.MULBERRY_WOOD, VerdanceBlocks.MULBERRY_LOG);
+        woodFromLogs(exporter, VerdanceBlocks.STRIPPED_MULBERRY_WOOD, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
+        planksFromLog(exporter, VerdanceBlocks.MULBERRY_PLANKS, VerdanceItemTags.MULBERRY_LOGS, 4);
 
-        offerBoatRecipe(exporter, VerdanceItems.MULBERRY_BOAT, VerdanceBlocks.MULBERRY_PLANKS);
-        offerChestBoatRecipe(exporter, VerdanceItems.MULBERRY_CHEST_BOAT, VerdanceItems.MULBERRY_BOAT);
+        woodenBoat(exporter, VerdanceItems.MULBERRY_BOAT, VerdanceBlocks.MULBERRY_PLANKS);
+        chestBoat(exporter, VerdanceItems.MULBERRY_CHEST_BOAT, VerdanceItems.MULBERRY_BOAT);
 
         cantaloupe(exporter);
-        offerHangingSignRecipe(exporter, VerdanceItems.MULBERRY_HANGING_SIGN, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
+        hangingSign(exporter, VerdanceItems.MULBERRY_HANGING_SIGN, VerdanceBlocks.STRIPPED_MULBERRY_LOG);
         stucco(exporter, VerdanceBlockFamilies.WHITE_STUCCO, ConventionalItemTags.WHITE_DYES);
         stucco(exporter, VerdanceBlockFamilies.LIGHT_GRAY_STUCCO, ConventionalItemTags.LIGHT_GRAY_DYES);
         stucco(exporter, VerdanceBlockFamilies.GRAY_STUCCO, ConventionalItemTags.GRAY_DYES);
@@ -127,7 +132,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         cushion(exporter, VerdanceBlocks.PINK_CUSHION, Blocks.PINK_WOOL);
 
         List<TagKey<Item>> dyes = List.of(ConventionalItemTags.BLACK_DYES, ConventionalItemTags.BLUE_DYES, ConventionalItemTags.BROWN_DYES, ConventionalItemTags.CYAN_DYES, ConventionalItemTags.GRAY_DYES, ConventionalItemTags.GREEN_DYES, ConventionalItemTags.LIGHT_BLUE_DYES, ConventionalItemTags.LIGHT_GRAY_DYES, ConventionalItemTags.LIME_DYES, ConventionalItemTags.MAGENTA_DYES, ConventionalItemTags.ORANGE_DYES, ConventionalItemTags.PINK_DYES, ConventionalItemTags.PURPLE_DYES, ConventionalItemTags.RED_DYES, ConventionalItemTags.YELLOW_DYES, ConventionalItemTags.WHITE_DYES);
-        List<ItemConvertible> cushions = List.of(VerdanceBlocks.BLACK_CUSHION, VerdanceBlocks.BLUE_CUSHION, VerdanceBlocks.BROWN_CUSHION, VerdanceBlocks.CYAN_CUSHION, VerdanceBlocks.GRAY_CUSHION, VerdanceBlocks.GREEN_CUSHION, VerdanceBlocks.LIGHT_BLUE_CUSHION, VerdanceBlocks.LIGHT_GRAY_CUSHION, VerdanceBlocks.LIME_CUSHION, VerdanceBlocks.MAGENTA_CUSHION, VerdanceBlocks.ORANGE_CUSHION, VerdanceBlocks.PINK_CUSHION, VerdanceBlocks.PURPLE_CUSHION, VerdanceBlocks.RED_CUSHION, VerdanceBlocks.YELLOW_CUSHION, VerdanceBlocks.WHITE_CUSHION);
+        List<ItemLike> cushions = List.of(VerdanceBlocks.BLACK_CUSHION, VerdanceBlocks.BLUE_CUSHION, VerdanceBlocks.BROWN_CUSHION, VerdanceBlocks.CYAN_CUSHION, VerdanceBlocks.GRAY_CUSHION, VerdanceBlocks.GREEN_CUSHION, VerdanceBlocks.LIGHT_BLUE_CUSHION, VerdanceBlocks.LIGHT_GRAY_CUSHION, VerdanceBlocks.LIME_CUSHION, VerdanceBlocks.MAGENTA_CUSHION, VerdanceBlocks.ORANGE_CUSHION, VerdanceBlocks.PINK_CUSHION, VerdanceBlocks.PURPLE_CUSHION, VerdanceBlocks.RED_CUSHION, VerdanceBlocks.YELLOW_CUSHION, VerdanceBlocks.WHITE_CUSHION);
         offerDyeableRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, dyes, cushions, "cushion");
         dyeFromFlower(exporter, Items.PURPLE_DYE, VerdanceBlocks.VIOLET, 1);
         dyeFromFlower(exporter, Items.MAGENTA_DYE, Blocks.SPORE_BLOSSOM, 2);

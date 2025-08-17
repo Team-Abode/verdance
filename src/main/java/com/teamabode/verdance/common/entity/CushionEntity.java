@@ -1,38 +1,38 @@
 package com.teamabode.verdance.common.entity;
 
 import com.teamabode.verdance.common.block.CushionBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.PushReaction;
 
 public class CushionEntity extends Entity {
 
-    public CushionEntity(EntityType<?> entityType, World level) {
+    public CushionEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
-        this.noClip = true;
+        this.noPhysics = true;
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-
-    }
-
-    @Override
-    protected void readCustomDataFromNbt(NbtCompound compoundTag) {
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
 
     }
 
     @Override
-    protected void writeCustomDataToNbt(NbtCompound compoundTag) {
+    protected void readAdditionalSaveData(CompoundTag compoundTag) {
+
+    }
+
+    @Override
+    protected void addAdditionalSaveData(CompoundTag compoundTag) {
 
     }
 
@@ -40,22 +40,22 @@ public class CushionEntity extends Entity {
     public void tick() {
         super.tick();
 
-        List<Entity> passengers = this.getPassengerList();
-        World world = this.getWorld();
+        List<Entity> passengers = this.getPassengers();
+        Level world = this.level();
 
-        if (passengers.isEmpty() && !world.isClient()) {
-            BlockPos pos = this.getBlockPos();
+        if (passengers.isEmpty() && !world.isClientSide()) {
+            BlockPos pos = this.blockPosition();
             BlockState state = world.getBlockState(pos);
 
-            if (state.contains(CushionBlock.OCCUPIED)) {
-                world.setBlockState(pos, state.with(Properties.OCCUPIED, false));
+            if (state.hasProperty(CushionBlock.OCCUPIED)) {
+                world.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.OCCUPIED, false));
             }
-            this.removeFromDimension();
+            this.removeAfterChangingDimensions();
         }
     }
 
-    public @NotNull PistonBehavior getPistonBehavior() {
-        return PistonBehavior.IGNORE;
+    public @NotNull PushReaction getPistonPushReaction() {
+        return PushReaction.IGNORE;
     }
 
     protected boolean canAddPassenger(Entity entity) {

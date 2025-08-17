@@ -2,45 +2,45 @@ package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.core.tag.VerdanceBiomeTags;
-import net.minecraft.registry.Registerable;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry.Reference;
-import net.minecraft.registry.entry.RegistryEntryList.Named;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.StructureTerrainAdaptation;
-import net.minecraft.world.gen.YOffset;
-import net.minecraft.world.gen.heightprovider.ConstantHeightProvider;
-import net.minecraft.world.gen.structure.JigsawStructure;
-import net.minecraft.world.gen.structure.Structure;
-import net.minecraft.world.gen.structure.Structure.Config;
+import net.minecraft.core.Holder.Reference;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderSet.Named;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.Structure.StructureSettings;
+import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
+import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
 
 public class VerdanceStructures {
-    public static final RegistryKey<Structure> TOWN_RUINS = createKey("town_ruins");
+    public static final ResourceKey<Structure> TOWN_RUINS = createKey("town_ruins");
 
-    public static void register(Registerable<Structure> context) {
-        var biomes = context.getRegistryLookup(RegistryKeys.BIOME);
-        var templatePools = context.getRegistryLookup(RegistryKeys.TEMPLATE_POOL);
+    public static void register(BootstrapContext<Structure> context) {
+        var biomes = context.lookup(Registries.BIOME);
+        var templatePools = context.lookup(Registries.TEMPLATE_POOL);
 
         var hasTownRuins = biomes.getOrThrow(VerdanceBiomeTags.HAS_TOWN_RUINS);
         var centersPool = templatePools.getOrThrow(VerdanceTemplatePools.TOWN_RUINS_TOWN_CENTERS);
 
         context.register(TOWN_RUINS, new JigsawStructure(
-                new Config.Builder(hasTownRuins)
-                        .step(GenerationStep.Feature.UNDERGROUND_STRUCTURES)
-                        .terrainAdaptation(StructureTerrainAdaptation.BURY)
+                new StructureSettings.Builder(hasTownRuins)
+                        .generationStep(GenerationStep.Decoration.UNDERGROUND_STRUCTURES)
+                        .terrainAdapation(TerrainAdjustment.BURY)
                         .build(),
                 centersPool,
                 4,
-                ConstantHeightProvider.create(YOffset.fixed(-15)),
+                ConstantHeight.of(VerticalAnchor.absolute(-15)),
                 false,
-                Heightmap.Type.WORLD_SURFACE_WG
+                Heightmap.Types.WORLD_SURFACE_WG
         ));
     }
 
-    private static RegistryKey<Structure> createKey(String name) {
-        return RegistryKey.of(RegistryKeys.STRUCTURE, Verdance.id(name));
+    private static ResourceKey<Structure> createKey(String name) {
+        return ResourceKey.create(Registries.STRUCTURE, Verdance.id(name));
     }
 }

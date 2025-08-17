@@ -1,34 +1,34 @@
 package com.teamabode.verdance.core.mixin.general;
 
 import com.teamabode.verdance.core.tag.VerdanceBlockTags;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LightningEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(LightningEntity.class)
+@Mixin(LightningBolt.class)
 public abstract class LightningEntityMixin extends Entity {
-    @Shadow protected abstract BlockPos getAffectedBlockPos();
+    @Shadow protected abstract BlockPos getStrikePosition();
 
-    public LightningEntityMixin(EntityType<?> entityType, World level) {
+    public LightningEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
 
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LightningEntity;powerLightningRod()V", shift = At.Shift.AFTER))
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LightningBolt;powerLightningRod()V", shift = At.Shift.AFTER))
     private void verdance$tick(CallbackInfo ci) {
-        for (BlockPos pos : BlockPos.iterateOutwards(this.getAffectedBlockPos(), 4, 2, 4)) {
-            BlockState state = getWorld().getBlockState(pos);
+        for (BlockPos pos : BlockPos.withinManhattan(this.getStrikePosition(), 4, 2, 4)) {
+            BlockState state = level().getBlockState(pos);
 
-            if (state.isIn(VerdanceBlockTags.SHRUBS)) {
-                getWorld().setBlockState(pos, Blocks.DEAD_BUSH.getDefaultState());
+            if (state.is(VerdanceBlockTags.SHRUBS)) {
+                level().setBlockAndUpdate(pos, Blocks.DEAD_BUSH.defaultBlockState());
             }
         }
     }

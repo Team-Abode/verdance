@@ -5,31 +5,31 @@ import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
 import com.teamabode.verdance.common.util.SilkUtils;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import java.util.Map;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.ai.brain.MemoryModuleState;
-import net.minecraft.entity.ai.brain.MemoryModuleType;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class TurnIntoCocoonTask extends ImprovedSingleTickTask<SilkwormEntity> {
 
     @Override
-    public void requires(Map<MemoryModuleType<?>, MemoryModuleState> requirements) {
-        requirements.put(VerdanceMemoryModuleTypes.WANTS_TO_COCOON, MemoryModuleState.VALUE_PRESENT);
+    public void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements) {
+        requirements.put(VerdanceMemoryModuleTypes.WANTS_TO_COCOON, MemoryStatus.VALUE_PRESENT);
     }
 
     @Override
-    public void run(ServerWorld level, SilkwormEntity entity, long gameTime) {
-        if (!entity.getBlockStateAtPos().isIn(BlockTags.REPLACEABLE)) return;
+    public void run(ServerLevel level, SilkwormEntity entity, long gameTime) {
+        if (!entity.getInBlockState().is(BlockTags.REPLACEABLE)) return;
 
-        for (Direction dir : Direction.Type.HORIZONTAL) {
-            BlockPos dirPos = entity.getBlockPos().offset(dir);
+        for (Direction dir : Direction.Plane.HORIZONTAL) {
+            BlockPos dirPos = entity.blockPosition().relative(dir);
             BlockState dirState = level.getBlockState(dirPos);
-            if (!dirState.isIn(BlockTags.LOGS_THAT_BURN)) continue;
+            if (!dirState.is(BlockTags.LOGS_THAT_BURN)) continue;
 
-            SilkUtils.transformIntoCocoon(level, entity, entity.getBlockPos(), dir);
+            SilkUtils.transformIntoCocoon(level, entity, entity.blockPosition(), dir);
         }
     }
 }

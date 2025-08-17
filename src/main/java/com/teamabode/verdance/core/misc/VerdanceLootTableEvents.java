@@ -2,27 +2,27 @@ package com.teamabode.verdance.core.misc;
 
 import com.teamabode.verdance.core.registry.VerdanceItems;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.minecraft.loot.LootTables;
-import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.entry.LootPoolEntry;
-import net.minecraft.loot.function.SetCountLootFunction;
-import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 public class VerdanceLootTableEvents {
-    private static final LootPoolEntry CANTALOUPE_SEEDS = ItemEntry.builder(VerdanceItems.CANTALOUPE_SEEDS)
-            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0f, 4.0f)))
-            .weight(5)
+    private static final LootPoolEntryContainer CANTALOUPE_SEEDS = LootItem.lootTableItem(VerdanceItems.CANTALOUPE_SEEDS)
+            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 4.0f)))
+            .setWeight(5)
             .build();
 
     public static void register() {
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
-            if (key.equals(LootTables.ABANDONED_MINESHAFT_CHEST)) {
+            if (key.equals(BuiltInLootTables.ABANDONED_MINESHAFT)) {
                 tableBuilder.modifyPools(builder -> builder.with(CANTALOUPE_SEEDS));
             }
-            if (key.equals(LootTables.SIMPLE_DUNGEON_CHEST)) {
+            if (key.equals(BuiltInLootTables.SIMPLE_DUNGEON)) {
                 tableBuilder.modifyPools(builder -> builder.with(CANTALOUPE_SEEDS));
             }
-            if (key.equals(LootTables.WOODLAND_MANSION_CHEST)) {
+            if (key.equals(BuiltInLootTables.WOODLAND_MANSION)) {
                 tableBuilder.modifyPools(builder -> builder.with(CANTALOUPE_SEEDS));
             }
         });

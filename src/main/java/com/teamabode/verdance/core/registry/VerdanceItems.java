@@ -5,79 +5,79 @@ import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.item.CantaloupeJuiceItem;
 import com.teamabode.verdance.core.misc.VerdanceFoodComponents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.minecraft.item.AliasedBlockItem;
-import net.minecraft.item.DiscFragmentItem;
-import net.minecraft.item.HangingSignItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Item.Settings;
-import net.minecraft.item.SignItem;
-import net.minecraft.item.SmithingTemplateItem;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Rarity;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.DiscFragmentItem;
+import net.minecraft.world.item.HangingSignItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SignItem;
+import net.minecraft.world.item.SmithingTemplateItem;
+import net.minecraft.world.item.SpawnEggItem;
 
 public class VerdanceItems {
     public static final Item CANTALOUPE_SLICE = register(
             "cantaloupe_slice",
-            new Settings()
+            new Properties()
                     .food(VerdanceFoodComponents.CANTALOUPE_SLICE)
     );
     public static final Item GRILLED_CANTALOUPE_SLICE = register(
             "grilled_cantaloupe_slice",
-            new Settings()
+            new Properties()
                     .food(VerdanceFoodComponents.GRILLED_CANTALOUPE_SLICE)
     );
     public static final Item CANTALOUPE_JUICE = register(
             "cantaloupe_juice",
-            new CantaloupeJuiceItem(new Settings()
+            new CantaloupeJuiceItem(new Properties()
                     .food(VerdanceFoodComponents.CANTALOUPE_JUICE)
-                    .maxCount(16))
+                    .stacksTo(16))
     );
     public static final Item CANTALOUPE_SEEDS = register(
             "cantaloupe_seeds",
-            new AliasedBlockItem(VerdanceBlocks.CANTALOUPE_STEM, new Settings())
+            new ItemNameBlockItem(VerdanceBlocks.CANTALOUPE_STEM, new Properties())
     );
     public static final Item MULBERRY = register(
             "mulberry",
-            new AliasedBlockItem(VerdanceBlocks.MULBERRY_SAPLING, new Settings()
+            new ItemNameBlockItem(VerdanceBlocks.MULBERRY_SAPLING, new Properties()
                     .food(VerdanceFoodComponents.MULBERRY))
     );
     public static final Item MULBERRY_SIGN = register(
             "mulberry_sign",
             new SignItem(
-                    new Settings().maxCount(16),
+                    new Properties().stacksTo(16),
                     VerdanceBlocks.MULBERRY_SIGN,
                     VerdanceBlocks.MULBERRY_WALL_SIGN)
     );
     public static final Item MULBERRY_HANGING_SIGN = register(
             "mulberry_hanging_sign",
-            new HangingSignItem(VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN, new Settings()
-                    .maxCount(16))
+            new HangingSignItem(VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN, new Properties()
+                    .stacksTo(16))
     );
     public static final Item MULBERRY_BOAT = register(
             "mulberry_boat", new SketchBoatItem(
-                    new Settings().maxCount(1),
+                    new Properties().stacksTo(1),
                     VerdanceBoatTypes.MULBERRY,
                     false)
     );
     public static final Item MULBERRY_CHEST_BOAT = register(
             "mulberry_chest_boat",
             new SketchBoatItem(
-                    new Settings().maxCount(1),
+                    new Properties().stacksTo(1),
                     VerdanceBoatTypes.MULBERRY,
                     true)
     );
     public static final Item MUSIC_DISC_RANGE = register(
             "music_disc_range",
-            new Settings()
-                    .maxCount(1)
+            new Properties()
+                    .stacksTo(1)
                     .rarity(Rarity.RARE)
                     .jukeboxPlayable(VerdanceJukeboxSongs.RANGE)
     );
     public static final Item DISC_FRAGMENT_RANGE = register(
             "disc_fragment_range",
-            new DiscFragmentItem(new Settings())
+            new DiscFragmentItem(new Properties())
     );
 
     public static final Item ABODE_POTTERY_SHERD = register("abode_pottery_sherd");
@@ -89,16 +89,16 @@ public class VerdanceItems {
 
     public static final Item COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE = register(
             "community_armor_trim_smithing_template",
-            SmithingTemplateItem.of(VerdanceTrimPatterns.COMMUNITY)
+            SmithingTemplateItem.createArmorTrimTemplate(VerdanceTrimPatterns.COMMUNITY)
     );
 
     public static final Item SILK_MOTH_SPAWN_EGG = register(
             "silk_moth_spawn_egg",
-            new SpawnEggItem(VerdanceEntityTypes.SILK_MOTH, 13542773, 16383172, new Settings())
+            new SpawnEggItem(VerdanceEntityTypes.SILK_MOTH, 13542773, 16383172, new Properties())
     );
     public static final Item SILKWORM_SPAWN_EGG = register(
             "silkworm_spawn_egg",
-            new SpawnEggItem(VerdanceEntityTypes.SILKWORM, 0xEBEDE6, 0x75665D, new Settings())
+            new SpawnEggItem(VerdanceEntityTypes.SILKWORM, 0xEBEDE6, 0x75665D, new Properties())
     );
 
     public static void register() {
@@ -117,14 +117,14 @@ public class VerdanceItems {
 
     // Utils
     private static Item register(String name) {
-        return register(name, new Settings());
+        return register(name, new Properties());
     }
 
-    private static Item register(String name, Settings properties) {
+    private static Item register(String name, Properties properties) {
         return register(name, new Item(properties));
     }
 
     private static <T extends Item> T register(String name, T item) {
-        return Registry.register(Registries.ITEM, Verdance.id(name), item);
+        return Registry.register(BuiltInRegistries.ITEM, Verdance.id(name), item);
     }
 }

@@ -4,18 +4,18 @@ import com.teamabode.sketch.client.model.SketchAnimatableModel;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.client.VerdanceAnimations;
 import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
-import net.minecraft.client.model.Dilation;
-import net.minecraft.client.model.ModelData;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.model.ModelPartBuilder;
-import net.minecraft.client.model.ModelPartData;
-import net.minecraft.client.model.ModelTransform;
-import net.minecraft.client.model.TexturedModelData;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class SilkMothEntityModel extends SketchAnimatableModel<SilkMothEntity> {
-	public static final EntityModelLayer LAYER = new EntityModelLayer(Verdance.id("silk_moth"), "main");
+	public static final ModelLayerLocation LAYER = new ModelLayerLocation(Verdance.id("silk_moth"), "main");
 
 	private final ModelPart root;
 	private final ModelPart body;
@@ -55,30 +55,30 @@ public class SilkMothEntityModel extends SketchAnimatableModel<SilkMothEntity> {
 		this.leftWing = body.getChild("left_wing");
 	}
 
-	public static TexturedModelData createBodyLayer() {
-		ModelData mesh = new ModelData();
-		ModelPartData root = mesh.getRoot();
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition mesh = new MeshDefinition();
+		PartDefinition root = mesh.getRoot();
 
-		ModelPartData body = root.addChild("body", ModelPartBuilder.create().uv(0, 9).cuboid(-5.0F, -4.0F, -5.0F, 9.0F, 9.0F, 7.0F, new Dilation(0.0F))
-		.uv(0, 25).cuboid(-4.0F, -3.0F, 2.0F, 7.0F, 7.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(0.5F, 19.0F, -1.0F));
+		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 9).addBox(-5.0F, -4.0F, -5.0F, 9.0F, 9.0F, 7.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 25).addBox(-4.0F, -3.0F, 2.0F, 7.0F, 7.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 19.0F, -1.0F));
 
-		ModelPartData head = body.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -3.0F, -3.0F, 7.0F, 6.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 1.0F, -5.0F));
+		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -3.0F, -3.0F, 7.0F, 6.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.0F, -5.0F));
 
-		ModelPartData rightAntenna = head.addChild("right_antenna", ModelPartBuilder.create().uv(20, -7).cuboid(0.0F, -7.0F, -7.0F, 0.0F, 7.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(-3.0F, -3.0F, -2.0F));
-		ModelPartData leftAntenna = head.addChild("left_antenna", ModelPartBuilder.create().uv(20, -7).cuboid(0.0F, -7.0F, -7.0F, 0.0F, 7.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(2.0F, -3.0F, -2.0F));
+		PartDefinition rightAntenna = head.addOrReplaceChild("right_antenna", CubeListBuilder.create().texOffs(20, -7).addBox(0.0F, -7.0F, -7.0F, 0.0F, 7.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, -3.0F, -2.0F));
+		PartDefinition leftAntenna = head.addOrReplaceChild("left_antenna", CubeListBuilder.create().texOffs(20, -7).addBox(0.0F, -7.0F, -7.0F, 0.0F, 7.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -3.0F, -2.0F));
 
-		ModelPartData leftLegFront = body.addChild("left_leg_front", ModelPartBuilder.create().uv(48, 0).cuboid(0.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(4.0F, 4.0F, -3.0F));
-		ModelPartData leftLegMid = body.addChild("left_leg_mid", ModelPartBuilder.create().uv(48, 0).cuboid(0.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(4.0F, 4.0F, 1.0F));
-		ModelPartData leftLegBack = body.addChild("left_leg_back", ModelPartBuilder.create().uv(48, 0).cuboid(0.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(3.0F, 4.0F, 5.0F));
+		PartDefinition leftLegFront = body.addOrReplaceChild("left_leg_front", CubeListBuilder.create().texOffs(48, 0).addBox(0.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(4.0F, 4.0F, -3.0F));
+		PartDefinition leftLegMid = body.addOrReplaceChild("left_leg_mid", CubeListBuilder.create().texOffs(48, 0).addBox(0.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(4.0F, 4.0F, 1.0F));
+		PartDefinition leftLegBack = body.addOrReplaceChild("left_leg_back", CubeListBuilder.create().texOffs(48, 0).addBox(0.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, 4.0F, 5.0F));
 
-		ModelPartData rightLegFront = body.addChild("right_leg_front", ModelPartBuilder.create().uv(48, 0).mirrored().cuboid(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(-5.0F, 4.0F, -3.0F));
-		ModelPartData rightLegMid = body.addChild("right_leg_mid", ModelPartBuilder.create().uv(48, 0).mirrored().cuboid(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(-5.0F, 4.0F, 1.0F));
-		ModelPartData rightLegBack = body.addChild("right_leg_back", ModelPartBuilder.create().uv(48, 0).mirrored().cuboid(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(-4.0F, 4.0F, 5.0F));
+		PartDefinition rightLegFront = body.addOrReplaceChild("right_leg_front", CubeListBuilder.create().texOffs(48, 0).mirror().addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-5.0F, 4.0F, -3.0F));
+		PartDefinition rightLegMid = body.addOrReplaceChild("right_leg_mid", CubeListBuilder.create().texOffs(48, 0).mirror().addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-5.0F, 4.0F, 1.0F));
+		PartDefinition rightLegBack = body.addOrReplaceChild("right_leg_back", CubeListBuilder.create().texOffs(48, 0).mirror().addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-4.0F, 4.0F, 5.0F));
 
-		ModelPartData leftWing = body.addChild("left_wing", ModelPartBuilder.create().uv(14, 7).mirrored().cuboid(0.0F, 0.0F, -9.5F, 12.0F, 0.0F, 18.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(4.0F, -2.0F, -1.0F));
-		ModelPartData rightWing = body.addChild("right_wing", ModelPartBuilder.create().uv(14, 7).cuboid(-12.0F, 0.0F, -9.5F, 12.0F, 0.0F, 18.0F, new Dilation(0.0F)), ModelTransform.pivot(-5.0F, -2.0F, -1.0F));
+		PartDefinition leftWing = body.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(14, 7).mirror().addBox(0.0F, 0.0F, -9.5F, 12.0F, 0.0F, 18.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(4.0F, -2.0F, -1.0F));
+		PartDefinition rightWing = body.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(14, 7).addBox(-12.0F, 0.0F, -9.5F, 12.0F, 0.0F, 18.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, -2.0F, -1.0F));
 
-		return TexturedModelData.of(mesh, 64, 64);
+		return LayerDefinition.create(mesh, 64, 64);
 	}
 
 	private static float expDecay(float a, float b, float decay, float dt) {
@@ -86,23 +86,23 @@ public class SilkMothEntityModel extends SketchAnimatableModel<SilkMothEntity> {
 	}
 
 	public void setupBones(SilkMothEntity entity, float deltaTicks) {
-		this.body.pivotY = 17.75f;
+		this.body.y = 17.75f;
 
-		this.rightAntenna.roll = -22.5f * MathHelper.RADIANS_PER_DEGREE;
-		this.leftAntenna.roll = 22.5f * MathHelper.RADIANS_PER_DEGREE;
+		this.rightAntenna.zRot = -22.5f * Mth.DEG_TO_RAD;
+		this.leftAntenna.zRot = 22.5f * Mth.DEG_TO_RAD;
 
-		this.rightLegFront.yaw = -22.5f * MathHelper.RADIANS_PER_DEGREE;
-		this.rightLegFront.roll = -22.5f * MathHelper.RADIANS_PER_DEGREE;
-		this.rightLegMid.roll = -22.5f * MathHelper.RADIANS_PER_DEGREE;
-		this.rightLegBack.yaw = 22.5f * MathHelper.RADIANS_PER_DEGREE;
-		this.rightLegBack.roll = -22.5f * MathHelper.RADIANS_PER_DEGREE;
-		this.leftLegFront.yaw = 22.5f * MathHelper.RADIANS_PER_DEGREE;
-		this.leftLegFront.roll = 22.5f * MathHelper.RADIANS_PER_DEGREE;
-		this.leftLegMid.roll = 22.5f * MathHelper.RADIANS_PER_DEGREE;
-		this.leftLegBack.yaw = -22.5f * MathHelper.RADIANS_PER_DEGREE;
-		this.leftLegBack.roll = 22.5f * MathHelper.RADIANS_PER_DEGREE;
-		this.rightWing.roll = 45.0f * MathHelper.RADIANS_PER_DEGREE;
-		this.leftWing.roll = -45.0f * MathHelper.RADIANS_PER_DEGREE;
+		this.rightLegFront.yRot = -22.5f * Mth.DEG_TO_RAD;
+		this.rightLegFront.zRot = -22.5f * Mth.DEG_TO_RAD;
+		this.rightLegMid.zRot = -22.5f * Mth.DEG_TO_RAD;
+		this.rightLegBack.yRot = 22.5f * Mth.DEG_TO_RAD;
+		this.rightLegBack.zRot = -22.5f * Mth.DEG_TO_RAD;
+		this.leftLegFront.yRot = 22.5f * Mth.DEG_TO_RAD;
+		this.leftLegFront.zRot = 22.5f * Mth.DEG_TO_RAD;
+		this.leftLegMid.zRot = 22.5f * Mth.DEG_TO_RAD;
+		this.leftLegBack.yRot = -22.5f * Mth.DEG_TO_RAD;
+		this.leftLegBack.zRot = 22.5f * Mth.DEG_TO_RAD;
+		this.rightWing.zRot = 45.0f * Mth.DEG_TO_RAD;
+		this.leftWing.zRot = -45.0f * Mth.DEG_TO_RAD;
 	}
 
 	@Override
@@ -110,11 +110,11 @@ public class SilkMothEntityModel extends SketchAnimatableModel<SilkMothEntity> {
 		float deltaTicks = animationProgress - entity.lastAnimationProgress;
 		entity.lastAnimationProgress = animationProgress;
 
-		this.getPart().traverse().forEach(ModelPart::resetTransform);
+		this.root().getAllParts().forEach(ModelPart::resetPose);
 		this.setupBones(entity, deltaTicks);
 		this.animate(entity.idleAnimationState, VerdanceAnimations.SILK_MOTH_IDLE, animationProgress);
 
-		if (entity.isOnGround() && !entity.isInAir()) {
+		if (entity.onGround() && !entity.isFlying()) {
 			this.animateWalk(VerdanceAnimations.SILK_MOTH_WALK, limbAngle, limbDistance, 2.0f, 2.5f);
 		}
 		this.animate(entity.flyAnimationState, VerdanceAnimations.SILK_MOTH_FLY,  animationProgress);
@@ -122,38 +122,38 @@ public class SilkMothEntityModel extends SketchAnimatableModel<SilkMothEntity> {
 	}
 
 	private void animateBones(SilkMothEntity entity, float animationProgress, float deltaTicks, float headYaw, float headPitch) {
-		headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
-		headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);
+		headYaw = Mth.clamp(headYaw, -30.0F, 30.0F);
+		headPitch = Mth.clamp(headPitch, -25.0F, 45.0F);
 
-		float targetXRot =  MathHelper.clamp(entity.bodyPitch * 45.0f, -45.0f, 45.0f) * MathHelper.RADIANS_PER_DEGREE;
-		float soarProgress = entity.getSoarProgress(animationProgress - entity.age);
+		float targetXRot =  Mth.clamp(entity.bodyPitch * 45.0f, -45.0f, 45.0f) * Mth.DEG_TO_RAD;
+		float soarProgress = entity.getSoarProgress(animationProgress - entity.tickCount);
 
 		entity.lastBodyPitch = expDecay(entity.lastBodyPitch, targetXRot, 8f, deltaTicks / 20f);
 
-		this.body.pitch = entity.lastBodyPitch;
-		this.head.yaw = headYaw * MathHelper.RADIANS_PER_DEGREE;
-		this.head.pitch = (headPitch * MathHelper.RADIANS_PER_DEGREE) - entity.lastBodyPitch;
+		this.body.xRot = entity.lastBodyPitch;
+		this.head.yRot = headYaw * Mth.DEG_TO_RAD;
+		this.head.xRot = (headPitch * Mth.DEG_TO_RAD) - entity.lastBodyPitch;
 
-		this.leftLegFront.roll -= (soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
-		this.leftLegFront.yaw -= (soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.leftLegFront.zRot -= (soarProgress * 15.0f) * Mth.DEG_TO_RAD;
+		this.leftLegFront.yRot -= (soarProgress * 30.0f) * Mth.DEG_TO_RAD;
 
-		this.leftLegMid.roll -= (soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
-		this.leftLegMid.yaw -= (soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.leftLegMid.zRot -= (soarProgress * 15.0f) * Mth.DEG_TO_RAD;
+		this.leftLegMid.yRot -= (soarProgress * 30.0f) * Mth.DEG_TO_RAD;
 
-		this.leftLegBack.roll -= (soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
-		this.leftLegBack.yaw -= (soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.leftLegBack.zRot -= (soarProgress * 15.0f) * Mth.DEG_TO_RAD;
+		this.leftLegBack.yRot -= (soarProgress * 30.0f) * Mth.DEG_TO_RAD;
 
-		this.rightLegFront.roll += (soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
-		this.rightLegFront.yaw += (soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.rightLegFront.zRot += (soarProgress * 15.0f) * Mth.DEG_TO_RAD;
+		this.rightLegFront.yRot += (soarProgress * 30.0f) * Mth.DEG_TO_RAD;
 
-		this.rightLegMid.roll += (soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
-		this.rightLegMid.yaw += (soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.rightLegMid.zRot += (soarProgress * 15.0f) * Mth.DEG_TO_RAD;
+		this.rightLegMid.yRot += (soarProgress * 30.0f) * Mth.DEG_TO_RAD;
 
-		this.rightLegBack.roll += (soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
-		this.rightLegBack.yaw += (soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.rightLegBack.zRot += (soarProgress * 15.0f) * Mth.DEG_TO_RAD;
+		this.rightLegBack.yRot += (soarProgress * 30.0f) * Mth.DEG_TO_RAD;
 	}
 
-	public ModelPart getPart() {
+	public ModelPart root() {
 		return this.root;
 	}
 }

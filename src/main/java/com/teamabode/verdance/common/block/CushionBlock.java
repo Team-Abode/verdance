@@ -6,87 +6,87 @@ import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CushionBlock extends Block {
-    public static final MapCodec<CushionBlock> CODEC = createCodec(CushionBlock::new);
-    private static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 10.0, 16.0);
-    public static final BooleanProperty OCCUPIED = Properties.OCCUPIED;
+    public static final MapCodec<CushionBlock> CODEC = simpleCodec(CushionBlock::new);
+    private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 10.0, 16.0);
+    public static final BooleanProperty OCCUPIED = BlockStateProperties.OCCUPIED;
 
-    public CushionBlock(Settings properties) {
+    public CushionBlock(Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateManager.getDefaultState().with(OCCUPIED, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(OCCUPIED, false));
     }
 
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(OCCUPIED);
     }
 
     @Override
-    protected boolean hasComparatorOutput(BlockState blockState) {
+    protected boolean hasAnalogOutputSignal(BlockState blockState) {
         return true;
     }
 
     @Override
-    protected int getComparatorOutput(BlockState state, World level, BlockPos pos) {
-        return state.get(OCCUPIED) ? 15 : 0;
+    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        return state.getValue(OCCUPIED) ? 15 : 0;
     }
 
     @Override
-    protected ActionResult onUse(BlockState blockState, World level, BlockPos blockPos, PlayerEntity player, BlockHitResult blockHitResult) {
-        if (level.isClient()) {
-            return ActionResult.CONSUME;
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        if (level.isClientSide()) {
+            return InteractionResult.CONSUME;
         }
-        if (!player.isSneaking()) {
-            if (blockState.get(OCCUPIED)) {
-                return ActionResult.FAIL;
+        if (!player.isShiftKeyDown()) {
+            if (blockState.getValue(OCCUPIED)) {
+                return InteractionResult.FAIL;
             }
-            level.setBlockState(blockPos, blockState.with(OCCUPIED, true));
+            level.setBlockAndUpdate(blockPos, blockState.setValue(OCCUPIED, true));
             CushionEntity cushion = new CushionEntity(VerdanceEntityTypes.CUSHION, level);
-            cushion.setPosition(blockPos.getX() + 0.5D, blockPos.getY() + 0.4D, blockPos.getZ() + 0.5D);
+            cushion.setPos(blockPos.getX() + 0.5D, blockPos.getY() + 0.4D, blockPos.getZ() + 0.5D);
 
-            if (level.spawnEntity(cushion)) {
+            if (level.addFreshEntity(cushion)) {
                 player.startRiding(cushion);
-                return ActionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         }
-        return ActionResult.FAIL;
+        return InteractionResult.FAIL;
     }
 
     @Override
-    protected void onStateReplaced(BlockState blockState, World level, BlockPos blockPos, BlockState blockState2, boolean bl) {
-        List<CushionEntity> entities = level.getNonSpectatingEntities(CushionEntity.class, new Box(blockPos));
+    protected void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        List<CushionEntity> entities = level.getEntitiesOfClass(CushionEntity.class, new AABB(blockPos));
         for (CushionEntity cushionEntity : entities) {
             cushionEntity.remove(Entity.RemovalReason.DISCARDED);
         }
-        super.onStateReplaced(blockState, level, blockPos, blockState2, bl);
+        super.onRemove(blockState, level, blockPos, blockState2, bl);
     }
 
-    public void onLandedUpon(World level, BlockState blockState, BlockPos blockPos, Entity entity, float f) {
-        super.onLandedUpon(level, blockState, blockPos, entity, f * 0.5F);
+    public void fallOn(Level level, BlockState blockState, BlockPos blockPos, Entity entity, float f) {
+        super.fallOn(level, blockState, blockPos, entity, f * 0.5F);
     }
 
     @Override
-    public void onEntityLand(BlockView blockGetter, Entity entity) {
-        if (entity.bypassesLandingEffects()) {
-            super.onEntityLand(blockGetter, entity);
+    public void updateEntityAfterFallOn(BlockGetter blockGetter, Entity entity) {
+        if (entity.isSuppressingBounce()) {
+            super.updateEntityAfterFallOn(blockGetter, entity);
         }
         else {
             this.bounce(entity);
@@ -94,30 +94,30 @@ public class CushionBlock extends Block {
     }
 
     private void bounce(Entity entity) {
-        Vec3d vec3 = entity.getVelocity();
+        Vec3 vec3 = entity.getDeltaMovement();
         if (vec3.y < 0.0d) {
             double multiplier = entity instanceof LivingEntity ? 1.0d: 0.8d;
-            entity.setVelocity(vec3.x, -vec3.y * 0.8d * multiplier, vec3.z);
+            entity.setDeltaMovement(vec3.x, -vec3.y * 0.8d * multiplier, vec3.z);
         }
     }
 
     @Override
-    protected boolean canPathfindThrough(BlockState blockState, NavigationType pathComputationType) {
+    protected boolean isPathfindable(BlockState blockState, PathComputationType pathComputationType) {
         return false;
     }
 
     @Override
-    public VoxelShape getCollisionShape(@NotNull BlockState state, @NotNull BlockView world, @NotNull BlockPos pos, @NotNull ShapeContext context) {
+    public VoxelShape getCollisionShape(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    public VoxelShape getOutlineShape(@NotNull BlockState state, @NotNull BlockView world, @NotNull BlockPos pos, @NotNull ShapeContext context) {
+    public VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    protected MapCodec<? extends Block> getCodec() {
+    protected MapCodec<? extends Block> codec() {
         return CODEC;
     }
 }

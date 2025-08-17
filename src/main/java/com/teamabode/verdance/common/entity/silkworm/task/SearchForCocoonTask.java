@@ -5,31 +5,31 @@ import com.teamabode.verdance.common.entity.silkworm.SilkwormEntity;
 import com.teamabode.verdance.common.util.SilkUtils;
 import java.util.Map;
 import java.util.Optional;
-import net.minecraft.entity.ai.brain.MemoryModuleState;
-import net.minecraft.entity.ai.brain.MemoryModuleType;
-import net.minecraft.entity.ai.brain.task.LookTargetUtil;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
 public class SearchForCocoonTask extends ImprovedSingleTickTask<SilkwormEntity> {
     private long lastExecution = 0L; // It should only try to attempt this task around every four seconds.
 
     @Override
-    public void requires(Map<MemoryModuleType<?>, MemoryModuleState> requirements) {
-        requirements.put(MemoryModuleType.WALK_TARGET, MemoryModuleState.VALUE_ABSENT);
-        requirements.put(MemoryModuleType.LOOK_TARGET, MemoryModuleState.REGISTERED);
+    public void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements) {
+        requirements.put(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT);
+        requirements.put(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED);
     }
 
     @Override
-    public void run(ServerWorld level, SilkwormEntity entity, long gameTime) {
+    public void run(ServerLevel level, SilkwormEntity entity, long gameTime) {
         if (gameTime > this.lastExecution) {
             this.lastExecution = gameTime + 80L;
             return;
         }
-        Optional<BlockPos> targetPos = SilkUtils.getTargetPos(level, entity.getBlockPos());
+        Optional<BlockPos> targetPos = SilkUtils.getTargetPos(level, entity.blockPosition());
 
         if (targetPos.isPresent()) {
-            LookTargetUtil.walkTowards(entity, targetPos.get(), 2.0f, 0);
+            BehaviorUtils.setWalkAndLookTargetMemories(entity, targetPos.get(), 2.0f, 0);
             return;
         }
         this.lastExecution = gameTime + 80L;

@@ -7,75 +7,76 @@ import com.teamabode.verdance.core.registry.VerdanceItems;
 import com.teamabode.verdance.core.registry.VerdanceCriteria;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
-import net.minecraft.advancement.Advancement;
-import net.minecraft.advancement.AdvancementEntry;
-import net.minecraft.advancement.AdvancementFrame;
-import net.minecraft.advancement.AdvancementRequirements.CriterionMerger;
-import net.minecraft.advancement.criterion.TickCriterion;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.predicate.NumberRange.IntRange;
-import net.minecraft.predicate.item.EnchantmentPredicate;
-import net.minecraft.predicate.item.EnchantmentsPredicate;
-import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.predicate.item.ItemSubPredicateTypes;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementRequirements.Strategy;
+import net.minecraft.advancements.AdvancementType;
+import net.minecraft.advancements.critereon.EnchantmentPredicate;
+import net.minecraft.advancements.critereon.ItemEnchantmentsPredicate;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.ItemSubPredicates;
+import net.minecraft.advancements.critereon.MinMaxBounds.Ints;
+import net.minecraft.advancements.critereon.PlayerTrigger;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderLookup.RegistryLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.enchantment.Enchantments;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class VerdanceAdvancementProvider extends FabricAdvancementProvider {
-    private static final Identifier HUSBANDRY_SILK_TOUCHED = Verdance.id("husbandry/silk_touched");
-    private static final Identifier HUSBANDRY_FEELING_FRESH = Verdance.id("husbandry/feeling_fresh");
+    private static final ResourceLocation HUSBANDRY_SILK_TOUCHED = Verdance.id("husbandry/silk_touched");
+    private static final ResourceLocation HUSBANDRY_FEELING_FRESH = Verdance.id("husbandry/feeling_fresh");
 
-    public VerdanceAdvancementProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+    public VerdanceAdvancementProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
     }
 
     @Override
-    public void generateAdvancement(RegistryWrapper.WrapperLookup registryLookup, Consumer<AdvancementEntry> exporter) {
+    public void generateAdvancement(HolderLookup.Provider registryLookup, Consumer<AdvancementHolder> exporter) {
         this.silkTouched(registryLookup, exporter);
         this.feelingFresh(exporter);
     }
 
-    private void silkTouched(RegistryWrapper.WrapperLookup registryLookup, Consumer<AdvancementEntry> exporter) {
-        Advancement.Builder advancement = Advancement.Builder.create();
+    private void silkTouched(HolderLookup.Provider registryLookup, Consumer<AdvancementHolder> exporter) {
+        Advancement.Builder advancement = Advancement.Builder.advancement();
         advancement.display(
                 VerdanceBlocks.SILKWORM_EGGS,
-                Text.translatable("advancements.verdance.husbandry.silk_touched.title"),
-                Text.translatable("advancements.verdance.husbandry.silk_touched.description"),
+                Component.translatable("advancements.verdance.husbandry.silk_touched.title"),
+                Component.translatable("advancements.verdance.husbandry.silk_touched.description"),
                 null,
-                AdvancementFrame.TASK,
+                AdvancementType.TASK,
                 true, true, false
         );
-        ItemPredicate.Builder item = ItemPredicate.Builder.create();
-        var enchantments = registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+        ItemPredicate.Builder item = ItemPredicate.Builder.item();
+        var enchantments = registryLookup.lookupOrThrow(Registries.ENCHANTMENT);
 
-        item.subPredicate(ItemSubPredicateTypes.ENCHANTMENTS, EnchantmentsPredicate.enchantments(List.of(
-                new EnchantmentPredicate(enchantments.getOrThrow(Enchantments.SILK_TOUCH), IntRange.atLeast(1))
+        item.withSubPredicate(ItemSubPredicates.ENCHANTMENTS, ItemEnchantmentsPredicate.enchantments(List.of(
+                new EnchantmentPredicate(enchantments.getOrThrow(Enchantments.SILK_TOUCH), Ints.atLeast(1))
         )));
-        advancement.parent(new AdvancementEntry(Identifier.ofVanilla("husbandry/root"), null));
-        advancement.criterion("silk_touch_silkworm_eggs", SilkwormEggsDestroyedCriterion.TriggerInstance.createCriterion(item));
-        advancement.criteriaMerger(CriterionMerger.AND);
-        advancement.build(exporter, HUSBANDRY_SILK_TOUCHED.toString());
+        advancement.parent(new AdvancementHolder(ResourceLocation.withDefaultNamespace("husbandry/root"), null));
+        advancement.addCriterion("silk_touch_silkworm_eggs", SilkwormEggsDestroyedCriterion.TriggerInstance.createCriterion(item));
+        advancement.requirements(Strategy.AND);
+        advancement.save(exporter, HUSBANDRY_SILK_TOUCHED.toString());
     }
 
-    private void feelingFresh(Consumer<AdvancementEntry> exporter) {
-        Advancement.Builder advancement = Advancement.Builder.create();
+    private void feelingFresh(Consumer<AdvancementHolder> exporter) {
+        Advancement.Builder advancement = Advancement.Builder.advancement();
         advancement.display(
                 VerdanceItems.CANTALOUPE_JUICE,
-                Text.translatable("advancements.verdance.husbandry.feeling_fresh.title"),
-                Text.translatable("advancements.verdance.husbandry.feeling_fresh.description"),
+                Component.translatable("advancements.verdance.husbandry.feeling_fresh.title"),
+                Component.translatable("advancements.verdance.husbandry.feeling_fresh.description"),
                 null,
-                AdvancementFrame.TASK,
+                AdvancementType.TASK,
                 true, true, false
         );
-        advancement.parent(new AdvancementEntry(Identifier.ofVanilla("husbandry/root"), null));
-        advancement.criterion("extinguished_with_cantaloupe_juice", VerdanceCriteria.EXTINGUISHED_WITH_CANTALOUPE_JUICE.create(new TickCriterion.Conditions(Optional.empty())));
-        advancement.criteriaMerger(CriterionMerger.AND);
-        advancement.build(exporter, HUSBANDRY_FEELING_FRESH.toString());
+        advancement.parent(new AdvancementHolder(ResourceLocation.withDefaultNamespace("husbandry/root"), null));
+        advancement.addCriterion("extinguished_with_cantaloupe_juice", VerdanceCriteria.EXTINGUISHED_WITH_CANTALOUPE_JUICE.createCriterion(new PlayerTrigger.TriggerInstance(Optional.empty())));
+        advancement.requirements(Strategy.AND);
+        advancement.save(exporter, HUSBANDRY_FEELING_FRESH.toString());
     }
 }

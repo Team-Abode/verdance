@@ -1,44 +1,43 @@
 package com.teamabode.verdance.core.mixin.general;
 
 import com.teamabode.verdance.core.tag.VerdanceBlockTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.block.SugarCaneBlock;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.SugarCaneBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(SugarCaneBlock.class)
-public class SugarCaneBlockMixin implements Fertilizable {
-
+public class SugarCaneBlockMixin implements BonemealableBlock {
 
     @Override
-    public boolean isFertilizable(WorldView level, BlockPos pos, BlockState state) {
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         SugarCaneBlock $this = SugarCaneBlock.class.cast(this);
 
-        BlockPos abovePos = pos.up();
+        BlockPos abovePos = pos.above();
         return level.getBlockState(abovePos).isAir() || getCaneHeight($this, level, pos) < 3;
     }
 
     @Override
-    public boolean canGrow(World level, Random randomSource, BlockPos blockPos, BlockState blockState) {
+    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         return randomSource.nextFloat() < 0.75F;
     }
 
     @Override
-    public void grow(ServerWorld level, Random random, BlockPos blockPos, BlockState blockState) {
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos blockPos, BlockState blockState) {
         SugarCaneBlock $this = SugarCaneBlock.class.cast(this);
 
         for (int i = 1; i < 3; i++) {
-            BlockState aboveState = level.getBlockState(blockPos.up(i));
-            if (aboveState.isIn(VerdanceBlockTags.REPLACEABLE_BY_SUGAR_CANE)) {
-                level.setBlockState(blockPos.up(i), $this.getDefaultState(), 2);
+            BlockState aboveState = level.getBlockState(blockPos.above(i));
+            if (aboveState.is(VerdanceBlockTags.REPLACEABLE_BY_SUGAR_CANE)) {
+                level.setBlock(blockPos.above(i), $this.defaultBlockState(), 2);
                 continue;
             }
             break;
@@ -46,9 +45,9 @@ public class SugarCaneBlockMixin implements Fertilizable {
     }
 
     @Unique
-    private static int getCaneHeight(Block block, BlockView level, BlockPos blockPos) {
+    private static int getCaneHeight(Block block, BlockGetter level, BlockPos blockPos) {
         int height;
-        for (height = 0; height < 5 && level.getBlockState(blockPos.up(height)).isOf(block); height++) {}
+        for (height = 0; height < 5 && level.getBlockState(blockPos.above(height)).is(block); height++) {}
         return height;
     }
 }

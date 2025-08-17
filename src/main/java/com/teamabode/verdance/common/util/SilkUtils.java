@@ -5,52 +5,52 @@ import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
 import com.teamabode.verdance.common.entity.silkworm.SilkwormEntity;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import java.util.Optional;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.ai.AboveGroundTargeting;
-import net.minecraft.entity.ai.FuzzyTargeting;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.ai.util.HoverRandomPos;
+import net.minecraft.world.entity.ai.util.LandRandomPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
 // Utils for the Silk Moth and Silkworm
 public class SilkUtils {
 
     public static Optional<BlockPos> calculateLandingTarget(SilkMothEntity entity) {
-        Vec3d pos = FuzzyTargeting.find(entity, 6, 3);
+        Vec3 pos = LandRandomPos.getPos(entity, 6, 3);
         if (pos == null) {
             return Optional.empty();
         }
-        return Optional.of(BlockPos.ofFloored(pos));
+        return Optional.of(BlockPos.containing(pos));
     }
 
     public static Optional<BlockPos> calculateStrollTarget(SilkMothEntity entity) {
-        Vec3d view = entity.getRotationVec(0.0f);
-        Vec3d pos = AboveGroundTargeting.find(entity, 10, 7, view.getX(), view.getZ(), 90.0f * MathHelper.RADIANS_PER_DEGREE, 3, 1);
+        Vec3 view = entity.getViewVector(0.0f);
+        Vec3 pos = HoverRandomPos.getPos(entity, 10, 7, view.x(), view.z(), 90.0f * Mth.DEG_TO_RAD, 3, 1);
 
         if (pos == null) {
             return Optional.empty();
         }
-        return Optional.of(BlockPos.ofFloored(pos));
+        return Optional.of(BlockPos.containing(pos));
     }
 
-    public static void transformIntoCocoon(ServerWorld level, SilkwormEntity entity, BlockPos pos, Direction direction) {
-        BlockState state = VerdanceBlocks.SILK_COCOON.getDefaultState().with(SilkCocoonBlock.FACING, direction);
-        level.setBlockState(pos, state);
+    public static void transformIntoCocoon(ServerLevel level, SilkwormEntity entity, BlockPos pos, Direction direction) {
+        BlockState state = VerdanceBlocks.SILK_COCOON.defaultBlockState().setValue(SilkCocoonBlock.FACING, direction);
+        level.setBlockAndUpdate(pos, state);
         entity.discard();
         // TODO: Play a unique sound
     }
 
-    public static Optional<BlockPos> getTargetPos(ServerWorld level, BlockPos origin) {
-        return BlockPos.findClosest(origin, 10, 3, pos -> {
+    public static Optional<BlockPos> getTargetPos(ServerLevel level, BlockPos origin) {
+        return BlockPos.findClosestMatch(origin, 10, 3, pos -> {
             BlockState state = level.getBlockState(pos);
-            if (!state.isIn(BlockTags.LOGS_THAT_BURN)) return false;
+            if (!state.is(BlockTags.LOGS_THAT_BURN)) return false;
 
-            for (Direction dir : Direction.Type.HORIZONTAL) {
-                BlockState dirState = level.getBlockState(pos.offset(dir));
-                if (dirState.isIn(BlockTags.REPLACEABLE)) {
+            for (Direction dir : Direction.Plane.HORIZONTAL) {
+                BlockState dirState = level.getBlockState(pos.relative(dir));
+                if (dirState.is(BlockTags.REPLACEABLE)) {
                     return true;
                 }
             }

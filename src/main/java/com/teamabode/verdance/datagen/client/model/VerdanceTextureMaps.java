@@ -1,24 +1,24 @@
 package com.teamabode.verdance.datagen.client.model;
 
-import net.minecraft.block.Block;
-import net.minecraft.data.client.TextureKey;
-import net.minecraft.data.client.TextureMap;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 
 public class VerdanceTextureMaps {
 
-    public static TextureMap cushionTextureMappings(Block block) {
-        return (new TextureMap()).put(TextureKey.SIDE, getCushionSideTexture(block)).put(TextureKey.TOP, getCushionTexture(block));
+    public static TextureMapping cushionTextureMappings(Block block) {
+        return (new TextureMapping()).put(TextureSlot.SIDE, getCushionSideTexture(block)).put(TextureSlot.TOP, getCushionTexture(block));
     }
 
-    public static Identifier getCushionTexture(Block cushion) {
-        Identifier resourceLocation = Registries.BLOCK.getId(cushion);
-        return resourceLocation.withPrefixedPath("block/");
+    public static ResourceLocation getCushionTexture(Block cushion) {
+        ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(cushion);
+        return resourceLocation.withPrefix("block/");
     }
 
-    public static Identifier getCushionSideTexture(Block cushion) {
-        Identifier resourceLocation = Registries.BLOCK.getId(cushion).withPath(path -> path + "_side");
-        return resourceLocation.withPrefixedPath("block/");
+    public static ResourceLocation getCushionSideTexture(Block cushion) {
+        ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(cushion).withPath(path -> path + "_side");
+        return resourceLocation.withPrefix("block/");
     }
 }

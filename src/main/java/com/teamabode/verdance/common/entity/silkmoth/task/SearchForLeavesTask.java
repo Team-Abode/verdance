@@ -3,41 +3,41 @@ package com.teamabode.verdance.common.entity.silkmoth.task;
 import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
 import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
 import java.util.Map;
-import net.minecraft.entity.ai.brain.MemoryModuleState;
-import net.minecraft.entity.ai.brain.MemoryModuleType;
-import net.minecraft.entity.ai.brain.task.LookTargetUtil;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
 public class SearchForLeavesTask extends ImprovedSingleTickTask<SilkMothEntity> {
     private long lastExecution = 0L;
 
     @Override
-    public void requires(Map<MemoryModuleType<?>, MemoryModuleState> requirements) {
-        requirements.put(MemoryModuleType.WALK_TARGET, MemoryModuleState.VALUE_ABSENT);
-        requirements.put(MemoryModuleType.IS_PANICKING, MemoryModuleState.REGISTERED);
-        requirements.put(MemoryModuleType.LOOK_TARGET, MemoryModuleState.REGISTERED);
+    public void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements) {
+        requirements.put(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT);
+        requirements.put(MemoryModuleType.IS_PANICKING, MemoryStatus.REGISTERED);
+        requirements.put(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED);
     }
 
     @Override
-    public void run(ServerWorld level, SilkMothEntity entity, long gameTime) {
+    public void run(ServerLevel level, SilkMothEntity entity, long gameTime) {
         if (gameTime > this.lastExecution) {
             this.lastExecution = gameTime + 40L;
             return;
         }
-        BlockPos entityPos = entity.getBlockPos();
-        Mutable mutablePos = new Mutable();
+        BlockPos entityPos = entity.blockPosition();
+        MutableBlockPos mutablePos = new MutableBlockPos();
 
-        for (BlockPos scanPos : BlockPos.iterateOutwards(entityPos, 15, 15, 15)) {
+        for (BlockPos scanPos : BlockPos.withinManhattan(entityPos, 15, 15, 15)) {
             boolean excludeCurrentPos = entityPos.getX() != scanPos.getX() || entityPos.getX() != scanPos.getZ();
-            boolean foundLeaves = level.getBlockState(mutablePos.set(scanPos)).isIn(BlockTags.LEAVES);
-            boolean isValidSpace = level.getBlockState(mutablePos.set(scanPos, Direction.UP)).isAir();
+            boolean foundLeaves = level.getBlockState(mutablePos.set(scanPos)).is(BlockTags.LEAVES);
+            boolean isValidSpace = level.getBlockState(mutablePos.setWithOffset(scanPos, Direction.UP)).isAir();
 
             if (excludeCurrentPos && foundLeaves && isValidSpace) {
-                LookTargetUtil.walkTowards(entity, mutablePos, 1.0f, 0);
+                BehaviorUtils.setWalkAndLookTargetMemories(entity, mutablePos, 1.0f, 0);
                 return;
             }
         }

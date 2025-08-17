@@ -1,9 +1,9 @@
 package com.teamabode.verdance.core.tag;
 
 import com.teamabode.verdance.Verdance;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
 
 public class VerdanceBiomeTags {
 
@@ -13,6 +13,6 @@ public class VerdanceBiomeTags {
     public static final TagKey<Biome> HAS_TOWN_RUINS = create("has_structure/town_ruins");
 
     private static TagKey<Biome> create(String name) {
-        return TagKey.of(RegistryKeys.BIOME, Verdance.id(name));
+        return TagKey.create(Registries.BIOME, Verdance.id(name));
     }
 }

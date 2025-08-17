@@ -6,21 +6,17 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabode.verdance.common.block.SilkCocoonBlock;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceTreeDecoratorTypes;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.TestableWorld;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.treedecorator.TreeDecorator;
-import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 public class SilkCocoonTreeDecorator extends TreeDecorator {
     public static final MapCodec<SilkCocoonTreeDecorator> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -34,16 +30,16 @@ public class SilkCocoonTreeDecorator extends TreeDecorator {
     }
 
     @Override
-    public void generate(Generator generator) {
-        TestableWorld world = generator.getWorld();
-        Random random = generator.getRandom();
+    public void place(Context generator) {
+        LevelSimulatedReader world = generator.level();
+        RandomSource random = generator.random();
 
         if (random.nextFloat() >= this.getProbability()) return;
 
-        List<BlockPos> logPositions = generator.getLogPositions();
+        List<BlockPos> logPositions = generator.logs();
 
         List<BlockPos> validPositions = logPositions.stream()
-                .flatMap(pos -> Direction.Type.HORIZONTAL.stream().map(pos::offset))
+                .flatMap(pos -> Direction.Plane.HORIZONTAL.stream().map(pos::relative))
                 .filter(generator::isAir)
                 .collect(Collectors.toList());
         Collections.shuffle(validPositions);
@@ -52,9 +48,9 @@ public class SilkCocoonTreeDecorator extends TreeDecorator {
         if (targetPos.isEmpty()) return;
         BlockPos pos = targetPos.get();
 
-        for (Direction dir : Direction.Type.HORIZONTAL) {
-            if (world.testBlockState(pos.offset(dir), state -> state.isIn(BlockTags.LOGS))) {
-                generator.replace(pos, VerdanceBlocks.SILK_COCOON.getDefaultState().with(SilkCocoonBlock.FACING, dir));
+        for (Direction dir : Direction.Plane.HORIZONTAL) {
+            if (world.isStateAtPosition(pos.relative(dir), state -> state.is(BlockTags.LOGS))) {
+                generator.setBlock(pos, VerdanceBlocks.SILK_COCOON.defaultBlockState().setValue(SilkCocoonBlock.FACING, dir));
                 break;
             }
         }
@@ -65,7 +61,7 @@ public class SilkCocoonTreeDecorator extends TreeDecorator {
     }
 
     @Override
-    protected TreeDecoratorType<?> getType() {
+    protected TreeDecoratorType<?> type() {
         return VerdanceTreeDecoratorTypes.SILK_COCOON;
     }
 }

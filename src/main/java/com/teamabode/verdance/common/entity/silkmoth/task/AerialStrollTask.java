@@ -6,23 +6,23 @@ import com.teamabode.verdance.common.util.SilkUtils;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import java.util.Map;
 import java.util.Optional;
-import net.minecraft.entity.ai.brain.BlockPosLookTarget;
-import net.minecraft.entity.ai.brain.MemoryModuleState;
-import net.minecraft.entity.ai.brain.MemoryModuleType;
-import net.minecraft.entity.ai.brain.WalkTarget;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.entity.ai.memory.WalkTarget;
 
 public class AerialStrollTask extends ImprovedSingleTickTask<SilkMothEntity> {
 
-    public void requires(Map<MemoryModuleType<?>, MemoryModuleState> requirements) {
-        requirements.put(MemoryModuleType.WALK_TARGET, MemoryModuleState.VALUE_ABSENT);
-        requirements.put(MemoryModuleType.LOOK_TARGET, MemoryModuleState.REGISTERED);
-        requirements.put(VerdanceMemoryModuleTypes.IS_FLYING, MemoryModuleState.VALUE_PRESENT);
+    public void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements) {
+        requirements.put(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT);
+        requirements.put(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED);
+        requirements.put(VerdanceMemoryModuleTypes.IS_FLYING, MemoryStatus.VALUE_PRESENT);
     }
 
-    public void run(ServerWorld level, SilkMothEntity entity, long gameTime) {
+    public void run(ServerLevel level, SilkMothEntity entity, long gameTime) {
         Optional<BlockPos> pos = SilkUtils.calculateStrollTarget(entity);
-        pos.ifPresent(blockPos -> entity.getBrain().remember(MemoryModuleType.WALK_TARGET, new WalkTarget(new BlockPosLookTarget(blockPos), 1.0f, 0)));
+        pos.ifPresent(blockPos -> entity.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(new BlockPosTracker(blockPos), 1.0f, 0)));
     }
 }

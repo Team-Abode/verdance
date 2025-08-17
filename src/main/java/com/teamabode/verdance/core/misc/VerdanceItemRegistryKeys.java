@@ -1,15 +1,15 @@
 package com.teamabode.verdance.core.misc;
 
 import com.teamabode.verdance.Verdance;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Item;
 
 public class VerdanceItemRegistryKeys {
 
-    public static final RegistryKey<Item> CANTALOUPE_SEEDS = createKey("cantaloupe_seeds");
+    public static final ResourceKey<Item> CANTALOUPE_SEEDS = createKey("cantaloupe_seeds");
 
-    private static RegistryKey<Item> createKey(String name) {
-        return RegistryKey.of(RegistryKeys.ITEM, Verdance.id(name));
+    private static ResourceKey<Item> createKey(String name) {
+        return ResourceKey.create(Registries.ITEM, Verdance.id(name));
     }
 }

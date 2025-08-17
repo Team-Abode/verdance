@@ -4,18 +4,18 @@ import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import java.util.concurrent.CompletableFuture;
 
 public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
-    public VerdanceBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public VerdanceBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
-    protected void configure(RegistryWrapper.WrapperLookup arg) {
+    protected void addTags(HolderLookup.Provider arg) {
         walls();
         planks();
         stairs();
@@ -49,7 +49,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
 
     private void mineablePickaxe() {
-        this.getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(VerdanceBlocks.WHITE_STUCCO)
                 .add(VerdanceBlocks.WHITE_STUCCO_STAIRS)
                 .add(VerdanceBlocks.WHITE_STUCCO_SLAB)
@@ -118,14 +118,14 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
 
     private void mineableHoe() {
-        this.getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
+        this.tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(VerdanceBlocks.MULBERRY_LEAVES)
                 .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES)
                 .setReplace(false);
     }
 
     private void mineableAxe() {
-        this.getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
+        this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(VerdanceBlocks.CANTALOUPE)
                 .add(VerdanceBlocks.WHITE_CUSHION)
                 .add(VerdanceBlocks.LIGHT_GRAY_CUSHION)
@@ -147,11 +147,11 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
 
     private void swordEfficient() {
-        this.getOrCreateTagBuilder(BlockTags.SWORD_EFFICIENT).add(VerdanceBlocks.CANTALOUPE);
+        this.tag(BlockTags.SWORD_EFFICIENT).add(VerdanceBlocks.CANTALOUPE);
     }
 
     private void walls() {
-        this.getOrCreateTagBuilder(BlockTags.WALLS)
+        this.tag(BlockTags.WALLS)
                 .add(VerdanceBlocks.WHITE_STUCCO_WALL)
                 .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL)
                 .add(VerdanceBlocks.GRAY_STUCCO_WALL)
@@ -172,13 +172,13 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
 
     private void planks() {
-        this.getOrCreateTagBuilder(BlockTags.PLANKS)
+        this.tag(BlockTags.PLANKS)
                 .add(VerdanceBlocks.MULBERRY_PLANKS)
                 .setReplace(false);
     }
 
     private void stairs() {
-        this.getOrCreateTagBuilder(BlockTags.STAIRS)
+        this.tag(BlockTags.STAIRS)
                 .add(VerdanceBlocks.WHITE_STUCCO_STAIRS)
                 .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS)
                 .add(VerdanceBlocks.GRAY_STUCCO_STAIRS)
@@ -196,13 +196,13 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
                 .add(VerdanceBlocks.MAGENTA_STUCCO_STAIRS)
                 .add(VerdanceBlocks.PINK_STUCCO_STAIRS)
                 .setReplace(false);
-        this.getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS)
+        this.tag(BlockTags.WOODEN_STAIRS)
                 .add(VerdanceBlocks.MULBERRY_STAIRS)
                 .setReplace(false);
     }
 
     private void slabs() {
-        this.getOrCreateTagBuilder(BlockTags.SLABS)
+        this.tag(BlockTags.SLABS)
                 .add(VerdanceBlocks.WHITE_STUCCO_SLAB)
                 .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB)
                 .add(VerdanceBlocks.GRAY_STUCCO_SLAB)
@@ -220,92 +220,92 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
                 .add(VerdanceBlocks.MAGENTA_STUCCO_SLAB)
                 .add(VerdanceBlocks.PINK_STUCCO_SLAB)
                 .setReplace(false);
-        this.getOrCreateTagBuilder(BlockTags.WOODEN_SLABS)
+        this.tag(BlockTags.WOODEN_SLABS)
                 .add(VerdanceBlocks.MULBERRY_SLAB)
                 .setReplace(false);
     }
 
     private void fences() {
-        this.getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
+        this.tag(BlockTags.WOODEN_FENCES)
                 .add(VerdanceBlocks.MULBERRY_FENCE)
                 .setReplace(false);
     }
 
     private void fenceGates() {
-        this.getOrCreateTagBuilder(BlockTags.FENCE_GATES)
+        this.tag(BlockTags.FENCE_GATES)
                 .add(VerdanceBlocks.MULBERRY_FENCE_GATE)
                 .setReplace(false);
     }
 
     private void doors() {
-        this.getOrCreateTagBuilder(BlockTags.WOODEN_DOORS)
+        this.tag(BlockTags.WOODEN_DOORS)
                 .add(VerdanceBlocks.MULBERRY_DOOR)
                 .setReplace(false);
     }
 
     private void trapdoors() {
-        this.getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS)
+        this.tag(BlockTags.WOODEN_TRAPDOORS)
                 .add(VerdanceBlocks.MULBERRY_TRAPDOOR)
                 .setReplace(false);
     }
 
     private void pressurePlates() {
-        this.getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES)
+        this.tag(BlockTags.WOODEN_PRESSURE_PLATES)
                 .add(VerdanceBlocks.MULBERRY_PRESSURE_PLATE)
                 .setReplace(false);
     }
 
     private void buttons() {
-        this.getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS)
+        this.tag(BlockTags.WOODEN_BUTTONS)
                 .add(VerdanceBlocks.MULBERRY_BUTTON)
                 .setReplace(false);
     }
 
     private void signs() {
-        this.getOrCreateTagBuilder(BlockTags.STANDING_SIGNS)
+        this.tag(BlockTags.STANDING_SIGNS)
                 .add(VerdanceBlocks.MULBERRY_SIGN)
                 .setReplace(false);
-        this.getOrCreateTagBuilder(BlockTags.WALL_SIGNS)
+        this.tag(BlockTags.WALL_SIGNS)
                 .add(VerdanceBlocks.MULBERRY_WALL_SIGN)
                 .setReplace(false);
-        this.getOrCreateTagBuilder(BlockTags.CEILING_HANGING_SIGNS)
+        this.tag(BlockTags.CEILING_HANGING_SIGNS)
                 .add(VerdanceBlocks.MULBERRY_HANGING_SIGN)
                 .setReplace(false);
-        this.getOrCreateTagBuilder(BlockTags.WALL_HANGING_SIGNS)
+        this.tag(BlockTags.WALL_HANGING_SIGNS)
                 .add(VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN)
                 .setReplace(false);
     }
 
     private void logs() {
-        this.getOrCreateTagBuilder(VerdanceBlockTags.MULBERRY_LOGS)
+        this.tag(VerdanceBlockTags.MULBERRY_LOGS)
                 .add(VerdanceBlocks.MULBERRY_LOG)
                 .add(VerdanceBlocks.MULBERRY_WOOD)
                 .add(VerdanceBlocks.STRIPPED_MULBERRY_LOG)
                 .add(VerdanceBlocks.STRIPPED_MULBERRY_WOOD)
                 .setReplace(false);
-        this.getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
+        this.tag(BlockTags.LOGS_THAT_BURN)
                 .forceAddTag(VerdanceBlockTags.MULBERRY_LOGS)
                 .setReplace(false);
-        this.getOrCreateTagBuilder(BlockTags.OVERWORLD_NATURAL_LOGS)
+        this.tag(BlockTags.OVERWORLD_NATURAL_LOGS)
                 .add(VerdanceBlocks.MULBERRY_LOG)
                 .setReplace(false);
     }
 
     private void saplings() {
-        this.getOrCreateTagBuilder(BlockTags.SAPLINGS)
+        this.tag(BlockTags.SAPLINGS)
                 .add(VerdanceBlocks.MULBERRY_SAPLING)
                 .setReplace(false);
     }
 
     private void leaves() {
-        this.getOrCreateTagBuilder(BlockTags.LEAVES)
+        this.tag(BlockTags.LEAVES)
                 .add(VerdanceBlocks.MULBERRY_LEAVES)
                 .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES)
                 .setReplace(false);
     }
 
     private void flowerPots() {
-        this.getOrCreateTagBuilder(BlockTags.FLOWER_POTS)
+        this.tag(BlockTags.FLOWER_POTS)
                 .add(VerdanceBlocks.POTTED_MULBERRY_SAPLING)
                 .add(VerdanceBlocks.POTTED_VIOLET)
                 .add(VerdanceBlocks.POTTED_SHRUB)
@@ -315,54 +315,54 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
 
     private void maintainsFarmland() {
-        this.getOrCreateTagBuilder(BlockTags.MAINTAINS_FARMLAND)
+        this.tag(BlockTags.MAINTAINS_FARMLAND)
                 .add(VerdanceBlocks.CANTALOUPE_STEM)
                 .add(VerdanceBlocks.ATTACHED_CANTALOUPE_STEM)
                 .setReplace(false);
     }
 
     private void silkMothsSpawnableOn() {
-        this.getOrCreateTagBuilder(VerdanceBlockTags.SILK_MOTHS_SPAWNABLE_ON).setReplace(false)
+        this.tag(VerdanceBlockTags.SILK_MOTHS_SPAWNABLE_ON).setReplace(false)
                 .add(VerdanceBlocks.MULBERRY_LEAVES)
                 .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES)
                 .add(Blocks.GRASS_BLOCK);
     }
 
     private void replaceableBySugarCane() {
-        this.getOrCreateTagBuilder(VerdanceBlockTags.REPLACEABLE_BY_SUGAR_CANE).setReplace(false)
+        this.tag(VerdanceBlockTags.REPLACEABLE_BY_SUGAR_CANE).setReplace(false)
                 .forceAddTag(BlockTags.REPLACEABLE)
                 .add(Blocks.SUGAR_CANE);
     }
 
     private void shrubs() {
-        this.getOrCreateTagBuilder(VerdanceBlockTags.SHRUBS).setReplace(false)
+        this.tag(VerdanceBlockTags.SHRUBS).setReplace(false)
                 .add(VerdanceBlocks.SHRUB)
                 .add(VerdanceBlocks.YELLOW_FLOWERING_SHRUB)
                 .add(VerdanceBlocks.PINK_FLOWERING_SHRUB);
     }
 
     private void floweringShrubs() {
-        this.getOrCreateTagBuilder(VerdanceBlockTags.FLOWERING_SHRUBS).setReplace(false)
+        this.tag(VerdanceBlockTags.FLOWERING_SHRUBS).setReplace(false)
                 .add(VerdanceBlocks.YELLOW_FLOWERING_SHRUB)
                 .add(VerdanceBlocks.PINK_FLOWERING_SHRUB);
     }
 
     private void shrubMayPlaceOn() {
-        this.getOrCreateTagBuilder(VerdanceBlockTags.SHRUB_MAY_PLACE_ON).setReplace(false)
+        this.tag(VerdanceBlockTags.SHRUB_MAY_PLACE_ON).setReplace(false)
                 .forceAddTag(BlockTags.DIRT)
                 .forceAddTag(BlockTags.SAND)
                 .forceAddTag(BlockTags.TERRACOTTA);
     }
 
     private void flowers() {
-        this.getOrCreateTagBuilder(BlockTags.FLOWERS).forceAddTag(VerdanceBlockTags.FLOWERING_SHRUBS);
+        this.tag(BlockTags.FLOWERS).forceAddTag(VerdanceBlockTags.FLOWERING_SHRUBS);
     }
 
     private void smallFlowers() {
-        this.getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS).add(VerdanceBlocks.VIOLET);
+        this.tag(BlockTags.SMALL_FLOWERS).add(VerdanceBlocks.VIOLET);
     }
 
     private void crops() {
-        this.getOrCreateTagBuilder(BlockTags.CROPS).add(VerdanceBlocks.CANTALOUPE_STEM);
+        this.tag(BlockTags.CROPS).add(VerdanceBlocks.CANTALOUPE_STEM);
     }
 }

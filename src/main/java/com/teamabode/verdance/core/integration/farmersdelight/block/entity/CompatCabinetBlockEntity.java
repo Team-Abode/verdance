@@ -3,51 +3,51 @@ package com.teamabode.verdance.core.integration.farmersdelight.block.entity;
 import com.teamabode.verdance.core.integration.farmersdelight.block.CompatCabinetBlock;
 import com.teamabode.verdance.core.integration.farmersdelight.registry.FDCompatBlockEntityTypes;
 import com.teamabode.verdance.core.integration.farmersdelight.registry.FDCompatSoundEvents;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.LootableContainerBlockEntity;
-import net.minecraft.block.entity.ViewerCountManager;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.screen.GenericContainerScreenHandler;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.Text;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.Vec3i;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.UnknownNullability;
 
-public class CompatCabinetBlockEntity extends LootableContainerBlockEntity {
-    private DefaultedList<ItemStack> contents;
-    private final ViewerCountManager openersCounter;
+public class CompatCabinetBlockEntity extends RandomizableContainerBlockEntity {
+    private NonNullList<ItemStack> contents;
+    private final ContainerOpenersCounter openersCounter;
 
     public CompatCabinetBlockEntity(BlockPos pos, BlockState state) {
         super(FDCompatBlockEntityTypes.CABINET, pos, state);
-        this.contents = DefaultedList.ofSize(27, ItemStack.EMPTY);
-        this.openersCounter = new ViewerCountManager() {
-            protected void onContainerOpen(World level, BlockPos pos, BlockState state) {
+        this.contents = NonNullList.withSize(27, ItemStack.EMPTY);
+        this.openersCounter = new ContainerOpenersCounter() {
+            protected void onOpen(Level level, BlockPos pos, BlockState state) {
                 CompatCabinetBlockEntity.this.playSound(state, FDCompatSoundEvents.BLOCK_CABINET_OPEN);
                 CompatCabinetBlockEntity.this.updateBlockState(state, true);
             }
 
-            protected void onContainerClose(World level, BlockPos pos, BlockState state) {
+            protected void onClose(Level level, BlockPos pos, BlockState state) {
                 CompatCabinetBlockEntity.this.playSound(state, FDCompatSoundEvents.BLOCK_CABINET_CLOSE);
                 CompatCabinetBlockEntity.this.updateBlockState(state, false);
             }
 
-            protected void onViewerCountUpdate(World level, BlockPos pos, BlockState sta, int arg1, int arg2) {
+            protected void openerCountChanged(Level level, BlockPos pos, BlockState sta, int arg1, int arg2) {
             }
 
-            protected boolean isPlayerViewing(PlayerEntity p_155060_) {
-                if (p_155060_.currentScreenHandler instanceof GenericContainerScreenHandler) {
-                    Inventory container = ((GenericContainerScreenHandler)p_155060_.currentScreenHandler).getInventory();
+            protected boolean isOwnContainer(Player p_155060_) {
+                if (p_155060_.containerMenu instanceof ChestMenu) {
+                    Container container = ((ChestMenu)p_155060_.containerMenu).getContainer();
                     return container == CompatCabinetBlockEntity.this;
                 } else {
                     return false;
@@ -56,84 +56,84 @@ public class CompatCabinetBlockEntity extends LootableContainerBlockEntity {
         };
     }
 
-    public void writeNbt(NbtCompound compound, RegistryWrapper.WrapperLookup registries) {
-        super.writeNbt(compound, registries);
-        if (!this.writeLootTable(compound)) {
-            Inventories.writeNbt(compound, this.contents, registries);
+    public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.saveAdditional(compound, registries);
+        if (!this.trySaveLootTable(compound)) {
+            ContainerHelper.saveAllItems(compound, this.contents, registries);
         }
 
     }
 
-    public void readNbt(NbtCompound compound, RegistryWrapper.WrapperLookup registries) {
-        super.readNbt(compound, registries);
-        this.contents = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        if (!this.readLootTable(compound)) {
-            Inventories.readNbt(compound, this.contents, registries);
+    public void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.loadAdditional(compound, registries);
+        this.contents = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        if (!this.tryLoadLootTable(compound)) {
+            ContainerHelper.loadAllItems(compound, this.contents, registries);
         }
 
     }
 
-    public int size() {
+    public int getContainerSize() {
         return 27;
     }
 
-    protected DefaultedList<ItemStack> getHeldStacks() {
+    protected NonNullList<ItemStack> getItems() {
         return this.contents;
     }
 
-    protected void setHeldStacks(DefaultedList<ItemStack> itemsIn) {
+    protected void setItems(NonNullList<ItemStack> itemsIn) {
         this.contents = itemsIn;
     }
 
-    protected Text getContainerName() {
-        return Text.translatable("farmersdelight.container.cabinet");
+    protected Component getDefaultName() {
+        return Component.translatable("farmersdelight.container.cabinet");
     }
 
-    protected ScreenHandler createScreenHandler(int id, PlayerInventory player) {
-        return GenericContainerScreenHandler.createGeneric9x3(id, player, this);
+    protected AbstractContainerMenu createMenu(int id, Inventory player) {
+        return ChestMenu.threeRows(id, player, this);
     }
 
-    public void onOpen(PlayerEntity pPlayer) {
-        if (this.world != null && !this.removed && !pPlayer.isSpectator()) {
-            this.openersCounter.openContainer(pPlayer, this.world, this.getPos(), this.getCachedState());
+    public void startOpen(Player pPlayer) {
+        if (this.level != null && !this.remove && !pPlayer.isSpectator()) {
+            this.openersCounter.incrementOpeners(pPlayer, this.level, this.getBlockPos(), this.getBlockState());
         }
 
     }
 
-    public void onClose(PlayerEntity pPlayer) {
-        if (this.world != null && !this.removed && !pPlayer.isSpectator()) {
-            this.openersCounter.closeContainer(pPlayer, this.world, this.getPos(), this.getCachedState());
+    public void stopOpen(Player pPlayer) {
+        if (this.level != null && !this.remove && !pPlayer.isSpectator()) {
+            this.openersCounter.decrementOpeners(pPlayer, this.level, this.getBlockPos(), this.getBlockState());
         }
 
     }
 
     public void recheckOpen() {
-        if (this.world != null && !this.removed) {
-            this.openersCounter.updateViewerCount(this.world, this.getPos(), this.getCachedState());
+        if (this.level != null && !this.remove) {
+            this.openersCounter.recheckOpeners(this.level, this.getBlockPos(), this.getBlockState());
         }
 
     }
 
     void updateBlockState(BlockState state, boolean open) {
-        if (this.world != null) {
-            this.world.setBlockState(this.getPos(), state.with(CompatCabinetBlock.OPEN, open), 3);
+        if (this.level != null) {
+            this.level.setBlock(this.getBlockPos(), state.setValue(CompatCabinetBlock.OPEN, open), 3);
         }
     }
 
     private void playSound(BlockState state, SoundEvent sound) {
-        if (this.world != null) {
-            Vec3i cabinetFacingVector = state.get(CompatCabinetBlock.FACING).getVector();
-            double x = (double)this.pos.getX() + 0.5 + (double)cabinetFacingVector.getX() / 2.0;
-            double y = (double)this.pos.getY() + 0.5 + (double)cabinetFacingVector.getY() / 2.0;
-            double z = (double)this.pos.getZ() + 0.5 + (double)cabinetFacingVector.getZ() / 2.0;
-            this.world.playSound(null, x, y, z, sound, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
+        if (this.level != null) {
+            Vec3i cabinetFacingVector = state.getValue(CompatCabinetBlock.FACING).getNormal();
+            double x = (double)this.worldPosition.getX() + 0.5 + (double)cabinetFacingVector.getX() / 2.0;
+            double y = (double)this.worldPosition.getY() + 0.5 + (double)cabinetFacingVector.getY() / 2.0;
+            double z = (double)this.worldPosition.getZ() + 0.5 + (double)cabinetFacingVector.getZ() / 2.0;
+            this.level.playSound(null, x, y, z, sound, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
         }
     }
 
-    public @UnknownNullability NbtCompound serializeNBT(RegistryWrapper.WrapperLookup provider) {
-        return new NbtCompound();
+    public @UnknownNullability CompoundTag serializeNBT(HolderLookup.Provider provider) {
+        return new CompoundTag();
     }
 
-    public void deserializeNBT(RegistryWrapper.WrapperLookup provider, NbtCompound compoundTag) {
+    public void deserializeNBT(HolderLookup.Provider provider, CompoundTag compoundTag) {
     }
 }

@@ -9,30 +9,30 @@ import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import com.teamabode.verdance.core.registry.VerdanceSensorTypes;
 import com.teamabode.verdance.core.tag.VerdanceItemTags;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.brain.Activity;
-import net.minecraft.entity.ai.brain.Brain;
-import net.minecraft.entity.ai.brain.MemoryModuleState;
-import net.minecraft.entity.ai.brain.MemoryModuleType;
-import net.minecraft.entity.ai.brain.sensor.Sensor;
-import net.minecraft.entity.ai.brain.sensor.SensorType;
-import net.minecraft.entity.ai.brain.task.BreedTask;
-import net.minecraft.entity.ai.brain.task.FleeTask;
-import net.minecraft.entity.ai.brain.task.GoTowardsLookTargetTask;
-import net.minecraft.entity.ai.brain.task.LookAroundTask;
-import net.minecraft.entity.ai.brain.task.LookAtMobWithIntervalTask;
-import net.minecraft.entity.ai.brain.task.MoveToTargetTask;
-import net.minecraft.entity.ai.brain.task.RandomTask;
-import net.minecraft.entity.ai.brain.task.StayAboveWaterTask;
-import net.minecraft.entity.ai.brain.task.StrollTask;
-import net.minecraft.entity.ai.brain.task.TaskTriggerer;
-import net.minecraft.entity.ai.brain.task.TemptTask;
-import net.minecraft.entity.ai.brain.task.TemptationCooldownTask;
-import net.minecraft.entity.ai.brain.task.WaitTask;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
 import java.util.List;
 import java.util.function.Predicate;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.ai.behavior.AnimalMakeLove;
+import net.minecraft.world.entity.ai.behavior.AnimalPanic;
+import net.minecraft.world.entity.ai.behavior.CountDownCooldownTicks;
+import net.minecraft.world.entity.ai.behavior.DoNothing;
+import net.minecraft.world.entity.ai.behavior.FollowTemptation;
+import net.minecraft.world.entity.ai.behavior.LookAtTargetSink;
+import net.minecraft.world.entity.ai.behavior.MoveToTargetSink;
+import net.minecraft.world.entity.ai.behavior.RandomStroll;
+import net.minecraft.world.entity.ai.behavior.RunOne;
+import net.minecraft.world.entity.ai.behavior.SetEntityLookTargetSometimes;
+import net.minecraft.world.entity.ai.behavior.SetWalkTargetFromLookTarget;
+import net.minecraft.world.entity.ai.behavior.Swim;
+import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.entity.ai.sensing.Sensor;
+import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.schedule.Activity;
+import net.minecraft.world.item.crafting.Ingredient;
 
 @SuppressWarnings("deprecation")
 public class SilkMothBrain {
@@ -49,8 +49,8 @@ public class SilkMothBrain {
             MemoryModuleType.IS_PREGNANT,
             MemoryModuleType.TEMPTING_PLAYER,
             MemoryModuleType.BREED_TARGET,
-            MemoryModuleType.MOBS,
-            MemoryModuleType.VISIBLE_MOBS,
+            MemoryModuleType.NEAREST_LIVING_ENTITIES,
+            MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
             VerdanceMemoryModuleTypes.IS_FLYING,
             VerdanceMemoryModuleTypes.LANDING_TIME,
             VerdanceMemoryModuleTypes.WANTS_TO_LAND
@@ -74,37 +74,37 @@ public class SilkMothBrain {
     }
 
     private static void addCoreActivities(Brain<SilkMothEntity> brain) {
-        brain.setTaskList(Activity.CORE, 0, ImmutableList.of(
-                new StayAboveWaterTask(1.0f),
+        brain.addActivity(Activity.CORE, 0, ImmutableList.of(
+                new Swim(1.0f),
                 new TakeOffTask(),
                 new LandTask(),
-                new FleeTask<>(1.5f),
-                new LookAroundTask(45, 90),
-                new MoveToTargetTask(),
-                new TemptationCooldownTask(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
+                new AnimalPanic<>(1.5f),
+                new LookAtTargetSink(45, 90),
+                new MoveToTargetSink(),
+                new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
         ));
     }
 
     private static void addIdleActivities(Brain<SilkMothEntity> brain) {
-        brain.setTaskList(Activity.IDLE, ImmutableList.of(
-                Pair.of(0, new BreedTask(VerdanceEntityTypes.SILK_MOTH)),
-                Pair.of(1, new TemptTask(livingEntity -> 1.5f)),
-                Pair.of(2, LookAtMobWithIntervalTask.follow(EntityType.PLAYER, 6.0f, UniformIntProvider.create(30, 60))),
+        brain.addActivity(Activity.IDLE, ImmutableList.of(
+                Pair.of(0, new AnimalMakeLove(VerdanceEntityTypes.SILK_MOTH)),
+                Pair.of(1, new FollowTemptation(livingEntity -> 1.5f)),
+                Pair.of(2, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
                 Pair.of(2, new GoTowardsLandingTask()),
                 Pair.of(4, addMovementTasks())
         ));
     }
 
     private static void addLayEggsActivities(Brain<SilkMothEntity> brain) {
-        brain.setTaskList(VerdanceActivities.LAY_EGGS, ImmutableList.of(
+        brain.addActivityWithConditions(VerdanceActivities.LAY_EGGS, ImmutableList.of(
                 Pair.of(0, new SearchForLeavesTask()),
                 Pair.of(1, LayEggsTask.create()),
                 Pair.of(2, addMovementTasks())
-        ), ImmutableSet.of(Pair.of(MemoryModuleType.IS_PREGNANT, MemoryModuleState.VALUE_PRESENT)));
+        ), ImmutableSet.of(Pair.of(MemoryModuleType.IS_PREGNANT, MemoryStatus.VALUE_PRESENT)));
     }
 
     public static void updateActivity(SilkMothEntity silkMoth) {
-        silkMoth.getBrain().resetPossibleActivities(ImmutableList.of(
+        silkMoth.getBrain().setActiveActivityToFirstValid(ImmutableList.of(
                 VerdanceActivities.LAY_EGGS,
                 VerdanceActivities.SLEEP,
                 Activity.IDLE
@@ -112,16 +112,16 @@ public class SilkMothBrain {
     }
 
     public static Ingredient getTemptations() {
-        return Ingredient.fromTag(VerdanceItemTags.SILK_MOTH_FOOD);
+        return Ingredient.of(VerdanceItemTags.SILK_MOTH_FOOD);
     }
 
-    private static RandomTask<SilkMothEntity> addMovementTasks() {
-        return new RandomTask<>(ImmutableList.of(
-                Pair.of(TaskTriggerer.runIf(SilkMothEntity::isInAir, new AerialStrollTask()), 2),
-                Pair.of(TaskTriggerer.runIf(SilkMothEntity::isInAir, new GoTowardsLandingTask()), 2),
-                Pair.of(TaskTriggerer.runIf(Predicate.not(SilkMothEntity::isInAir), StrollTask.create(1.0f)), 2),
-                Pair.of(GoTowardsLookTargetTask.create(1.0f, 3), 2),
-                Pair.of(new WaitTask(30,  60), 1)
+    private static RunOne<SilkMothEntity> addMovementTasks() {
+        return new RunOne<>(ImmutableList.of(
+                Pair.of(BehaviorBuilder.triggerIf(SilkMothEntity::isFlying, new AerialStrollTask()), 2),
+                Pair.of(BehaviorBuilder.triggerIf(SilkMothEntity::isFlying, new GoTowardsLandingTask()), 2),
+                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(SilkMothEntity::isFlying), RandomStroll.stroll(1.0f)), 2),
+                Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 3), 2),
+                Pair.of(new DoNothing(30,  60), 1)
         ));
     }
 }

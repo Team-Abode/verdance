@@ -19,20 +19,15 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.item.Items;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.structure.pool.FeaturePoolElement;
-import net.minecraft.structure.pool.StructurePool;
-import net.minecraft.structure.pool.StructurePoolElement;
-import net.minecraft.util.Identifier;
-import net.minecraft.village.TradeOffers;
-import net.minecraft.village.VillagerProfession;
-import net.minecraft.world.biome.BiomeKeys;
-import net.minecraft.world.gen.surfacebuilder.MaterialRules;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -89,20 +84,20 @@ public class Verdance implements ModInitializer {
 
     public static void registerTrades() {
         TradeOfferHelper.registerWanderingTraderOffers(1, itemListings -> {
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceItems.CANTALOUPE_SEEDS, 1, 1, 12, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceItems.MULBERRY, 5, 1, 8, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.VIOLET, 1, 1, 12, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.SHRUB, 1, 1, 12, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.YELLOW_FLOWERING_SHRUB, 1, 1, 12, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.PINK_FLOWERING_SHRUB, 1, 1, 12, 1));
+            itemListings.add(new VillagerTrades.ItemsForEmeralds(VerdanceItems.CANTALOUPE_SEEDS, 1, 1, 12, 1));
+            itemListings.add(new VillagerTrades.ItemsForEmeralds(VerdanceItems.MULBERRY, 5, 1, 8, 1));
+            itemListings.add(new VillagerTrades.ItemsForEmeralds(VerdanceBlocks.VIOLET, 1, 1, 12, 1));
+            itemListings.add(new VillagerTrades.ItemsForEmeralds(VerdanceBlocks.SHRUB, 1, 1, 12, 1));
+            itemListings.add(new VillagerTrades.ItemsForEmeralds(VerdanceBlocks.YELLOW_FLOWERING_SHRUB, 1, 1, 12, 1));
+            itemListings.add(new VillagerTrades.ItemsForEmeralds(VerdanceBlocks.PINK_FLOWERING_SHRUB, 1, 1, 12, 1));
         });
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, itemListings -> {
-            itemListings.add(new TradeOffers.BuyItemFactory(VerdanceBlocks.CANTALOUPE, 6, 12, 10));
+            itemListings.add(new VillagerTrades.EmeraldForItems(VerdanceBlocks.CANTALOUPE, 6, 12, 10));
         });
     }
 
     public static void registerItemGroupEvents() {
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.BUILDING_BLOCKS).register(entries -> {
             entries.addAfter(
                     Items.CHERRY_BUTTON,
                     VerdanceBlocks.MULBERRY_LOG,
@@ -120,7 +115,7 @@ public class Verdance implements ModInitializer {
                     VerdanceBlocks.MULBERRY_BUTTON
             );
         });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(entries -> {
             entries.addAfter(
                     Items.CHERRY_CHEST_BOAT,
                     VerdanceItems.MULBERRY_BOAT,
@@ -128,7 +123,7 @@ public class Verdance implements ModInitializer {
             );
             entries.addBefore(Items.MUSIC_DISC_5, VerdanceItems.MUSIC_DISC_RANGE);
         });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> {
             entries.addAfter(
                     Items.CHERRY_HANGING_SIGN,
                     VerdanceItems.MULBERRY_SIGN,
@@ -154,12 +149,12 @@ public class Verdance implements ModInitializer {
                     VerdanceBlocks.PINK_CUSHION
             );
         });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(entries -> {
             entries.addAfter(Items.GLOW_BERRIES, VerdanceItems.MULBERRY);
             entries.addAfter(Items.MELON_SLICE, VerdanceItems.CANTALOUPE_SLICE, VerdanceItems.GRILLED_CANTALOUPE_SLICE);
             entries.addAfter(Items.HONEY_BOTTLE, VerdanceItems.CANTALOUPE_JUICE);
         });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS).register(entries -> {
             entries.addAfter(Blocks.CHERRY_LOG, VerdanceBlocks.MULBERRY_LOG);
             entries.addAfter(Items.MELON, VerdanceBlocks.CANTALOUPE);
             entries.addAfter(Items.MELON_SEEDS, VerdanceItems.CANTALOUPE_SEEDS);
@@ -170,7 +165,7 @@ public class Verdance implements ModInitializer {
 
             entries.addBefore(Items.DEAD_BUSH, VerdanceBlocks.SHRUB, VerdanceBlocks.YELLOW_FLOWERING_SHRUB, VerdanceBlocks.PINK_FLOWERING_SHRUB);
         });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COLORED_BLOCKS).register(entries -> {
             entries.addAfter(
                     Items.PINK_TERRACOTTA,
                     VerdanceBlocks.WHITE_STUCCO,
@@ -258,8 +253,8 @@ public class Verdance implements ModInitializer {
                     VerdanceBlocks.PINK_CUSHION
             );
         });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> entries.addAfter(Blocks.CAULDRON, VerdanceBlocks.WHITE_CUSHION));
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(entries -> entries.addAfter(Blocks.CAULDRON, VerdanceBlocks.WHITE_CUSHION));
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(entries -> {
             entries.addBefore(Items.DISC_FRAGMENT_5, VerdanceItems.DISC_FRAGMENT_RANGE);
             entries.addBefore(Items.ANGLER_POTTERY_SHERD, VerdanceItems.ABODE_POTTERY_SHERD);
             entries.addAfter(Items.FRIEND_POTTERY_SHERD, VerdanceItems.FRILLS_POTTERY_SHERD);
@@ -268,7 +263,7 @@ public class Verdance implements ModInitializer {
             entries.addAfter(Items.SNORT_POTTERY_SHERD, VerdanceItems.SPIRIT_POTTERY_SHERD, VerdanceItems.TRAP_POTTERY_SHERD);
             entries.addAfter(Items.HOST_ARMOR_TRIM_SMITHING_TEMPLATE, VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE);
         });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.SPAWN_EGGS).register(entries -> {
             entries.addBefore(
                     Items.SILVERFISH_SPAWN_EGG,
                     VerdanceItems.SILK_MOTH_SPAWN_EGG,
@@ -278,17 +273,17 @@ public class Verdance implements ModInitializer {
     }
 
     public static void registerBiomePlacements() {
-        BiomePlacement.replaceOverworld(BiomeKeys.CHERRY_GROVE, VerdanceBiomes.MULBERRY_FOREST, VerdanceConfig.MULBERRY_FOREST_PROPORTION.get());
-        BiomePlacement.replaceOverworld(BiomeKeys.SPARSE_JUNGLE, VerdanceBiomes.SHRUBLANDS, VerdanceConfig.SHRUBLANDS_PROPORTION.get());
+        BiomePlacement.replaceOverworld(Biomes.CHERRY_GROVE, VerdanceBiomes.MULBERRY_FOREST, VerdanceConfig.MULBERRY_FOREST_PROPORTION.get());
+        BiomePlacement.replaceOverworld(Biomes.SPARSE_JUNGLE, VerdanceBiomes.SHRUBLANDS, VerdanceConfig.SHRUBLANDS_PROPORTION.get());
     }
 
     public static void registerSurfaceRules() {
-        SurfaceGeneration.addOverworldSurfaceRules(Identifier.ofVanilla("rules/overworld"), MaterialRules.sequence(
+        SurfaceGeneration.addOverworldSurfaceRules(ResourceLocation.withDefaultNamespace("rules/overworld"), SurfaceRules.sequence(
                 VerdanceSurfaceRules.shrublands()
         ));
     }
 
-    public static Identifier id(String name) {
-        return Identifier.of(MOD_ID, name);
+    public static ResourceLocation id(String name) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 }
