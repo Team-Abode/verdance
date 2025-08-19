@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.7-SNAPSHOT'
+	id 'fabric-loom' version "${loom_version}"
 	id 'maven-publish'
 }
 
@@ -28,7 +28,6 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Dependencies
-	modApi "com.github.Team-Abode:sketch:${rootProject.sketch_version}"
 	modApi "com.terraformersmc:biolith-fabric:${project.biolith_version}"
 
 	modCompileOnly "maven.modrinth:farmers-delight-refabricated:${rootProject.farmers_delight_version}"
@@ -39,19 +38,13 @@ base {
 }
 
 loom {
-	runs {
-		datagenClient {
-			inherit client
-			name "Data Generation"
-			vmArg "-Dfabric-api.datagen"
-			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-			vmArg "-Dfabric-api.datagen.modid=${project.mod_id}"
-
-			runDir "build/datagen"
-		}
-	}
-
 	accessWidenerPath = file("src/main/resources/verdance.accesswidener")
+}
+
+fabricApi {
+	configureDataGeneration() {
+		client = true
+	}
 }
 
 processResources {
