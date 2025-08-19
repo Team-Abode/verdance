@@ -1,6 +1,5 @@
 package com.teamabode.verdance.datagen;
 
-import com.teamabode.sketch.core.registry.SketchRegistries;
 import com.teamabode.verdance.core.registry.*;
 import com.teamabode.verdance.datagen.client.VerdanceModelProvider;
 import com.teamabode.verdance.datagen.server.*;
@@ -39,7 +38,6 @@ public class VerdanceDataGenerator implements DataGeneratorEntrypoint {
         registryBuilder.addRegistry(RegistryKeys.WOLF_VARIANT, VerdanceWolfVariants::register);
         registryBuilder.addRegistry(RegistryKeys.JUKEBOX_SONG, VerdanceJukeboxSongs::register);
         registryBuilder.addRegistry(RegistryKeys.TRIM_PATTERN, VerdanceTrimPatterns::register);
-        registryBuilder.addRegistry(SketchRegistries.BOAT_TYPE, VerdanceBoatTypes::register);
         registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, VerdanceConfiguredFeatures::register);
         registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, VerdancePlacedFeatures::register);
         registryBuilder.addRegistry(RegistryKeys.BIOME, VerdanceBiomes::register);

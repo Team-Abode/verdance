@@ -308,9 +308,9 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
         this.getOrCreateTagBuilder(BlockTags.FLOWER_POTS)
                 .add(VerdanceBlocks.POTTED_MULBERRY_SAPLING)
                 .add(VerdanceBlocks.POTTED_VIOLET)
-                .add(VerdanceBlocks.POTTED_SHRUB)
-                .add(VerdanceBlocks.POTTED_YELLOW_FLOWERING_SHRUB)
-                .add(VerdanceBlocks.POTTED_PINK_FLOWERING_SHRUB)
+                .add(VerdanceBlocks.POTTED_DESERT_BUSH)
+                .add(VerdanceBlocks.POTTED_YELLOW_FLOWERING_DESERT_BUSH)
+                .add(VerdanceBlocks.POTTED_PINK_FLOWERING_DESERT_BUSH)
                 .setReplace(false);
     }
 
@@ -335,16 +335,16 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
 
     private void shrubs() {
-        this.getOrCreateTagBuilder(VerdanceBlockTags.SHRUBS).setReplace(false)
-                .add(VerdanceBlocks.SHRUB)
-                .add(VerdanceBlocks.YELLOW_FLOWERING_SHRUB)
-                .add(VerdanceBlocks.PINK_FLOWERING_SHRUB);
+        this.getOrCreateTagBuilder(VerdanceBlockTags.DESERT_BUSHES).setReplace(false)
+                .add(VerdanceBlocks.DESERT_BUSH)
+                .add(VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH)
+                .add(VerdanceBlocks.PINK_FLOWERING_DESERT_BUSH);
     }
 
     private void floweringShrubs() {
-        this.getOrCreateTagBuilder(VerdanceBlockTags.FLOWERING_SHRUBS).setReplace(false)
-                .add(VerdanceBlocks.YELLOW_FLOWERING_SHRUB)
-                .add(VerdanceBlocks.PINK_FLOWERING_SHRUB);
+        this.getOrCreateTagBuilder(VerdanceBlockTags.FLOWERING_DESERT_BUSHES).setReplace(false)
+                .add(VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH)
+                .add(VerdanceBlocks.PINK_FLOWERING_DESERT_BUSH);
     }
 
     private void shrubMayPlaceOn() {
@@ -355,7 +355,7 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
 
     private void flowers() {
-        this.getOrCreateTagBuilder(BlockTags.FLOWERS).forceAddTag(VerdanceBlockTags.FLOWERING_SHRUBS);
+        this.getOrCreateTagBuilder(BlockTags.FLOWERS).forceAddTag(VerdanceBlockTags.FLOWERING_DESERT_BUSHES);
     }
 
     private void smallFlowers() {

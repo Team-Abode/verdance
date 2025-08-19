@@ -1,6 +1,5 @@
 package com.teamabode.verdance;
 
-import com.mojang.datafixers.util.Pair;
 import com.teamabode.verdance.core.integration.CompatUtils;
 import com.teamabode.verdance.core.integration.farmersdelight.FDIntegration;
 import com.teamabode.verdance.core.integration.guarding.GuardingIntegration;
@@ -8,13 +7,10 @@ import com.teamabode.verdance.core.misc.VerdanceBiomeModifications;
 import com.teamabode.verdance.core.misc.VerdanceLootTableEvents;
 import com.teamabode.verdance.core.misc.VerdanceStructurePoolModifiers;
 import com.teamabode.verdance.core.misc.VerdanceSurfaceRules;
-import com.teamabode.verdance.core.mixin.accessor.StructurePoolAccessor;
 import com.teamabode.verdance.core.registry.*;
 import com.terraformersmc.biolith.api.biome.BiomePlacement;
 import com.terraformersmc.biolith.api.surface.SurfaceGeneration;
-import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.loader.api.FabricLoader;
@@ -23,11 +19,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.structure.pool.FeaturePoolElement;
-import net.minecraft.structure.pool.StructurePool;
-import net.minecraft.structure.pool.StructurePoolElement;
 import net.minecraft.util.Identifier;
 import net.minecraft.village.TradeOffers;
 import net.minecraft.village.VillagerProfession;
@@ -48,9 +39,9 @@ public class Verdance implements ModInitializer {
         VerdanceBlocks.register();
         VerdanceBlockEntityTypes.register();
         VerdanceItems.register();
+        VerdanceConsumeEffectTypes.register();
         VerdanceDecoratedPotPatterns.register();
         VerdanceSoundEvents.register();
-        VerdanceFeatures.register();
         VerdanceTrunkPlacerTypes.register();
         VerdanceTreeDecoratorTypes.register();
         VerdanceActivities.register();
@@ -89,12 +80,13 @@ public class Verdance implements ModInitializer {
 
     public static void registerTrades() {
         TradeOfferHelper.registerWanderingTraderOffers(1, itemListings -> {
+
             itemListings.add(new TradeOffers.SellItemFactory(VerdanceItems.CANTALOUPE_SEEDS, 1, 1, 12, 1));
             itemListings.add(new TradeOffers.SellItemFactory(VerdanceItems.MULBERRY, 5, 1, 8, 1));
             itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.VIOLET, 1, 1, 12, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.SHRUB, 1, 1, 12, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.YELLOW_FLOWERING_SHRUB, 1, 1, 12, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.PINK_FLOWERING_SHRUB, 1, 1, 12, 1));
+            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.DESERT_BUSH, 1, 1, 12, 1));
+            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH, 1, 1, 12, 1));
+            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.PINK_FLOWERING_DESERT_BUSH, 1, 1, 12, 1));
         });
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, itemListings -> {
             itemListings.add(new TradeOffers.BuyItemFactory(VerdanceBlocks.CANTALOUPE, 6, 12, 10));
@@ -168,7 +160,7 @@ public class Verdance implements ModInitializer {
             entries.addAfter(Items.FROGSPAWN, VerdanceBlocks.SILKWORM_EGGS);
             entries.addAfter(Items.CORNFLOWER, VerdanceBlocks.VIOLET);
 
-            entries.addBefore(Items.DEAD_BUSH, VerdanceBlocks.SHRUB, VerdanceBlocks.YELLOW_FLOWERING_SHRUB, VerdanceBlocks.PINK_FLOWERING_SHRUB);
+            entries.addBefore(Items.DEAD_BUSH, VerdanceBlocks.DESERT_BUSH, VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH, VerdanceBlocks.PINK_FLOWERING_DESERT_BUSH);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(entries -> {
             entries.addAfter(

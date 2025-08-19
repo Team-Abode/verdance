@@ -5,7 +5,7 @@ import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
 import java.util.Map;
 import net.minecraft.entity.ai.brain.MemoryModuleState;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
-import net.minecraft.entity.ai.brain.task.LookTargetUtil;
+import net.minecraft.entity.ai.brain.task.TargetUtil;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -37,7 +37,7 @@ public class SearchForLeavesTask extends ImprovedSingleTickTask<SilkMothEntity> 
             boolean isValidSpace = level.getBlockState(mutablePos.set(scanPos, Direction.UP)).isAir();
 
             if (excludeCurrentPos && foundLeaves && isValidSpace) {
-                LookTargetUtil.walkTowards(entity, mutablePos, 1.0f, 0);
+                TargetUtil.walkTowards(entity, mutablePos, 1.0f, 0);
                 return;
             }
         }

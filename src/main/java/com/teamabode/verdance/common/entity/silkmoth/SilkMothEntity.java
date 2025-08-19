@@ -30,11 +30,12 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TimeHelper;
@@ -59,7 +60,7 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
 
     public float lastBodyPitch;
     public float bodyPitch;
-    public float lastAnimationProgress;
+    public float lastAge;
 
     public int lastSoarTicks;
     public int soarTicks;
@@ -122,19 +123,15 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
         this.flyAnimationState.setRunning(this.isInAir(), this.age);
     }
 
-    public float getSoarProgress(float deltaTicks) {
-        return MathHelper.lerp(deltaTicks, this.lastSoarTicks, this.soarTicks) / 5.0f;
-    }
-
     @Override
-    protected void mobTick() {
-        this.getBrain().tick((ServerWorld) this.getWorld(), this);
+    protected void mobTick(ServerWorld world) {
+        this.getBrain().tick(world, this);
         SilkMothBrain.updateActivity(this);
-        super.mobTick();
+        super.mobTick(world);
     }
 
     @Override
-    protected int computeFallDamage(float fallDistance, float damageMultiplier) {
+    protected int computeFallDamage(double fallDistance, float damagePerDistance) {
         return this.isInAir() ? 0 : super.computeFallDamage(fallDistance, 0.5f);
     }
 
@@ -142,16 +139,14 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
     protected EntityNavigation createNavigation(World world) {
         MobNavigation navigation = new MobNavigation(this, world);
         navigation.setCanSwim(true);
-        navigation.setCanPathThroughDoors(false);
-        navigation.setCanEnterOpenDoors(false);
+        navigation.setCanOpenDoors(true);
         return navigation;
     }
 
     private EntityNavigation createFlightNavigation(World world) {
         BirdNavigation navigation = new BirdNavigation(this, world);
-        navigation.setCanPathThroughDoors(false);
         navigation.setCanSwim(true);
-        navigation.setCanEnterOpenDoors(false);
+        navigation.setCanOpenDoors(true);
         return navigation;
     }
 
@@ -162,15 +157,19 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
     }
 
     @Override
-    public void writeCustomDataToNbt(NbtCompound compound) {
-        super.writeCustomDataToNbt(compound);
-        compound.putBoolean("Flying", this.isInAir());
+    protected void writeCustomData(WriteView view) {
+        super.writeCustomData(view);
+
+        view.putBoolean("flying", this.isInAir());
     }
 
     @Override
-    public void readCustomDataFromNbt(NbtCompound compound) {
-        super.readCustomDataFromNbt(compound);
-        this.setFlying(compound.getBoolean("Flying"));
+    protected void readCustomData(ReadView view) {
+        super.readCustomData(view);
+
+        boolean flying = view.getBoolean("flying", false);
+
+        this.setFlying(flying);
     }
 
     @Override
@@ -193,11 +192,10 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand interactionHand) {
         ItemStack stack = player.getStackInHand(interactionHand);
-        World world = this.getWorld();
         boolean isFood = this.isBreedingItem(stack);
         ActionResult interactionResult = super.interactMob(player, interactionHand);
         if (interactionResult.isAccepted() && isFood) {
-            world.playSoundFromEntity(null, this, this.getEatSound(stack), SoundCategory.NEUTRAL, 1.0F, MathHelper.nextBetween(world.random, 0.8F, 1.2F));
+            this.playEatSound();
         }
         return interactionResult;
     }
@@ -219,6 +217,11 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
 
     public void setFlying(boolean flying) {
         this.dataTracker.set(FLYING, flying);
+    }
+
+
+    public boolean isInFlyingState() {
+        return this.isInAir();
     }
 
     @Override
@@ -249,8 +252,8 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
     }
 
     @Override
-    public SoundEvent getEatSound(ItemStack itemStack) {
-        return VerdanceSoundEvents.ENTITY_SILK_MOTH_EAT;
+    protected void playEatSound() {
+        this.getWorld().playSoundFromEntity(null, this, VerdanceSoundEvents.ENTITY_SILK_MOTH_EAT, SoundCategory.NEUTRAL, 2.0f, 1.0f);
     }
 
     @Nullable
@@ -284,10 +287,10 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
 
     public static DefaultAttributeContainer.Builder createSilkMothAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0f)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5d)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2d)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0)
-                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.25f);
+                .add(EntityAttributes.MAX_HEALTH, 10.0f)
+                .add(EntityAttributes.FLYING_SPEED, 0.5d)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.2d)
+                .add(EntityAttributes.FOLLOW_RANGE, 48.0)
+                .add(EntityAttributes.STEP_HEIGHT, 1.25f);
     }
 }

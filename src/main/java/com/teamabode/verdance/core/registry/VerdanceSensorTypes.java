@@ -16,8 +16,8 @@ public class VerdanceSensorTypes {
 
     public static final SensorType<SilkMothSpecificSensor> SILK_MOTH_SPECIFIC_SENSOR = register("silk_moth_specific_sensor", SilkMothSpecificSensor::new);
     public static final SensorType<SilkwormSpecificSensor> SILKWORM_SPECIFIC_SENSOR = register("silkworm_specific_sensor", SilkwormSpecificSensor::new);
-    public static final SensorType<TemptationsSensor> SILK_MOTH_TEMPTATIONS = register("silk_moth_temptations", () -> new TemptationsSensor(SilkMothBrain.getTemptations()));
-    public static final SensorType<TemptationsSensor> SILKWORM_TEMPTATIONS = register("silkworm_temptations", () -> new TemptationsSensor(SilkwormBrain.getTemptations()));
+    public static final SensorType<TemptationsSensor> SILK_MOTH_TEMPTATIONS = register("silk_moth_temptations", () -> new TemptationsSensor(SilkMothBrain.getTemptItemPredicate()));
+    public static final SensorType<TemptationsSensor> SILKWORM_TEMPTATIONS = register("silkworm_temptations", () -> new TemptationsSensor(SilkwormBrain.getTemptItemPredicate()));
 
     public static <U extends Sensor<?>> SensorType<U> register(String name, Supplier<U> sensorType) {
         return Registry.register(Registries.SENSOR_TYPE, Verdance.id(name), new SensorType<>(sensorType));

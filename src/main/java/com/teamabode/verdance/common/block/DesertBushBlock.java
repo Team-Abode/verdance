@@ -18,11 +18,11 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
-public class ShrubBlock extends PlantBlock implements Fertilizable {
-    public static final MapCodec<ShrubBlock> CODEC = createCodec(ShrubBlock::new);
+public class DesertBushBlock extends PlantBlock implements Fertilizable {
+    public static final MapCodec<DesertBushBlock> CODEC = createCodec(DesertBushBlock::new);
     public static final VoxelShape SHAPE = Block.createCuboidShape(0.0d, 0.0d, 0.0d, 16.0d, 14.0d, 16.0d);
 
-    public ShrubBlock(Settings properties) {
+    public DesertBushBlock(Settings properties) {
         super(properties);
     }
 
@@ -48,12 +48,12 @@ public class ShrubBlock extends PlantBlock implements Fertilizable {
 
     @Override
     public void grow(ServerWorld level, Random random, BlockPos pos, BlockState state) {
-        Optional<Block> finalBlock = Registries.BLOCK.getRandomEntry(VerdanceBlockTags.FLOWERING_SHRUBS, random).map(RegistryEntry::value);
+        Optional<Block> finalBlock = Registries.BLOCK.getRandomEntry(VerdanceBlockTags.FLOWERING_DESERT_BUSHES, random).map(RegistryEntry::value);
         finalBlock.ifPresent(block -> level.setBlockState(pos, block.getDefaultState(), 2));
     }
 
     @Override
-    protected MapCodec<? extends ShrubBlock> getCodec() {
+    protected MapCodec<? extends DesertBushBlock> getCodec() {
         return CODEC;
     }
 }

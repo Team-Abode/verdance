@@ -15,18 +15,12 @@ import net.minecraft.entity.ai.brain.MemoryModuleState;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.sensor.Sensor;
 import net.minecraft.entity.ai.brain.sensor.SensorType;
-import net.minecraft.entity.ai.brain.task.FleeTask;
-import net.minecraft.entity.ai.brain.task.LookAroundTask;
-import net.minecraft.entity.ai.brain.task.MoveToTargetTask;
-import net.minecraft.entity.ai.brain.task.RandomTask;
-import net.minecraft.entity.ai.brain.task.StayAboveWaterTask;
-import net.minecraft.entity.ai.brain.task.StrollTask;
-import net.minecraft.entity.ai.brain.task.TemptTask;
-import net.minecraft.entity.ai.brain.task.TemptationCooldownTask;
-import net.minecraft.entity.ai.brain.task.WaitTask;
-import net.minecraft.recipe.Ingredient;
+import net.minecraft.entity.ai.brain.task.*;
+import net.minecraft.item.ItemStack;
+
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public class SilkwormBrain {
     public static final List<MemoryModuleType<?>> MEMORY_MODULES = ImmutableList.of(
@@ -63,11 +57,11 @@ public class SilkwormBrain {
 
     private static void addCoreActivities(Brain<SilkwormEntity> brain) {
         brain.setTaskList(Activity.CORE, 0, ImmutableList.of(
-                new StayAboveWaterTask(1.0f),
+                new StayAboveWaterTask<>(1.0f),
                 new FleeTask<>(1.5f),
-                new LookAroundTask(45, 90),
+                new UpdateLookControlTask(45, 90),
                 new MoveToTargetTask(),
-                new TemptationCooldownTask(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
+                new TickCooldownTask(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
         ));
     }
 
@@ -103,7 +97,7 @@ public class SilkwormBrain {
         ));
     }
 
-    public static Ingredient getTemptations() {
-        return Ingredient.fromTag(VerdanceItemTags.SILKWORM_FOOD);
+    public static Predicate<ItemStack> getTemptItemPredicate() {
+        return stack -> stack.isIn(VerdanceItemTags.SILKWORM_FOOD);
     }
 }

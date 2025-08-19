@@ -131,7 +131,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
         offerDyeableRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, dyes, cushions, "cushion");
         dyeFromFlower(exporter, Items.PURPLE_DYE, VerdanceBlocks.VIOLET, 1);
         dyeFromFlower(exporter, Items.MAGENTA_DYE, Blocks.SPORE_BLOSSOM, 2);
-        dyeFromFlower(exporter, Items.YELLOW_DYE, VerdanceBlocks.YELLOW_FLOWERING_SHRUB, 1);
-        dyeFromFlower(exporter, Items.PINK_DYE, VerdanceBlocks.PINK_FLOWERING_SHRUB, 1);
+        dyeFromFlower(exporter, Items.YELLOW_DYE, VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH, 1);
+        dyeFromFlower(exporter, Items.PINK_DYE, VerdanceBlocks.PINK_FLOWERING_DESERT_BUSH, 1);
     }
 }

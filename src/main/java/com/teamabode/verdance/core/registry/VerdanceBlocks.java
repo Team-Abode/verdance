@@ -10,27 +10,9 @@ import com.teamabode.verdance.core.misc.VerdanceBlockRegistryKeys;
 import com.teamabode.verdance.core.misc.VerdanceItemRegistryKeys;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.OffsetType;
 import net.minecraft.block.AbstractBlock.Settings;
-import net.minecraft.block.AttachedStemBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.FlowerBlock;
-import net.minecraft.block.HangingSignBlock;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.SaplingBlock;
-import net.minecraft.block.SignBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.StemBlock;
-import net.minecraft.block.TrapdoorBlock;
-import net.minecraft.block.WallBlock;
-import net.minecraft.block.WallHangingSignBlock;
-import net.minecraft.block.WallSignBlock;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
@@ -38,28 +20,37 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
+
+import java.util.function.Function;
 
 public class VerdanceBlocks {
     public static final Block MULBERRY_LOG = register(
             "mulberry_log",
-            Blocks.createLogBlock(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_GRAY)
+            PillarBlock::new,
+            Blocks.createLogSettings(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_GRAY, BlockSoundGroup.WOOD)
     );
     public static final Block MULBERRY_WOOD = register(
             "mulberry_wood",
-            Blocks.createLogBlock(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_GRAY)
+            PillarBlock::new,
+            Blocks.createLogSettings(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_GRAY, BlockSoundGroup.WOOD)
     );
     public static final Block STRIPPED_MULBERRY_LOG = register(
             "stripped_mulberry_log",
-            Blocks.createLogBlock(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_YELLOW)
+            PillarBlock::new,
+            Blocks.createLogSettings(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_YELLOW, BlockSoundGroup.WOOD)
     );
     public static final Block STRIPPED_MULBERRY_WOOD = register(
             "stripped_mulberry_wood",
-            Blocks.createLogBlock(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_YELLOW)
+            PillarBlock::new,
+            Blocks.createLogSettings(MapColor.TERRACOTTA_YELLOW, MapColor.TERRACOTTA_YELLOW, BlockSoundGroup.WOOD)
     );
     public static final Block MULBERRY_PLANKS = register(
             "mulberry_planks",
+            Block::new,
             Settings.create()
                 .mapColor(MapColor.TERRACOTTA_YELLOW)
                 .strength(2.0F, 3.0F)
@@ -69,545 +60,625 @@ public class VerdanceBlocks {
     );
     public static final Block MULBERRY_STAIRS = register(
             "mulberry_stairs",
-            new StairsBlock(MULBERRY_PLANKS.getDefaultState(), Settings.copy(MULBERRY_PLANKS))
+            settings -> new StairsBlock(MULBERRY_PLANKS.getDefaultState(), settings),
+            Settings.copy(MULBERRY_PLANKS)
     );
     public static final Block MULBERRY_SLAB = register(
             "mulberry_slab",
-            new SlabBlock(Settings.create()
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
-                    .strength(2.0F, 3.0F)
-                    .instrument(NoteBlockInstrument.BASS)
-                    .sounds(BlockSoundGroup.WOOD)
-                    .burnable())
+            SlabBlock::new,
+            Settings.create()
+                .mapColor(MapColor.TERRACOTTA_YELLOW)
+                .strength(2.0F, 3.0F)
+                .instrument(NoteBlockInstrument.BASS)
+                .sounds(BlockSoundGroup.WOOD)
+                .burnable()
     );
     public static final Block MULBERRY_FENCE = register(
             "mulberry_fence",
-            new FenceBlock(Settings.create()
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
-                    .strength(2.0F, 3.0F)
-                    .instrument(NoteBlockInstrument.BASS)
-                    .sounds(BlockSoundGroup.WOOD)
-                    .burnable())
+            FenceBlock::new,
+            Settings.create()
+                .mapColor(MapColor.TERRACOTTA_YELLOW)
+                .strength(2.0F, 3.0F)
+                .instrument(NoteBlockInstrument.BASS)
+                .sounds(BlockSoundGroup.WOOD)
+                .burnable()
     );
     public static final Block MULBERRY_FENCE_GATE = register(
             "mulberry_fence_gate",
-            new FenceGateBlock(VerdanceWoodTypes.MULBERRY, Settings.create()
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
-                    .solid()
-                    .strength(2.0F, 3.0F)
-                    .instrument(NoteBlockInstrument.BASS)
-                    .burnable())
+            settings -> new FenceGateBlock(VerdanceWoodTypes.MULBERRY, settings),
+            Settings.create()
+                .mapColor(MapColor.TERRACOTTA_YELLOW)
+                .solid()
+                .strength(2.0F, 3.0F)
+                .instrument(NoteBlockInstrument.BASS)
+                .burnable()
     );
     public static final Block MULBERRY_DOOR = register(
             "mulberry_door",
-            new DoorBlock(VerdanceBlockSetTypes.MULBERRY, Settings.create()
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
-                    .strength(3.0F)
-                    .instrument(NoteBlockInstrument.BASS)
-                    .nonOpaque()
-                    .pistonBehavior(PistonBehavior.DESTROY)
-                    .burnable())
+            settings -> new DoorBlock(VerdanceBlockSetTypes.MULBERRY, settings),
+            Settings.create()
+                .mapColor(MapColor.TERRACOTTA_YELLOW)
+                .strength(3.0F)
+                .instrument(NoteBlockInstrument.BASS)
+                .nonOpaque()
+                .pistonBehavior(PistonBehavior.DESTROY)
+                .burnable()
     );
     public static final Block MULBERRY_TRAPDOOR = register(
             "mulberry_trapdoor",
-            new TrapdoorBlock(VerdanceBlockSetTypes.MULBERRY, Settings.create()
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
-                    .strength(3.0F)
-                    .instrument(NoteBlockInstrument.BASS)
-                    .allowsSpawning(Blocks::never)
-                    .nonOpaque()
-                    .burnable())
+            settings -> new TrapdoorBlock(VerdanceBlockSetTypes.MULBERRY, settings),
+            Settings.create()
+                .mapColor(MapColor.TERRACOTTA_YELLOW)
+                .strength(3.0F)
+                .instrument(NoteBlockInstrument.BASS)
+                .allowsSpawning(Blocks::never)
+                .nonOpaque()
+                .burnable()
     );
     public static final Block MULBERRY_PRESSURE_PLATE = register(
             "mulberry_pressure_plate",
-            new PressurePlateBlock(VerdanceBlockSetTypes.MULBERRY, Settings.create()
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
-                    .solid()
-                    .strength(0.5f)
-                    .instrument(NoteBlockInstrument.BASS)
-                    .noCollision()
-                    .pistonBehavior(PistonBehavior.DESTROY)
-                    .burnable())
+            settings -> new PressurePlateBlock(VerdanceBlockSetTypes.MULBERRY, settings),
+            Settings.create()
+                .mapColor(MapColor.TERRACOTTA_YELLOW)
+                .solid()
+                .strength(0.5f)
+                .instrument(NoteBlockInstrument.BASS)
+                .noCollision()
+                .pistonBehavior(PistonBehavior.DESTROY)
+                .burnable()
     );
     public static final Block MULBERRY_BUTTON = register(
             "mulberry_button",
-            Blocks.createWoodenButtonBlock(VerdanceBlockSetTypes.MULBERRY)
+            settings -> new ButtonBlock(VerdanceBlockSetTypes.MULBERRY, 30, settings),
+            Blocks.createButtonSettings()
     );
     public static final Block MULBERRY_SIGN = registerWithoutItem(
             "mulberry_sign",
-            new SignBlock(VerdanceWoodTypes.MULBERRY, Settings.create()
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
-                    .solid()
-                    .instrument(NoteBlockInstrument.BASS)
-                    .noCollision()
-                    .strength(1.0F)
-                    .burnable())
+            settings -> new SignBlock(VerdanceWoodTypes.MULBERRY, settings),
+            Settings.create()
+                .mapColor(MapColor.TERRACOTTA_YELLOW)
+                .solid()
+                .instrument(NoteBlockInstrument.BASS)
+                .noCollision()
+                .strength(1.0F)
+                .burnable()
     );
     public static final Block MULBERRY_WALL_SIGN = registerWithoutItem(
             "mulberry_wall_sign",
-            new WallSignBlock(VerdanceWoodTypes.MULBERRY, Settings.create()
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
-                    .solid()
-                    .instrument(NoteBlockInstrument.BASS)
-                    .noCollision()
-                    .strength(1.0F)
-                    .dropsLike(MULBERRY_SIGN)
-                    .burnable())
+            settings -> new WallSignBlock(VerdanceWoodTypes.MULBERRY, settings),
+            Settings.create()
+                .lootTable(MULBERRY_SIGN.getLootTableKey())
+                .overrideTranslationKey(MULBERRY_SIGN.getTranslationKey())
+                .mapColor(MapColor.TERRACOTTA_YELLOW)
+                .solid()
+                .instrument(NoteBlockInstrument.BASS)
+                .noCollision()
+                .strength(1.0F)
+                .burnable()
     );
     public static final Block MULBERRY_HANGING_SIGN = registerWithoutItem(
             "mulberry_hanging_sign",
-            new HangingSignBlock(VerdanceWoodTypes.MULBERRY, Settings.create()
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
-                    .solid()
-                    .instrument(NoteBlockInstrument.BASS)
-                    .noCollision()
-                    .strength(1.0F)
-                    .burnable())
+            settings -> new HangingSignBlock(VerdanceWoodTypes.MULBERRY, settings),
+            Settings.create()
+                .mapColor(MapColor.TERRACOTTA_YELLOW)
+                .solid()
+                .instrument(NoteBlockInstrument.BASS)
+                .noCollision()
+                .strength(1.0F)
+                .burnable()
     );
     public static final Block MULBERRY_WALL_HANGING_SIGN = registerWithoutItem(
             "mulberry_wall_hanging_sign",
-            new WallHangingSignBlock(VerdanceWoodTypes.MULBERRY, Settings.create()
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
-                    .solid()
-                    .instrument(NoteBlockInstrument.BASS)
-                    .noCollision()
-                    .strength(1.0F)
-                    .dropsLike(MULBERRY_HANGING_SIGN)
-                    .burnable())
+            settings -> new WallHangingSignBlock(VerdanceWoodTypes.MULBERRY, settings),
+            Settings.create()
+                .lootTable(MULBERRY_SIGN.getLootTableKey())
+                .overrideTranslationKey(MULBERRY_SIGN.getTranslationKey())
+                .mapColor(MapColor.TERRACOTTA_YELLOW)
+                .solid()
+                .instrument(NoteBlockInstrument.BASS)
+                .noCollision()
+                .strength(1.0F)
+                .burnable()
     );
     public static final Block MULBERRY_LEAVES = register(
-            "mulberry_leaves", Blocks.createLeavesBlock(BlockSoundGroup.GRASS)
+            "mulberry_leaves",
+            settings -> new TintedParticleLeavesBlock(0.01f, settings),
+            Blocks.createLeavesSettings(BlockSoundGroup.GRASS)
     );
     public static final Block FLOWERING_MULBERRY_LEAVES = register(
-            "flowering_mulberry_leaves", Blocks.createLeavesBlock(BlockSoundGroup.GRASS)
+            "flowering_mulberry_leaves",
+            settings -> new TintedParticleLeavesBlock(0.01f, settings),
+            Blocks.createLeavesSettings(BlockSoundGroup.GRASS)
     );
-    public static final Block MULBERRY_SAPLING = registerWithoutItem(
+    public static final Block MULBERRY_SAPLING = register(
             "mulberry_sapling",
-            new SaplingBlock(VerdanceSaplingGenerators.MULBERRY, Settings.create()
-                    .mapColor(MapColor.DARK_GREEN)
-                    .noCollision()
-                    .ticksRandomly()
-                    .breakInstantly()
-                    .sounds(BlockSoundGroup.CROP)
-                    .pistonBehavior(PistonBehavior.DESTROY))
+            settings -> new SaplingBlock(VerdanceSaplingGenerators.MULBERRY, settings),
+            Settings.create()
+                .mapColor(MapColor.DARK_GREEN)
+                .noCollision()
+                .ticksRandomly()
+                .breakInstantly()
+                .sounds(BlockSoundGroup.CROP)
+                .pistonBehavior(PistonBehavior.DESTROY)
     );
     public static final Block POTTED_MULBERRY_SAPLING = registerWithoutItem(
             "potted_mulberry_sapling",
-            Blocks.createFlowerPotBlock(MULBERRY_SAPLING)
+            settings -> new FlowerPotBlock(MULBERRY_SAPLING, settings),
+            Blocks.createFlowerPotSettings()
     );
     public static final Block CANTALOUPE = register(
             "cantaloupe",
-            new Block(Settings.create()
-                    .mapColor(MapColor.LIME)
-                    .strength(1.0F)
-                    .sounds(BlockSoundGroup.WOOD))
+            Block::new,
+            Settings.create()
+                .mapColor(MapColor.LIME)
+                .strength(1.0F)
+                .sounds(BlockSoundGroup.WOOD)
     );
     public static final Block ATTACHED_CANTALOUPE_STEM = registerWithoutItem(
             "attached_cantaloupe_stem",
-            new AttachedStemBlock(
+            settings -> new AttachedStemBlock(
                     VerdanceBlockRegistryKeys.CANTALOUPE_STEM,
                     VerdanceBlockRegistryKeys.CANTALOUPE,
                     VerdanceItemRegistryKeys.CANTALOUPE_SEEDS,
-                    Settings.create()
-                            .noCollision()
-                            .ticksRandomly()
-                            .breakInstantly()
-                            .sounds(BlockSoundGroup.STEM)
-                            .pistonBehavior(PistonBehavior.DESTROY))
+            settings),
+            Settings.create()
+                .noCollision()
+                .ticksRandomly()
+                .breakInstantly()
+                .sounds(BlockSoundGroup.STEM)
+                .pistonBehavior(PistonBehavior.DESTROY)
     );
     public static final Block CANTALOUPE_STEM = registerWithoutItem(
             "cantaloupe_stem",
-            new StemBlock(
+            settings -> new StemBlock(
                 VerdanceBlockRegistryKeys.CANTALOUPE,
                 VerdanceBlockRegistryKeys.ATTACHED_CANTALOUPE_STEM,
                 VerdanceItemRegistryKeys.CANTALOUPE_SEEDS,
-                Settings.create()
-                        .noCollision()
-                        .ticksRandomly()
-                        .breakInstantly()
-                        .sounds(BlockSoundGroup.STEM)
-                        .pistonBehavior(PistonBehavior.DESTROY))
+            settings),
+            Settings.create()
+                .noCollision()
+                .ticksRandomly()
+                .breakInstantly()
+                .sounds(BlockSoundGroup.STEM)
+                .pistonBehavior(PistonBehavior.DESTROY)
     );
-    public static final Block WHITE_CUSHION = register(
+    public static final Block WHITE_CUSHION = registerCushionBlock(
             "white_cushion",
-            cushion(DyeColor.WHITE)
+            DyeColor.WHITE
     );
-    public static final Block LIGHT_GRAY_CUSHION = register(
+    public static final Block LIGHT_GRAY_CUSHION = registerCushionBlock(
             "light_gray_cushion",
-            cushion(DyeColor.LIGHT_GRAY)
+            DyeColor.LIGHT_GRAY
     );
-    public static final Block GRAY_CUSHION = register(
+    public static final Block GRAY_CUSHION = registerCushionBlock(
             "gray_cushion",
-            cushion(DyeColor.GRAY)
+            DyeColor.GRAY
     );
-    public static final Block BLACK_CUSHION = register(
+    public static final Block BLACK_CUSHION = registerCushionBlock(
             "black_cushion",
-            cushion(DyeColor.BLACK)
+            DyeColor.BLACK
     );
-    public static final Block BROWN_CUSHION = register(
+    public static final Block BROWN_CUSHION = registerCushionBlock(
             "brown_cushion",
-            cushion(DyeColor.BROWN)
+            DyeColor.BROWN
     );
-    public static final Block RED_CUSHION = register(
+    public static final Block RED_CUSHION = registerCushionBlock(
             "red_cushion",
-            cushion(DyeColor.RED)
+            DyeColor.RED
     );
-    public static final Block ORANGE_CUSHION = register(
+    public static final Block ORANGE_CUSHION = registerCushionBlock(
             "orange_cushion",
-            cushion(DyeColor.ORANGE)
+            DyeColor.ORANGE
     );
-    public static final Block YELLOW_CUSHION = register(
+    public static final Block YELLOW_CUSHION = registerCushionBlock(
             "yellow_cushion",
-            cushion(DyeColor.YELLOW)
+            DyeColor.YELLOW
     );
-    public static final Block LIME_CUSHION = register(
+    public static final Block LIME_CUSHION = registerCushionBlock(
             "lime_cushion",
-            cushion(DyeColor.LIME)
+            DyeColor.LIME
     );
-    public static final Block GREEN_CUSHION = register(
+    public static final Block GREEN_CUSHION = registerCushionBlock(
             "green_cushion",
-            cushion(DyeColor.GREEN)
+            DyeColor.GREEN
     );
-    public static final Block CYAN_CUSHION = register(
+    public static final Block CYAN_CUSHION = registerCushionBlock(
             "cyan_cushion",
-            cushion(DyeColor.CYAN)
+            DyeColor.CYAN
     );
-    public static final Block LIGHT_BLUE_CUSHION = register(
+    public static final Block LIGHT_BLUE_CUSHION = registerCushionBlock(
             "light_blue_cushion",
-            cushion(DyeColor.LIGHT_BLUE)
+            DyeColor.LIGHT_BLUE
     );
-    public static final Block BLUE_CUSHION = register(
+    public static final Block BLUE_CUSHION = registerCushionBlock(
             "blue_cushion",
-            cushion(DyeColor.BLUE)
+            DyeColor.BLUE
     );
-    public static final Block PURPLE_CUSHION = register(
+    public static final Block PURPLE_CUSHION = registerCushionBlock(
             "purple_cushion",
-            cushion(DyeColor.PURPLE)
+            DyeColor.PURPLE
     );
-    public static final Block MAGENTA_CUSHION = register(
+    public static final Block MAGENTA_CUSHION = registerCushionBlock(
             "magenta_cushion",
-            cushion(DyeColor.MAGENTA)
+            DyeColor.MAGENTA
     );
-    public static final Block PINK_CUSHION = register(
+    public static final Block PINK_CUSHION = registerCushionBlock(
             "pink_cushion",
-            cushion(DyeColor.PINK)
+            DyeColor.PINK
     );
-    public static final Block WHITE_STUCCO = register(
+    public static final Block WHITE_STUCCO = registerStuccoBlock(
             "white_stucco",
-            stucco(DyeColor.WHITE)
+            DyeColor.WHITE
     );
     public static final Block WHITE_STUCCO_STAIRS = register(
             "white_stucco_stairs",
-            new StairsBlock(WHITE_STUCCO.getDefaultState(), Settings.copy(WHITE_STUCCO))
+            settings -> new StairsBlock(WHITE_STUCCO.getDefaultState(), settings),
+            Settings.copy(WHITE_STUCCO)
     );
     public static final Block WHITE_STUCCO_SLAB = register(
             "white_stucco_slab",
-            new SlabBlock(Settings.copy(WHITE_STUCCO))
+            SlabBlock::new,
+            Settings.copy(WHITE_STUCCO)
     );
     public static final Block WHITE_STUCCO_WALL = register(
             "white_stucco_wall",
-            new WallBlock(Settings.copy(WHITE_STUCCO))
+            WallBlock::new,
+            Settings.copy(WHITE_STUCCO)
     );
-    public static final Block LIGHT_GRAY_STUCCO = register(
+    public static final Block LIGHT_GRAY_STUCCO = registerCushionBlock(
             "light_gray_stucco",
-            stucco(DyeColor.LIGHT_GRAY)
+            DyeColor.LIGHT_GRAY
     );
     public static final Block LIGHT_GRAY_STUCCO_STAIRS = register(
             "light_gray_stucco_stairs",
-            new StairsBlock(LIGHT_GRAY_STUCCO.getDefaultState(), Settings.copy(LIGHT_GRAY_STUCCO))
+            settings -> new StairsBlock(LIGHT_GRAY_STUCCO.getDefaultState(), settings),
+            Settings.copy(LIGHT_GRAY_STUCCO)
     );
     public static final Block LIGHT_GRAY_STUCCO_SLAB = register(
             "light_gray_stucco_slab",
-            new SlabBlock(Settings.copy(LIGHT_GRAY_STUCCO))
+            SlabBlock::new,
+            Settings.copy(LIGHT_GRAY_STUCCO)
     );
     public static final Block LIGHT_GRAY_STUCCO_WALL = register(
             "light_gray_stucco_wall",
-            new WallBlock(Settings.copy(LIGHT_GRAY_STUCCO))
+            WallBlock::new,
+            Settings.copy(LIGHT_GRAY_STUCCO)
     );
-    public static final Block GRAY_STUCCO = register(
+    public static final Block GRAY_STUCCO = registerStuccoBlock(
             "gray_stucco",
-            stucco(DyeColor.GRAY)
+            DyeColor.GRAY
     );
     public static final Block GRAY_STUCCO_STAIRS = register(
             "gray_stucco_stairs",
-            new StairsBlock(GRAY_STUCCO.getDefaultState(), Settings.copy(GRAY_STUCCO))
+            settings -> new StairsBlock(GRAY_STUCCO.getDefaultState(), settings),
+            Settings.copy(GRAY_STUCCO)
     );
     public static final Block GRAY_STUCCO_SLAB = register(
             "gray_stucco_slab",
-            new SlabBlock(Settings.copy(GRAY_STUCCO))
+            SlabBlock::new,
+            Settings.copy(GRAY_STUCCO)
     );
     public static final Block GRAY_STUCCO_WALL = register(
             "gray_stucco_wall",
-            new WallBlock(Settings.copy(GRAY_STUCCO))
+            WallBlock::new,
+            Settings.copy(GRAY_STUCCO)
     );
-    public static final Block BLACK_STUCCO = register(
+    public static final Block BLACK_STUCCO = registerStuccoBlock(
             "black_stucco",
-            stucco(DyeColor.BLACK)
+            DyeColor.BLACK
     );
     public static final Block BLACK_STUCCO_STAIRS = register(
             "black_stucco_stairs",
-            new StairsBlock(BLACK_STUCCO.getDefaultState(), Settings.copy(BLACK_STUCCO))
+            settings -> new StairsBlock(BLACK_STUCCO.getDefaultState(), settings),
+            Settings.copy(BLACK_STUCCO)
     );
     public static final Block BLACK_STUCCO_SLAB = register(
             "black_stucco_slab",
-            new SlabBlock(Settings.copy(BLACK_STUCCO))
+            SlabBlock::new,
+            Settings.copy(BLACK_STUCCO)
     );
     public static final Block BLACK_STUCCO_WALL = register(
             "black_stucco_wall",
-            new WallBlock(Settings.copy(BLACK_STUCCO))
+            WallBlock::new,
+            Settings.copy(BLACK_STUCCO)
     );
-    public static final Block BROWN_STUCCO = register(
+    public static final Block BROWN_STUCCO = registerStuccoBlock(
             "brown_stucco",
-            stucco(DyeColor.BROWN)
+            DyeColor.BROWN
     );
     public static final Block BROWN_STUCCO_STAIRS = register(
             "brown_stucco_stairs",
-            new StairsBlock(BROWN_STUCCO.getDefaultState(), Settings.copy(BROWN_STUCCO))
+            settings -> new StairsBlock(BROWN_STUCCO.getDefaultState(), settings),
+            Settings.copy(BROWN_STUCCO)
     );
     public static final Block BROWN_STUCCO_SLAB = register(
             "brown_stucco_slab",
-            new SlabBlock(Settings.copy(BROWN_STUCCO))
+            SlabBlock::new,
+            Settings.copy(BROWN_STUCCO)
     );
     public static final Block BROWN_STUCCO_WALL = register(
             "brown_stucco_wall",
-            new WallBlock(Settings.copy(BROWN_STUCCO))
+            WallBlock::new,
+            Settings.copy(BROWN_STUCCO)
     );
-    public static final Block RED_STUCCO = register(
+    public static final Block RED_STUCCO = registerStuccoBlock(
             "red_stucco",
-            stucco(DyeColor.RED)
+            DyeColor.RED
     );
     public static final Block RED_STUCCO_STAIRS = register(
             "red_stucco_stairs",
-            new StairsBlock(RED_STUCCO.getDefaultState(), Settings.copy(RED_STUCCO))
+            settings -> new StairsBlock(RED_STUCCO.getDefaultState(), settings),
+            Settings.copy(RED_STUCCO)
     );
     public static final Block RED_STUCCO_SLAB = register(
             "red_stucco_slab",
-            new SlabBlock(Settings.copy(RED_STUCCO))
+            SlabBlock::new,
+            Settings.copy(RED_STUCCO)
     );
     public static final Block RED_STUCCO_WALL = register(
             "red_stucco_wall",
-            new WallBlock(Settings.copy(RED_STUCCO))
+            WallBlock::new,
+            Settings.copy(RED_STUCCO)
     );
-    public static final Block ORANGE_STUCCO = register(
+    public static final Block ORANGE_STUCCO = registerStuccoBlock(
             "orange_stucco",
-            stucco(DyeColor.ORANGE)
+            DyeColor.ORANGE
     );
     public static final Block ORANGE_STUCCO_STAIRS = register(
             "orange_stucco_stairs",
-            new StairsBlock(ORANGE_STUCCO.getDefaultState(), Settings.copy(ORANGE_STUCCO))
+            settings -> new StairsBlock(ORANGE_STUCCO.getDefaultState(), settings),
+            Settings.copy(ORANGE_STUCCO)
     );
     public static final Block ORANGE_STUCCO_SLAB = register(
             "orange_stucco_slab",
-            new SlabBlock(Settings.copy(ORANGE_STUCCO))
+            SlabBlock::new,
+            Settings.copy(ORANGE_STUCCO)
     );
     public static final Block ORANGE_STUCCO_WALL = register(
             "orange_stucco_wall",
-            new WallBlock(Settings.copy(ORANGE_STUCCO))
+            WallBlock::new,
+            Settings.copy(ORANGE_STUCCO)
     );
-    public static final Block YELLOW_STUCCO = register(
+    public static final Block YELLOW_STUCCO = registerStuccoBlock(
             "yellow_stucco",
-            stucco(DyeColor.YELLOW)
+            DyeColor.YELLOW
     );
     public static final Block YELLOW_STUCCO_STAIRS = register(
             "yellow_stucco_stairs",
-            new StairsBlock(YELLOW_STUCCO.getDefaultState(), Settings.copy(YELLOW_STUCCO))
+            settings -> new StairsBlock(YELLOW_STUCCO.getDefaultState(), settings),
+            Settings.copy(YELLOW_STUCCO)
     );
     public static final Block YELLOW_STUCCO_SLAB = register(
             "yellow_stucco_slab",
-            new SlabBlock(Settings.copy(YELLOW_STUCCO))
+            SlabBlock::new,
+            Settings.copy(YELLOW_STUCCO)
     );
     public static final Block YELLOW_STUCCO_WALL = register(
             "yellow_stucco_wall",
-            new WallBlock(Settings.copy(YELLOW_STUCCO))
+            WallBlock::new,
+            Settings.copy(YELLOW_STUCCO)
     );
-    public static final Block LIME_STUCCO = register(
+    public static final Block LIME_STUCCO = registerStuccoBlock(
             "lime_stucco",
-            stucco(DyeColor.LIME)
+            DyeColor.LIME
     );
     public static final Block LIME_STUCCO_STAIRS = register(
             "lime_stucco_stairs",
-            new StairsBlock(LIME_STUCCO.getDefaultState(), Settings.copy(LIME_STUCCO))
+            settings -> new StairsBlock(LIME_STUCCO.getDefaultState(), settings),
+            Settings.copy(LIME_STUCCO)
     );
     public static final Block LIME_STUCCO_SLAB = register(
             "lime_stucco_slab",
-            new SlabBlock(Settings.copy(LIME_STUCCO))
+            SlabBlock::new,
+            Settings.copy(LIME_STUCCO)
     );
     public static final Block LIME_STUCCO_WALL = register(
             "lime_stucco_wall",
-            new WallBlock(Settings.copy(LIME_STUCCO))
+            WallBlock::new,
+            Settings.copy(LIME_STUCCO)
     );
-    public static final Block GREEN_STUCCO = register(
+    public static final Block GREEN_STUCCO = registerStuccoBlock(
             "green_stucco",
-            stucco(DyeColor.GREEN)
+            DyeColor.GREEN
     );
     public static final Block GREEN_STUCCO_STAIRS = register(
             "green_stucco_stairs",
-            new StairsBlock(GREEN_STUCCO.getDefaultState(), Settings.copy(GREEN_STUCCO))
+            settings -> new StairsBlock(GREEN_STUCCO.getDefaultState(), settings),
+            Settings.copy(GREEN_STUCCO)
     );
     public static final Block GREEN_STUCCO_SLAB = register(
             "green_stucco_slab",
-            new SlabBlock(Settings.copy(GREEN_STUCCO))
+            SlabBlock::new,
+            Settings.copy(GREEN_STUCCO)
     );
     public static final Block GREEN_STUCCO_WALL = register(
             "green_stucco_wall",
-            new WallBlock(Settings.copy(GREEN_STUCCO))
+            WallBlock::new,
+            Settings.copy(GREEN_STUCCO)
     );
-    public static final Block CYAN_STUCCO = register(
+    public static final Block CYAN_STUCCO = registerStuccoBlock(
             "cyan_stucco",
-            stucco(DyeColor.CYAN)
+            DyeColor.CYAN
     );
     public static final Block CYAN_STUCCO_STAIRS = register(
             "cyan_stucco_stairs",
-            new StairsBlock(CYAN_STUCCO.getDefaultState(), Settings.copy(CYAN_STUCCO))
+            settings -> new StairsBlock(CYAN_STUCCO.getDefaultState(), settings),
+            Settings.copy(CYAN_STUCCO)
     );
     public static final Block CYAN_STUCCO_SLAB = register(
             "cyan_stucco_slab",
-            new SlabBlock(Settings.copy(CYAN_STUCCO))
+            SlabBlock::new,
+            Settings.copy(CYAN_STUCCO)
     );
     public static final Block CYAN_STUCCO_WALL = register(
             "cyan_stucco_wall",
-            new WallBlock(Settings.copy(CYAN_STUCCO))
+            WallBlock::new,
+            Settings.copy(CYAN_STUCCO)
     );
-    public static final Block LIGHT_BLUE_STUCCO = register(
+    public static final Block LIGHT_BLUE_STUCCO = registerStuccoBlock(
             "light_blue_stucco",
-            stucco(DyeColor.LIGHT_BLUE)
+            DyeColor.LIGHT_BLUE
     );
     public static final Block LIGHT_BLUE_STUCCO_STAIRS = register(
             "light_blue_stucco_stairs",
-            new StairsBlock(LIGHT_BLUE_STUCCO.getDefaultState(), Settings.copy(LIGHT_BLUE_STUCCO))
+            settings -> new StairsBlock(LIGHT_BLUE_STUCCO.getDefaultState(), settings),
+            Settings.copy(LIGHT_BLUE_STUCCO)
     );
     public static final Block LIGHT_BLUE_STUCCO_SLAB = register(
             "light_blue_stucco_slab",
-            new SlabBlock(Settings.copy(LIGHT_BLUE_STUCCO))
+            SlabBlock::new,
+            Settings.copy(LIGHT_BLUE_STUCCO)
     );
     public static final Block LIGHT_BLUE_STUCCO_WALL = register(
             "light_blue_stucco_wall",
-            new WallBlock(Settings.copy(LIGHT_BLUE_STUCCO))
+            WallBlock::new,
+            Settings.copy(LIGHT_BLUE_STUCCO)
     );
-    public static final Block BLUE_STUCCO = register(
-            "blue_stucco", stucco(DyeColor.BLUE)
+    public static final Block BLUE_STUCCO = registerStuccoBlock(
+            "blue_stucco",
+            DyeColor.BLUE
     );
     public static final Block BLUE_STUCCO_STAIRS = register(
             "blue_stucco_stairs",
-            new StairsBlock(BLUE_STUCCO.getDefaultState(), Settings.copy(BLUE_STUCCO))
+            settings -> new StairsBlock(BLUE_STUCCO.getDefaultState(), settings),
+            Settings.copy(BLUE_STUCCO)
     );
     public static final Block BLUE_STUCCO_SLAB = register(
             "blue_stucco_slab",
-            new SlabBlock(Settings.copy(BLUE_STUCCO))
+            SlabBlock::new,
+            Settings.copy(BLUE_STUCCO)
     );
     public static final Block BLUE_STUCCO_WALL = register(
             "blue_stucco_wall",
-            new WallBlock(Settings.copy(BLUE_STUCCO))
+            WallBlock::new,
+            Settings.copy(BLUE_STUCCO)
     );
-    public static final Block PURPLE_STUCCO = register(
-            "purple_stucco", stucco(DyeColor.PURPLE)
+    public static final Block PURPLE_STUCCO = registerStuccoBlock(
+            "purple_stucco",
+            DyeColor.PURPLE
     );
     public static final Block PURPLE_STUCCO_STAIRS = register(
             "purple_stucco_stairs",
-            new StairsBlock(PURPLE_STUCCO.getDefaultState(), Settings.copy(PURPLE_STUCCO))
+            settings -> new StairsBlock(PURPLE_STUCCO.getDefaultState(), settings),
+            Settings.copy(PURPLE_STUCCO)
     );
     public static final Block PURPLE_STUCCO_SLAB = register(
             "purple_stucco_slab",
-            new SlabBlock(Settings.copy(PURPLE_STUCCO))
+            SlabBlock::new,
+            Settings.copy(PURPLE_STUCCO)
     );
     public static final Block PURPLE_STUCCO_WALL = register(
             "purple_stucco_wall",
-            new WallBlock(Settings.copy(PURPLE_STUCCO))
+            WallBlock::new,
+            Settings.copy(PURPLE_STUCCO)
     );
-    public static final Block MAGENTA_STUCCO = register(
+    public static final Block MAGENTA_STUCCO = registerStuccoBlock(
             "magenta_stucco",
-            stucco(DyeColor.MAGENTA)
+            DyeColor.MAGENTA
     );
     public static final Block MAGENTA_STUCCO_STAIRS = register(
             "magenta_stucco_stairs",
-            new StairsBlock(MAGENTA_STUCCO.getDefaultState(), Settings.copy(MAGENTA_STUCCO))
+            settings -> new StairsBlock(MAGENTA_STUCCO.getDefaultState(), settings),
+            Settings.copy(MAGENTA_STUCCO)
     );
     public static final Block MAGENTA_STUCCO_SLAB = register(
             "magenta_stucco_slab",
-            new SlabBlock(Settings.copy(MAGENTA_STUCCO))
+            SlabBlock::new,
+            Settings.copy(MAGENTA_STUCCO)
     );
     public static final Block MAGENTA_STUCCO_WALL = register(
             "magenta_stucco_wall",
-            new WallBlock(Settings.copy(MAGENTA_STUCCO))
+            WallBlock::new,
+            Settings.copy(MAGENTA_STUCCO)
     );
-    public static final Block PINK_STUCCO = register(
+    public static final Block PINK_STUCCO = registerStuccoBlock(
             "pink_stucco",
-            stucco(DyeColor.PINK)
+            DyeColor.PINK
     );
     public static final Block PINK_STUCCO_STAIRS = register(
             "pink_stucco_stairs",
-            new StairsBlock(PINK_STUCCO.getDefaultState(), Settings.copy(PINK_STUCCO))
+            settings -> new StairsBlock(PINK_STUCCO.getDefaultState(), settings),
+            Settings.copy(PINK_STUCCO)
     );
     public static final Block PINK_STUCCO_SLAB = register(
             "pink_stucco_slab",
-            new SlabBlock(Settings.copy(PINK_STUCCO))
+            SlabBlock::new,
+            Settings.copy(PINK_STUCCO)
     );
     public static final Block PINK_STUCCO_WALL = register(
             "pink_stucco_wall",
-            new WallBlock(Settings.copy(PINK_STUCCO))
+            WallBlock::new,
+            Settings.copy(PINK_STUCCO)
     );
     public static final Block SILKWORM_EGGS = register(
             "silkworm_eggs",
-            new SilkWormEggsBlock(Settings.create()
-                    .mapColor(MapColor.YELLOW)
-                    .sounds(BlockSoundGroup.FROGSPAWN)
-                    .breakInstantly().nonOpaque()
-                    .noCollision()
-                    .pistonBehavior(PistonBehavior.DESTROY))
+            SilkWormEggsBlock::new,
+            Settings.create()
+                .mapColor(MapColor.YELLOW)
+                .sounds(BlockSoundGroup.FROGSPAWN)
+                .breakInstantly().nonOpaque()
+                .noCollision()
+                .pistonBehavior(PistonBehavior.DESTROY)
     );
     public static final Block SILK_COCOON = registerWithoutItem(
             "silk_cocoon",
-            new SilkCocoonBlock(Settings.create()
-                    .strength(0.8F)
-                    .sounds(VerdanceBlockSoundGroups.SILK_COCOON))
+            SilkCocoonBlock::new,
+            Settings.create()
+                .strength(0.8F)
+                .sounds(VerdanceBlockSoundGroups.SILK_COCOON)
     );
     public static final Block VIOLET = register(
-            "violet", new FlowerBlock(StatusEffects.REGENERATION, 8.0f, Settings.create()
-                    .mapColor(MapColor.DARK_GREEN)
-                    .noCollision()
-                    .breakInstantly()
-                    .sounds(BlockSoundGroup.GRASS)
-                    .offset(OffsetType.XZ)
-                    .pistonBehavior(PistonBehavior.DESTROY))
+            "violet",
+            settings -> new FlowerBlock(StatusEffects.REGENERATION, 8.0f, settings),
+            Settings.create()
+                .mapColor(MapColor.DARK_GREEN)
+                .noCollision()
+                .breakInstantly()
+                .sounds(BlockSoundGroup.GRASS)
+                .offset(OffsetType.XZ)
+                .pistonBehavior(PistonBehavior.DESTROY)
     );
     public static final Block POTTED_VIOLET = registerWithoutItem(
             "potted_violet",
-            Blocks.createFlowerPotBlock(VIOLET)
+            settings -> new FlowerPotBlock(VIOLET, settings),
+            Blocks.createFlowerPotSettings()
     );
-    public static final Block SHRUB = register(
-            "shrub",
-            new ShrubBlock(Settings.create()
-                    .mapColor(MapColor.DARK_GREEN)
-                    .noCollision()
-                    .breakInstantly()
-                    .sounds(BlockSoundGroup.AZALEA)
-                    .burnable()
-                    .offset(OffsetType.XZ)
-                    .pistonBehavior(PistonBehavior.BLOCK))
+    public static final Block DESERT_BUSH = register(
+            "desert_bush",
+            DesertBushBlock::new,
+            Settings.create()
+                .mapColor(MapColor.DARK_GREEN)
+                .noCollision()
+                .breakInstantly()
+                .sounds(BlockSoundGroup.AZALEA)
+                .burnable()
+                .offset(OffsetType.XZ)
+                .pistonBehavior(PistonBehavior.BLOCK)
     );
-    public static final Block POTTED_SHRUB = registerWithoutItem(
-            "potted_shrub",
-            Blocks.createFlowerPotBlock(SHRUB)
+    public static final Block POTTED_DESERT_BUSH = registerWithoutItem(
+            "potted_desert_bush",
+            settings -> new FlowerPotBlock(DESERT_BUSH, settings),
+            Blocks.createFlowerPotSettings()
     );
-    public static final Block YELLOW_FLOWERING_SHRUB = register(
-            "yellow_flowering_shrub",
-            new FloweringShrubBlock(
-                    VerdanceConfiguredFeatures.PATCH_YELLOW_FLOWERING_SHRUB_BONEMEAL,
-                    Settings.copy(SHRUB))
+    public static final Block YELLOW_FLOWERING_DESERT_BUSH = register(
+            "yellow_flowering_desert_bush",
+            settings -> new FloweringDesertBushBlock(VerdanceConfiguredFeatures.PATCH_YELLOW_FLOWERING_SHRUB_BONEMEAL, settings),
+            Settings.copy(DESERT_BUSH)
     );
-    public static final Block POTTED_YELLOW_FLOWERING_SHRUB = registerWithoutItem(
-            "potted_yellow_flowering_shrub",
-            Blocks.createFlowerPotBlock(YELLOW_FLOWERING_SHRUB)
+    public static final Block POTTED_YELLOW_FLOWERING_DESERT_BUSH = registerWithoutItem(
+            "potted_yellow_flowering_desert_bush",
+            settings -> new FlowerPotBlock(YELLOW_FLOWERING_DESERT_BUSH, settings),
+            Blocks.createFlowerPotSettings()
     );
-    public static final Block PINK_FLOWERING_SHRUB = register(
-            "pink_flowering_shrub",
-            new FloweringShrubBlock(
-                    VerdanceConfiguredFeatures.PATCH_PINK_FLOWERING_SHRUB_BONEMEAL,
-                    Settings.copy(SHRUB))
+    public static final Block PINK_FLOWERING_DESERT_BUSH = register(
+            "pink_flowering_desert_bush",
+            settings -> new FloweringDesertBushBlock(VerdanceConfiguredFeatures.PATCH_PINK_FLOWERING_SHRUB_BONEMEAL, settings),
+            Settings.copy(DESERT_BUSH)
     );
-    public static final Block POTTED_PINK_FLOWERING_SHRUB = registerWithoutItem(
-            "potted_pink_flowering_shrub",
-            Blocks.createFlowerPotBlock(PINK_FLOWERING_SHRUB)
+    public static final Block POTTED_PINK_FLOWERING_DESERT_BUSH = registerWithoutItem(
+            "potted_pink_flowering_desert_bush",
+            settings -> new FlowerPotBlock(PINK_FLOWERING_DESERT_BUSH, settings),
+            Blocks.createFlowerPotSettings()
     );
 
     public static void register() {
@@ -626,31 +697,34 @@ public class VerdanceBlocks {
     }
 
     // Utils
-    public static Block register(String name, Block block) {
-        var registry = Registry.register(Registries.BLOCK, Verdance.id(name), block);
-        Registry.register(Registries.ITEM, Verdance.id(name), new BlockItem(registry, new Item.Settings()));
+    private static Block register(String name, Function<Settings, Block> block, Settings settings) {
+        RegistryKey<Block> key = RegistryKey.of(RegistryKeys.BLOCK, Verdance.id(name));
+        var registry = Registry.register(Registries.BLOCK, key, block.apply(settings.registryKey(key)));
+
+        RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Verdance.id(name));
+        Registry.register(Registries.ITEM, itemKey, new BlockItem(registry, new Item.Settings().registryKey(itemKey)));
+
         return registry;
     }
 
-    private static Block register(String name, Settings properties) {
-        return register(name, new Block(properties));
+    private static Block registerWithoutItem(String name, Function<Settings, Block> block, Settings settings) {
+        RegistryKey<Block> key = RegistryKey.of(RegistryKeys.BLOCK, Verdance.id(name));
+
+        return Registry.register(Registries.BLOCK, key, block.apply(settings.registryKey(key)));
     }
 
-    private static <T extends Block> T registerWithoutItem(String name, T block) {
-        return Registry.register(Registries.BLOCK, Verdance.id(name), block);
-    }
-
-    private static Block stucco(DyeColor color) {
-        return new Block(Settings.create()
+    private static Block registerStuccoBlock(String name, DyeColor color) {
+        return register(name, Block::new, Settings.create()
                 .mapColor(color)
                 .sounds(VerdanceBlockSoundGroups.STUCCO)
                 .requiresTool()
                 .instrument(NoteBlockInstrument.BASEDRUM)
-                .strength(1.5F, 5.5F)
+                .strength(1.5f, 5.5f)
         );
     }
-    private static Block cushion(DyeColor color) {
-        return new CushionBlock(Settings.create()
+
+    private static Block registerCushionBlock(String name, DyeColor color) {
+        return register(name, CushionBlock::new, Settings.create()
                 .mapColor(color)
                 .sounds(BlockSoundGroup.WOOD)
                 .strength(0.2f)

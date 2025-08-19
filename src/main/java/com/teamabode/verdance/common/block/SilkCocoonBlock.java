@@ -3,6 +3,9 @@ package com.teamabode.verdance.common.block;
 import com.mojang.serialization.MapCodec;
 import com.teamabode.verdance.common.block.entity.SilkCocoonBlockEntity;
 import com.teamabode.verdance.core.registry.VerdanceBlockEntityTypes;
+import net.minecraft.state.property.EnumProperty;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -17,14 +20,12 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
 public class SilkCocoonBlock extends BlockWithEntity {
@@ -35,7 +36,7 @@ public class SilkCocoonBlock extends BlockWithEntity {
             Direction.SOUTH, Block.createCuboidShape(3.0d,0.0d, 6.0d, 13.0d, 12.0d, 16.0d),
             Direction.WEST, Block.createCuboidShape(0.0d, 0.0d, 3.0d, 10.0d, 12.0d, 13.0d)
     );
-    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
 
     public SilkCocoonBlock(Settings properties) {
         super(properties);
@@ -76,8 +77,8 @@ public class SilkCocoonBlock extends BlockWithEntity {
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess level, BlockPos pos, BlockPos neighborPos) {
-        return direction == state.get(FACING) && !state.canPlaceAt(level, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, level, pos, neighborPos);
+    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
+        return direction == state.get(FACING) && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
     @Override

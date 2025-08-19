@@ -18,10 +18,11 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
@@ -79,7 +80,7 @@ public class SilkwormEntity extends PathAwareEntity {
                 stack.decrement(1);
             }
             this.ageUp(PassiveEntity.toGrowUpAge(this.getTimeUntilAdult()));
-            this.getWorld().addParticle(
+            this.getWorld().addParticleClient(
                     ParticleTypes.HAPPY_VILLAGER,
                     this.getParticleX(1.0),
                     this.getRandomBodyY() + 0.5,
@@ -88,7 +89,7 @@ public class SilkwormEntity extends PathAwareEntity {
                     0.0,
                     0.0
             );
-            return ActionResult.success(this.getWorld().isClient());
+            return ActionResult.SUCCESS;
         }
         return super.interactMob(player, hand);
     }
@@ -100,26 +101,30 @@ public class SilkwormEntity extends PathAwareEntity {
     }
 
     @Override
-    protected void mobTick() {
-        this.getBrain().tick((ServerWorld) this.getWorld(), this);
+    protected void mobTick(ServerWorld world) {
+        this.getBrain().tick(world, this);
         SilkwormBrain.updateActivity(this);
-        super.mobTick();
+        super.mobTick(world);
     }
 
     @Override
-    public void readCustomDataFromNbt(NbtCompound compound) {
-        super.readCustomDataFromNbt(compound);
-        this.setClimbing(compound.getBoolean("Climbing"));
-        this.setAge(compound.getInt("Age"));
+    protected void writeCustomData(WriteView view) {
+        super.writeCustomData(view);
+
+        view.putBoolean("climbing", this.isClimbing());
+        view.putInt("age", this.getAge());
     }
 
     @Override
-    public void writeCustomDataToNbt(NbtCompound compound) {
-        super.writeCustomDataToNbt(compound);
-        compound.putBoolean("Climbing", this.isClimbing());
-        compound.putInt("Age", this.getAge());
-    }
+    protected void readCustomData(ReadView view) {
+        super.readCustomData(view);
 
+        boolean climbing = view.getBoolean("climbing", false);
+        int age = view.getInt("age", -24000);
+
+        this.setClimbing(climbing);
+        this.setAge(age);
+    }
 
     public boolean isClimbingWall() {
         return dataTracker.get(CLIMBING_WALL);
@@ -145,8 +150,12 @@ public class SilkwormEntity extends PathAwareEntity {
         return Math.max(0, 24000 - this.age);
     }
 
+    public boolean isFood(ItemStack stack) {
+        return stack.isIn(VerdanceItemTags.SILKWORM_FOOD);
+    }
+
     @Override
-    protected int computeFallDamage(float fallDistance, float damageMultiplier) {
+    protected int computeFallDamage(double fallDistance, float damageMultiplier) {
         return super.computeFallDamage(fallDistance, damageMultiplier) - 10;
     }
 
@@ -167,19 +176,16 @@ public class SilkwormEntity extends PathAwareEntity {
         return this.isClimbingWall();
     }
 
-    public boolean isFood(ItemStack stack) {
-        return stack.isIn(VerdanceItemTags.SILKWORM_FOOD);
-    }
-
     @Override
-    public boolean shouldDropXp() {
+    public boolean shouldDropExperience() {
         return false;
     }
 
+
     public static DefaultAttributeContainer.Builder createSilkwormAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 5.0f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1d)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0);
+                .add(EntityAttributes.MAX_HEALTH, 5.0f)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.1d)
+                .add(EntityAttributes.FOLLOW_RANGE, 48.0);
     }
 }

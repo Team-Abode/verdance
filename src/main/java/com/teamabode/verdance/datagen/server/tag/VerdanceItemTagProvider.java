@@ -142,8 +142,8 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
     private void flowers() {
         this.getOrCreateTagBuilder(ItemTags.FLOWERS)
-                .add(VerdanceBlocks.YELLOW_FLOWERING_SHRUB.asItem())
-                .add(VerdanceBlocks.PINK_FLOWERING_SHRUB.asItem())
+                .add(VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH.asItem())
+                .add(VerdanceBlocks.PINK_FLOWERING_DESERT_BUSH.asItem())
                 .setReplace(false);
     }
 

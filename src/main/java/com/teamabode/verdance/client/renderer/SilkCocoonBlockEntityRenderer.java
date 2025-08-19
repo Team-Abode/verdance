@@ -16,17 +16,19 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3d;
 import org.joml.Quaternionf;
 
 public class SilkCocoonBlockEntityRenderer implements BlockEntityRenderer<SilkCocoonBlockEntity> {
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(Verdance.id("silk_cocoon"), "main");
-    public static final SpriteIdentifier TEXTURE_LOCATION = new SpriteIdentifier(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, Verdance.id("entity/silk_cocoon"));
+    public static final SpriteIdentifier TEXTURE_LOCATION = new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, Verdance.id("entity/silk_cocoon"));
 
     private final ModelPart cocoon;
 
@@ -48,13 +50,13 @@ public class SilkCocoonBlockEntityRenderer implements BlockEntityRenderer<SilkCo
     }
 
     @Override
-    public void render(SilkCocoonBlockEntity cocoon, float partialTick, MatrixStack poseStack, VertexConsumerProvider bufferSource, int i, int j) {
-        poseStack.push();
-        VertexConsumer vertex = TEXTURE_LOCATION.getVertexConsumer(bufferSource, RenderLayer::getEntitySolid);
-        BlockState state = cocoon.getCachedState();
+    public void render(SilkCocoonBlockEntity entity, float tickProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, Vec3d cameraPos) {
+        matrices.push();
+        VertexConsumer vertex = TEXTURE_LOCATION.getVertexConsumer(vertexConsumers, RenderLayer::getEntitySolid);
+        BlockState state = entity.getCachedState();
         Direction dir = state.get(SilkCocoonBlock.FACING);
 
-        float deltaTicks = (cocoon.wobbleTicks + partialTick);
+        float deltaTicks = (entity.wobbleTicks + tickProgress);
         float wobble = MathHelper.sin(deltaTicks * 3.0f / MathHelper.PI) * (5.0f * MathHelper.RADIANS_PER_DEGREE);
 
         Quaternionf rotation;
@@ -65,16 +67,16 @@ public class SilkCocoonBlockEntityRenderer implements BlockEntityRenderer<SilkCo
         else {
             rotation = RotationAxis.POSITIVE_X.rotation(wobble);
         }
-        if (cocoon.wobbling) {
-            poseStack.multiply(rotation, 0.5f, 0.5f, 0.5f);
+        if (entity.wobbling) {
+            matrices.multiply(rotation, 0.5f, 0.5f, 0.5f);
         }
         // Rotates the cocoon based off the direction it's facing.
         // Translating 0.5f and back will shift the pivot point for this rotation.
-        poseStack.translate(0.5f, 0.5f, 0.5f);
-        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-dir.asRotation()));
-        poseStack.translate(-0.5f, -0.5f, -0.5f);
+        matrices.translate(0.5f, 0.5f, 0.5f);
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-dir.getPositiveHorizontalDegrees()));
+        matrices.translate(-0.5f, -0.5f, -0.5f);
 
-        this.cocoon.render(poseStack, vertex, i, j);
-        poseStack.pop();
+        this.cocoon.render(matrices, vertex, light, overlay);
+        matrices.pop();
     }
 }

@@ -16,20 +16,8 @@ import net.minecraft.entity.ai.brain.MemoryModuleState;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.sensor.Sensor;
 import net.minecraft.entity.ai.brain.sensor.SensorType;
-import net.minecraft.entity.ai.brain.task.BreedTask;
-import net.minecraft.entity.ai.brain.task.FleeTask;
-import net.minecraft.entity.ai.brain.task.GoTowardsLookTargetTask;
-import net.minecraft.entity.ai.brain.task.LookAroundTask;
-import net.minecraft.entity.ai.brain.task.LookAtMobWithIntervalTask;
-import net.minecraft.entity.ai.brain.task.MoveToTargetTask;
-import net.minecraft.entity.ai.brain.task.RandomTask;
-import net.minecraft.entity.ai.brain.task.StayAboveWaterTask;
-import net.minecraft.entity.ai.brain.task.StrollTask;
-import net.minecraft.entity.ai.brain.task.TaskTriggerer;
-import net.minecraft.entity.ai.brain.task.TemptTask;
-import net.minecraft.entity.ai.brain.task.TemptationCooldownTask;
-import net.minecraft.entity.ai.brain.task.WaitTask;
-import net.minecraft.recipe.Ingredient;
+import net.minecraft.entity.ai.brain.task.*;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import java.util.List;
 import java.util.function.Predicate;
@@ -75,13 +63,13 @@ public class SilkMothBrain {
 
     private static void addCoreActivities(Brain<SilkMothEntity> brain) {
         brain.setTaskList(Activity.CORE, 0, ImmutableList.of(
-                new StayAboveWaterTask(1.0f),
+                new StayAboveWaterTask<>(1.0f),
                 new TakeOffTask(),
                 new LandTask(),
                 new FleeTask<>(1.5f),
-                new LookAroundTask(45, 90),
+                new UpdateLookControlTask(45, 90),
                 new MoveToTargetTask(),
-                new TemptationCooldownTask(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
+                new TickCooldownTask(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
         ));
     }
 
@@ -111,8 +99,8 @@ public class SilkMothBrain {
         ));
     }
 
-    public static Ingredient getTemptations() {
-        return Ingredient.fromTag(VerdanceItemTags.SILK_MOTH_FOOD);
+    public static Predicate<ItemStack> getTemptItemPredicate() {
+        return stack -> stack.isIn(VerdanceItemTags.SILK_MOTH_FOOD);
     }
 
     private static RandomTask<SilkMothEntity> addMovementTasks() {
@@ -120,7 +108,7 @@ public class SilkMothBrain {
                 Pair.of(TaskTriggerer.runIf(SilkMothEntity::isInAir, new AerialStrollTask()), 2),
                 Pair.of(TaskTriggerer.runIf(SilkMothEntity::isInAir, new GoTowardsLandingTask()), 2),
                 Pair.of(TaskTriggerer.runIf(Predicate.not(SilkMothEntity::isInAir), StrollTask.create(1.0f)), 2),
-                Pair.of(GoTowardsLookTargetTask.create(1.0f, 3), 2),
+                Pair.of(GoToLookTargetTask.create(1.0f, 3), 2),
                 Pair.of(new WaitTask(30,  60), 1)
         ));
     }

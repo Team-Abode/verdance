@@ -1,9 +1,8 @@
 package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
-import net.minecraft.item.trim.ArmorTrimPattern;
+import net.minecraft.item.equipment.trim.ArmorTrimPattern;
 import net.minecraft.registry.Registerable;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
@@ -15,7 +14,6 @@ public class VerdanceTrimPatterns {
     public static void register(Registerable<ArmorTrimPattern> context) {
         context.register(COMMUNITY, new ArmorTrimPattern(
                 Verdance.id("community"),
-                Registries.ITEM.getEntry(VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE),
                 Text.translatable("trim_pattern.verdance.community"),
                 false
         ));

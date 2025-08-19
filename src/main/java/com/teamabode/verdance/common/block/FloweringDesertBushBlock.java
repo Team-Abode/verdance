@@ -2,7 +2,6 @@ package com.teamabode.verdance.common.block;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import java.util.Optional;
 import net.minecraft.block.BlockState;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKey;
@@ -13,15 +12,15 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
-public class FloweringShrubBlock extends ShrubBlock {
-    public static final MapCodec<FloweringShrubBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+public class FloweringDesertBushBlock extends DesertBushBlock {
+    public static final MapCodec<FloweringDesertBushBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             RegistryKey.createCodec(RegistryKeys.CONFIGURED_FEATURE).fieldOf("feature").forGetter(block -> block.feature),
             createSettingsCodec()
-    ).apply(instance, FloweringShrubBlock::new));
+    ).apply(instance, FloweringDesertBushBlock::new));
 
     private final RegistryKey<ConfiguredFeature<?, ?>> feature;
 
-    public FloweringShrubBlock(RegistryKey<ConfiguredFeature<?, ?>> feature, Settings properties) {
+    public FloweringDesertBushBlock(RegistryKey<ConfiguredFeature<?, ?>> feature, Settings properties) {
         super(properties);
         this.feature = feature;
     }
@@ -32,16 +31,16 @@ public class FloweringShrubBlock extends ShrubBlock {
     }
 
     @Override
-    public void grow(ServerWorld level, Random random, BlockPos pos, BlockState state) {
-        DynamicRegistryManager registryAccess = level.getRegistryManager();
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        DynamicRegistryManager registryAccess = world.getRegistryManager();
         var configuredFeatures = registryAccess.getOptional(RegistryKeys.CONFIGURED_FEATURE);
-        var featureToPlace = configuredFeatures.flatMap(registry -> registry.getEntry(this.feature));
+        var featureToPlace = configuredFeatures.flatMap(registry -> registry.getOptional(this.feature));
 
-        featureToPlace.ifPresent(reference -> reference.value().generate(level, level.getChunkManager().getChunkGenerator(), random, pos));
+        featureToPlace.ifPresent(reference -> reference.value().generate(world, world.getChunkManager().getChunkGenerator(), random, pos));
     }
 
     @Override
-    protected MapCodec<FloweringShrubBlock> getCodec() {
+    protected MapCodec<FloweringDesertBushBlock> getCodec() {
         return CODEC;
     }
 }

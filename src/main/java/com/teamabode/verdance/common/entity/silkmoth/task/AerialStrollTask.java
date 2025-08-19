@@ -2,7 +2,7 @@ package com.teamabode.verdance.common.entity.silkmoth.task;
 
 import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
 import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
-import com.teamabode.verdance.common.util.SilkUtils;
+import com.teamabode.verdance.common.util.SilkUtil;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import java.util.Map;
 import java.util.Optional;
@@ -22,7 +22,7 @@ public class AerialStrollTask extends ImprovedSingleTickTask<SilkMothEntity> {
     }
 
     public void run(ServerWorld level, SilkMothEntity entity, long gameTime) {
-        Optional<BlockPos> pos = SilkUtils.calculateStrollTarget(entity);
+        Optional<BlockPos> pos = SilkUtil.calculateStrollTarget(entity);
         pos.ifPresent(blockPos -> entity.getBrain().remember(MemoryModuleType.WALK_TARGET, new WalkTarget(new BlockPosLookTarget(blockPos), 1.0f, 0)));
     }
 }

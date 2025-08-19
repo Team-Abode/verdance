@@ -3,6 +3,7 @@ package com.teamabode.verdance.common.block;
 import com.mojang.serialization.MapCodec;
 import com.teamabode.verdance.common.entity.CushionEntity;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
+import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -71,16 +72,17 @@ public class CushionBlock extends Block {
     }
 
     @Override
-    protected void onStateReplaced(BlockState blockState, World level, BlockPos blockPos, BlockState blockState2, boolean bl) {
-        List<CushionEntity> entities = level.getNonSpectatingEntities(CushionEntity.class, new Box(blockPos));
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        List<CushionEntity> entities = world.getNonSpectatingEntities(CushionEntity.class, new Box(pos));
         for (CushionEntity cushionEntity : entities) {
             cushionEntity.remove(Entity.RemovalReason.DISCARDED);
         }
-        super.onStateReplaced(blockState, level, blockPos, blockState2, bl);
+        super.onStateReplaced(state, world, pos, moved);
     }
 
-    public void onLandedUpon(World level, BlockState blockState, BlockPos blockPos, Entity entity, float f) {
-        super.onLandedUpon(level, blockState, blockPos, entity, f * 0.5F);
+    @Override
+    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+        super.onLandedUpon(world, state, pos, entity, fallDistance * 0.5f);
     }
 
     @Override

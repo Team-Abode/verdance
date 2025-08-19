@@ -5,9 +5,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -22,24 +26,7 @@ public class CushionEntity extends Entity {
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-
-    }
-
-    @Override
-    protected void readCustomDataFromNbt(NbtCompound compoundTag) {
-
-    }
-
-    @Override
-    protected void writeCustomDataToNbt(NbtCompound compoundTag) {
-
-    }
-
-    @Override
     public void tick() {
-        super.tick();
-
         List<Entity> passengers = this.getPassengerList();
         World world = this.getWorld();
 
@@ -54,15 +41,27 @@ public class CushionEntity extends Entity {
         }
     }
 
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+
+    }
+
+    @Override
+    protected void readCustomData(ReadView view) {
+
+    }
+
+    @Override
+    protected void writeCustomData(WriteView view) {
+
+    }
+
+    @Override
+    public boolean damage(ServerWorld world, DamageSource source, float amount) {
+        return false;
+    }
+
     public @NotNull PistonBehavior getPistonBehavior() {
         return PistonBehavior.IGNORE;
-    }
-
-    protected boolean canAddPassenger(Entity entity) {
-        return true;
-    }
-
-    protected boolean couldAcceptPassenger() {
-        return true;
     }
 }

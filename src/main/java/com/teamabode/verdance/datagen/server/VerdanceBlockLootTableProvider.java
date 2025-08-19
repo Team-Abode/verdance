@@ -84,18 +84,18 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     }
 
     private void shrubs() {
-        this.addDrop(VerdanceBlocks.SHRUB, block -> dropsWithShears(
+        this.addDrop(VerdanceBlocks.DESERT_BUSH, block -> dropsWithShears(
                 block, this.applyExplosionDecay(block, ItemEntry.builder(Items.STICK).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 2.0f))))
         ));
-        this.addDrop(VerdanceBlocks.YELLOW_FLOWERING_SHRUB, block -> dropsWithShears(
+        this.addDrop(VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH, block -> dropsWithShears(
                 block, this.applyExplosionDecay(block, ItemEntry.builder(Items.STICK).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 2.0f))))
         ));
-        this.addDrop(VerdanceBlocks.PINK_FLOWERING_SHRUB, block -> dropsWithShears(
+        this.addDrop(VerdanceBlocks.PINK_FLOWERING_DESERT_BUSH, block -> dropsWithShears(
                 block, this.applyExplosionDecay(block, ItemEntry.builder(Items.STICK).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 2.0f))))
         ));
-        this.addPottedPlantDrops(VerdanceBlocks.POTTED_SHRUB);
-        this.addPottedPlantDrops(VerdanceBlocks.POTTED_YELLOW_FLOWERING_SHRUB);
-        this.addPottedPlantDrops(VerdanceBlocks.POTTED_PINK_FLOWERING_SHRUB);
+        this.addPottedPlantDrops(VerdanceBlocks.POTTED_DESERT_BUSH);
+        this.addPottedPlantDrops(VerdanceBlocks.POTTED_YELLOW_FLOWERING_DESERT_BUSH);
+        this.addPottedPlantDrops(VerdanceBlocks.POTTED_PINK_FLOWERING_DESERT_BUSH);
     }
 
     private LootTable.Builder createMulberryLeaves(Block leafBlock) {

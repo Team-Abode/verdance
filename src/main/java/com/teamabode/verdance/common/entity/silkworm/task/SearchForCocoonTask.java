@@ -2,12 +2,12 @@ package com.teamabode.verdance.common.entity.silkworm.task;
 
 import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
 import com.teamabode.verdance.common.entity.silkworm.SilkwormEntity;
-import com.teamabode.verdance.common.util.SilkUtils;
+import com.teamabode.verdance.common.util.SilkUtil;
 import java.util.Map;
 import java.util.Optional;
 import net.minecraft.entity.ai.brain.MemoryModuleState;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
-import net.minecraft.entity.ai.brain.task.LookTargetUtil;
+import net.minecraft.entity.ai.brain.task.TargetUtil;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 
@@ -26,10 +26,10 @@ public class SearchForCocoonTask extends ImprovedSingleTickTask<SilkwormEntity> 
             this.lastExecution = gameTime + 80L;
             return;
         }
-        Optional<BlockPos> targetPos = SilkUtils.getTargetPos(level, entity.getBlockPos());
+        Optional<BlockPos> targetPos = SilkUtil.getTargetPos(level, entity.getBlockPos());
 
         if (targetPos.isPresent()) {
-            LookTargetUtil.walkTowards(entity, targetPos.get(), 2.0f, 0);
+            TargetUtil.walkTowards(entity, targetPos.get(), 2.0f, 0);
             return;
         }
         this.lastExecution = gameTime + 80L;

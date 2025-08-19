@@ -9,10 +9,10 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.property.Properties;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
@@ -46,8 +46,8 @@ public class SilkCocoonBlockEntity extends BlockEntity {
         if (ticks >= 4800) {
             SilkMothEntity silkMoth = new SilkMothEntity(VerdanceEntityTypes.SILK_MOTH, level);
             silkMoth.setPosition(pos.toCenterPos());
-            silkMoth.setHeadYaw(state.get(Properties.HORIZONTAL_FACING).asRotation());
-            silkMoth.setYaw(state.get(Properties.HORIZONTAL_FACING).asRotation());
+            silkMoth.setHeadYaw(state.get(Properties.HORIZONTAL_FACING).getPositiveHorizontalDegrees());
+            silkMoth.setYaw(state.get(Properties.HORIZONTAL_FACING).getPositiveHorizontalDegrees());
             silkMoth.takeOff();
 
             level.playSound(null, pos, VerdanceSoundEvents.ENTITY_SILK_MOTH_EMERGE, SoundCategory.NEUTRAL);
@@ -61,13 +61,14 @@ public class SilkCocoonBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void writeNbt(NbtCompound compound, RegistryWrapper.WrapperLookup provider) {
-        compound.putInt("ticks", this.getTicks());
+    protected void writeData(WriteView view) {
+        view.putInt("ticks", this.getTicks());
     }
 
     @Override
-    protected void readNbt(NbtCompound compound, RegistryWrapper.WrapperLookup provider) {
-        this.setTicks(compound.getInt("ticks"));
+    protected void readData(ReadView view) {
+        int ticks = view.getInt("ticks", 0);
+        this.setTicks(ticks);
     }
 
     public void wobble(World level) {

@@ -10,8 +10,12 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnLocationTypes;
 import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.entity.vehicle.ChestBoatEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.Heightmap;
 
@@ -33,9 +37,28 @@ public class VerdanceEntityTypes {
                     .dimensions(0.6f, 0.25f)
     );
 
+    public static final EntityType<BoatEntity> MULBERRY_BOAT = register(
+            "mulberry_boat",
+            EntityType.Builder.<BoatEntity>create((type, world) -> new BoatEntity(type, world, () -> VerdanceItems.MULBERRY_BOAT), SpawnGroup.MISC)
+                    .dropsNothing()
+                    .dimensions(1.375f, 0.5625f)
+                    .eyeHeight(0.5625f)
+                    .maxTrackingRange(10)
+    );
+
+    public static final EntityType<ChestBoatEntity> MULBERRY_CHEST_BOAT = register(
+            "mulberry_chest_boat",
+            EntityType.Builder.<ChestBoatEntity>create((type, world) -> new ChestBoatEntity(type, world, () -> VerdanceItems.MULBERRY_CHEST_BOAT), SpawnGroup.MISC)
+                    .dropsNothing()
+                    .dimensions(1.375f, 0.5625f)
+                    .eyeHeight(0.5625f)
+                    .maxTrackingRange(10)
+    );
+
     private static <E extends Entity> EntityType<E> register(String name, EntityType.Builder<E> builder) {
-        Identifier id = Verdance.id(name);
-        return Registry.register(Registries.ENTITY_TYPE, id, builder.build(id.toString()));
+        var key = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Verdance.id(name));
+
+        return Registry.register(Registries.ENTITY_TYPE, key, builder.build(key));
     }
 
     public static void register() {

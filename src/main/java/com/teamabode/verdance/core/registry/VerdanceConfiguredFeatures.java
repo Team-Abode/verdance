@@ -107,13 +107,13 @@ public class VerdanceConfiguredFeatures {
                 32,
                 4,
                 2,
-                floweringShrubPlacement(VerdanceBlocks.YELLOW_FLOWERING_SHRUB)
+                floweringShrubPlacement(VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH)
         ));
         ConfiguredFeatures.register(context, PATCH_PINK_FLOWERING_SHRUB_BONEMEAL, Feature.RANDOM_PATCH, new RandomPatchFeatureConfig(
                 32,
                 4,
                 2,
-                floweringShrubPlacement(VerdanceBlocks.PINK_FLOWERING_SHRUB)
+                floweringShrubPlacement(VerdanceBlocks.PINK_FLOWERING_DESERT_BUSH)
         ));
         ConfiguredFeatures.register(context, FLOWER_VIOLET, Feature.FLOWER, new RandomPatchFeatureConfig(
                 64,
@@ -130,7 +130,7 @@ public class VerdanceConfiguredFeatures {
         return PlacedFeatures.createEntry(
                 Feature.SIMPLE_BLOCK,
                 new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder()
-                        .add(shrubBlock.getDefaultState(), 3).add(VerdanceBlocks.SHRUB.getDefaultState(), 4)
+                        .add(shrubBlock.getDefaultState(), 3).add(VerdanceBlocks.DESERT_BUSH.getDefaultState(), 4)
                 )),
                 BlockFilterPlacementModifier.of(BlockPredicate.bothOf(
                         BlockPredicate.IS_AIR,
@@ -141,13 +141,13 @@ public class VerdanceConfiguredFeatures {
 
     private static void patchShrub(Registerable<ConfiguredFeature<?, ?>> context) {
         RegistryEntry<PlacedFeature> shrub = PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
-                SimpleBlockStateProvider.of(VerdanceBlocks.SHRUB)
+                SimpleBlockStateProvider.of(VerdanceBlocks.DESERT_BUSH)
         ));
         RegistryEntry<PlacedFeature> noiseBasedShrub = PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
                 new NoiseBlockStateProvider(2345L, new DoublePerlinNoiseSampler.NoiseParameters(-2, List.of(1.0d)), 0.1f, List.of(
-                        VerdanceBlocks.PINK_FLOWERING_SHRUB.getDefaultState(),
-                        VerdanceBlocks.SHRUB.getDefaultState(),
-                        VerdanceBlocks.YELLOW_FLOWERING_SHRUB.getDefaultState()
+                        VerdanceBlocks.PINK_FLOWERING_DESERT_BUSH.getDefaultState(),
+                        VerdanceBlocks.DESERT_BUSH.getDefaultState(),
+                        VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH.getDefaultState()
                 ))
         ));
         RandomPatchFeatureConfig patch = new RandomPatchFeatureConfig(64, 5, 2, PlacedFeatures.createEntry(

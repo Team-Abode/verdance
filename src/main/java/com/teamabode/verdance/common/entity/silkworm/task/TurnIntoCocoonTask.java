@@ -2,7 +2,7 @@ package com.teamabode.verdance.common.entity.silkworm.task;
 
 import com.teamabode.verdance.common.entity.silkworm.SilkwormEntity;
 import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
-import com.teamabode.verdance.common.util.SilkUtils;
+import com.teamabode.verdance.common.util.SilkUtil;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import java.util.Map;
 import net.minecraft.block.BlockState;
@@ -29,7 +29,7 @@ public class TurnIntoCocoonTask extends ImprovedSingleTickTask<SilkwormEntity> {
             BlockState dirState = level.getBlockState(dirPos);
             if (!dirState.isIn(BlockTags.LOGS_THAT_BURN)) continue;
 
-            SilkUtils.transformIntoCocoon(level, entity, entity.getBlockPos(), dir);
+            SilkUtil.transformIntoCocoon(level, entity, entity.getBlockPos(), dir);
         }
     }
 }

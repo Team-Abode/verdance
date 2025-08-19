@@ -16,7 +16,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 // Utils for the Silk Moth and Silkworm
-public class SilkUtils {
+public class SilkUtil {
 
     public static Optional<BlockPos> calculateLandingTarget(SilkMothEntity entity) {
         Vec3d pos = FuzzyTargeting.find(entity, 6, 3);

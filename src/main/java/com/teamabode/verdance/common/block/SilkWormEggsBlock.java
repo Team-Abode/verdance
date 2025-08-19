@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.BlockTags;
@@ -22,6 +23,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
 public class SilkWormEggsBlock extends Block {
@@ -54,8 +56,8 @@ public class SilkWormEggsBlock extends Block {
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess level, BlockPos pos, BlockPos neighborPos) {
-        return !this.canPlaceAt(state, level, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, level, pos, neighborPos);
+    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
+        return !this.canPlaceAt(state, world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
     @Override
@@ -85,7 +87,7 @@ public class SilkWormEggsBlock extends Block {
         int count = random.nextInt(2) + 2;
 
         for (int i = 0; i < count; i++) {
-            SilkwormEntity silkworm = VerdanceEntityTypes.SILKWORM.create(level);
+            SilkwormEntity silkworm = VerdanceEntityTypes.SILKWORM.create(level, SpawnReason.BREEDING);
             if (silkworm == null) continue;
 
             silkworm.setPosition(pos.toCenterPos().addRandom(random, 0.25f));

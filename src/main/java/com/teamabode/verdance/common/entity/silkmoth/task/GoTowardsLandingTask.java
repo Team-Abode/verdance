@@ -2,13 +2,13 @@ package com.teamabode.verdance.common.entity.silkmoth.task;
 
 import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
 import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
-import com.teamabode.verdance.common.util.SilkUtils;
+import com.teamabode.verdance.common.util.SilkUtil;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import java.util.Map;
 import java.util.Optional;
 import net.minecraft.entity.ai.brain.MemoryModuleState;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
-import net.minecraft.entity.ai.brain.task.LookTargetUtil;
+import net.minecraft.entity.ai.brain.task.TargetUtil;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 
@@ -26,13 +26,13 @@ public class GoTowardsLandingTask extends ImprovedSingleTickTask<SilkMothEntity>
 
     @Override
     public void run(ServerWorld level, SilkMothEntity entity, long gameTime) {
-        Optional<BlockPos> landingTarget = SilkUtils.calculateLandingTarget(entity);
+        Optional<BlockPos> landingTarget = SilkUtil.calculateLandingTarget(entity);
 
         if (landingTarget.isPresent()) {
-            LookTargetUtil.walkTowards(entity, landingTarget.get(), 1.0f, 0);
+            TargetUtil.walkTowards(entity, landingTarget.get(), 1.0f, 0);
             return;
         }
-        Optional<BlockPos> strollTarget = SilkUtils.calculateStrollTarget(entity);
-        strollTarget.ifPresent(pos -> LookTargetUtil.walkTowards(entity, strollTarget.get(), 1.0f, 0));
+        Optional<BlockPos> strollTarget = SilkUtil.calculateStrollTarget(entity);
+        strollTarget.ifPresent(pos -> TargetUtil.walkTowards(entity, strollTarget.get(), 1.0f, 0));
     }
 }

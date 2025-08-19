@@ -27,7 +27,7 @@ public abstract class LightningEntityMixin extends Entity {
         for (BlockPos pos : BlockPos.iterateOutwards(this.getAffectedBlockPos(), 4, 2, 4)) {
             BlockState state = getWorld().getBlockState(pos);
 
-            if (state.isIn(VerdanceBlockTags.SHRUBS)) {
+            if (state.isIn(VerdanceBlockTags.DESERT_BUSHES)) {
                 getWorld().setBlockState(pos, Blocks.DEAD_BUSH.getDefaultState());
             }
         }
