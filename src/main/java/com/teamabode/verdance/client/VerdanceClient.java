@@ -9,12 +9,12 @@ import com.teamabode.verdance.core.registry.VerdanceBlockEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.BlockRenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
 import net.minecraft.world.biome.FoliageColors;
@@ -42,23 +42,26 @@ public class VerdanceClient implements ClientModInitializer {
     }
 
     private static void setRenderTypes() {
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_LEAVES, RenderLayer.getCutoutMipped());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_SAPLING, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_MULBERRY_SAPLING, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.ATTACHED_CANTALOUPE_STEM, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.CANTALOUPE_STEM, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_DOOR, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.MULBERRY_TRAPDOOR, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.SILKWORM_EGGS, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.SILK_COCOON, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.VIOLET, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_VIOLET, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.DESERT_BUSH, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_DESERT_BUSH, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_YELLOW_FLOWERING_DESERT_BUSH, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.PINK_FLOWERING_DESERT_BUSH, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(VerdanceBlocks.POTTED_PINK_FLOWERING_DESERT_BUSH, RenderLayer.getCutout());
+        BlockRenderLayerMap.putBlocks(BlockRenderLayer.CUTOUT_MIPPED, VerdanceBlocks.MULBERRY_LEAVES);
+
+        BlockRenderLayerMap.putBlocks(BlockRenderLayer.CUTOUT,
+                VerdanceBlocks.MULBERRY_SAPLING,
+                VerdanceBlocks.POTTED_MULBERRY_SAPLING,
+                VerdanceBlocks.ATTACHED_CANTALOUPE_STEM,
+                VerdanceBlocks.CANTALOUPE_STEM,
+                VerdanceBlocks.MULBERRY_DOOR,
+                VerdanceBlocks.MULBERRY_TRAPDOOR,
+                VerdanceBlocks.SILKWORM_EGGS,
+                VerdanceBlocks.SILK_COCOON,
+                VerdanceBlocks.VIOLET,
+                VerdanceBlocks.POTTED_VIOLET,
+                VerdanceBlocks.DESERT_BUSH,
+                VerdanceBlocks.POTTED_DESERT_BUSH,
+                VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH,
+                VerdanceBlocks.POTTED_YELLOW_FLOWERING_DESERT_BUSH,
+                VerdanceBlocks.PINK_FLOWERING_DESERT_BUSH,
+                VerdanceBlocks.POTTED_PINK_FLOWERING_DESERT_BUSH
+        );
     }
 
     private static void addColorProviders() {

@@ -15,6 +15,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -183,7 +184,7 @@ public class SilkwormEntity extends PathAwareEntity {
 
 
     public static DefaultAttributeContainer.Builder createSilkwormAttributes() {
-        return MobEntity.createMobAttributes()
+        return AnimalEntity.createAnimalAttributes()
                 .add(EntityAttributes.MAX_HEALTH, 5.0f)
                 .add(EntityAttributes.MOVEMENT_SPEED, 0.1d)
                 .add(EntityAttributes.FOLLOW_RANGE, 48.0);

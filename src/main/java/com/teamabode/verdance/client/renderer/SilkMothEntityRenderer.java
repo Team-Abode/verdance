@@ -22,20 +22,14 @@ public class SilkMothEntityRenderer extends MobEntityRenderer<SilkMothEntity, Si
     }
 
     @Override
-    public void updateRenderState(SilkMothEntity entity, SilkMothEntityRenderState renderState, float f) {
-        super.updateRenderState(entity, renderState, f);
+    public void updateRenderState(SilkMothEntity entity, SilkMothEntityRenderState state, float tickProgress) {
+        super.updateRenderState(entity, state, tickProgress);
 
-        renderState.lastAge = entity.lastAge;
-        renderState.isGrounded = entity.isOnGround() && entity.isInFlyingState();
+        state.flying = entity.isFlying();
+        state.soarProgress = entity.getSoaringAnimationProgress(tickProgress);
 
-        renderState.bodyPitch = entity.bodyPitch;
-        renderState.lastBodyPitch = entity.lastBodyPitch;
-
-        renderState.soarTicks = entity.soarTicks;
-        renderState.lastSoarTicks = entity.lastSoarTicks;
-
-        renderState.idleAnimationState.copyFrom(entity.idleAnimationState);
-        renderState.flyAnimationState.copyFrom(entity.flyAnimationState);
+        state.idleAnimationState.copyFrom(entity.idleAnimationState);
+        state.flyAnimationState.copyFrom(entity.flyAnimationState);
     }
 
     @Override

@@ -305,14 +305,20 @@ public class Verdance implements ModInitializer {
     }
 
     public static void registerBiomePlacements() {
+        /*
         BiomePlacement.replaceOverworld(BiomeKeys.CHERRY_GROVE, VerdanceBiomes.MULBERRY_FOREST, VerdanceConstants.MULBERRY_FOREST_PROPORTION);
         BiomePlacement.replaceOverworld(BiomeKeys.SPARSE_JUNGLE, VerdanceBiomes.SHRUBLANDS, VerdanceConstants.SHRUBLANDS_PROPORTION);
+
+         */
     }
 
     public static void registerSurfaceRules() {
+        /*
         SurfaceGeneration.addOverworldSurfaceRules(Identifier.ofVanilla("rules/overworld"), MaterialRules.sequence(
                 VerdanceSurfaceRules.shrublands()
         ));
+
+         */
     }
 
     public static Identifier id(String name) {

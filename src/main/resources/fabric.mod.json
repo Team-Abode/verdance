@@ -23,6 +23,9 @@
         ],
         "fabric-datagen": [
             "com.teamabode.verdance.datagen.VerdanceDataGenerator"
+        ],
+        "terrablender": [
+            "com.teamabode.verdance.core.integration.terrablender.TerraBlenderIntegration"
         ]
     },
     "mixins": [
@@ -31,7 +34,6 @@
     "depends": {
         "fabricloader": ">=0.16.14",
         "fabric-api": "*",
-        "biolith": "*",
         "minecraft": "~1.21",
         "java": ">=21"
     },

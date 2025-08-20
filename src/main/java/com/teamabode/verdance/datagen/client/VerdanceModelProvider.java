@@ -29,7 +29,7 @@ public class VerdanceModelProvider extends FabricModelProvider {
 
         generator.createLogTexturePool(VerdanceBlocks.MULBERRY_LOG).log(VerdanceBlocks.MULBERRY_LOG).wood(VerdanceBlocks.MULBERRY_WOOD);
         generator.createLogTexturePool(VerdanceBlocks.STRIPPED_MULBERRY_LOG).log(VerdanceBlocks.STRIPPED_MULBERRY_LOG).wood(VerdanceBlocks.STRIPPED_MULBERRY_WOOD);
-        generator.registerSingleton(VerdanceBlocks.MULBERRY_LEAVES, TexturedModel.LEAVES);
+        generator.registerTintedBlockAndItem(VerdanceBlocks.MULBERRY_LEAVES, TexturedModel.LEAVES, -12012264);
         generator.registerFlowerPotPlantAndItem(VerdanceBlocks.VIOLET, VerdanceBlocks.POTTED_VIOLET, BlockStateModelGenerator.CrossType.NOT_TINTED);
         generator.registerFlowerPotPlantAndItem(VerdanceBlocks.DESERT_BUSH, VerdanceBlocks.POTTED_DESERT_BUSH, BlockStateModelGenerator.CrossType.NOT_TINTED);
         generator.registerFlowerPotPlantAndItem(VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH, VerdanceBlocks.POTTED_YELLOW_FLOWERING_DESERT_BUSH, BlockStateModelGenerator.CrossType.NOT_TINTED);

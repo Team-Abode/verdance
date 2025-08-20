@@ -1,6 +1,7 @@
 package com.teamabode.verdance.common.entity.silkmoth;
 
 import com.mojang.serialization.Dynamic;
+import com.teamabode.verdance.common.entity.silkmoth.control.PitchFlyingMoveControl;
 import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
@@ -13,7 +14,9 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.control.FlightMoveControl;
+import net.minecraft.entity.ai.control.LookControl;
 import net.minecraft.entity.ai.control.MoveControl;
+import net.minecraft.entity.ai.control.YawAdjustingLookControl;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.MobNavigation;
@@ -25,7 +28,6 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -58,10 +60,6 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
 
     private int idleCooldown = 100;
 
-    public float lastBodyPitch;
-    public float bodyPitch;
-    public float lastAge;
-
     public int lastSoarTicks;
     public int soarTicks;
 
@@ -69,6 +67,7 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
         super(entityType, world);
 
         this.moveControl = new MoveControl(this);
+
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
         this.setPathfindingPenalty(PathNodeType.WATER_BORDER, 16.0F);
@@ -109,12 +108,8 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
         }
         Vec3d velocity = this.getVelocity();
 
-        if (this.isInAir()) {
-            this.bodyPitch = (float) (-velocity.y * 10.0f);
-        }
-        else this.bodyPitch = 0.0f;
-
         this.lastSoarTicks = this.soarTicks;
+
         if (velocity.horizontalLength() > 0.05d) {
             this.soarTicks = MathHelper.clamp(this.soarTicks + 1, 0, 5);
         }
@@ -177,11 +172,13 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
         super.onTrackedDataSet(key);
         if (FLYING.equals(key)) {
             if (this.isInAir()) {
-                this.moveControl = new FlightMoveControl(this, 20, true);
+                this.moveControl = new PitchFlyingMoveControl(this, 30, true);
+                this.lookControl = new YawAdjustingLookControl(this, 20);
                 this.navigation = this.createFlightNavigation(this.getWorld());
             }
             else {
                 this.moveControl = new MoveControl(this);
+                this.lookControl = new LookControl(this);
                 this.navigation = this.createNavigation(this.getWorld());
                 this.setNoGravity(false);
                 this.setOnGround(true);
@@ -219,9 +216,12 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
         this.dataTracker.set(FLYING, flying);
     }
 
+    public boolean isFlying() {
+        return this.dataTracker.get(FLYING);
+    }
 
-    public boolean isInFlyingState() {
-        return this.isInAir();
+    public float getSoaringAnimationProgress(float tickProgress) {
+        return MathHelper.lerp(tickProgress, this.lastSoarTicks, this.soarTicks) / 5.0f;
     }
 
     @Override
@@ -286,7 +286,7 @@ public class SilkMothEntity extends AnimalEntity implements Flutterer {
     }
 
     public static DefaultAttributeContainer.Builder createSilkMothAttributes() {
-        return MobEntity.createMobAttributes()
+        return AnimalEntity.createAnimalAttributes()
                 .add(EntityAttributes.MAX_HEALTH, 10.0f)
                 .add(EntityAttributes.FLYING_SPEED, 0.5d)
                 .add(EntityAttributes.MOVEMENT_SPEED, 0.2d)

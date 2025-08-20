@@ -20,7 +20,7 @@ public class SilkwormEntityModel extends EntityModel<SilkwormEntityRenderState> 
 	private final Animation moveAnimation;
 
 	public SilkwormEntityModel(ModelPart root) {
-		super(root.getChild("root"));
+		super(root);
 
 		this.moveAnimation = SilkwormEntityAnimations.MOVE.createAnimation(root);
 	}

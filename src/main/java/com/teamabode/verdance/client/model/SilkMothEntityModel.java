@@ -40,7 +40,7 @@ public class SilkMothEntityModel extends EntityModel<SilkMothEntityRenderState> 
 	private final Animation flyAnimation;
 
 	public SilkMothEntityModel(ModelPart root) {
-        super(root.getChild("root"));
+        super(root);
 
 		this.body = this.root.getChild("body");
 		this.head = body.getChild("head");
@@ -117,50 +117,42 @@ public class SilkMothEntityModel extends EntityModel<SilkMothEntityRenderState> 
 
 		this.idleAnimation.apply(state.idleAnimationState, state.age);
 
-		if (state.isGrounded) {
+		if (!state.flying) {
 			this.walkAnimation.applyWalking(state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2.0f, 2.5f);
 		}
 		this.flyAnimation.apply(state.flyAnimationState, state.age);
-		this.animateBones(state);
 
-		state.lastAge = state.age;
+		this.animateBones(state);
 	}
 
 	private void animateBones(SilkMothEntityRenderState state) {
-		float ageDelta = state.age - state.lastAge;
+		float clampedHeadYaw = MathHelper.clamp(state.relativeHeadYaw, -15.0f, 15.0f);
+		float clampedPitch = MathHelper.clamp(state.pitch, -15.0f, 15.0f);
 
-		float headYaw = MathHelper.clamp(state.relativeHeadYaw, -30.0F, 30.0F);
-		float headPitch = MathHelper.clamp(state.pitch, -25.0f, 45.0f);
+		if (state.flying) {
+			this.body.pitch = state.pitch * MathHelper.RADIANS_PER_DEGREE;
+		}
+		else {
+			this.head.yaw = clampedHeadYaw * MathHelper.RADIANS_PER_DEGREE;
+			this.head.pitch = clampedPitch * MathHelper.RADIANS_PER_DEGREE;
+		}
 
-		float targetXRot =  MathHelper.clamp(state.bodyPitch * 45.0f, -45.0f, 45.0f) * MathHelper.RADIANS_PER_DEGREE;
-		float soarProgress = MathHelper.lerp(ageDelta, state.lastSoarTicks, state.soarTicks) / 5.0f;
+		this.leftLegFront.roll -= (state.soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.leftLegFront.yaw -= (state.soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
 
-		float lastBodyPitch = expDecay(state.lastAge, targetXRot, 8.0f, ageDelta / 20.0f);
+		this.leftLegMid.roll -= (state.soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.leftLegMid.yaw -= (state.soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
 
-		this.body.pitch = state.lastBodyPitch;
-		this.head.yaw = headYaw * MathHelper.RADIANS_PER_DEGREE;
-		this.head.pitch = (headPitch * MathHelper.RADIANS_PER_DEGREE) - lastBodyPitch;
+		this.leftLegBack.roll -= (state.soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.leftLegBack.yaw -= (state.soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
 
-		this.leftLegFront.roll -= (soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
-		this.leftLegFront.yaw -= (soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.rightLegFront.roll += (state.soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.rightLegFront.yaw += (state.soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
 
-		this.leftLegMid.roll -= (soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
-		this.leftLegMid.yaw -= (soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.rightLegMid.roll += (state.soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.rightLegMid.yaw += (state.soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
 
-		this.leftLegBack.roll -= (soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
-		this.leftLegBack.yaw -= (soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
-
-		this.rightLegFront.roll += (soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
-		this.rightLegFront.yaw += (soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
-
-		this.rightLegMid.roll += (soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
-		this.rightLegMid.yaw += (soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
-
-		this.rightLegBack.roll += (soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
-		this.rightLegBack.yaw += (soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
-	}
-
-	private static float expDecay(float a, float b, float decay, float dt) {
-		return b + (a - b) * (float)Math.exp(-decay * dt);
+		this.rightLegBack.roll += (state.soarProgress * 15.0f) * MathHelper.RADIANS_PER_DEGREE;
+		this.rightLegBack.yaw += (state.soarProgress * 30.0f) * MathHelper.RADIANS_PER_DEGREE;
 	}
 }
