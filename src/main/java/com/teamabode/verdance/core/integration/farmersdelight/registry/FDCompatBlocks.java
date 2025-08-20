@@ -11,7 +11,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
 public class FDCompatBlocks {
-    // TODO: To prevent issues when trying to update MC versions, we could recreate our own cabinet
     public static final Block MULBERRY_CABINET = register(
             "mulberry_cabinet",
             new CompatCabinetBlock(AbstractBlock.Settings.copy(Blocks.BARREL))

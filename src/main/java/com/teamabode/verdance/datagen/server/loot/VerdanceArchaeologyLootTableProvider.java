@@ -1,4 +1,4 @@
-package com.teamabode.verdance.datagen.server;
+package com.teamabode.verdance.datagen.server.loot;
 
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import com.teamabode.verdance.core.registry.VerdanceItems;

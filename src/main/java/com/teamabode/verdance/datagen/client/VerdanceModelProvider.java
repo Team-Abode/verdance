@@ -79,5 +79,8 @@ public class VerdanceModelProvider extends FabricModelProvider {
 
         generator.register(VerdanceItems.MUSIC_DISC_RANGE, Models.GENERATED);
         generator.register(VerdanceItems.DISC_FRAGMENT_RANGE, Models.GENERATED);
+
+        generator.register(VerdanceItems.SILK_MOTH_SPAWN_EGG, Models.GENERATED);
+        generator.register(VerdanceItems.SILKWORM_SPAWN_EGG, Models.GENERATED);
     }
 }

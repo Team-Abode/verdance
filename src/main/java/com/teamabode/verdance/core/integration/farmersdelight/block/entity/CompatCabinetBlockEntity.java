@@ -4,6 +4,7 @@ import com.teamabode.verdance.core.integration.farmersdelight.block.CompatCabine
 import com.teamabode.verdance.core.integration.farmersdelight.registry.FDCompatBlockEntityTypes;
 import com.teamabode.verdance.core.integration.farmersdelight.registry.FDCompatSoundEvents;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.block.entity.ViewerCountManager;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,18 +12,18 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.text.Text;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.UnknownNullability;
 
 public class CompatCabinetBlockEntity extends LootableContainerBlockEntity {
     private DefaultedList<ItemStack> contents;
@@ -45,9 +46,9 @@ public class CompatCabinetBlockEntity extends LootableContainerBlockEntity {
             protected void onViewerCountUpdate(World level, BlockPos pos, BlockState sta, int arg1, int arg2) {
             }
 
-            protected boolean isPlayerViewing(PlayerEntity p_155060_) {
-                if (p_155060_.currentScreenHandler instanceof GenericContainerScreenHandler) {
-                    Inventory container = ((GenericContainerScreenHandler)p_155060_.currentScreenHandler).getInventory();
+            protected boolean isPlayerViewing(PlayerEntity player) {
+                if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
+                    Inventory container = ((GenericContainerScreenHandler)player.currentScreenHandler).getInventory();
                     return container == CompatCabinetBlockEntity.this;
                 } else {
                     return false;
@@ -56,43 +57,61 @@ public class CompatCabinetBlockEntity extends LootableContainerBlockEntity {
         };
     }
 
-    public void writeNbt(NbtCompound compound, RegistryWrapper.WrapperLookup registries) {
-        super.writeNbt(compound, registries);
-        if (!this.writeLootTable(compound)) {
-            Inventories.writeNbt(compound, this.contents, registries);
+    @Override
+    protected void writeData(WriteView view) {
+        super.writeData(view);
+        if (!this.writeLootTable(view)) {
+            Inventories.writeData(view, this.contents);
         }
-
     }
 
-    public void readNbt(NbtCompound compound, RegistryWrapper.WrapperLookup registries) {
-        super.readNbt(compound, registries);
+    @Override
+    protected void readData(ReadView view) {
+        super.readData(view);
+
         this.contents = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        if (!this.readLootTable(compound)) {
-            Inventories.readNbt(compound, this.contents, registries);
-        }
 
+        if (!this.readLootTable(view)) {
+            Inventories.readData(view, this.contents);
+        }
     }
 
+    @Override
+    public void onBlockReplaced(BlockPos pos, BlockState state) {
+        BlockEntity tileEntity = this.world.getBlockEntity(pos);
+        if (tileEntity instanceof Inventory) {
+            ItemScatterer.spawn(this.world, pos, (Inventory)tileEntity);
+        }
+
+        super.onBlockReplaced(pos, state);
+    }
+
+    @Override
     public int size() {
         return 27;
     }
 
+    @Override
     protected DefaultedList<ItemStack> getHeldStacks() {
         return this.contents;
     }
 
+    @Override
     protected void setHeldStacks(DefaultedList<ItemStack> itemsIn) {
         this.contents = itemsIn;
     }
 
+    @Override
     protected Text getContainerName() {
         return Text.translatable("farmersdelight.container.cabinet");
     }
 
+    @Override
     protected ScreenHandler createScreenHandler(int id, PlayerInventory player) {
         return GenericContainerScreenHandler.createGeneric9x3(id, player, this);
     }
 
+    @Override
     public void onOpen(PlayerEntity pPlayer) {
         if (this.world != null && !this.removed && !pPlayer.isSpectator()) {
             this.openersCounter.openContainer(pPlayer, this.world, this.getPos(), this.getCachedState());
@@ -100,6 +119,7 @@ public class CompatCabinetBlockEntity extends LootableContainerBlockEntity {
 
     }
 
+    @Override
     public void onClose(PlayerEntity pPlayer) {
         if (this.world != null && !this.removed && !pPlayer.isSpectator()) {
             this.openersCounter.closeContainer(pPlayer, this.world, this.getPos(), this.getCachedState());
@@ -128,12 +148,5 @@ public class CompatCabinetBlockEntity extends LootableContainerBlockEntity {
             double z = (double)this.pos.getZ() + 0.5 + (double)cabinetFacingVector.getZ() / 2.0;
             this.world.playSound(null, x, y, z, sound, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
         }
-    }
-
-    public @UnknownNullability NbtCompound serializeNBT(RegistryWrapper.WrapperLookup provider) {
-        return new NbtCompound();
-    }
-
-    public void deserializeNBT(RegistryWrapper.WrapperLookup provider, NbtCompound compoundTag) {
     }
 }

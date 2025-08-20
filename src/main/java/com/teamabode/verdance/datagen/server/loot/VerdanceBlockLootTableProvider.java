@@ -1,4 +1,4 @@
-package com.teamabode.verdance.datagen.server;
+package com.teamabode.verdance.datagen.server.loot;
 
 import com.teamabode.verdance.core.misc.VerdanceBlockFamilies;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
@@ -99,12 +99,13 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
     }
 
     private LootTable.Builder createMulberryLeaves(Block leafBlock) {
-        var enchantments = registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+        var fortune = this.registries.getEntryOrThrow(Enchantments.FORTUNE);
+
         var lootItem = ItemEntry.builder(Items.STICK);
 
         return dropsWithSilkTouchOrShears(
                 leafBlock,
-                this.addSurvivesExplosionCondition(leafBlock, lootItem).conditionally(TableBonusLootCondition.builder(enchantments.getOrThrow(Enchantments.FORTUNE), NORMAL_LEAVES_STICK_CHANCES))
+                this.addSurvivesExplosionCondition(leafBlock, lootItem).conditionally(TableBonusLootCondition.builder(fortune, NORMAL_LEAVES_STICK_CHANCES))
         );
     }
 
@@ -142,8 +143,8 @@ public class VerdanceBlockLootTableProvider extends FabricBlockLootTableProvider
 
     private void cantaloupe() {
         addDrop(VerdanceBlocks.CANTALOUPE, block -> {
-            var enchantments = registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
-            var lootItem = ItemEntry.builder(VerdanceItems.CANTALOUPE_SLICE).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0f, 4.0f))).apply(ApplyBonusLootFunction.uniformBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.createMax(4)));
+            var fortune = this.registries.getEntryOrThrow(Enchantments.FORTUNE);
+            var lootItem = ItemEntry.builder(VerdanceItems.CANTALOUPE_SLICE).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0f, 4.0f))).apply(ApplyBonusLootFunction.uniformBonusCount(fortune)).apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.createMax(4)));
             return dropsWithSilkTouch(block, this.applyExplosionDecay(block, lootItem));
         });
         addDrop(VerdanceBlocks.CANTALOUPE_STEM, block -> this.cropStemDrops(block, VerdanceItems.CANTALOUPE_SEEDS));

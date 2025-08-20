@@ -14,11 +14,11 @@ import net.minecraft.advancement.AdvancementRequirements.CriterionMerger;
 import net.minecraft.advancement.criterion.TickCriterion;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.predicate.NumberRange.IntRange;
+import net.minecraft.predicate.component.ComponentPredicateTypes;
+import net.minecraft.predicate.component.ComponentsPredicate;
 import net.minecraft.predicate.item.EnchantmentPredicate;
 import net.minecraft.predicate.item.EnchantmentsPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.predicate.item.ItemSubPredicateTypes;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -41,7 +41,7 @@ public class VerdanceAdvancementProvider extends FabricAdvancementProvider {
         this.feelingFresh(exporter);
     }
 
-    private void silkTouched(RegistryWrapper.WrapperLookup registryLookup, Consumer<AdvancementEntry> exporter) {
+    private void silkTouched(RegistryWrapper.WrapperLookup registries, Consumer<AdvancementEntry> exporter) {
         Advancement.Builder advancement = Advancement.Builder.create();
         advancement.display(
                 VerdanceBlocks.SILKWORM_EGGS,
@@ -52,11 +52,16 @@ public class VerdanceAdvancementProvider extends FabricAdvancementProvider {
                 true, true, false
         );
         ItemPredicate.Builder item = ItemPredicate.Builder.create();
-        var enchantments = registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+        var silkTouch = registries.getEntryOrThrow(Enchantments.SILK_TOUCH);
 
-        item.subPredicate(ItemSubPredicateTypes.ENCHANTMENTS, EnchantmentsPredicate.enchantments(List.of(
-                new EnchantmentPredicate(enchantments.getOrThrow(Enchantments.SILK_TOUCH), IntRange.atLeast(1))
-        )));
+        item.components(
+                ComponentsPredicate.Builder.create()
+                        .partial(ComponentPredicateTypes.ENCHANTMENTS, EnchantmentsPredicate.enchantments(List.of(
+                                new EnchantmentPredicate(silkTouch, IntRange.atLeast(1))
+                        )))
+                        .build()
+        );
+
         advancement.parent(new AdvancementEntry(Identifier.ofVanilla("husbandry/root"), null));
         advancement.criterion("silk_touch_silkworm_eggs", SilkwormEggsDestroyedCriterion.TriggerInstance.createCriterion(item));
         advancement.criteriaMerger(CriterionMerger.AND);

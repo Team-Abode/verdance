@@ -34,48 +34,48 @@ public class VerdanceBiomeTagProvider extends FabricTagProvider<Biome> {
     }
 
     private void isForest() {
-        this.getOrCreateTagBuilder(BiomeTags.IS_FOREST).add(VerdanceBiomes.MULBERRY_FOREST).setReplace(false);;
+        this.builder(BiomeTags.IS_FOREST).add(VerdanceBiomes.MULBERRY_FOREST).setReplace(false);;
     }
 
     private void isMountain() {
-        this.getOrCreateTagBuilder(BiomeTags.IS_MOUNTAIN).add(VerdanceBiomes.MULBERRY_FOREST).setReplace(false);;
+        this.builder(BiomeTags.IS_MOUNTAIN).add(VerdanceBiomes.MULBERRY_FOREST).setReplace(false);;
     }
 
     private void isOverworld() {
-        this.getOrCreateTagBuilder(BiomeTags.IS_OVERWORLD)
+        this.builder(BiomeTags.IS_OVERWORLD)
                 .add(VerdanceBiomes.MULBERRY_FOREST)
                 .add(VerdanceBiomes.SHRUBLANDS)
                 .setReplace(false);
     }
 
     private void snowGolemMelts() {
-        this.getOrCreateTagBuilder(BiomeTags.SNOW_GOLEM_MELTS).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
+        this.builder(BiomeTags.SNOW_GOLEM_MELTS).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
     }
 
     private void spawnsWarmVariantFrogs() {
-        this.getOrCreateTagBuilder(BiomeTags.SPAWNS_WARM_VARIANT_FROGS).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
+        this.builder(BiomeTags.SPAWNS_WARM_VARIANT_FROGS).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
     }
 
     private void strongholdBiasedTo() {
-        this.getOrCreateTagBuilder(BiomeTags.STRONGHOLD_BIASED_TO)
+        this.builder(BiomeTags.STRONGHOLD_BIASED_TO)
                 .add(VerdanceBiomes.MULBERRY_FOREST)
                 .add(VerdanceBiomes.SHRUBLANDS)
                 .setReplace(false);;
     }
 
     private void hasCantaloupe() {
-        this.getOrCreateTagBuilder(VerdanceBiomeTags.HAS_CANTALOUPE)
+        this.builder(VerdanceBiomeTags.HAS_CANTALOUPE)
                 .forceAddTag(BiomeTags.IS_SAVANNA)
                 .add(VerdanceBiomes.SHRUBLANDS);
     }
 
     private void hasGoldenWolf() {
-        this.getOrCreateTagBuilder(VerdanceBiomeTags.HAS_GOLDEN_WOLF)
+        this.builder(VerdanceBiomeTags.HAS_GOLDEN_WOLF)
                 .add(VerdanceBiomes.MULBERRY_FOREST);
     }
 
     private void hasViolet() {
-        this.getOrCreateTagBuilder(VerdanceBiomeTags.HAS_VIOLET)
+        this.builder(VerdanceBiomeTags.HAS_VIOLET)
                 .forceAddTag(BiomeTags.IS_TAIGA)
                 .add(BiomeKeys.OLD_GROWTH_BIRCH_FOREST)
                 .add(BiomeKeys.WINDSWEPT_HILLS)
@@ -83,19 +83,19 @@ public class VerdanceBiomeTagProvider extends FabricTagProvider<Biome> {
     }
 
     private void hasStructure() {
-        this.getOrCreateTagBuilder(BiomeTags.TRIAL_CHAMBERS_HAS_STRUCTURE)
+        this.builder(BiomeTags.TRIAL_CHAMBERS_HAS_STRUCTURE)
                 .add(VerdanceBiomes.MULBERRY_FOREST)
                 .add(VerdanceBiomes.SHRUBLANDS)
                 .setReplace(false);
-        this.getOrCreateTagBuilder(BiomeTags.MINESHAFT_HAS_STRUCTURE).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
-        this.getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_STANDARD_HAS_STRUCTURE).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);
-        this.getOrCreateTagBuilder(VerdanceBiomeTags.HAS_TOWN_RUINS)
+        this.builder(BiomeTags.MINESHAFT_HAS_STRUCTURE).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
+        this.builder(BiomeTags.RUINED_PORTAL_STANDARD_HAS_STRUCTURE).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);
+        this.builder(VerdanceBiomeTags.HAS_TOWN_RUINS)
                 .add(VerdanceBiomes.SHRUBLANDS)
                 .forceAddTag(ConventionalBiomeTags.IS_DESERT);
     }
 
     private void conventionalTags() {
-        this.getOrCreateTagBuilder(ConventionalBiomeTags.IS_HOT_OVERWORLD).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
-        this.getOrCreateTagBuilder(ConventionalBiomeTags.IS_VEGETATION_DENSE).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
+        this.builder(ConventionalBiomeTags.IS_HOT_OVERWORLD).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
+        this.builder(ConventionalBiomeTags.IS_VEGETATION_DENSE).add(VerdanceBiomes.SHRUBLANDS).setReplace(false);;
     }
 }

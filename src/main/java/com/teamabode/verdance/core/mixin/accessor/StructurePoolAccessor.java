@@ -12,12 +12,12 @@ import java.util.List;
 
 @Mixin(StructurePool.class)
 public interface StructurePoolAccessor {
-    @Accessor("elementCounts")
-    List<Pair<StructurePoolElement, Integer>> getElementCounts();
+    @Accessor("elementWeights")
+    List<Pair<StructurePoolElement, Integer>> getElementWeights();
 
-    @Accessor("elementCounts")
+    @Accessor("elementWeights")
     @Mutable
-    void setElementCounts(List<Pair<StructurePoolElement, Integer>> list);
+    void setElementWeights(List<Pair<StructurePoolElement, Integer>> list);
 
     @Accessor("elements")
     ObjectArrayList<StructurePoolElement> getElements();

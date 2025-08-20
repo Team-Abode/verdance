@@ -15,8 +15,7 @@ public class VerdanceEntityTypeTagProvider extends FabricTagProvider.EntityTypeT
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-
-        this.getOrCreateTagBuilder(EntityTypeTags.ARTHROPOD)
+        this.valueLookupBuilder(EntityTypeTags.ARTHROPOD)
                 .add(VerdanceEntityTypes.SILK_MOTH)
                 .add(VerdanceEntityTypes.SILKWORM);
     }

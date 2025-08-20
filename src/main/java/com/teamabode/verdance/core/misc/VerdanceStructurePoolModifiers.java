@@ -17,10 +17,10 @@ public class VerdanceStructurePoolModifiers {
     public static void register() {
         ServerLifecycleEvents.SERVER_STARTED.register(server -> {
             var registryManager = server.getRegistryManager();
-            var placedFeatures = registryManager.getWrapperOrThrow(RegistryKeys.PLACED_FEATURE);
+            var pileCantaloupePlacedFeature = registryManager.getEntryOrThrow(VerdancePlacedFeatures.PILE_CANTALOUPE);
 
             modifyStructurePool(Identifier.of("minecraft", "village/desert/decor"), registryManager, elements -> {
-                elements.put(StructurePoolElement.ofFeature(placedFeatures.getOrThrow(VerdancePlacedFeatures.PILE_CANTALOUPE)).apply(StructurePool.Projection.RIGID), 4);
+                elements.put(StructurePoolElement.ofFeature(pileCantaloupePlacedFeature).apply(StructurePool.Projection.RIGID), 4);
             });
         });
     }
@@ -28,11 +28,11 @@ public class VerdanceStructurePoolModifiers {
     // All code after this point was pretty much yoinked by Chikorita Lover ;) (thanks btw!)
     private static void modifyStructurePool(Identifier id, RegistryWrapper.WrapperLookup registries, Modifier modifier) {
         RegistryKey<StructurePool> pool = RegistryKey.of(RegistryKeys.TEMPLATE_POOL, id);
-        StructurePoolAccessor accessor = (StructurePoolAccessor) registries.getWrapperOrThrow(RegistryKeys.TEMPLATE_POOL).getOrThrow(pool).value();
+        StructurePoolAccessor accessor = (StructurePoolAccessor) registries.getEntryOrThrow(pool).value();
         Object2IntArrayMap<StructurePoolElement> builder = new Object2IntArrayMap<>();
-        accessor.getElementCounts().forEach(pair -> builder.put(pair.getFirst(), pair.getSecond().intValue()));
+        accessor.getElementWeights().forEach(pair -> builder.put(pair.getFirst(), pair.getSecond().intValue()));
         modifier.apply(builder);
-        accessor.setElementCounts(builder.object2IntEntrySet().stream().map(entry -> Pair.of(entry.getKey(), entry.getIntValue())).toList());
+        accessor.setElementWeights(builder.object2IntEntrySet().stream().map(entry -> Pair.of(entry.getKey(), entry.getIntValue())).toList());
         accessor.getElements().clear();
         builder.forEach((element, weight) -> {
             for (int i = 0; i < weight; ++i) {

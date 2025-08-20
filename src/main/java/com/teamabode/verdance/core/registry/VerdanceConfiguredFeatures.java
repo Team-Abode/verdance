@@ -11,7 +11,7 @@ import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.collection.Pool;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
@@ -49,7 +49,7 @@ public class VerdanceConfiguredFeatures {
                 7,
                 3,
                 PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
-                        new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                        new WeightedBlockStateProvider(Pool.<BlockState>builder()
                                 .add(Blocks.LILY_OF_THE_VALLEY.getDefaultState(), 1)
                                 .add(Blocks.OXEYE_DAISY.getDefaultState(), 2).build())
                 ), BlockFilterPlacementModifier.of(BlockPredicate.matchingBlocks(Blocks.AIR)))
@@ -58,7 +58,7 @@ public class VerdanceConfiguredFeatures {
                 SimpleBlockStateProvider.of(VerdanceBlocks.MULBERRY_LOG),
                 new MulberryTrunkPlacer(7, 2, 0),
                 new WeightedBlockStateProvider(
-                        DataPool.<BlockState>builder()
+                        Pool.<BlockState>builder()
                                 .add(VerdanceBlocks.MULBERRY_LEAVES.getDefaultState(), 14)
                                 .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES.getDefaultState(), 1)
                                 .build()
@@ -70,7 +70,7 @@ public class VerdanceConfiguredFeatures {
                 SimpleBlockStateProvider.of(VerdanceBlocks.MULBERRY_LOG),
                 new MulberryTrunkPlacer(7, 2, 0),
                 new WeightedBlockStateProvider(
-                        DataPool.<BlockState>builder()
+                        Pool.<BlockState>builder()
                                 .add(VerdanceBlocks.MULBERRY_LEAVES.getDefaultState(), 14)
                                 .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES.getDefaultState(), 1)
                                 .build()
@@ -94,7 +94,7 @@ public class VerdanceConfiguredFeatures {
                 new StraightTrunkPlacer(1, 0, 0),
                 BlockStateProvider.of(Blocks.OAK_LEAVES),
                 new AcaciaFoliagePlacer(
-                        new WeightedListIntProvider(DataPool.<IntProvider>builder()
+                        new WeightedListIntProvider(Pool.<IntProvider>builder()
                                 .add(ConstantIntProvider.create(2), 1)
                                 .add(ConstantIntProvider.create(1), 4)
                                 .build()),
@@ -129,7 +129,7 @@ public class VerdanceConfiguredFeatures {
     public static RegistryEntry<PlacedFeature> floweringShrubPlacement(Block shrubBlock) {
         return PlacedFeatures.createEntry(
                 Feature.SIMPLE_BLOCK,
-                new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(Pool.<BlockState>builder()
                         .add(shrubBlock.getDefaultState(), 3).add(VerdanceBlocks.DESERT_BUSH.getDefaultState(), 4)
                 )),
                 BlockFilterPlacementModifier.of(BlockPredicate.bothOf(

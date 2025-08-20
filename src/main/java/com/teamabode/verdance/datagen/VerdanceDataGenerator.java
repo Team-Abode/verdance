@@ -3,6 +3,8 @@ package com.teamabode.verdance.datagen;
 import com.teamabode.verdance.core.registry.*;
 import com.teamabode.verdance.datagen.client.VerdanceModelProvider;
 import com.teamabode.verdance.datagen.server.*;
+import com.teamabode.verdance.datagen.server.loot.VerdanceArchaeologyLootTableProvider;
+import com.teamabode.verdance.datagen.server.loot.VerdanceBlockLootTableProvider;
 import com.teamabode.verdance.datagen.server.tag.VerdanceBiomeTagProvider;
 import com.teamabode.verdance.datagen.server.tag.VerdanceBlockTagProvider;
 import com.teamabode.verdance.datagen.server.tag.VerdanceEntityTypeTagProvider;

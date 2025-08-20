@@ -37,10 +37,12 @@ public class VerdanceBiomes {
         SpawnSettings.Builder spawnSettings = new SpawnSettings.Builder();
         BiomeEffects.Builder specialEffects = new BiomeEffects.Builder();
 
-        spawnSettings.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.RABBIT, 2, 2, 6));
-        spawnSettings.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 3, 2, 3));
-        spawnSettings.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 1, 4, 4));
-        spawnSettings.spawn(SpawnGroup.AMBIENT, new SpawnSettings.SpawnEntry(VerdanceEntityTypes.SILK_MOTH, 10, 1, 3));
+        spawnSettings.spawn(SpawnGroup.CREATURE, 2, new SpawnSettings.SpawnEntry(EntityType.RABBIT, 2, 6));
+        spawnSettings.spawn(SpawnGroup.CREATURE, 3, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 2, 3));
+        spawnSettings.spawn(SpawnGroup.CREATURE, 1, new SpawnSettings.SpawnEntry(EntityType.WOLF, 4, 4));
+        // AXOLOTLS SpawnGroup is being used here as more of a special category.
+        spawnSettings.spawn(SpawnGroup.AXOLOTLS, 10, new SpawnSettings.SpawnEntry(VerdanceEntityTypes.SILK_MOTH, 1, 3));
+
         DefaultBiomeFeatures.addBatsAndMonsters(spawnSettings);
 
         // Global Overworld generation
@@ -89,7 +91,7 @@ public class VerdanceBiomes {
         SpawnSettings.Builder spawnSettings = new SpawnSettings.Builder();
         BiomeEffects.Builder specialEffects = new BiomeEffects.Builder();
 
-        spawnSettings.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.ARMADILLO, 6, 1, 2));
+        spawnSettings.spawn(SpawnGroup.CREATURE, 6, new SpawnSettings.SpawnEntry(EntityType.ARMADILLO, 1, 2));
         DefaultBiomeFeatures.addBatsAndMonsters(spawnSettings);
 
         // Global Overworld generation
@@ -105,7 +107,7 @@ public class VerdanceBiomes {
         DefaultBiomeFeatures.addDefaultDisks(generationSettings);
 
         // Shrublands features
-        DefaultBiomeFeatures.addDesertDeadBushes(generationSettings);
+        DefaultBiomeFeatures.addDesertDryVegetation(generationSettings);
         generationSettings.feature(GenerationStep.Feature.VEGETAL_DECORATION, VerdancePlacedFeatures.SHRUBLANDS_BUSH);
         generationSettings.feature(GenerationStep.Feature.VEGETAL_DECORATION, VerdancePlacedFeatures.PATCH_SHRUB);
 

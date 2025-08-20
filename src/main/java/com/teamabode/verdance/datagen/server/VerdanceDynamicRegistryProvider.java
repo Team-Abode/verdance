@@ -1,6 +1,5 @@
 package com.teamabode.verdance.datagen.server;
 
-import com.teamabode.sketch.core.registry.SketchRegistries;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.registry.Registry;
@@ -20,7 +19,6 @@ public class VerdanceDynamicRegistryProvider extends FabricDynamicRegistryProvid
         this.addAll(RegistryKeys.WOLF_VARIANT, registries, entries);
         this.addAll(RegistryKeys.JUKEBOX_SONG, registries, entries);
         this.addAll(RegistryKeys.TRIM_PATTERN, registries, entries);
-        this.addAll(SketchRegistries.BOAT_TYPE, registries, entries);
         this.addAll(RegistryKeys.CONFIGURED_FEATURE, registries, entries);
         this.addAll(RegistryKeys.PLACED_FEATURE, registries, entries);
         this.addAll(RegistryKeys.BIOME, registries, entries);
@@ -31,7 +29,7 @@ public class VerdanceDynamicRegistryProvider extends FabricDynamicRegistryProvid
     }
 
     private <T> void addAll(RegistryKey<Registry<T>> registry, RegistryWrapper.WrapperLookup registries, Entries entries) {
-        entries.addAll(registries.getWrapperOrThrow(registry));
+        entries.addAll(registries.getOrThrow(registry));
     }
 
     @Override

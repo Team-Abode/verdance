@@ -13,6 +13,7 @@ import com.terraformersmc.biolith.api.surface.SurfaceGeneration;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
+import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper.WanderingTraderOffersBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.block.Blocks;
@@ -20,6 +21,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
+import net.minecraft.village.TradeOffer;
 import net.minecraft.village.TradeOffers;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.biome.BiomeKeys;
@@ -79,15 +81,47 @@ public class Verdance implements ModInitializer {
     }
 
     public static void registerTrades() {
-        TradeOfferHelper.registerWanderingTraderOffers(1, itemListings -> {
+        TradeOfferHelper.registerWanderingTraderOffers(builder -> {
+            builder.addAll(
+                WanderingTraderOffersBuilder.SELL_COMMON_ITEMS_POOL,
 
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceItems.CANTALOUPE_SEEDS, 1, 1, 12, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceItems.MULBERRY, 5, 1, 8, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.VIOLET, 1, 1, 12, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.DESERT_BUSH, 1, 1, 12, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH, 1, 1, 12, 1));
-            itemListings.add(new TradeOffers.SellItemFactory(VerdanceBlocks.PINK_FLOWERING_DESERT_BUSH, 1, 1, 12, 1));
+                (entity, random) -> new TradeOffers.SellItemFactory(
+                        VerdanceItems.CANTALOUPE_SEEDS, 1, 1, 12, 1
+                ).create(entity, random),
+
+                (entity, random) -> new TradeOffers.SellItemFactory(
+                        VerdanceItems.MULBERRY, 5, 1, 8, 1
+                ).create(entity, random),
+
+                (entity, random) -> new TradeOffers.SellItemFactory(
+                        VerdanceBlocks.VIOLET, 1, 1, 12, 1
+                ).create(entity, random),
+
+                (entity, random) -> new TradeOffers.SellItemFactory(
+                        VerdanceBlocks.DESERT_BUSH, 1, 1, 12, 1
+                ).create(entity, random),
+
+                (entity, random) -> new TradeOffers.SellItemFactory(
+                        VerdanceBlocks.DESERT_BUSH, 1, 1, 12, 1
+                ).create(entity, random),
+
+                (entity, random) -> new TradeOffers.SellItemFactory(
+                        VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH, 1, 1, 12, 1
+                ).create(entity, random),
+
+                (entity, random) -> new TradeOffers.SellItemFactory(
+                        VerdanceBlocks.YELLOW_FLOWERING_DESERT_BUSH, 1, 1, 12, 1
+                ).create(entity, random)
+            );
+
+            builder.addAll(
+                WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL,
+                (entity, random) -> new TradeOffers.SellItemFactory(
+                        VerdanceBlocks.MULBERRY_LOG, 1, 8, 4, 1
+                ).create(entity, random)
+            );
         });
+
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, itemListings -> {
             itemListings.add(new TradeOffers.BuyItemFactory(VerdanceBlocks.CANTALOUPE, 6, 12, 10));
         });
@@ -270,8 +304,8 @@ public class Verdance implements ModInitializer {
     }
 
     public static void registerBiomePlacements() {
-        BiomePlacement.replaceOverworld(BiomeKeys.CHERRY_GROVE, VerdanceBiomes.MULBERRY_FOREST, VerdanceConfig.MULBERRY_FOREST_PROPORTION.get());
-        BiomePlacement.replaceOverworld(BiomeKeys.SPARSE_JUNGLE, VerdanceBiomes.SHRUBLANDS, VerdanceConfig.SHRUBLANDS_PROPORTION.get());
+        BiomePlacement.replaceOverworld(BiomeKeys.CHERRY_GROVE, VerdanceBiomes.MULBERRY_FOREST, VerdanceConstants.MULBERRY_FOREST_PROPORTION);
+        BiomePlacement.replaceOverworld(BiomeKeys.SPARSE_JUNGLE, VerdanceBiomes.SHRUBLANDS, VerdanceConstants.SHRUBLANDS_PROPORTION);
     }
 
     public static void registerSurfaceRules() {
