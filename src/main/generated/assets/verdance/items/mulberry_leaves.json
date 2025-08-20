@@ -1,6 +1,12 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "verdance:block/mulberry_leaves"
+    "model": "verdance:block/mulberry_leaves",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -12012264
+      }
+    ]
   }
 }
