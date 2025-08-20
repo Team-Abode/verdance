@@ -702,7 +702,7 @@ public class VerdanceBlocks {
         var registry = Registry.register(Registries.BLOCK, key, block.apply(settings.registryKey(key)));
 
         RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Verdance.id(name));
-        Registry.register(Registries.ITEM, itemKey, new BlockItem(registry, new Item.Settings().registryKey(itemKey)));
+        Registry.register(Registries.ITEM, itemKey, new BlockItem(registry, new Item.Settings().registryKey(itemKey).useBlockPrefixedTranslationKey()));
 
         return registry;
     }
