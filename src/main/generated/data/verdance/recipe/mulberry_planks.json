@@ -3,9 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    {
-      "tag": "verdance:mulberry_logs"
-    }
+    "#verdance:mulberry_logs"
   ],
   "result": {
     "count": 4,

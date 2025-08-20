@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:diamond"
-    },
-    "C": {
-      "item": "verdance:white_stucco"
-    },
-    "S": {
-      "item": "verdance:community_armor_trim_smithing_template"
-    }
+    "#": "minecraft:diamond",
+    "C": "verdance:white_stucco",
+    "S": "verdance:community_armor_trim_smithing_template"
   },
   "pattern": [
     "#S#",

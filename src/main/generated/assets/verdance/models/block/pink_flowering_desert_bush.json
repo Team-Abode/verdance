@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "verdance:block/pink_flowering_desert_bush"
+  }
+}

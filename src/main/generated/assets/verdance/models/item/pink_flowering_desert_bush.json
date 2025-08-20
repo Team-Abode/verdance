@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "verdance:block/pink_flowering_desert_bush"
+  }
+}

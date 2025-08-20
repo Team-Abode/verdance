@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "verdance:pink_stucco"
-  },
+  "ingredient": "verdance:pink_stucco",
   "result": {
     "count": 1,
     "id": "verdance:pink_stucco_wall"

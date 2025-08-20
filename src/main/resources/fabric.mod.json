@@ -31,7 +31,6 @@
     "depends": {
         "fabricloader": ">=0.16.14",
         "fabric-api": "*",
-        "sketch": "*",
         "biolith": "*",
         "minecraft": "~1.21",
         "java": ">=21"

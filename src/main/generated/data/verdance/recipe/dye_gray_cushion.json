@@ -3,55 +3,23 @@
   "category": "building",
   "group": "cushion",
   "ingredients": [
-    {
-      "tag": "c:dyes/gray"
-    },
+    "#c:dyes/gray",
     [
-      {
-        "item": "verdance:black_cushion"
-      },
-      {
-        "item": "verdance:blue_cushion"
-      },
-      {
-        "item": "verdance:brown_cushion"
-      },
-      {
-        "item": "verdance:cyan_cushion"
-      },
-      {
-        "item": "verdance:green_cushion"
-      },
-      {
-        "item": "verdance:light_blue_cushion"
-      },
-      {
-        "item": "verdance:light_gray_cushion"
-      },
-      {
-        "item": "verdance:lime_cushion"
-      },
-      {
-        "item": "verdance:magenta_cushion"
-      },
-      {
-        "item": "verdance:orange_cushion"
-      },
-      {
-        "item": "verdance:pink_cushion"
-      },
-      {
-        "item": "verdance:purple_cushion"
-      },
-      {
-        "item": "verdance:red_cushion"
-      },
-      {
-        "item": "verdance:yellow_cushion"
-      },
-      {
-        "item": "verdance:white_cushion"
-      }
+      "verdance:black_cushion",
+      "verdance:blue_cushion",
+      "verdance:brown_cushion",
+      "verdance:cyan_cushion",
+      "verdance:green_cushion",
+      "verdance:light_blue_cushion",
+      "verdance:light_gray_cushion",
+      "verdance:lime_cushion",
+      "verdance:magenta_cushion",
+      "verdance:orange_cushion",
+      "verdance:pink_cushion",
+      "verdance:purple_cushion",
+      "verdance:red_cushion",
+      "verdance:yellow_cushion",
+      "verdance:white_cushion"
     ]
   ],
   "result": {

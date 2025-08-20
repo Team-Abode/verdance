@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "wooden_fence_gate",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "verdance:mulberry_planks"
-    }
+    "#": "minecraft:stick",
+    "W": "verdance:mulberry_planks"
   },
   "pattern": [
     "#W#",

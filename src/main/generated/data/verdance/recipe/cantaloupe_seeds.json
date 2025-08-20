@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "verdance:cantaloupe_slice"
-    }
+    "verdance:cantaloupe_slice"
   ],
   "result": {
     "count": 1,

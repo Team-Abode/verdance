@@ -10,13 +10,13 @@
             "entries": [
               {
                 "data": {
-                  "Name": "verdance:pink_flowering_shrub"
+                  "Name": "verdance:pink_flowering_desert_bush"
                 },
                 "weight": 3
               },
               {
                 "data": {
-                  "Name": "verdance:shrub"
+                  "Name": "verdance:desert_bush"
                 },
                 "weight": 4
               }

@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "verdance:lime_stucco"
-  },
+  "ingredient": "verdance:lime_stucco",
   "result": {
     "count": 1,
     "id": "verdance:lime_stucco_stairs"

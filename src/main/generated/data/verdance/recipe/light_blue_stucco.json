@@ -3,33 +3,15 @@
   "category": "building",
   "group": "stucco",
   "ingredients": [
-    {
-      "tag": "c:dyes/light_blue"
-    },
-    {
-      "item": "minecraft:clay"
-    },
-    {
-      "item": "minecraft:clay"
-    },
-    {
-      "item": "minecraft:clay"
-    },
-    {
-      "item": "minecraft:clay"
-    },
-    {
-      "tag": "minecraft:sand"
-    },
-    {
-      "tag": "minecraft:sand"
-    },
-    {
-      "tag": "minecraft:sand"
-    },
-    {
-      "tag": "minecraft:sand"
-    }
+    "#c:dyes/light_blue",
+    "minecraft:clay",
+    "minecraft:clay",
+    "minecraft:clay",
+    "minecraft:clay",
+    "#minecraft:sand",
+    "#minecraft:sand",
+    "#minecraft:sand",
+    "#minecraft:sand"
   ],
   "result": {
     "count": 8,

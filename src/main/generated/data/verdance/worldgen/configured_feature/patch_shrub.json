@@ -21,13 +21,13 @@
                   "seed": 2345,
                   "states": [
                     {
-                      "Name": "verdance:pink_flowering_shrub"
+                      "Name": "verdance:pink_flowering_desert_bush"
                     },
                     {
-                      "Name": "verdance:shrub"
+                      "Name": "verdance:desert_bush"
                     },
                     {
-                      "Name": "verdance:yellow_flowering_shrub"
+                      "Name": "verdance:yellow_flowering_desert_bush"
                     }
                   ]
                 }
@@ -50,7 +50,7 @@
                 "to_place": {
                   "type": "minecraft:simple_state_provider",
                   "state": {
-                    "Name": "verdance:shrub"
+                    "Name": "verdance:desert_bush"
                   }
                 }
               }

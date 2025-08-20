@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stucco_stairs",
   "key": {
-    "#": {
-      "item": "verdance:green_stucco"
-    }
+    "#": "verdance:green_stucco"
   },
   "pattern": [
     "#  ",

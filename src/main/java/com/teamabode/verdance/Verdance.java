@@ -82,7 +82,8 @@ public class Verdance implements ModInitializer {
 
     public static void registerTrades() {
         TradeOfferHelper.registerWanderingTraderOffers(builder -> {
-            builder.addAll(
+
+            builder.addOffersToPool(
                 WanderingTraderOffersBuilder.SELL_COMMON_ITEMS_POOL,
 
                 (entity, random) -> new TradeOffers.SellItemFactory(
@@ -114,7 +115,7 @@ public class Verdance implements ModInitializer {
                 ).create(entity, random)
             );
 
-            builder.addAll(
+            builder.addOffersToPool(
                 WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL,
                 (entity, random) -> new TradeOffers.SellItemFactory(
                         VerdanceBlocks.MULBERRY_LOG, 1, 8, 4, 1

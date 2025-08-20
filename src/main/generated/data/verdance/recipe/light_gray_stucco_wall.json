@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "stucco_wall",
   "key": {
-    "#": {
-      "item": "verdance:light_gray_stucco"
-    }
+    "#": "verdance:light_gray_stucco"
   },
   "pattern": [
     "###",

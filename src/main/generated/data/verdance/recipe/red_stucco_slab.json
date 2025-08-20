@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stucco_slab",
   "key": {
-    "#": {
-      "item": "verdance:red_stucco"
-    }
+    "#": "verdance:red_stucco"
   },
   "pattern": [
     "###"

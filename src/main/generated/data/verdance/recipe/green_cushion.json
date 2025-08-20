@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "cushion",
   "key": {
-    "#": {
-      "tag": "minecraft:planks"
-    },
-    "W": {
-      "item": "minecraft:green_wool"
-    }
+    "#": "#minecraft:planks",
+    "W": "minecraft:green_wool"
   },
   "pattern": [
     "WW",

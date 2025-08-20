@@ -3,9 +3,7 @@
   "category": "building",
   "group": "bark",
   "key": {
-    "#": {
-      "item": "verdance:stripped_mulberry_log"
-    }
+    "#": "verdance:stripped_mulberry_log"
   },
   "pattern": [
     "##",

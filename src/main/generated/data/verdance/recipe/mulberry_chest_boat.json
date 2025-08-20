@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "chest_boat",
   "ingredients": [
-    {
-      "item": "minecraft:chest"
-    },
-    {
-      "item": "verdance:mulberry_boat"
-    }
+    "minecraft:chest",
+    "verdance:mulberry_boat"
   ],
   "result": {
     "count": 1,

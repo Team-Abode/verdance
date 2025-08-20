@@ -141,7 +141,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
 
             List<TagKey<Item>> dyes = List.of(ConventionalItemTags.BLACK_DYES, ConventionalItemTags.BLUE_DYES, ConventionalItemTags.BROWN_DYES, ConventionalItemTags.CYAN_DYES, ConventionalItemTags.GRAY_DYES, ConventionalItemTags.GREEN_DYES, ConventionalItemTags.LIGHT_BLUE_DYES, ConventionalItemTags.LIGHT_GRAY_DYES, ConventionalItemTags.LIME_DYES, ConventionalItemTags.MAGENTA_DYES, ConventionalItemTags.ORANGE_DYES, ConventionalItemTags.PINK_DYES, ConventionalItemTags.PURPLE_DYES, ConventionalItemTags.RED_DYES, ConventionalItemTags.YELLOW_DYES, ConventionalItemTags.WHITE_DYES);
             List<ItemConvertible> cushions = List.of(VerdanceBlocks.BLACK_CUSHION, VerdanceBlocks.BLUE_CUSHION, VerdanceBlocks.BROWN_CUSHION, VerdanceBlocks.CYAN_CUSHION, VerdanceBlocks.GRAY_CUSHION, VerdanceBlocks.GREEN_CUSHION, VerdanceBlocks.LIGHT_BLUE_CUSHION, VerdanceBlocks.LIGHT_GRAY_CUSHION, VerdanceBlocks.LIME_CUSHION, VerdanceBlocks.MAGENTA_CUSHION, VerdanceBlocks.ORANGE_CUSHION, VerdanceBlocks.PINK_CUSHION, VerdanceBlocks.PURPLE_CUSHION, VerdanceBlocks.RED_CUSHION, VerdanceBlocks.YELLOW_CUSHION, VerdanceBlocks.WHITE_CUSHION);
-            this.offerDyeableRecipes(RecipeCategory.BUILDING_BLOCKS, dyes, cushions, "cushion");
+            this.offerCustomDyeableRecipes(RecipeCategory.BUILDING_BLOCKS, dyes, cushions, "cushion");
             
             this.offerDyeFromFlowerRecipe(Items.PURPLE_DYE, VerdanceBlocks.VIOLET, 1);
             this.offerDyeFromFlowerRecipe(Items.MAGENTA_DYE, Blocks.SPORE_BLOSSOM, 2);
@@ -193,21 +193,19 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
                     .offerTo(this.exporter);
         }
 
-        private void offerDyeableRecipes(RecipeCategory category, List<TagKey<Item>> dyeTags, List<ItemConvertible> dyeables, String group) {
+        private void offerCustomDyeableRecipes(RecipeCategory category, List<TagKey<Item>> dyeTags, List<ItemConvertible> dyeables, String group) {
             for (int i = 0; i < dyeTags.size(); ++i) {
                 TagKey<Item> dyeTag = dyeTags.get(i);
                 final ItemConvertible item = dyeables.get(i);
 
-                var builder = this.createShapeless(category, item)
-                        .input(dyeTag);
+                var trueDyeables = dyeables.stream().filter(dyeable -> !dyeable.equals(item));
 
-                dyeables.stream()
-                        .filter(dyeable -> !dyeable.equals(item))
-                        .forEach(itemConvertible -> builder.input(item));
-
-                builder.group(group);
-                builder.criterion("has_needed_dye", this.conditionsFromTag(dyeTag));
-                builder.offerTo(this.exporter, this.createKey("dye_" + RecipeGenerator.getItemPath(item)));
+                this.createShapeless(category, item)
+                    .input(dyeTag)
+                    .input(Ingredient.ofItems(trueDyeables))
+                    .group(group)
+                    .criterion("has_needed_dye", this.conditionsFromTag(dyeTag))
+                    .offerTo(this.exporter, this.createKey("dye_" + RecipeGenerator.getItemPath(item)));
             }
         }
         
