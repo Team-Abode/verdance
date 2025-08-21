@@ -22,7 +22,7 @@ import net.minecraft.world.Heightmap;
 public class VerdanceEntityTypes {
     public static final EntityType<SilkMothEntity> SILK_MOTH = register(
             "silk_moth",
-            EntityType.Builder.create(SilkMothEntity::new, SpawnGroup.CREATURE).dimensions(0.7f, 0.7f).eyeHeight(0.35f)
+            EntityType.Builder.create(SilkMothEntity::new, SpawnGroup.AXOLOTLS).dimensions(0.7f, 0.7f).eyeHeight(0.35f)
     );
 
     public static final EntityType<SilkwormEntity> SILKWORM = register(

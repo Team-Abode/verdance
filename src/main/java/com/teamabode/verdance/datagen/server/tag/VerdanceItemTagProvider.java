@@ -41,6 +41,7 @@ public class VerdanceItemTagProvider extends FabricTagProvider.ItemTagProvider {
     }
 
     private void silkMothFood() {
+
         this.valueLookupBuilder(VerdanceItemTags.SILK_MOTH_FOOD)
                 .forceAddTag(ItemTags.FLOWERS);
     }

@@ -9,14 +9,20 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+
+import java.util.function.Function;
 
 public class FDCompatBlocks {
     public static final Block MULBERRY_CABINET = register(
             "mulberry_cabinet",
-            new CompatCabinetBlock(AbstractBlock.Settings.copy(Blocks.BARREL))
+            CompatCabinetBlock::new,
+            AbstractBlock.Settings.copy(Blocks.BARREL)
     );
     public static final Block MULBERRY_CRATE = register(
             "mulberry_crate",
+            Block::new,
             AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)
     );
 
@@ -25,13 +31,13 @@ public class FDCompatBlocks {
     }
 
     // Registry Utils
-    private static Block register(String name, AbstractBlock.Settings properties) {
-        return register(name, new Block(properties));
-    }
+    private static Block register(String name, Function<AbstractBlock.Settings, Block> block, AbstractBlock.Settings settings) {
+        var key = RegistryKey.of(RegistryKeys.BLOCK, Verdance.id(name));
+        var registry = Registry.register(Registries.BLOCK, key, block.apply(settings.registryKey(key)));
 
-    private static Block register(String name, Block block) {
-        var registry = Registry.register(Registries.BLOCK, Verdance.id(name), block);
-        Registry.register(Registries.ITEM, Verdance.id(name), new BlockItem(registry, new Item.Settings()));
+        var itemKey = RegistryKey.of(RegistryKeys.ITEM, Verdance.id(name));
+        Registry.register(Registries.ITEM, itemKey, new BlockItem(registry, new Item.Settings().registryKey(itemKey)));
+
         return registry;
     }
 }
