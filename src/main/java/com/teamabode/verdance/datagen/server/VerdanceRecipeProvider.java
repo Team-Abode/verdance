@@ -99,7 +99,7 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
 
             this.offerSmithingTrimRecipe(
                     VerdanceItems.HERITAGE_ARMOR_TRIM_SMITHING_TEMPLATE,
-                    VerdanceTrimPatterns.COMMUNITY,
+                    VerdanceTrimPatterns.HERITAGE,
                     this.createKey(RecipeGenerator.getItemPath(VerdanceItems.HERITAGE_ARMOR_TRIM_SMITHING_TEMPLATE) + "_smithing_trim")
             );
 

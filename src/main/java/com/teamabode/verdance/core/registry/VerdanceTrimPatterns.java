@@ -9,12 +9,12 @@ import net.minecraft.text.Text;
 
 public class VerdanceTrimPatterns {
 
-    public static final RegistryKey<ArmorTrimPattern> COMMUNITY = createKey("community");
+    public static final RegistryKey<ArmorTrimPattern> HERITAGE = createKey("heritage");
 
     public static void register(Registerable<ArmorTrimPattern> context) {
-        context.register(COMMUNITY, new ArmorTrimPattern(
-                Verdance.id("community"),
-                Text.translatable("trim_pattern.verdance.community"),
+        context.register(HERITAGE, new ArmorTrimPattern(
+                Verdance.id("heritage"),
+                Text.translatable("trim_pattern.verdance.heritage"),
                 false
         ));
     }
