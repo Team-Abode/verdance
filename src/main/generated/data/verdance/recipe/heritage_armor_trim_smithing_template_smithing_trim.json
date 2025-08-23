@@ -3,5 +3,5 @@
   "addition": "#minecraft:trim_materials",
   "base": "#minecraft:trimmable_armor",
   "pattern": "verdance:community",
-  "template": "verdance:community_armor_trim_smithing_template"
+  "template": "verdance:heritage_armor_trim_smithing_template"
 }

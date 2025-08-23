@@ -75,7 +75,7 @@ public class VerdanceModelProvider extends FabricModelProvider {
         generator.register(VerdanceItems.PRICKLE_POTTERY_SHERD, Models.GENERATED);
         generator.register(VerdanceItems.SPIRIT_POTTERY_SHERD, Models.GENERATED);
         generator.register(VerdanceItems.TRAP_POTTERY_SHERD, Models.GENERATED);
-        generator.register(VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE, Models.GENERATED);
+        generator.register(VerdanceItems.HERITAGE_ARMOR_TRIM_SMITHING_TEMPLATE, Models.GENERATED);
 
         generator.register(VerdanceItems.MUSIC_DISC_RANGE, Models.GENERATED);
         generator.register(VerdanceItems.DISC_FRAGMENT_RANGE, Models.GENERATED);

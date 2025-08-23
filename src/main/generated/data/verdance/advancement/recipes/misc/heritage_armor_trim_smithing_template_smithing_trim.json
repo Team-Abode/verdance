@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "verdance:community_armor_trim_smithing_template"
+            "items": "verdance:heritage_armor_trim_smithing_template"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "verdance:community_armor_trim_smithing_template_smithing_trim"
+        "recipe": "verdance:heritage_armor_trim_smithing_template_smithing_trim"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "verdance:community_armor_trim_smithing_template_smithing_trim"
+      "verdance:heritage_armor_trim_smithing_template_smithing_trim"
     ]
   }
 }

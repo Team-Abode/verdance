@@ -88,8 +88,8 @@ public class VerdanceItems {
     public static final Item SPIRIT_POTTERY_SHERD = register("spirit_pottery_sherd", new Settings().rarity(Rarity.UNCOMMON));
     public static final Item TRAP_POTTERY_SHERD = register("trap_pottery_sherd", new Settings().rarity(Rarity.UNCOMMON));
 
-    public static final Item COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE = register(
-            "community_armor_trim_smithing_template",
+    public static final Item HERITAGE_ARMOR_TRIM_SMITHING_TEMPLATE = register(
+            "heritage_armor_trim_smithing_template",
             SmithingTemplateItem::of,
             new Settings().rarity(Rarity.UNCOMMON)
     );

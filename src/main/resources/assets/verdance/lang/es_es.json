@@ -130,11 +130,11 @@
     "item.verdance.cantaloupe_juice": "Jugo de cantalupo",
     "item.verdance.cantaloupe_seeds": "Semillas de cantalupo",
     "item.verdance.cantaloupe_slice": "Rodaja de cantalupo",
-    "item.verdance.community_armor_trim_smithing_template": "Molde de herrería",
     "item.verdance.frills_pottery_sherd": "Fragmento de cerámica de branquias",
     "item.verdance.disc_fragment_range": "Fragmento de disco",
     "item.verdance.disc_fragment_range.desc": "Disco de música - Range",
     "item.verdance.grilled_cantaloupe_slice": "Rodaja de cantalupo asado",
+    "item.verdance.heritage_armor_trim_smithing_template": "Diseño de armadura de herencia",
     "item.verdance.mulberry": "Mora blanca",
     "item.verdance.mulberry_boat": "Barca de morera",
     "item.verdance.mulberry_chest_boat": "Barca de morera con cofre",
@@ -156,5 +156,5 @@
     "subtitles.verdance.entity.silkworm.death": "Gusano de seda muerto",
     "subtitles.verdance.entity.silkworm.hurt": "Gusano de seda herido",
 
-    "trim_pattern.verdance.community": "Ornamento de comunidad"
+    "trim_pattern.verdance.heritage": "Diseño de armadura de herencia"
 }

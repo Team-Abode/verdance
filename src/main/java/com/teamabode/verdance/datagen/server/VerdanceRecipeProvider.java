@@ -95,12 +95,12 @@ public class VerdanceRecipeProvider extends FabricRecipeProvider {
             // Archaeology Treasures
             this.offerCompactingRecipe(RecipeCategory.MISC, VerdanceItems.MUSIC_DISC_RANGE, VerdanceItems.DISC_FRAGMENT_RANGE);
 
-            this.offerSmithingTemplateCopyingRecipe(VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE, VerdanceBlocks.WHITE_STUCCO);
+            this.offerSmithingTemplateCopyingRecipe(VerdanceItems.HERITAGE_ARMOR_TRIM_SMITHING_TEMPLATE, VerdanceBlocks.WHITE_STUCCO);
 
             this.offerSmithingTrimRecipe(
-                    VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE,
+                    VerdanceItems.HERITAGE_ARMOR_TRIM_SMITHING_TEMPLATE,
                     VerdanceTrimPatterns.COMMUNITY,
-                    this.createKey(RecipeGenerator.getItemPath(VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE) + "_smithing_trim")
+                    this.createKey(RecipeGenerator.getItemPath(VerdanceItems.HERITAGE_ARMOR_TRIM_SMITHING_TEMPLATE) + "_smithing_trim")
             );
 
             // Stucco
