@@ -1,0 +1,6 @@
+{
+    "type": "neoforge:add_features",
+    "biomes": "#verdance:has_cantaloupe",
+    "features": "verdance:patch_cantaloupe",
+    "step": "vegetal_decoration"
+}

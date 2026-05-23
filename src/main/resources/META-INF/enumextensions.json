@@ -1,0 +1,13 @@
+{
+    "entries": [
+        {
+            "enum": "net/minecraft/world/entity/vehicle/Boat$Type",
+            "name": "VERDANCE_MULBERRY",
+            "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
+            "parameters": {
+                "class": "com/teamabode/verdance/core/misc/VerdanceBoatTypes",
+                "field": "MULBERRY_BOAT_PROXY"
+            }
+        }
+    ]
+}

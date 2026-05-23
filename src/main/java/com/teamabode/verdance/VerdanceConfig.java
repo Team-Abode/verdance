@@ -1,19 +1,43 @@
 package com.teamabode.verdance;
 
-import com.teamabode.sketch.core.api.config.BooleanProperty;
-import com.teamabode.sketch.core.api.config.Config;
-import com.teamabode.sketch.core.api.config.FloatProperty;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import org.apache.commons.lang3.tuple.Pair;
 
-public class VerdanceConfig extends Config {
-    public static final BooleanProperty CAN_BONEMEAL_SUGAR_CANE = new BooleanProperty("can_bonemeal_sugar_cane", true);
-    public static final BooleanProperty CAN_BONEMEAL_SPORE_BLOSSOM = new BooleanProperty("can_bonemeal_spore_blossom", true);
-    public static final FloatProperty MULBERRY_FOREST_PROPORTION = new FloatProperty("mulberry_forest", 0.25f);
-    public static final FloatProperty SHRUBLANDS_PROPORTION = new FloatProperty("shrublands", 0.35f);
+public class VerdanceConfig {
+    private static final Pair<VerdanceConfig, ModConfigSpec> PAIR = new ModConfigSpec.Builder().configure(VerdanceConfig::new);
+    public static final VerdanceConfig INSTANCE = PAIR.getLeft();
+    public static final ModConfigSpec SPEC = PAIR.getRight();
 
-    public VerdanceConfig() {
-        super("verdance");
+    public final ModConfigSpec.BooleanValue canBonemealSugarCane;
+    public final ModConfigSpec.BooleanValue canBonemealSporeBlossom;
+    public final ModConfigSpec.DoubleValue mulberryForestProportion;
+    public final ModConfigSpec.DoubleValue shrublandsProportion;
 
-        this.defineCategory("general", CAN_BONEMEAL_SUGAR_CANE, CAN_BONEMEAL_SPORE_BLOSSOM);
-        this.defineCategory("biome_proportions", MULBERRY_FOREST_PROPORTION, SHRUBLANDS_PROPORTION);
+    private VerdanceConfig(ModConfigSpec.Builder builder) {
+        this.canBonemealSugarCane = builder.define(
+                "can_bonemeal_sugar_cane",
+                true
+        );
+        this.canBonemealSporeBlossom = builder.define(
+                "can_bonemeal_spore_blossom",
+                true
+        );
+        this.mulberryForestProportion = builder.defineInRange(
+                "mulberry_forest_proportion",
+                0.25d,
+                0.0d,
+                1.0d
+
+        );
+        this.shrublandsProportion = builder.defineInRange(
+                "shrublands_proportion",
+                0.35d,
+                0.0d,
+                1.0d
+        );
+    }
+
+    static {
+        Pair<VerdanceConfig, ModConfigSpec> pair = new ModConfigSpec.Builder().configure(VerdanceConfig::new);
     }
 }

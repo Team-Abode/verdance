@@ -1,0 +1,8 @@
+{
+  "asset_id": "verdance:heritage",
+  "decal": false,
+  "description": {
+    "translate": "trim_pattern.verdance.heritage"
+  },
+  "template_item": "verdance:heritage_armor_trim_smithing_template"
+}

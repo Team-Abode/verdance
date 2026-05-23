@@ -1,6 +1,6 @@
 package com.teamabode.verdance.common.entity.silkmoth.task;
 
-import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
 import java.util.Map;
 import net.minecraft.core.BlockPos;
@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
-public class SearchForLeavesTask extends ImprovedSingleTickTask<SilkMothEntity> {
+public class SearchForLeavesTask extends ImprovedSingleTickTask<SilkMoth> {
     private long lastExecution = 0L;
 
     @Override
@@ -23,7 +23,7 @@ public class SearchForLeavesTask extends ImprovedSingleTickTask<SilkMothEntity> 
     }
 
     @Override
-    public void run(ServerLevel level, SilkMothEntity entity, long gameTime) {
+    public void run(ServerLevel level, SilkMoth entity, long gameTime) {
         if (gameTime > this.lastExecution) {
             this.lastExecution = gameTime + 40L;
             return;

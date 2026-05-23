@@ -1,0 +1,37 @@
+{
+    "values": {
+        "verdance:cantaloupe": {
+            "chance": 0.65
+        },
+        "verdance:cantaloupe_seeds": {
+            "chance": 0.3
+        },
+        "verdance:cantaloupe_slice": {
+            "chance": 0.5
+        },
+        "verdance:flowering_mulberry_leaves": {
+            "chance": 0.5
+        },
+        "verdance:grilled_cantaloupe_slice": {
+            "chance": 0.65
+        },
+        "verdance:mulberry": {
+            "chance": 0.3
+        },
+        "verdance:mulberry_leaves": {
+            "chance": 0.3
+        },
+        "verdance:violet": {
+            "chance": 0.65
+        },
+        "verdance:shrub": {
+            "chance": 0.3
+        },
+        "verdance:pink_flowering_shrub": {
+            "chance": 0.3
+        },
+        "verdance:yellow_flowering_shrub": {
+            "chance": 0.3
+        }
+    }
+}

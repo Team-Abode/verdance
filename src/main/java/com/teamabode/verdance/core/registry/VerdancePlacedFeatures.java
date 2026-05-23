@@ -45,7 +45,7 @@ public class VerdancePlacedFeatures {
         ));
         PlacementUtils.register(context, MULBERRY, configuredFeatures.getOrThrow(VerdanceConfiguredFeatures.MULBERRY), List.of(
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(
-                        VerdanceBlocks.MULBERRY_SAPLING.defaultBlockState(),
+                        VerdanceBlocks.MULBERRY_SAPLING.get().defaultBlockState(),
                         Vec3i.ZERO
                 ))
         ));
@@ -55,7 +55,7 @@ public class VerdancePlacedFeatures {
                 SurfaceWaterDepthFilter.forMaxDepth(0),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(
-                        VerdanceBlocks.MULBERRY_SAPLING.defaultBlockState(),
+                        VerdanceBlocks.MULBERRY_SAPLING.get().defaultBlockState(),
                         Vec3i.ZERO
                 )),
                 BiomeFilter.biome()

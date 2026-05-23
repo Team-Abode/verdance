@@ -130,7 +130,7 @@
     "item.verdance.cantaloupe_juice": "Канталуповий сік",
     "item.verdance.cantaloupe_seeds": "Насіння канталупи",
     "item.verdance.cantaloupe_slice": "Скибка канталупи",
-    "item.verdance.community_armor_trim_smithing_template": "Ковальський шаблон",
+    "item.verdance.heritage_armor_trim_smithing_template": "Ковальський шаблон",
     "item.verdance.disc_fragment_range": "Фрагмент платівки",
     "item.verdance.disc_fragment_range.desc": "Платівка — Range",
     "item.verdance.frills_pottery_sherd": "Гончарний черепок «Кривляння»",
@@ -156,5 +156,5 @@
     "subtitles.verdance.entity.silkworm.death": "Гусінь шовкопряда гине",
     "subtitles.verdance.entity.silkworm.hurt": "Гусінь шовкопряда поранено",
 
-    "trim_pattern.verdance.community": "Орнамент обладунків «Спільнота»"
+    "trim_pattern.verdance.heritage": "Орнамент обладунків «Спільнота»"
 }

@@ -1,0 +1,10 @@
+{
+    "values": {
+        "verdance:mulberry_log": {
+            "stripped_block": "verdance:stripped_mulberry_log"
+        },
+        "verdance:mulberry_wood": {
+            "stripped_block": "verdance:stripped_mulberry_wood"
+        }
+    }
+}

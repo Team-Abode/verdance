@@ -1,6 +1,6 @@
 package com.teamabode.verdance.common.entity.silkmoth.task;
 
-import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -14,13 +14,13 @@ import net.minecraft.world.level.gameevent.GameEvent;
 
 public class LayEggsTask {
 
-    public static BehaviorControl<SilkMothEntity> create() {
+    public static BehaviorControl<SilkMoth> create() {
         return BehaviorBuilder.create(instance -> instance.group(
                 instance.present(MemoryModuleType.IS_PREGNANT)
         ).apply(instance, (isPregnantMemory) -> LayEggsTask::tryStart));
     }
 
-    private static boolean tryStart(ServerLevel level, SilkMothEntity entity, long gameTime) {
+    private static boolean tryStart(ServerLevel level, SilkMoth entity, long gameTime) {
         BlockPos entityPos = entity.blockPosition();
 
         BlockPos relativePos = entityPos.below();
@@ -30,7 +30,7 @@ public class LayEggsTask {
         boolean isLeaves = level.getBlockState(relativePos).is(BlockTags.LEAVES);
 
         if (isEmpty && isLeaves) {
-            BlockState eggState = VerdanceBlocks.SILKWORM_EGGS.defaultBlockState();
+            BlockState eggState = VerdanceBlocks.SILKWORM_EGGS.get().defaultBlockState();
 
             level.setBlock(eggPos, eggState, 3);
             level.playSound(null, eggPos, eggState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0f, 1.0f);

@@ -3,6 +3,9 @@ package com.teamabode.verdance.common.block;
 import com.mojang.serialization.MapCodec;
 import com.teamabode.verdance.common.block.entity.SilkCocoonBlockEntity;
 import com.teamabode.verdance.core.registry.VerdanceBlockEntityTypes;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -76,6 +79,15 @@ public class SilkCocoonBlock extends BaseEntityBlock {
     }
 
     @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        SilkCocoonBlockEntity blockEntity = (SilkCocoonBlockEntity) level.getBlockEntity(pos);
+        if (blockEntity != null) {
+            blockEntity.wobble(level);
+        }
+        return super.useWithoutItem(state, level, pos, player, hitResult);
+    }
+
+    @Override
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         return direction == state.getValue(FACING) && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
@@ -102,6 +114,6 @@ public class SilkCocoonBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, VerdanceBlockEntityTypes.SILK_COCOON, SilkCocoonBlockEntity::tick);
+        return createTickerHelper(blockEntityType, VerdanceBlockEntityTypes.SILK_COCOON.get(), SilkCocoonBlockEntity::tick);
     }
 }

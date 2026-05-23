@@ -131,7 +131,7 @@
     "item.verdance.cantaloupe_juice": "メロンのジュース",
     "item.verdance.cantaloupe_seeds": "メロンの種",
     "item.verdance.cantaloupe_slice": "メロンの薄切り",
-    "item.verdance.community_armor_trim_smithing_template": "鍛冶型",
+    "item.verdance.heritage_armor_trim_smithing_template": "鍛冶型",
     "item.verdance.disc_fragment_range": "レコードの破片",
     "item.verdance.disc_fragment_range.desc": "レコード - Range",
     "item.verdance.frills_pottery_sherd": "エラの壺の欠片",
@@ -156,5 +156,5 @@
     "subtitles.verdance.entity.silk_moth.idle": "クワコがさえずる",
     "subtitles.verdance.entity.silkworm.death": "クワコの幼虫が死ぬ",
     "subtitles.verdance.entity.silkworm.hurt": "クワコの幼虫がダメージを受ける",
-    "trim_pattern.verdance.community": "コミュニティ風の装飾"
+    "trim_pattern.verdance.heritage": "コミュニティ風の装飾"
 }

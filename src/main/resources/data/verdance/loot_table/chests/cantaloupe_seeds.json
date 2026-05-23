@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:chest",
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "verdance:cantaloupe_seeds",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_count",
+                            "count": {
+                                "min": 2,
+                                "max": 5
+                            },
+                            "add": false
+                        }
+                    ],
+                    "weight": 1
+                },
+                {
+                    "type": "minecraft:empty",
+                    "weight": 5
+                }
+            ]
+        }
+    ],
+    "random_sequence": "verdance:chests/cantaloupe_seeds"
+}

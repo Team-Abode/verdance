@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.25,
+  "ingredient": {
+    "item": "verdance:cantaloupe_slice"
+  },
+  "result": {
+    "count": 1,
+    "id": "verdance:grilled_cantaloupe_slice"
+  }
+}

@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.storage.loot.LootTable;
 
 public class VerdanceLootTables {
-
     public static final ResourceKey<LootTable> ARCHAEOLOGY_TOWN_RUINS_COMMON = createKey("archaeology/town_ruins_common");
     public static final ResourceKey<LootTable> ARCHAEOLOGY_TOWN_RUINS_TREASURE = createKey("archaeology/town_ruins_treasure");
 

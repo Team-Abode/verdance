@@ -59,7 +59,7 @@ public class CushionBlock extends Block {
                 return InteractionResult.FAIL;
             }
             level.setBlockAndUpdate(blockPos, blockState.setValue(OCCUPIED, true));
-            CushionEntity cushion = new CushionEntity(VerdanceEntityTypes.CUSHION, level);
+            CushionEntity cushion = new CushionEntity(VerdanceEntityTypes.CUSHION.get(), level);
             cushion.setPos(blockPos.getX() + 0.5D, blockPos.getY() + 0.4D, blockPos.getZ() + 0.5D);
 
             if (level.addFreshEntity(cushion)) {

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "verdance:block/mulberry_crate_bottom",
-    "side": "verdance:block/mulberry_crate_side",
-    "top": "verdance:block/mulberry_crate_top"
-  }
-}

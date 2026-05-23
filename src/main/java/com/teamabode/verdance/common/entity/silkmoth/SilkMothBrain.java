@@ -51,19 +51,19 @@ public class SilkMothBrain {
             MemoryModuleType.BREED_TARGET,
             MemoryModuleType.NEAREST_LIVING_ENTITIES,
             MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
-            VerdanceMemoryModuleTypes.IS_FLYING,
-            VerdanceMemoryModuleTypes.LANDING_TIME,
-            VerdanceMemoryModuleTypes.WANTS_TO_LAND
+            VerdanceMemoryModuleTypes.IS_FLYING.get(),
+            VerdanceMemoryModuleTypes.LANDING_TIME.get(),
+            VerdanceMemoryModuleTypes.WANTS_TO_LAND.get()
     );
 
-    public static final List<SensorType<? extends Sensor<? super SilkMothEntity>>> SENSORS = ImmutableList.of(
-            VerdanceSensorTypes.SILK_MOTH_SPECIFIC_SENSOR,
-            VerdanceSensorTypes.SILK_MOTH_TEMPTATIONS,
+    public static final List<SensorType<? extends Sensor<? super SilkMoth>>> SENSORS = ImmutableList.of(
+            VerdanceSensorTypes.SILK_MOTH_SPECIFIC_SENSOR.get(),
+            VerdanceSensorTypes.SILK_MOTH_TEMPTATIONS.get(),
             SensorType.NEAREST_LIVING_ENTITIES,
             SensorType.HURT_BY
     );
 
-    public static Brain<SilkMothEntity> createBrain(Brain<SilkMothEntity> brain) {
+    public static Brain<SilkMoth> createBrain(Brain<SilkMoth> brain) {
         addCoreActivities(brain);
         addIdleActivities(brain);
         addLayEggsActivities(brain);
@@ -73,7 +73,7 @@ public class SilkMothBrain {
         return brain;
     }
 
-    private static void addCoreActivities(Brain<SilkMothEntity> brain) {
+    private static void addCoreActivities(Brain<SilkMoth> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new Swim(1.0f),
                 new TakeOffTask(),
@@ -85,9 +85,9 @@ public class SilkMothBrain {
         ));
     }
 
-    private static void addIdleActivities(Brain<SilkMothEntity> brain) {
+    private static void addIdleActivities(Brain<SilkMoth> brain) {
         brain.addActivity(Activity.IDLE, ImmutableList.of(
-                Pair.of(0, new AnimalMakeLove(VerdanceEntityTypes.SILK_MOTH)),
+                Pair.of(0, new AnimalMakeLove(VerdanceEntityTypes.SILK_MOTH.get())),
                 Pair.of(1, new FollowTemptation(livingEntity -> 1.5f)),
                 Pair.of(2, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
                 Pair.of(2, new GoTowardsLandingTask()),
@@ -95,18 +95,18 @@ public class SilkMothBrain {
         ));
     }
 
-    private static void addLayEggsActivities(Brain<SilkMothEntity> brain) {
-        brain.addActivityWithConditions(VerdanceActivities.LAY_EGGS, ImmutableList.of(
+    private static void addLayEggsActivities(Brain<SilkMoth> brain) {
+        brain.addActivityWithConditions(VerdanceActivities.LAY_EGGS.get(), ImmutableList.of(
                 Pair.of(0, new SearchForLeavesTask()),
                 Pair.of(1, LayEggsTask.create()),
                 Pair.of(2, addMovementTasks())
         ), ImmutableSet.of(Pair.of(MemoryModuleType.IS_PREGNANT, MemoryStatus.VALUE_PRESENT)));
     }
 
-    public static void updateActivity(SilkMothEntity silkMoth) {
+    public static void updateActivity(SilkMoth silkMoth) {
         silkMoth.getBrain().setActiveActivityToFirstValid(ImmutableList.of(
-                VerdanceActivities.LAY_EGGS,
-                VerdanceActivities.SLEEP,
+                VerdanceActivities.LAY_EGGS.get(),
+                VerdanceActivities.SLEEP.get(),
                 Activity.IDLE
         ));
     }
@@ -115,11 +115,11 @@ public class SilkMothBrain {
         return Ingredient.of(VerdanceItemTags.SILK_MOTH_FOOD);
     }
 
-    private static RunOne<SilkMothEntity> addMovementTasks() {
+    private static RunOne<SilkMoth> addMovementTasks() {
         return new RunOne<>(ImmutableList.of(
-                Pair.of(BehaviorBuilder.triggerIf(SilkMothEntity::isFlying, new AerialStrollTask()), 2),
-                Pair.of(BehaviorBuilder.triggerIf(SilkMothEntity::isFlying, new GoTowardsLandingTask()), 2),
-                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(SilkMothEntity::isFlying), RandomStroll.stroll(1.0f)), 2),
+                Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new AerialStrollTask()), 2),
+                Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new GoTowardsLandingTask()), 2),
+                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(SilkMoth::isFlying), RandomStroll.stroll(1.0f)), 2),
                 Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 3), 2),
                 Pair.of(new DoNothing(30,  60), 1)
         ));

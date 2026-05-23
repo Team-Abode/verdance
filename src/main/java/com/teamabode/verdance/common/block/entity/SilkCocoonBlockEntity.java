@@ -1,6 +1,6 @@
 package com.teamabode.verdance.common.block.entity;
 
-import com.teamabode.verdance.common.entity.silkmoth.SilkMothEntity;
+import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
 import com.teamabode.verdance.core.registry.VerdanceBlockEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import com.teamabode.verdance.core.registry.VerdanceSoundEvents;
@@ -29,7 +29,7 @@ public class SilkCocoonBlockEntity extends BlockEntity {
     public boolean wobbling = false;
 
     public SilkCocoonBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(VerdanceBlockEntityTypes.SILK_COCOON, blockPos, blockState);
+        super(VerdanceBlockEntityTypes.SILK_COCOON.get(), blockPos, blockState);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, SilkCocoonBlockEntity cocoon) {
@@ -43,14 +43,15 @@ public class SilkCocoonBlockEntity extends BlockEntity {
             cocoon.wobbling = false;
             cocoon.wobbleTicks = 0;
         }
+
         if (ticks >= 4800) {
-            SilkMothEntity silkMoth = new SilkMothEntity(VerdanceEntityTypes.SILK_MOTH, level);
+            SilkMoth silkMoth = new SilkMoth(VerdanceEntityTypes.SILK_MOTH.get(), level);
             silkMoth.setPos(pos.getCenter());
             silkMoth.setYHeadRot(state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot());
             silkMoth.setYRot(state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot());
             silkMoth.takeOff();
 
-            level.playSound(null, pos, VerdanceSoundEvents.ENTITY_SILK_MOTH_EMERGE, SoundSource.NEUTRAL);
+            level.playSound(null, pos, VerdanceSoundEvents.ENTITY_SILK_MOTH_EMERGE.get(), SoundSource.NEUTRAL);
             level.addFreshEntity(silkMoth);
             level.destroyBlock(pos, true);
         }
@@ -82,7 +83,7 @@ public class SilkCocoonBlockEntity extends BlockEntity {
         if (random.nextInt(2) == 0) {
             this.dropString(level, random, pos);
         }
-        level.playSound(null, pos, VerdanceSoundEvents.BLOCK_SILK_COCOON_WOBBLE, SoundSource.BLOCKS);
+        level.playSound(null, pos, VerdanceSoundEvents.BLOCK_SILK_COCOON_WOBBLE.get(), SoundSource.BLOCKS);
     }
 
     public void dropString(Level level, RandomSource random, BlockPos origin) {

@@ -130,7 +130,7 @@
     "item.verdance.cantaloupe_juice": "Kavun Suyu",
     "item.verdance.cantaloupe_seeds": "Kavun Tohumu",
     "item.verdance.cantaloupe_slice": "Kavun Dilimi",
-    "item.verdance.community_armor_trim_smithing_template": "Demirci Şablonu",
+    "item.verdance.heritage_armor_trim_smithing_template": "Demirci Şablonu",
     "item.verdance.disc_fragment_range": "Disk Parçası",
     "item.verdance.disc_fragment_range.desc": "Müzik Diski - Range",
     "item.verdance.frills_pottery_sherd": "Gösteriş Çömlek Parçası",
@@ -156,5 +156,5 @@
     "subtitles.verdance.entity.silkworm.death": "İpekböceği öldü",
     "subtitles.verdance.entity.silkworm.hurt": "İpekböceği hasar aldı",
 
-    "trim_pattern.verdance.community": "Topluluk Zırh Süslemesi"
+    "trim_pattern.verdance.heritage": "Topluluk Zırh Süslemesi"
 }

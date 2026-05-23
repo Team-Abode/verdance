@@ -1,18 +1,22 @@
 package com.teamabode.verdance.datagen.server.tag;
 
+import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.core.tag.VerdanceBlockTags;
 import com.teamabode.verdance.core.registry.VerdanceBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.concurrent.CompletableFuture;
 
-public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider {
+public class VerdanceBlockTagProvider extends BlockTagsProvider {
 
-    public VerdanceBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
-        super(output, registriesFuture);
+    public VerdanceBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, Verdance.MOD_ID, existingFileHelper);
     }
 
     protected void addTags(HolderLookup.Provider arg) {
@@ -50,319 +54,295 @@ public class VerdanceBlockTagProvider extends FabricTagProvider.BlockTagProvider
 
     private void mineablePickaxe() {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(VerdanceBlocks.WHITE_STUCCO)
-                .add(VerdanceBlocks.WHITE_STUCCO_STAIRS)
-                .add(VerdanceBlocks.WHITE_STUCCO_SLAB)
-                .add(VerdanceBlocks.WHITE_STUCCO_WALL)
-                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO)
-                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS)
-                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB)
-                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL)
-                .add(VerdanceBlocks.GRAY_STUCCO)
-                .add(VerdanceBlocks.GRAY_STUCCO_STAIRS)
-                .add(VerdanceBlocks.GRAY_STUCCO_SLAB)
-                .add(VerdanceBlocks.GRAY_STUCCO_WALL)
-                .add(VerdanceBlocks.BLACK_STUCCO)
-                .add(VerdanceBlocks.BLACK_STUCCO_STAIRS)
-                .add(VerdanceBlocks.BLACK_STUCCO_SLAB)
-                .add(VerdanceBlocks.BLACK_STUCCO_WALL)
-                .add(VerdanceBlocks.BROWN_STUCCO)
-                .add(VerdanceBlocks.BROWN_STUCCO_STAIRS)
-                .add(VerdanceBlocks.BROWN_STUCCO_SLAB)
-                .add(VerdanceBlocks.BROWN_STUCCO_WALL)
-                .add(VerdanceBlocks.RED_STUCCO)
-                .add(VerdanceBlocks.RED_STUCCO_STAIRS)
-                .add(VerdanceBlocks.RED_STUCCO_SLAB)
-                .add(VerdanceBlocks.RED_STUCCO_WALL)
-                .add(VerdanceBlocks.ORANGE_STUCCO)
-                .add(VerdanceBlocks.ORANGE_STUCCO_STAIRS)
-                .add(VerdanceBlocks.ORANGE_STUCCO_SLAB)
-                .add(VerdanceBlocks.ORANGE_STUCCO_WALL)
-                .add(VerdanceBlocks.YELLOW_STUCCO)
-                .add(VerdanceBlocks.YELLOW_STUCCO_STAIRS)
-                .add(VerdanceBlocks.YELLOW_STUCCO_SLAB)
-                .add(VerdanceBlocks.YELLOW_STUCCO_WALL)
-                .add(VerdanceBlocks.LIME_STUCCO)
-                .add(VerdanceBlocks.LIME_STUCCO_STAIRS)
-                .add(VerdanceBlocks.LIME_STUCCO_SLAB)
-                .add(VerdanceBlocks.LIME_STUCCO_WALL)
-                .add(VerdanceBlocks.GREEN_STUCCO)
-                .add(VerdanceBlocks.GREEN_STUCCO_STAIRS)
-                .add(VerdanceBlocks.GREEN_STUCCO_SLAB)
-                .add(VerdanceBlocks.GREEN_STUCCO_WALL)
-                .add(VerdanceBlocks.CYAN_STUCCO)
-                .add(VerdanceBlocks.CYAN_STUCCO_STAIRS)
-                .add(VerdanceBlocks.CYAN_STUCCO_SLAB)
-                .add(VerdanceBlocks.CYAN_STUCCO_WALL)
-                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO)
-                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO_STAIRS)
-                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO_SLAB)
-                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO_WALL)
-                .add(VerdanceBlocks.BLUE_STUCCO)
-                .add(VerdanceBlocks.BLUE_STUCCO_STAIRS)
-                .add(VerdanceBlocks.BLUE_STUCCO_SLAB)
-                .add(VerdanceBlocks.BLUE_STUCCO_WALL)
-                .add(VerdanceBlocks.PURPLE_STUCCO)
-                .add(VerdanceBlocks.PURPLE_STUCCO_STAIRS)
-                .add(VerdanceBlocks.PURPLE_STUCCO_SLAB)
-                .add(VerdanceBlocks.PURPLE_STUCCO_WALL)
-                .add(VerdanceBlocks.MAGENTA_STUCCO)
-                .add(VerdanceBlocks.MAGENTA_STUCCO_STAIRS)
-                .add(VerdanceBlocks.MAGENTA_STUCCO_SLAB)
-                .add(VerdanceBlocks.MAGENTA_STUCCO_WALL)
-                .add(VerdanceBlocks.PINK_STUCCO)
-                .add(VerdanceBlocks.PINK_STUCCO_STAIRS)
-                .add(VerdanceBlocks.PINK_STUCCO_SLAB)
-                .add(VerdanceBlocks.PINK_STUCCO_WALL)
-                .setReplace(false);
+                .add(VerdanceBlocks.WHITE_STUCCO.get())
+                .add(VerdanceBlocks.WHITE_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.WHITE_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.WHITE_STUCCO_WALL.get())
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO.get())
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL.get())
+                .add(VerdanceBlocks.GRAY_STUCCO.get())
+                .add(VerdanceBlocks.GRAY_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.GRAY_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.GRAY_STUCCO_WALL.get())
+                .add(VerdanceBlocks.BLACK_STUCCO.get())
+                .add(VerdanceBlocks.BLACK_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.BLACK_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.BLACK_STUCCO_WALL.get())
+                .add(VerdanceBlocks.BROWN_STUCCO.get())
+                .add(VerdanceBlocks.BROWN_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.BROWN_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.BROWN_STUCCO_WALL.get())
+                .add(VerdanceBlocks.RED_STUCCO.get())
+                .add(VerdanceBlocks.RED_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.RED_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.RED_STUCCO_WALL.get())
+                .add(VerdanceBlocks.ORANGE_STUCCO.get())
+                .add(VerdanceBlocks.ORANGE_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.ORANGE_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.ORANGE_STUCCO_WALL.get())
+                .add(VerdanceBlocks.YELLOW_STUCCO.get())
+                .add(VerdanceBlocks.YELLOW_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.YELLOW_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.YELLOW_STUCCO_WALL.get())
+                .add(VerdanceBlocks.LIME_STUCCO.get())
+                .add(VerdanceBlocks.LIME_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.LIME_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.LIME_STUCCO_WALL.get())
+                .add(VerdanceBlocks.GREEN_STUCCO.get())
+                .add(VerdanceBlocks.GREEN_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.GREEN_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.GREEN_STUCCO_WALL.get())
+                .add(VerdanceBlocks.CYAN_STUCCO.get())
+                .add(VerdanceBlocks.CYAN_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.CYAN_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.CYAN_STUCCO_WALL.get())
+                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO.get())
+                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO_WALL.get())
+                .add(VerdanceBlocks.BLUE_STUCCO.get())
+                .add(VerdanceBlocks.BLUE_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.BLUE_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.BLUE_STUCCO_WALL.get())
+                .add(VerdanceBlocks.PURPLE_STUCCO.get())
+                .add(VerdanceBlocks.PURPLE_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.PURPLE_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.PURPLE_STUCCO_WALL.get())
+                .add(VerdanceBlocks.MAGENTA_STUCCO.get())
+                .add(VerdanceBlocks.MAGENTA_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.MAGENTA_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.MAGENTA_STUCCO_WALL.get())
+                .add(VerdanceBlocks.PINK_STUCCO.get())
+                .add(VerdanceBlocks.PINK_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.PINK_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.PINK_STUCCO_WALL.get());
     }
 
     private void mineableHoe() {
         this.tag(BlockTags.MINEABLE_WITH_HOE)
-                .add(VerdanceBlocks.MULBERRY_LEAVES)
-                .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_LEAVES.get())
+                .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES.get());
     }
 
     private void mineableAxe() {
         this.tag(BlockTags.MINEABLE_WITH_AXE)
-                .add(VerdanceBlocks.CANTALOUPE)
-                .add(VerdanceBlocks.WHITE_CUSHION)
-                .add(VerdanceBlocks.LIGHT_GRAY_CUSHION)
-                .add(VerdanceBlocks.GRAY_CUSHION)
-                .add(VerdanceBlocks.BLACK_CUSHION)
-                .add(VerdanceBlocks.BROWN_CUSHION)
-                .add(VerdanceBlocks.RED_CUSHION)
-                .add(VerdanceBlocks.ORANGE_CUSHION)
-                .add(VerdanceBlocks.YELLOW_CUSHION)
-                .add(VerdanceBlocks.LIME_CUSHION)
-                .add(VerdanceBlocks.GREEN_CUSHION)
-                .add(VerdanceBlocks.CYAN_CUSHION)
-                .add(VerdanceBlocks.LIGHT_BLUE_CUSHION)
-                .add(VerdanceBlocks.BLUE_CUSHION)
-                .add(VerdanceBlocks.PURPLE_CUSHION)
-                .add(VerdanceBlocks.MAGENTA_CUSHION)
-                .add(VerdanceBlocks.PINK_CUSHION)
-                .setReplace(false);
+                .add(VerdanceBlocks.CANTALOUPE.get())
+                .add(VerdanceBlocks.WHITE_CUSHION.get())
+                .add(VerdanceBlocks.LIGHT_GRAY_CUSHION.get())
+                .add(VerdanceBlocks.GRAY_CUSHION.get())
+                .add(VerdanceBlocks.BLACK_CUSHION.get())
+                .add(VerdanceBlocks.BROWN_CUSHION.get())
+                .add(VerdanceBlocks.RED_CUSHION.get())
+                .add(VerdanceBlocks.ORANGE_CUSHION.get())
+                .add(VerdanceBlocks.YELLOW_CUSHION.get())
+                .add(VerdanceBlocks.LIME_CUSHION.get())
+                .add(VerdanceBlocks.GREEN_CUSHION.get())
+                .add(VerdanceBlocks.CYAN_CUSHION.get())
+                .add(VerdanceBlocks.LIGHT_BLUE_CUSHION.get())
+                .add(VerdanceBlocks.BLUE_CUSHION.get())
+                .add(VerdanceBlocks.PURPLE_CUSHION.get())
+                .add(VerdanceBlocks.MAGENTA_CUSHION.get())
+                .add(VerdanceBlocks.PINK_CUSHION.get());
     }
 
     private void swordEfficient() {
-        this.tag(BlockTags.SWORD_EFFICIENT).add(VerdanceBlocks.CANTALOUPE);
+        this.tag(BlockTags.SWORD_EFFICIENT).add(VerdanceBlocks.CANTALOUPE.get());
     }
 
     private void walls() {
         this.tag(BlockTags.WALLS)
-                .add(VerdanceBlocks.WHITE_STUCCO_WALL)
-                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL)
-                .add(VerdanceBlocks.GRAY_STUCCO_WALL)
-                .add(VerdanceBlocks.BLACK_STUCCO_WALL)
-                .add(VerdanceBlocks.BROWN_STUCCO_WALL)
-                .add(VerdanceBlocks.RED_STUCCO_WALL)
-                .add(VerdanceBlocks.ORANGE_STUCCO_WALL)
-                .add(VerdanceBlocks.YELLOW_STUCCO_WALL)
-                .add(VerdanceBlocks.LIME_STUCCO_WALL)
-                .add(VerdanceBlocks.GREEN_STUCCO_WALL)
-                .add(VerdanceBlocks.CYAN_STUCCO_WALL)
-                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO_WALL)
-                .add(VerdanceBlocks.BLUE_STUCCO_WALL)
-                .add(VerdanceBlocks.PURPLE_STUCCO_WALL)
-                .add(VerdanceBlocks.MAGENTA_STUCCO_WALL)
-                .add(VerdanceBlocks.PINK_STUCCO_WALL)
-                .setReplace(false);
+                .add(VerdanceBlocks.WHITE_STUCCO_WALL.get())
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_WALL.get())
+                .add(VerdanceBlocks.GRAY_STUCCO_WALL.get())
+                .add(VerdanceBlocks.BLACK_STUCCO_WALL.get())
+                .add(VerdanceBlocks.BROWN_STUCCO_WALL.get())
+                .add(VerdanceBlocks.RED_STUCCO_WALL.get())
+                .add(VerdanceBlocks.ORANGE_STUCCO_WALL.get())
+                .add(VerdanceBlocks.YELLOW_STUCCO_WALL.get())
+                .add(VerdanceBlocks.LIME_STUCCO_WALL.get())
+                .add(VerdanceBlocks.GREEN_STUCCO_WALL.get())
+                .add(VerdanceBlocks.CYAN_STUCCO_WALL.get())
+                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO_WALL.get())
+                .add(VerdanceBlocks.BLUE_STUCCO_WALL.get())
+                .add(VerdanceBlocks.PURPLE_STUCCO_WALL.get())
+                .add(VerdanceBlocks.MAGENTA_STUCCO_WALL.get())
+                .add(VerdanceBlocks.PINK_STUCCO_WALL.get());
     }
 
     private void planks() {
         this.tag(BlockTags.PLANKS)
-                .add(VerdanceBlocks.MULBERRY_PLANKS)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_PLANKS.get());
     }
 
     private void stairs() {
         this.tag(BlockTags.STAIRS)
-                .add(VerdanceBlocks.WHITE_STUCCO_STAIRS)
-                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS)
-                .add(VerdanceBlocks.GRAY_STUCCO_STAIRS)
-                .add(VerdanceBlocks.BLACK_STUCCO_STAIRS)
-                .add(VerdanceBlocks.BROWN_STUCCO_STAIRS)
-                .add(VerdanceBlocks.RED_STUCCO_STAIRS)
-                .add(VerdanceBlocks.ORANGE_STUCCO_STAIRS)
-                .add(VerdanceBlocks.YELLOW_STUCCO_STAIRS)
-                .add(VerdanceBlocks.LIME_STUCCO_STAIRS)
-                .add(VerdanceBlocks.GREEN_STUCCO_STAIRS)
-                .add(VerdanceBlocks.CYAN_STUCCO_STAIRS)
-                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO_STAIRS)
-                .add(VerdanceBlocks.BLUE_STUCCO_STAIRS)
-                .add(VerdanceBlocks.PURPLE_STUCCO_STAIRS)
-                .add(VerdanceBlocks.MAGENTA_STUCCO_STAIRS)
-                .add(VerdanceBlocks.PINK_STUCCO_STAIRS)
-                .setReplace(false);
+                .add(VerdanceBlocks.WHITE_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.GRAY_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.BLACK_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.BROWN_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.RED_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.ORANGE_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.YELLOW_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.LIME_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.GREEN_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.CYAN_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.BLUE_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.PURPLE_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.MAGENTA_STUCCO_STAIRS.get())
+                .add(VerdanceBlocks.PINK_STUCCO_STAIRS.get());
+
         this.tag(BlockTags.WOODEN_STAIRS)
-                .add(VerdanceBlocks.MULBERRY_STAIRS)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_STAIRS.get());
     }
 
     private void slabs() {
         this.tag(BlockTags.SLABS)
-                .add(VerdanceBlocks.WHITE_STUCCO_SLAB)
-                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB)
-                .add(VerdanceBlocks.GRAY_STUCCO_SLAB)
-                .add(VerdanceBlocks.BLACK_STUCCO_SLAB)
-                .add(VerdanceBlocks.BROWN_STUCCO_SLAB)
-                .add(VerdanceBlocks.RED_STUCCO_SLAB)
-                .add(VerdanceBlocks.ORANGE_STUCCO_SLAB)
-                .add(VerdanceBlocks.YELLOW_STUCCO_SLAB)
-                .add(VerdanceBlocks.LIME_STUCCO_SLAB)
-                .add(VerdanceBlocks.GREEN_STUCCO_SLAB)
-                .add(VerdanceBlocks.CYAN_STUCCO_SLAB)
-                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO_SLAB)
-                .add(VerdanceBlocks.BLUE_STUCCO_SLAB)
-                .add(VerdanceBlocks.PURPLE_STUCCO_SLAB)
-                .add(VerdanceBlocks.MAGENTA_STUCCO_SLAB)
-                .add(VerdanceBlocks.PINK_STUCCO_SLAB)
-                .setReplace(false);
+                .add(VerdanceBlocks.WHITE_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.LIGHT_GRAY_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.GRAY_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.BLACK_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.BROWN_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.RED_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.ORANGE_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.YELLOW_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.LIME_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.GREEN_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.CYAN_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.LIGHT_BLUE_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.BLUE_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.PURPLE_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.MAGENTA_STUCCO_SLAB.get())
+                .add(VerdanceBlocks.PINK_STUCCO_SLAB.get());
+
         this.tag(BlockTags.WOODEN_SLABS)
-                .add(VerdanceBlocks.MULBERRY_SLAB)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_SLAB.get());
     }
 
     private void fences() {
         this.tag(BlockTags.WOODEN_FENCES)
-                .add(VerdanceBlocks.MULBERRY_FENCE)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_FENCE.get());
     }
 
     private void fenceGates() {
         this.tag(BlockTags.FENCE_GATES)
-                .add(VerdanceBlocks.MULBERRY_FENCE_GATE)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_FENCE_GATE.get());
     }
 
     private void doors() {
         this.tag(BlockTags.WOODEN_DOORS)
-                .add(VerdanceBlocks.MULBERRY_DOOR)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_DOOR.get());
     }
 
     private void trapdoors() {
         this.tag(BlockTags.WOODEN_TRAPDOORS)
-                .add(VerdanceBlocks.MULBERRY_TRAPDOOR)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_TRAPDOOR.get());
     }
 
     private void pressurePlates() {
         this.tag(BlockTags.WOODEN_PRESSURE_PLATES)
-                .add(VerdanceBlocks.MULBERRY_PRESSURE_PLATE)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_PRESSURE_PLATE.get());
     }
 
     private void buttons() {
         this.tag(BlockTags.WOODEN_BUTTONS)
-                .add(VerdanceBlocks.MULBERRY_BUTTON)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_BUTTON.get());
     }
 
     private void signs() {
         this.tag(BlockTags.STANDING_SIGNS)
-                .add(VerdanceBlocks.MULBERRY_SIGN)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_SIGN.get());
         this.tag(BlockTags.WALL_SIGNS)
-                .add(VerdanceBlocks.MULBERRY_WALL_SIGN)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_WALL_SIGN.get());
         this.tag(BlockTags.CEILING_HANGING_SIGNS)
-                .add(VerdanceBlocks.MULBERRY_HANGING_SIGN)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_HANGING_SIGN.get());
         this.tag(BlockTags.WALL_HANGING_SIGNS)
-                .add(VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN.get());
     }
 
     private void logs() {
         this.tag(VerdanceBlockTags.MULBERRY_LOGS)
-                .add(VerdanceBlocks.MULBERRY_LOG)
-                .add(VerdanceBlocks.MULBERRY_WOOD)
-                .add(VerdanceBlocks.STRIPPED_MULBERRY_LOG)
-                .add(VerdanceBlocks.STRIPPED_MULBERRY_WOOD)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_LOG.get())
+                .add(VerdanceBlocks.MULBERRY_WOOD.get())
+                .add(VerdanceBlocks.STRIPPED_MULBERRY_LOG.get())
+                .add(VerdanceBlocks.STRIPPED_MULBERRY_WOOD.get());
         this.tag(BlockTags.LOGS_THAT_BURN)
-                .forceAddTag(VerdanceBlockTags.MULBERRY_LOGS)
-                .setReplace(false);
+                .addTag(VerdanceBlockTags.MULBERRY_LOGS);
         this.tag(BlockTags.OVERWORLD_NATURAL_LOGS)
-                .add(VerdanceBlocks.MULBERRY_LOG)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_LOG.get());
     }
 
     private void saplings() {
         this.tag(BlockTags.SAPLINGS)
-                .add(VerdanceBlocks.MULBERRY_SAPLING)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_SAPLING.get());
     }
 
     private void leaves() {
         this.tag(BlockTags.LEAVES)
-                .add(VerdanceBlocks.MULBERRY_LEAVES)
-                .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES)
-                .setReplace(false);
+                .add(VerdanceBlocks.MULBERRY_LEAVES.get())
+                .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES.get());
     }
 
     private void flowerPots() {
         this.tag(BlockTags.FLOWER_POTS)
-                .add(VerdanceBlocks.POTTED_MULBERRY_SAPLING)
-                .add(VerdanceBlocks.POTTED_VIOLET)
-                .add(VerdanceBlocks.POTTED_SHRUB)
-                .add(VerdanceBlocks.POTTED_YELLOW_FLOWERING_SHRUB)
-                .add(VerdanceBlocks.POTTED_PINK_FLOWERING_SHRUB)
-                .setReplace(false);
+                .add(VerdanceBlocks.POTTED_MULBERRY_SAPLING.get())
+                .add(VerdanceBlocks.POTTED_VIOLET.get())
+                .add(VerdanceBlocks.POTTED_SHRUB.get())
+                .add(VerdanceBlocks.POTTED_YELLOW_FLOWERING_SHRUB.get())
+                .add(VerdanceBlocks.POTTED_PINK_FLOWERING_SHRUB.get());
     }
 
     private void maintainsFarmland() {
         this.tag(BlockTags.MAINTAINS_FARMLAND)
-                .add(VerdanceBlocks.CANTALOUPE_STEM)
-                .add(VerdanceBlocks.ATTACHED_CANTALOUPE_STEM)
-                .setReplace(false);
+                .add(VerdanceBlocks.CANTALOUPE_STEM.get())
+                .add(VerdanceBlocks.ATTACHED_CANTALOUPE_STEM.get());
     }
 
     private void silkMothsSpawnableOn() {
-        this.tag(VerdanceBlockTags.SILK_MOTHS_SPAWNABLE_ON).setReplace(false)
-                .add(VerdanceBlocks.MULBERRY_LEAVES)
-                .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES)
+        this.tag(VerdanceBlockTags.SILK_MOTHS_SPAWNABLE_ON)
+                .add(VerdanceBlocks.MULBERRY_LEAVES.get())
+                .add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES.get())
                 .add(Blocks.GRASS_BLOCK);
     }
 
     private void replaceableBySugarCane() {
-        this.tag(VerdanceBlockTags.REPLACEABLE_BY_SUGAR_CANE).setReplace(false)
-                .forceAddTag(BlockTags.REPLACEABLE)
+        this.tag(VerdanceBlockTags.REPLACEABLE_BY_SUGAR_CANE)
+                .addTag(BlockTags.REPLACEABLE)
                 .add(Blocks.SUGAR_CANE);
     }
 
     private void shrubs() {
-        this.tag(VerdanceBlockTags.SHRUBS).setReplace(false)
-                .add(VerdanceBlocks.SHRUB)
-                .add(VerdanceBlocks.YELLOW_FLOWERING_SHRUB)
-                .add(VerdanceBlocks.PINK_FLOWERING_SHRUB);
+        this.tag(VerdanceBlockTags.SHRUBS)
+                .add(VerdanceBlocks.SHRUB.get())
+                .add(VerdanceBlocks.YELLOW_FLOWERING_SHRUB.get())
+                .add(VerdanceBlocks.PINK_FLOWERING_SHRUB.get());
     }
 
     private void floweringShrubs() {
-        this.tag(VerdanceBlockTags.FLOWERING_SHRUBS).setReplace(false)
-                .add(VerdanceBlocks.YELLOW_FLOWERING_SHRUB)
-                .add(VerdanceBlocks.PINK_FLOWERING_SHRUB);
+        this.tag(VerdanceBlockTags.FLOWERING_SHRUBS)
+                .add(VerdanceBlocks.YELLOW_FLOWERING_SHRUB.get())
+                .add(VerdanceBlocks.PINK_FLOWERING_SHRUB.get());
     }
 
     private void shrubMayPlaceOn() {
-        this.tag(VerdanceBlockTags.SHRUB_MAY_PLACE_ON).setReplace(false)
-                .forceAddTag(BlockTags.DIRT)
-                .forceAddTag(BlockTags.SAND)
-                .forceAddTag(BlockTags.TERRACOTTA);
+        this.tag(VerdanceBlockTags.SHRUB_MAY_PLACE_ON)
+                .addTag(BlockTags.DIRT)
+                .addTag(BlockTags.SAND)
+                .addTag(BlockTags.TERRACOTTA);
     }
 
     private void flowers() {
-        this.tag(BlockTags.FLOWERS).forceAddTag(VerdanceBlockTags.FLOWERING_SHRUBS);
+        this.tag(BlockTags.FLOWERS).addTag(VerdanceBlockTags.FLOWERING_SHRUBS);
     }
 
     private void smallFlowers() {
-        this.tag(BlockTags.SMALL_FLOWERS).add(VerdanceBlocks.VIOLET);
+        this.tag(BlockTags.SMALL_FLOWERS).add(VerdanceBlocks.VIOLET.get());
     }
 
     private void crops() {
-        this.tag(BlockTags.CROPS).add(VerdanceBlocks.CANTALOUPE_STEM);
+        this.tag(BlockTags.CROPS).add(VerdanceBlocks.CANTALOUPE_STEM.get());
     }
 }

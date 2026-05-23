@@ -12,13 +12,13 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 @Mixin(StructureTemplatePool.class)
 public interface StructurePoolAccessor {
-    @Accessor("elementCounts")
-    List<Pair<StructurePoolElement, Integer>> getElementCounts();
+    @Accessor("rawTemplates")
+    List<Pair<StructurePoolElement, Integer>> getRawTemplates();
 
-    @Accessor("elementCounts")
+    @Accessor("rawTemplates")
     @Mutable
-    void setElementCounts(List<Pair<StructurePoolElement, Integer>> list);
+    void setRawTemplates(List<Pair<StructurePoolElement, Integer>> list);
 
-    @Accessor("elements")
-    ObjectArrayList<StructurePoolElement> getElements();
+    @Accessor("templates")
+    ObjectArrayList<StructurePoolElement> getTemplates();
 }

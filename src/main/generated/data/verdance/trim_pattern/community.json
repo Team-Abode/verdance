@@ -1,8 +1,0 @@
-{
-  "asset_id": "verdance:community",
-  "decal": false,
-  "description": {
-    "translate": "trim_pattern.verdance.community"
-  },
-  "template_item": "verdance:community_armor_trim_smithing_template"
-}

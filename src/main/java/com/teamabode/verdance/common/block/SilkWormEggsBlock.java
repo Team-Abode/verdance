@@ -1,7 +1,7 @@
 package com.teamabode.verdance.common.block;
 
 import com.mojang.serialization.MapCodec;
-import com.teamabode.verdance.common.entity.silkworm.SilkwormEntity;
+import com.teamabode.verdance.common.entity.silkworm.Silkworm;
 import com.teamabode.verdance.core.registry.VerdanceEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import com.teamabode.verdance.core.registry.VerdanceCriteria;
+import com.teamabode.verdance.core.registry.VerdanceTriggerTypes;
 import org.jetbrains.annotations.Nullable;
 
 public class SilkWormEggsBlock extends Block {
@@ -68,7 +68,7 @@ public class SilkWormEggsBlock extends Block {
         super.playerDestroy(level, player, pos, state, blockEntity, stack);
 
         if (!level.isClientSide()) {
-            VerdanceCriteria.SILKWORM_EGGS_DESTROYED.trigger((ServerPlayer) player, stack);
+            VerdanceTriggerTypes.SILKWORM_EGGS_DESTROYED.get().trigger((ServerPlayer) player, stack);
         }
     }
 
@@ -85,7 +85,7 @@ public class SilkWormEggsBlock extends Block {
         int count = random.nextInt(2) + 2;
 
         for (int i = 0; i < count; i++) {
-            SilkwormEntity silkworm = VerdanceEntityTypes.SILKWORM.create(level);
+            Silkworm silkworm = VerdanceEntityTypes.SILKWORM.get().create(level);
             if (silkworm == null) continue;
 
             silkworm.setPos(pos.getCenter().offsetRandom(random, 0.25f));

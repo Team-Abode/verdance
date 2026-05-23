@@ -35,7 +35,7 @@ public class SilkCocoonBlockEntityRenderer implements BlockEntityRenderer<SilkCo
         this.cocoon = root.getChild("cocoon");
     }
 
-    public static LayerDefinition createBodyLayer() {
+    public static LayerDefinition createLayer() {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
 

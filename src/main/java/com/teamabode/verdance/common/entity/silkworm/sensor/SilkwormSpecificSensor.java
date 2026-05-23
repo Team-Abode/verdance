@@ -1,6 +1,6 @@
 package com.teamabode.verdance.common.entity.silkworm.sensor;
 
-import com.teamabode.verdance.common.entity.silkworm.SilkwormEntity;
+import com.teamabode.verdance.common.entity.silkworm.Silkworm;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Unit;
@@ -10,21 +10,21 @@ import net.minecraft.world.entity.ai.sensing.Sensor;
 import java.util.Optional;
 import java.util.Set;
 
-public class SilkwormSpecificSensor extends Sensor<SilkwormEntity> {
+public class SilkwormSpecificSensor extends Sensor<Silkworm> {
 
     @Override
-    protected void sense(ServerLevel world, SilkwormEntity entity) {
-        Brain<SilkwormEntity> brain = entity.getBrain();
+    protected void doTick(ServerLevel world, Silkworm entity) {
+        Brain<Silkworm> brain = entity.getBrain();
         Optional<Unit> wantsToCocoon = Optional.empty();
 
         if (entity.getAge() > 24000) {
             wantsToCocoon = Optional.of(Unit.INSTANCE);
         }
-        brain.setMemory(VerdanceMemoryModuleTypes.WANTS_TO_COCOON, wantsToCocoon);
+        brain.setMemory(VerdanceMemoryModuleTypes.WANTS_TO_COCOON.get(), wantsToCocoon);
     }
 
     @Override
     public Set<MemoryModuleType<?>> requires() {
-        return Set.of(VerdanceMemoryModuleTypes.WANTS_TO_COCOON);
+        return Set.of(VerdanceMemoryModuleTypes.WANTS_TO_COCOON.get());
     }
 }

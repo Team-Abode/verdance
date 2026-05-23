@@ -10,13 +10,13 @@ import net.minecraft.world.item.armortrim.TrimPattern;
 
 public class VerdanceTrimPatterns {
 
-    public static final ResourceKey<TrimPattern> COMMUNITY = createKey("community");
+    public static final ResourceKey<TrimPattern> HERITAGE = createKey("heritage");
 
     public static void register(BootstrapContext<TrimPattern> context) {
-        context.register(COMMUNITY, new TrimPattern(
-                Verdance.id("community"),
-                BuiltInRegistries.ITEM.wrapAsHolder(VerdanceItems.COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE),
-                Component.translatable("trim_pattern.verdance.community"),
+        context.register(HERITAGE, new TrimPattern(
+                Verdance.id("heritage"),
+                BuiltInRegistries.ITEM.wrapAsHolder(VerdanceItems.HERITAGE_ARMOR_TRIM_SMITHING_TEMPLATE.get()),
+                Component.translatable("trim_pattern.verdance.heritage"),
                 false
         ));
     }

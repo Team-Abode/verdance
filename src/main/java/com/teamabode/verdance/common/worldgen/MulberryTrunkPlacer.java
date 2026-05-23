@@ -32,7 +32,7 @@ public class MulberryTrunkPlacer extends TrunkPlacer {
 
     public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos pos, TreeConfiguration config) {
         MulberryTrunkPlacer.setDirtAt(level, blockSetter, random, pos.below(), config);
-        BlockPos.MutableBlockPos mutableBlockPos = pos.mutable();
+        MutableBlockPos mutableBlockPos = pos.mutable();
         Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
         ArrayList<FoliagePlacer.FoliageAttachment> list = new ArrayList<>();
         BlockPos branchPos = null;
@@ -77,6 +77,6 @@ public class MulberryTrunkPlacer extends TrunkPlacer {
     }
 
     protected TrunkPlacerType<?> type() {
-        return VerdanceTrunkPlacerTypes.MULBERRY_TRUNK_PLACER;
+        return VerdanceTrunkPlacerTypes.MULBERRY_TRUNK_PLACER.get();
     }
 }

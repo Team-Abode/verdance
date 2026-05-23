@@ -1,0 +1,6 @@
+{
+    "type": "neoforge:remove_features",
+    "biomes": "#verdance:has_violet",
+    "features": "minecraft:flower_default",
+    "step": "vegetal_decoration"
+}

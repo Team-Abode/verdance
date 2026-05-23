@@ -2,44 +2,37 @@ package com.teamabode.verdance.core.registry;
 
 import com.teamabode.verdance.Verdance;
 import java.util.Map;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import java.util.function.Supplier;
+
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.DecoratedPotPattern;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class VerdanceDecoratedPotPatterns {
-    public static final ResourceKey<DecoratedPotPattern> ABODE = createKey("abode");
-    public static final ResourceKey<DecoratedPotPattern> FRILLS = createKey("frills");
-    public static final ResourceKey<DecoratedPotPattern> PITCH = createKey("pitch");
-    public static final ResourceKey<DecoratedPotPattern> PRICKLE = createKey("prickle");
-    public static final ResourceKey<DecoratedPotPattern> SPIRIT = createKey("spirit");
-    public static final ResourceKey<DecoratedPotPattern> TRAP = createKey("trap");
+    public static final DeferredRegister<DecoratedPotPattern> REGISTRY = DeferredRegister.create(Registries.DECORATED_POT_PATTERN, Verdance.MOD_ID);
 
+    public static final DeferredHolder<DecoratedPotPattern, DecoratedPotPattern> ABODE = register("abode");
+    public static final DeferredHolder<DecoratedPotPattern, DecoratedPotPattern> FRILLS = register("frills");
+    public static final DeferredHolder<DecoratedPotPattern, DecoratedPotPattern> PITCH = register("pitch");
+    public static final DeferredHolder<DecoratedPotPattern, DecoratedPotPattern> PRICKLE = register("prickle");
+    public static final DeferredHolder<DecoratedPotPattern, DecoratedPotPattern> SPIRIT = register("spirit");
+    public static final DeferredHolder<DecoratedPotPattern, DecoratedPotPattern> TRAP = register("trap");
+
+    /*
     public static final Map<Item, ResourceKey<DecoratedPotPattern>> SHERD_TO_PATTERN = Map.of(
-            VerdanceItems.ABODE_POTTERY_SHERD, ABODE,
-            VerdanceItems.FRILLS_POTTERY_SHERD, FRILLS,
-            VerdanceItems.PITCH_POTTERY_SHERD, PITCH,
-            VerdanceItems.PRICKLE_POTTERY_SHERD, PRICKLE,
-            VerdanceItems.SPIRIT_POTTERY_SHERD, SPIRIT,
-            VerdanceItems.TRAP_POTTERY_SHERD, TRAP
+            VerdanceItems.ABODE_POTTERY_SHERD.get(), ABODE.getKey(),
+            VerdanceItems.FRILLS_POTTERY_SHERD.get(), FRILLS.getKey(),
+            VerdanceItems.PITCH_POTTERY_SHERD.get(), PITCH.getKey(),
+            VerdanceItems.PRICKLE_POTTERY_SHERD.get(), PRICKLE.getKey(),
+            VerdanceItems.SPIRIT_POTTERY_SHERD.get(), SPIRIT.getKey(),
+            VerdanceItems.TRAP_POTTERY_SHERD.get(), TRAP.getKey()
     );
+    */
 
-    public static void register() {
-        register(ABODE, "abode_pottery_pattern");
-        register(FRILLS, "frills_pottery_pattern");
-        register(PITCH, "pitch_pottery_pattern");
-        register(PRICKLE, "prickle_pottery_pattern");
-        register(SPIRIT, "spirit_pottery_pattern");
-        register(TRAP, "trap_pottery_pattern");
-    }
-
-    private static ResourceKey<DecoratedPotPattern> createKey(String name) {
-        return ResourceKey.create(Registries.DECORATED_POT_PATTERN, Verdance.id(name));
-    }
-
-    private static DecoratedPotPattern register(ResourceKey<DecoratedPotPattern> key, String assetId) {
-        return Registry.register(BuiltInRegistries.DECORATED_POT_PATTERN, key, new DecoratedPotPattern(Verdance.id(assetId)));
+    private static DeferredHolder<DecoratedPotPattern, DecoratedPotPattern> register(String name) {
+        return REGISTRY.register(name, () -> new DecoratedPotPattern(Verdance.id(name + "_pottery_pattern")));
     }
 }

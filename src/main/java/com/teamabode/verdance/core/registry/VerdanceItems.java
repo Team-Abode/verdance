@@ -1,130 +1,115 @@
 package com.teamabode.verdance.core.registry;
 
-import com.teamabode.sketch.common.item.SketchBoatItem;
 import com.teamabode.verdance.Verdance;
 import com.teamabode.verdance.common.item.CantaloupeJuiceItem;
+import com.teamabode.verdance.core.misc.VerdanceBoatTypes;
 import com.teamabode.verdance.core.misc.VerdanceFoodComponents;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.DiscFragmentItem;
-import net.minecraft.world.item.HangingSignItem;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.Item.Properties;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.SignItem;
-import net.minecraft.world.item.SmithingTemplateItem;
-import net.minecraft.world.item.SpawnEggItem;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class VerdanceItems {
-    public static final Item CANTALOUPE_SLICE = register(
+    public static final DeferredRegister<Item> REGISTRY = DeferredRegister.createItems(Verdance.MOD_ID);
+
+    public static final Supplier<Item> CANTALOUPE_SLICE = register(
             "cantaloupe_slice",
             new Properties()
                     .food(VerdanceFoodComponents.CANTALOUPE_SLICE)
     );
-    public static final Item GRILLED_CANTALOUPE_SLICE = register(
+    public static final Supplier<Item> GRILLED_CANTALOUPE_SLICE = register(
             "grilled_cantaloupe_slice",
             new Properties()
                     .food(VerdanceFoodComponents.GRILLED_CANTALOUPE_SLICE)
     );
-    public static final Item CANTALOUPE_JUICE = register(
+    public static final Supplier<Item> CANTALOUPE_JUICE = register(
             "cantaloupe_juice",
-            new CantaloupeJuiceItem(new Properties()
+            () -> new CantaloupeJuiceItem(new Properties()
                     .food(VerdanceFoodComponents.CANTALOUPE_JUICE)
                     .stacksTo(16))
     );
-    public static final Item CANTALOUPE_SEEDS = register(
+    public static final Supplier<Item> CANTALOUPE_SEEDS = register(
             "cantaloupe_seeds",
-            new ItemNameBlockItem(VerdanceBlocks.CANTALOUPE_STEM, new Properties())
+            () -> new ItemNameBlockItem(VerdanceBlocks.CANTALOUPE_STEM.get(), new Properties())
     );
-    public static final Item MULBERRY = register(
+    public static final Supplier<Item> MULBERRY = register(
             "mulberry",
-            new ItemNameBlockItem(VerdanceBlocks.MULBERRY_SAPLING, new Properties()
+            () -> new ItemNameBlockItem(VerdanceBlocks.MULBERRY_SAPLING.get(), new Properties()
                     .food(VerdanceFoodComponents.MULBERRY))
     );
-    public static final Item MULBERRY_SIGN = register(
+    public static final Supplier<Item> MULBERRY_SIGN = register(
             "mulberry_sign",
-            new SignItem(
+            () -> new SignItem(
                     new Properties().stacksTo(16),
-                    VerdanceBlocks.MULBERRY_SIGN,
-                    VerdanceBlocks.MULBERRY_WALL_SIGN)
+                    VerdanceBlocks.MULBERRY_SIGN.get(),
+                    VerdanceBlocks.MULBERRY_WALL_SIGN.get())
     );
-    public static final Item MULBERRY_HANGING_SIGN = register(
+    public static final Supplier<Item> MULBERRY_HANGING_SIGN = register(
             "mulberry_hanging_sign",
-            new HangingSignItem(VerdanceBlocks.MULBERRY_HANGING_SIGN, VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN, new Properties()
+            () -> new HangingSignItem(VerdanceBlocks.MULBERRY_HANGING_SIGN.get(), VerdanceBlocks.MULBERRY_WALL_HANGING_SIGN.get(), new Properties()
                     .stacksTo(16))
     );
-    public static final Item MULBERRY_BOAT = register(
-            "mulberry_boat", new SketchBoatItem(
-                    new Properties().stacksTo(1),
-                    VerdanceBoatTypes.MULBERRY,
-                    false)
+    public static final Supplier<Item> MULBERRY_BOAT = register(
+            "mulberry_boat",
+            () -> new BoatItem(
+                    false,
+                    VerdanceBoatTypes.MULBERRY_BOAT_PROXY.getValue(),
+                    new Properties().stacksTo(1)
+            )
     );
-    public static final Item MULBERRY_CHEST_BOAT = register(
+    public static final Supplier<Item> MULBERRY_CHEST_BOAT = register(
             "mulberry_chest_boat",
-            new SketchBoatItem(
-                    new Properties().stacksTo(1),
-                    VerdanceBoatTypes.MULBERRY,
-                    true)
+            () -> new BoatItem(
+                    true,
+                    VerdanceBoatTypes.MULBERRY_BOAT_PROXY.getValue(),
+                    new Properties().stacksTo(1)
+            )
     );
-    public static final Item MUSIC_DISC_RANGE = register(
+    public static final Supplier<Item> MUSIC_DISC_RANGE = register(
             "music_disc_range",
             new Properties()
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
                     .jukeboxPlayable(VerdanceJukeboxSongs.RANGE)
     );
-    public static final Item DISC_FRAGMENT_RANGE = register(
+    public static final Supplier<Item> DISC_FRAGMENT_RANGE = register(
             "disc_fragment_range",
-            new DiscFragmentItem(new Properties())
+            () -> new DiscFragmentItem(new Properties())
     );
 
-    public static final Item ABODE_POTTERY_SHERD = register("abode_pottery_sherd");
-    public static final Item FRILLS_POTTERY_SHERD = register("frills_pottery_sherd");
-    public static final Item PITCH_POTTERY_SHERD = register("pitch_pottery_sherd");
-    public static final Item PRICKLE_POTTERY_SHERD = register("prickle_pottery_sherd");
-    public static final Item SPIRIT_POTTERY_SHERD = register("spirit_pottery_sherd");
-    public static final Item TRAP_POTTERY_SHERD = register("trap_pottery_sherd");
+    public static final Supplier<Item> ABODE_POTTERY_SHERD = register("abode_pottery_sherd");
+    public static final Supplier<Item> FRILLS_POTTERY_SHERD = register("frills_pottery_sherd");
+    public static final Supplier<Item> PITCH_POTTERY_SHERD = register("pitch_pottery_sherd");
+    public static final Supplier<Item> PRICKLE_POTTERY_SHERD = register("prickle_pottery_sherd");
+    public static final Supplier<Item> SPIRIT_POTTERY_SHERD = register("spirit_pottery_sherd");
+    public static final Supplier<Item> TRAP_POTTERY_SHERD = register("trap_pottery_sherd");
 
-    public static final Item COMMUNITY_ARMOR_TRIM_SMITHING_TEMPLATE = register(
-            "community_armor_trim_smithing_template",
-            SmithingTemplateItem.createArmorTrimTemplate(VerdanceTrimPatterns.COMMUNITY)
+    public static final Supplier<Item> HERITAGE_ARMOR_TRIM_SMITHING_TEMPLATE = register(
+            "heritage_armor_trim_smithing_template",
+            () -> SmithingTemplateItem.createArmorTrimTemplate(VerdanceTrimPatterns.HERITAGE)
     );
 
-    public static final Item SILK_MOTH_SPAWN_EGG = register(
+    public static final Supplier<Item> SILK_MOTH_SPAWN_EGG = register(
             "silk_moth_spawn_egg",
-            new SpawnEggItem(VerdanceEntityTypes.SILK_MOTH, 13542773, 16383172, new Properties())
+            () -> new DeferredSpawnEggItem(VerdanceEntityTypes.SILK_MOTH, 13542773, 16383172, new Properties())
     );
-    public static final Item SILKWORM_SPAWN_EGG = register(
+    public static final Supplier<Item> SILKWORM_SPAWN_EGG = register(
             "silkworm_spawn_egg",
-            new SpawnEggItem(VerdanceEntityTypes.SILKWORM, 0xEBEDE6, 0x75665D, new Properties())
+            () -> new DeferredSpawnEggItem(VerdanceEntityTypes.SILKWORM, 0xEBEDE6, 0x75665D, new Properties())
     );
-
-    public static void register() {
-        CompostingChanceRegistry.INSTANCE.add(VerdanceBlocks.CANTALOUPE, 0.65F);
-        CompostingChanceRegistry.INSTANCE.add(CANTALOUPE_SEEDS, 0.30F);
-        CompostingChanceRegistry.INSTANCE.add(CANTALOUPE_SLICE, 0.50F);
-        CompostingChanceRegistry.INSTANCE.add(VerdanceBlocks.FLOWERING_MULBERRY_LEAVES, 0.50F);
-        CompostingChanceRegistry.INSTANCE.add(GRILLED_CANTALOUPE_SLICE, 0.65F);
-        CompostingChanceRegistry.INSTANCE.add(MULBERRY, 0.30F);
-        CompostingChanceRegistry.INSTANCE.add(VerdanceBlocks.MULBERRY_LEAVES, 0.30F);
-        CompostingChanceRegistry.INSTANCE.add(VerdanceBlocks.VIOLET, 0.65f);
-        CompostingChanceRegistry.INSTANCE.add(VerdanceBlocks.SHRUB, 0.30f);
-        CompostingChanceRegistry.INSTANCE.add(VerdanceBlocks.YELLOW_FLOWERING_SHRUB, 0.30f);
-        CompostingChanceRegistry.INSTANCE.add(VerdanceBlocks.PINK_FLOWERING_SHRUB, 0.30f);
-    }
 
     // Utils
-    private static Item register(String name) {
+    private static Supplier<Item> register(String name) {
         return register(name, new Properties());
     }
 
-    private static Item register(String name, Properties properties) {
-        return register(name, new Item(properties));
+    private static Supplier<Item> register(String name, Properties properties) {
+        return register(name, () -> new Item(properties));
     }
 
-    private static <T extends Item> T register(String name, T item) {
-        return Registry.register(BuiltInRegistries.ITEM, Verdance.id(name), item);
+    private static <T extends Item> Supplier<T> register(String name, Supplier<T> item) {
+        return REGISTRY.register(name, item);
     }
 }

@@ -1,6 +1,6 @@
 package com.teamabode.verdance.common.item;
 
-import com.teamabode.verdance.core.registry.VerdanceCriteria;
+import com.teamabode.verdance.core.registry.VerdanceTriggerTypes;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -21,7 +21,7 @@ import net.minecraft.world.level.Level;
 
 public class CantaloupeJuiceItem extends Item {
 
-    public CantaloupeJuiceItem(Item.Properties properties) {
+    public CantaloupeJuiceItem(Properties properties) {
         super(properties);
     }
 
@@ -32,7 +32,7 @@ public class CantaloupeJuiceItem extends Item {
         if (user instanceof ServerPlayer serverPlayer) {
             CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
             if (serverPlayer.isOnFire()) {
-                VerdanceCriteria.EXTINGUISHED_WITH_CANTALOUPE_JUICE.trigger(serverPlayer);
+                VerdanceTriggerTypes.EXTINGUISHED_WITH_CANTALOUPE_JUICE.get().trigger(serverPlayer);
             }
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
         }

@@ -50,7 +50,7 @@ public class SilkCocoonTreeDecorator extends TreeDecorator {
 
         for (Direction dir : Direction.Plane.HORIZONTAL) {
             if (world.isStateAtPosition(pos.relative(dir), state -> state.is(BlockTags.LOGS))) {
-                generator.setBlock(pos, VerdanceBlocks.SILK_COCOON.defaultBlockState().setValue(SilkCocoonBlock.FACING, dir));
+                generator.setBlock(pos, VerdanceBlocks.SILK_COCOON.get().defaultBlockState().setValue(SilkCocoonBlock.FACING, dir));
                 break;
             }
         }
@@ -62,6 +62,6 @@ public class SilkCocoonTreeDecorator extends TreeDecorator {
 
     @Override
     protected TreeDecoratorType<?> type() {
-        return VerdanceTreeDecoratorTypes.SILK_COCOON;
+        return VerdanceTreeDecoratorTypes.SILK_COCOON.get();
     }
 }

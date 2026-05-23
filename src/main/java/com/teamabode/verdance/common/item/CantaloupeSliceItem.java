@@ -18,7 +18,7 @@ import net.minecraft.world.phys.Vec3;
 @MethodsReturnNonnullByDefault
 public class CantaloupeSliceItem extends Item {
 
-    public CantaloupeSliceItem(net.minecraft.world.item.Item.Properties properties) {
+    public CantaloupeSliceItem(Properties properties) {
         super(properties);
     }
 
