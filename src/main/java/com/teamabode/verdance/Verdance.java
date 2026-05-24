@@ -22,6 +22,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
 // TODO: fd integration (unnecessary for initial port)
+// TODO: loot modifier data gen
 
 @Mod(Verdance.MOD_ID)
 public class Verdance {

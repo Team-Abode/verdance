@@ -24,6 +24,10 @@ repositories {
         name = 'TerraformersMC'
         url = 'https://maven.terraformersmc.com/'
     }
+    maven {
+        name = 'Modrinth'
+        url = "https://api.modrinth.com/maven"
+    }
 }
 
 base {
@@ -79,6 +83,7 @@ configurations {
 
 dependencies {
     implementation("com.terraformersmc:biolith-neoforge:${biolith_version}")
+    //compileOnly "maven.modrinth:farmers-delight:${farmersdelight_version}"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
@@ -90,7 +95,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_id                 : mod_id,
             mod_name               : mod_name,
             mod_license            : mod_license,
-            mod_version            : mod_version,
+            mod_version            : minecraft_version + "-" + mod_version,
     ]
     inputs.properties replaceProperties
     expand replaceProperties

@@ -79,15 +79,6 @@ public class SilkCocoonBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        SilkCocoonBlockEntity blockEntity = (SilkCocoonBlockEntity) level.getBlockEntity(pos);
-        if (blockEntity != null) {
-            blockEntity.wobble(level);
-        }
-        return super.useWithoutItem(state, level, pos, player, hitResult);
-    }
-
-    @Override
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         return direction == state.getValue(FACING) && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }

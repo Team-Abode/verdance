@@ -13,7 +13,8 @@ public class VerdanceLootTableProvider extends LootTableProvider {
     public VerdanceLootTableProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, Set.of(), List.of(
                 new SubProviderEntry(VerdanceArchaeologyLootTableSubProvider::new, LootContextParamSets.ARCHAEOLOGY),
-                new SubProviderEntry(VerdanceBlockLootTableProvider::new, LootContextParamSets.BLOCK)
+                new SubProviderEntry(VerdanceBlockLootTableProvider::new, LootContextParamSets.BLOCK),
+                new SubProviderEntry(VerdanceGameplayLootTableSubProvider::new, LootContextParamSets.GIFT)
         ), registries);
     }
 }
