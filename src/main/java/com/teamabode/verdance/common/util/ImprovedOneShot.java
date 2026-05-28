@@ -2,7 +2,7 @@ package com.teamabode.verdance.common.util;
 
 import com.google.common.collect.Maps;
 import java.util.Map;
-import java.util.Map.Entry;
+
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
@@ -10,7 +10,7 @@ import net.minecraft.world.entity.ai.behavior.OneShot;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
-public abstract class ImprovedSingleTickTask<E extends LivingEntity> extends OneShot<E> {
+public abstract class ImprovedOneShot<E extends LivingEntity> extends OneShot<E> {
     private final Map<MemoryModuleType<?>, MemoryStatus> requiredMemories = Maps.newHashMap();
 
     public abstract void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements);

@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        {
+            "item": "verdance:mulberry_crate"
+        }
+    ],
+    "result": {
+        "count": 9,
+        "id": "verdance:mulberry"
+    }
+}

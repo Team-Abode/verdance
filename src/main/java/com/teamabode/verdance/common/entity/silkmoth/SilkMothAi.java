@@ -35,7 +35,7 @@ import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.crafting.Ingredient;
 
 @SuppressWarnings("deprecation")
-public class SilkMothBrain {
+public class SilkMothAi {
 
     public static final List<MemoryModuleType<?>> MEMORY_MODULES = ImmutableList.of(
             MemoryModuleType.WALK_TARGET,
@@ -76,8 +76,8 @@ public class SilkMothBrain {
     private static void addCoreActivities(Brain<SilkMoth> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new Swim(1.0f),
-                new TakeOffTask(),
-                new LandTask(),
+                new TakeOff(),
+                new Land(),
                 new AnimalPanic<>(1.5f),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
@@ -90,15 +90,15 @@ public class SilkMothBrain {
                 Pair.of(0, new AnimalMakeLove(VerdanceEntityTypes.SILK_MOTH.get())),
                 Pair.of(1, new FollowTemptation(livingEntity -> 1.5f)),
                 Pair.of(2, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
-                Pair.of(2, new GoTowardsLandingTask()),
+                Pair.of(2, new GoTowardsLanding()),
                 Pair.of(4, addMovementTasks())
         ));
     }
 
     private static void addLayEggsActivities(Brain<SilkMoth> brain) {
         brain.addActivityWithConditions(VerdanceActivities.LAY_EGGS.get(), ImmutableList.of(
-                Pair.of(0, new SearchForLeavesTask()),
-                Pair.of(1, LayEggsTask.create()),
+                Pair.of(0, new SearchForLeaves()),
+                Pair.of(1, LayEggs.create()),
                 Pair.of(2, addMovementTasks())
         ), ImmutableSet.of(Pair.of(MemoryModuleType.IS_PREGNANT, MemoryStatus.VALUE_PRESENT)));
     }
@@ -117,10 +117,11 @@ public class SilkMothBrain {
 
     private static RunOne<SilkMoth> addMovementTasks() {
         return new RunOne<>(ImmutableList.of(
-                Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new AerialStrollTask()), 2),
-                Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new GoTowardsLandingTask()), 2),
+                Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new AerialStroll()), 2),
+                Pair.of(BehaviorBuilder.triggerIf(SilkMoth::isFlying, new GoTowardsLanding()), 2),
                 Pair.of(BehaviorBuilder.triggerIf(Predicate.not(SilkMoth::isFlying), RandomStroll.stroll(1.0f)), 2),
                 Pair.of(SetWalkTargetFromLookTarget.create(1.0f, 3), 2),
+                Pair.of(new GoTowardsLightSource(), 2),
                 Pair.of(new DoNothing(30,  60), 1)
         ));
     }

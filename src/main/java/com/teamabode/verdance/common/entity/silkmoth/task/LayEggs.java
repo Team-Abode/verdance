@@ -12,12 +12,12 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-public class LayEggsTask {
+public class LayEggs {
 
     public static BehaviorControl<SilkMoth> create() {
         return BehaviorBuilder.create(instance -> instance.group(
                 instance.present(MemoryModuleType.IS_PREGNANT)
-        ).apply(instance, (isPregnantMemory) -> LayEggsTask::tryStart));
+        ).apply(instance, (isPregnantMemory) -> LayEggs::tryStart));
     }
 
     private static boolean tryStart(ServerLevel level, SilkMoth entity, long gameTime) {

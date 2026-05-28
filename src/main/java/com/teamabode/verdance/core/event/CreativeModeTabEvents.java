@@ -202,7 +202,7 @@ public class CreativeModeTabEvents {
         }
     }
 
-    private static void insertAfter(BuildCreativeModeTabContentsEvent event, Item existing, ItemLike... newItems) {
+    public static void insertAfter(BuildCreativeModeTabContentsEvent event, Item existing, ItemLike... newItems) {
         for (int i = 0; i < newItems.length; i++) {
             event.insertAfter(
                     i > 0 ? newItems[i - 1].asItem().getDefaultInstance() : existing.getDefaultInstance(),
@@ -212,7 +212,7 @@ public class CreativeModeTabEvents {
         }
     }
 
-    private static void insertBefore(BuildCreativeModeTabContentsEvent event, Item existing, ItemLike... newItems) {
+    public static void insertBefore(BuildCreativeModeTabContentsEvent event, Item existing, ItemLike... newItems) {
         for (int i = 0; i < newItems.length; i++) {
             event.insertAfter(
                     i > 0 ? newItems[i - 1].asItem().getDefaultInstance() : existing.getDefaultInstance(),

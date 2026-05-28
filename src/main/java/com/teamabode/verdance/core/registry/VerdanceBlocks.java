@@ -219,7 +219,7 @@ public class VerdanceBlocks {
                             .sound(SoundType.HARD_CROP)
                             .pushReaction(PushReaction.DESTROY))
     );
-    public static final Supplier<Block> CANTALOUPE_STEM = registerWithItem(
+    public static final Supplier<Block> CANTALOUPE_STEM = register(
             "cantaloupe_stem",
             () -> new StemBlock(
                 VerdanceBlockRegistryKeys.CANTALOUPE,

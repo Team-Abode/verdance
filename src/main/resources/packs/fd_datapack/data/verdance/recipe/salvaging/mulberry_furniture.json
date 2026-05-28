@@ -1,0 +1,58 @@
+{
+    "type": "farmersdelight:cutting",
+    "ingredients": [
+        {
+            "type": "neoforge:compound",
+            "children": [
+                {
+                    "item": "verdance:mulberry_door"
+                },
+                {
+                    "item": "verdance:mulberry_trapdoor"
+                },
+                {
+                    "item": "verdance:mulberry_sign"
+                },
+                {
+                    "item": "verdance:mulberry_hanging_sign"
+                },
+                {
+                    "item": "verdance:mulberry_fence"
+                },
+                {
+                    "item": "verdance:mulberry_fence_gate"
+                },
+                {
+                    "item": "verdance:mulberry_pressure_plate"
+                },
+                {
+                    "item": "verdance:mulberry_button"
+                },
+                {
+                    "item": "verdance:mulberry_boat"
+                },
+                {
+                    "item": "verdance:mulberry_cabinet"
+                }
+            ]
+        }
+    ],
+    "result": [
+        {
+            "chance": 0.75,
+            "item": {
+                "count": 1,
+                "id": "verdance:mulberry_planks"
+            }
+        }
+    ],
+    "tool": [
+        {
+            "type": "farmersdelight:item_ability",
+            "action": "axe_dig"
+        },
+        {
+            "tag": "minecraft:axes"
+        }
+    ]
+}

@@ -1,7 +1,7 @@
 package com.teamabode.verdance.common.entity.silkmoth.task;
 
 import com.teamabode.verdance.common.entity.silkmoth.SilkMoth;
-import com.teamabode.verdance.common.util.ImprovedSingleTickTask;
+import com.teamabode.verdance.common.util.ImprovedOneShot;
 import com.teamabode.verdance.common.util.SilkUtils;
 import com.teamabode.verdance.core.registry.VerdanceMemoryModuleTypes;
 import java.util.Map;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
 
-public class AerialStrollTask extends ImprovedSingleTickTask<SilkMoth> {
+public class AerialStroll extends ImprovedOneShot<SilkMoth> {
 
     public void requires(Map<MemoryModuleType<?>, MemoryStatus> requirements) {
         requirements.put(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT);

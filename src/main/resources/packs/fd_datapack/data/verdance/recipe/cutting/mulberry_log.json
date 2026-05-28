@@ -1,0 +1,34 @@
+{
+    "type": "farmersdelight:cutting",
+    "ingredients": [
+        {
+            "item": "verdance:mulberry_log"
+        }
+    ],
+    "result": [
+        {
+            "item": {
+                "count": 1,
+                "id": "verdance:stripped_mulberry_log"
+            }
+        },
+        {
+            "item": {
+                "count": 1,
+                "id": "farmersdelight:tree_bark"
+            }
+        }
+    ],
+    "sound": {
+        "sound_id": "minecraft:item.axe.strip"
+    },
+    "tool": [
+        {
+            "type": "farmersdelight:item_ability",
+            "action": "axe_strip"
+        },
+        {
+            "tag": "minecraft:axes"
+        }
+    ]
+}

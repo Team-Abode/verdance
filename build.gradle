@@ -83,7 +83,7 @@ configurations {
 
 dependencies {
     implementation("com.terraformersmc:biolith-neoforge:${biolith_version}")
-    //compileOnly "maven.modrinth:farmers-delight:${farmersdelight_version}"
+    compileOnly "maven.modrinth:farmers-delight:${farmersdelight_version}"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

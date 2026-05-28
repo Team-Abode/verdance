@@ -40,7 +40,7 @@ public class VerdanceBiomes {
         spawnSettings.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 2, 2, 6));
         spawnSettings.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.SHEEP, 3, 2, 3));
         spawnSettings.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 1, 4, 4));
-        spawnSettings.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(VerdanceEntityTypes.SILK_MOTH.get(), 10, 1, 3));
+        spawnSettings.addSpawn(MobCategory.AXOLOTLS, new MobSpawnSettings.SpawnerData(VerdanceEntityTypes.SILK_MOTH.get(), 10, 1, 3));
         BiomeDefaultFeatures.commonSpawns(spawnSettings);
 
         // Global Overworld generation

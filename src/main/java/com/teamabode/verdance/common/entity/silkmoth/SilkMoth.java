@@ -77,12 +77,12 @@ public class SilkMoth extends Animal implements FlyingAnimal {
 
     @Override
     protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return SilkMothBrain.createBrain(this.brainProvider().makeBrain(dynamic));
+        return SilkMothAi.createBrain(this.brainProvider().makeBrain(dynamic));
     }
 
     @Override
     protected Brain.Provider<SilkMoth> brainProvider() {
-        return Brain.provider(SilkMothBrain.MEMORY_MODULES, SilkMothBrain.SENSORS);
+        return Brain.provider(SilkMothAi.MEMORY_MODULES, SilkMothAi.SENSORS);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class SilkMoth extends Animal implements FlyingAnimal {
     @Override
     protected void customServerAiStep() {
         this.getBrain().tick((ServerLevel) this.level(), this);
-        SilkMothBrain.updateActivity(this);
+        SilkMothAi.updateActivity(this);
         super.customServerAiStep();
     }
 

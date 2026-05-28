@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "D": {
+            "item": "verdance:mulberry_trapdoor"
+        },
+        "_": {
+            "item": "verdance:mulberry_slab"
+        }
+    },
+    "pattern": ["___", "D D", "___"],
+    "result": {
+        "count": 1,
+        "id": "verdance:mulberry_cabinet"
+    }
+}

@@ -1,6 +1,7 @@
 package com.teamabode.verdance;
 
 import com.mojang.logging.LogUtils;
+import com.teamabode.verdance.core.integration.farmersdelight.FDIntegration;
 import com.teamabode.verdance.core.misc.VerdanceBoatTypes;
 import com.teamabode.verdance.core.misc.VerdanceSurfaceRules;
 import com.teamabode.verdance.core.registry.*;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -31,6 +33,10 @@ public class Verdance {
 
     public Verdance(IEventBus eventBus, ModContainer container) {
         eventBus.addListener(this::commonSetup);
+
+        if (ModList.get().isLoaded("farmersdelight")) {
+            FDIntegration.register(eventBus);
+        }
 
         VerdanceActivities.REGISTRY.register(eventBus);
         VerdanceBlocks.REGISTRY.register(eventBus);

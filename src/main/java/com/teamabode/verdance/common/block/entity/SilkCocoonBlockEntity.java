@@ -50,11 +50,10 @@ public class SilkCocoonBlockEntity extends BlockEntity {
             silkMoth.setYHeadRot(state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot());
             silkMoth.setYRot(state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot());
             silkMoth.takeOff();
-
-
+            silkMoth.setPersistenceRequired();
+            level.addFreshEntity(silkMoth);
 
             level.playSound(null, pos, VerdanceSoundEvents.ENTITY_SILK_MOTH_EMERGE.get(), SoundSource.NEUTRAL);
-            level.addFreshEntity(silkMoth);
             level.destroyBlock(pos, true);
         }
         else if (ticks >= 4400 && ticks % 100 == 0 || ticks >= 3600 && ticks % 200 == 0) {
